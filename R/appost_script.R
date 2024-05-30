@@ -20,7 +20,6 @@ appost <- function(){
       ***************************
       *** BENVENUTI in AppOst ***
       ***************************
-                         v. 0.1.0
 
       ")
   ordine <- readline("Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' scaricato da Teams:   ")
@@ -1838,7 +1837,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       ***************************
       *** BENVENUTI in AppOst ***
       ***************************
-                         v. 0.1.0
 
       Che documento vuoi generare?
       1: RAS con eventuale avviso pubblico
