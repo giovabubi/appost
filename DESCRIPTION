@@ -1,10 +1,10 @@
 Package: appost
 Type: Package
-Title: AppOst
-Version: 0.1.0
+Title: AppOst, lo script R per generare i documenti degli ordini di acquisto
+Version: 0.1.1
 Author: Giovanni Bubici
 Maintainer: Giovanni Bubici <giovanninicola.bubici@cnr.it>
-Description: AppOst è una funzione che consente di generare i documenti necessari per le procedure di acquisto con affidamento diretto del CNR-IPSP, redatti secondo il d.lgs. 36/2023.
-License: Freeware
+Description: Questo package è una funzione che consente di generare i documenti necessari per le procedure di acquisto con affidamento diretto del CNR-IPSP, redatti secondo il d.lgs. 36/2023
+License: None
 Encoding: UTF-8
 LazyData: true
