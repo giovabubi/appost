@@ -5,14 +5,14 @@ appost <- function(){
   if(!require(stringr)) install.packages("stringr")
   if(!require(dplyr)) install.packages("dplyr")
   #if(!require(Microsoft365R)) install.packages("Microsoft365R")
-  if(!require(googledrive)) install.packages("googledrive")
+  #if(!require(googledrive)) install.packages("googledrive")
 
   library(officer)
   library(openxlsx)
   library(stringr)
   library(dplyr)
   #library(Microsoft365R)
-  library(googledrive)
+  #library(googledrive)
 
   # Carica dati ordine ----
   cat("\014")
@@ -306,27 +306,47 @@ appost <- function(){
   ultimi.recente <- ultimi$diff[1]
 
   # Scarica Modello.docx da GoogleDrive ----
-  drive_deauth()
-  drive_user()
-  modello <- drive_get(as_id("1AOrViONf-0tZI22Hzn1dCNDcn_xxPag-"))
-  drive_download(modello, overwrite = TRUE)
-  doc.ras <- read_docx(modello$name)
-  doc.avv <- read_docx(modello$name)
-  doc.all <- read_docx(modello$name)
-  doc.dac <- read_docx(modello$name)
-  doc.prov.imp <- read_docx(modello$name)
-  doc.pag <- read_docx(modello$name)
-  doc.pi <- read_docx(modello$name)
-  doc.cc <- read_docx(modello$name)
-  doc.dgue <- read_docx(modello$name)
-  doc.dpcm <- read_docx(modello$name)
-  doc.doh <- read_docx(modello$name)
-  doc.com.cig <- read_docx(modello$name)
-  doc.ai <- read_docx(modello$name)
-  doc.ldo <- read_docx(modello$name)
-  doc.dic.pres <- read_docx(modello$name)
-  doc.prov.liq <- read_docx(modello$name)
-  file.remove(modello$name)
+  # drive_deauth()
+  # drive_user()
+  # modello <- drive_get(as_id("1AOrViONf-0tZI22Hzn1dCNDcn_xxPag-"))
+  # drive_download(modello, overwrite = TRUE)
+  # doc.ras <- read_docx(modello$name)
+  # doc.avv <- read_docx(modello$name)
+  # doc.all <- read_docx(modello$name)
+  # doc.dac <- read_docx(modello$name)
+  # doc.prov.imp <- read_docx(modello$name)
+  # doc.pag <- read_docx(modello$name)
+  # doc.pi <- read_docx(modello$name)
+  # doc.cc <- read_docx(modello$name)
+  # doc.dgue <- read_docx(modello$name)
+  # doc.dpcm <- read_docx(modello$name)
+  # doc.doh <- read_docx(modello$name)
+  # doc.com.cig <- read_docx(modello$name)
+  # doc.ai <- read_docx(modello$name)
+  # doc.ldo <- read_docx(modello$name)
+  # doc.dic.pres <- read_docx(modello$name)
+  # doc.prov.liq <- read_docx(modello$name)
+  # file.remove(modello$name)
+
+  # Scarica Modello.docx da Github ----
+  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello.docx", destfile = "Modello.docx", method = "curl")
+  doc.ras <-
+  doc.avv <-
+  doc.all <-
+  doc.dac <-
+  doc.prov.imp <-
+  doc.pag <-
+  doc.pi <-
+  doc.cc <-
+  doc.dgue <-
+  doc.dpcm <-
+  doc.doh <-
+  doc.com.cig <-
+  doc.ai <-
+  doc.ldo <-
+  doc.dic.pres <-
+  doc.prov.liq <- read_docx("Modello.docx")
+  file.remove("Modello.docx")
 
   # Genera RAS ----
   ras <- function(){
@@ -1836,10 +1856,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(inpt==3){docoe();ai();ldo();com_cig()}
     if(inpt==4){dic_pres();provv_liq()}
     if(inpt==5){
-      drive_deauth()
-      drive_user()
-      elenco.prodotti <- drive_get(as_id("1Hqjc3fruTBy04u_ULwua1Cegtbs7ndEe"))
-      drive_download(elenco.prodotti, overwrite = TRUE)
+      # drive_deauth()
+      # drive_user()
+      # elenco.prodotti <- drive_get(as_id("1Hqjc3fruTBy04u_ULwua1Cegtbs7ndEe"))
+      # drive_download(elenco.prodotti, overwrite = TRUE)
+      download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     }
 
     cat("
