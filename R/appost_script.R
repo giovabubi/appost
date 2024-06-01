@@ -329,21 +329,21 @@ appost <- function(){
 
   # Scarica Modello.docx da Github ----
   download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello.docx", destfile = "Modello.docx", method = "curl")
-  doc.ras <-
-  doc.avv <-
-  doc.all <-
-  doc.dac <-
-  doc.prov.imp <-
-  doc.pag <-
-  doc.pi <-
-  doc.cc <-
-  doc.dgue <-
-  doc.dpcm <-
-  doc.doh <-
-  doc.com.cig <-
-  doc.ai <-
-  doc.ldo <-
-  doc.dic.pres <-
+  doc.ras <- read_docx("Modello.docx")
+  doc.avv <- read_docx("Modello.docx")
+  doc.all <- read_docx("Modello.docx")
+  doc.dac <- read_docx("Modello.docx")
+  doc.prov.imp <- read_docx("Modello.docx")
+  doc.pag <- read_docx("Modello.docx")
+  doc.pi <- read_docx("Modello.docx")
+  doc.cc <- read_docx("Modello.docx")
+  doc.dgue <- read_docx("Modello.docx")
+  doc.dpcm <- read_docx("Modello.docx")
+  doc.doh <- read_docx("Modello.docx")
+  doc.com.cig <- read_docx("Modello.docx")
+  doc.ai <- read_docx("Modello.docx")
+  doc.ldo <- read_docx("Modello.docx")
+  doc.dic.pres <- read_docx("Modello.docx")
   doc.prov.liq <- read_docx("Modello.docx")
   file.remove("Modello.docx")
 
@@ -381,13 +381,13 @@ appost <- function(){
 
     doc <- doc |>
       cursor_reach("CAMPO.DEST.RAS.SEDE") |>
-      body_replace_all_text("CAMPO.DEST.RAS.SEDE", paste0(al.RSS), only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.DEST.RAS.SEDE", al.RSS, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DEST.RAS.RSS") |>
       body_replace_all_text("CAMPO.DEST.RAS.RSS", RSS, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DEST.RAS.EMAIL") |>
       body_replace_all_text("CAMPO.DEST.RAS.EMAIL", RSS.email, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
-      body_replace_all_text("CAMPO.DELLA.FORNITURA", Prodotto, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.DELLA.FORNITURA", della.fornitura, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PRODOTTO") |>
       body_replace_all_text("CAMPO.PRODOTTO", Prodotto, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PROGETTO") |>
