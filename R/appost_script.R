@@ -63,6 +63,7 @@ appost <- function(){
     RSS <- 'Dott. Giovanni Nicola Bubici'
     RSS.email <- 'giovanninicola.bubici@cnr.it'
     RAMM <- 'Dott. Nicola Centorame'
+    RAMM.email <- 'nicola.centorame@ipsp.cnr.it'
     al.RSS <- 'Al Responsabile della Sede Secondaria di Bari'
     firma.RSS <- 'Il Responsabile della Sede Secondaria di Bari'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via G. Amendola 122/D, 70126 Bari, Italia."
@@ -74,6 +75,7 @@ appost <- function(){
     RSS <- 'Dott. Stefano Ghignone'
     RSS.email <- 'stefano.ghignone@cnr.it'
     RAMM <- "Dott.ssa Lucia Allione"
+    RAMM.email <- 'lucia.allione@ipsp.cnr.it'
     al.RSS <- 'Al Responsabile della Sede Secondaria di Torino'
     firma.RSS <- 'Il Responsabile della Sede Secondaria di Torino'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale Mattioli, 25, 10125 Torino, Italia."
@@ -85,6 +87,7 @@ appost <- function(){
     RSS <- 'Dott.ssa Michelina Ruocco'
     RSS.email <- 'michelina.ruocco@cnr.it'
     RAMM <- 'Dott. Ettore Magaldi'
+    RAMM.email <- 'ettore.magaldi@ipsp.cnr.it'
     al.RSS <- 'Alla Responsabile della Sede Secondaria di Portici'
     firma.RSS <- 'La Responsabile della Sede Secondaria di Portici'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, piazzale Enrico Fermi, 1, 80055 Portici (NA), Italia."
@@ -96,6 +99,7 @@ appost <- function(){
     RSS <- "Dott. Nicola Luchi"
     RSS.email <- "nicola.luchi@ipsp.cnr.it"
     RAMM <- "Sig.ra Francesca Pesciolini"
+    RAMM.email <- 'francesca.pesciolini@ipsp.cnr.it'
     al.RSS <- 'Al Responsabile della Sede Secondaria di Sesto Fiorentino'
     firma.RSS <- 'Il Responsabile della Sede Secondaria di Sesto Fiorentino'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via Madonna del Piano, 10, 50019 Sesto F.no (FI), Italia."
@@ -107,6 +111,7 @@ appost <- function(){
     RSS <- "Dott.ssa Laura Scarabel"
     RSS.email <- "laura.scarabel@ipsp.cnr.it"
     RAMM <- "Dott.ssa Lucia Allione"
+    RAMM.email <- 'lucia.allione@ipsp.cnr.it'
     al.RSS <- 'Al Responsabile della Sede Secondaria di Legnaro'
     firma.RSS <- 'Il Responsabile della Sede Secondaria di Legnaro'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale dell’Università, 16, 35020 Legnaro (PD), Italia."
@@ -118,6 +123,7 @@ appost <- function(){
     RSS <- 'Dott. Francesco Di Serio'
     RSS.email <- 'francesco.diserio@cnr.it'
     RAMM <- 'Dott. Josè Saporita'
+    RAMM.email <- 'jose.saporita@ipsp.cnr.it'
     al.RSS <- "Al Direttore dell'IPSP"
     firma.RSS <- "Il Direttore"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, Strada delle Cacce, 73, 10135 Torino, Italia."
@@ -599,18 +605,40 @@ appost <- function(){
                            ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "),
                            ftext(dott.ric), ftext(" "), ftext(Richiedente.dati),
                            ftext(": preventivo relativo all’avviso pubblico per "),
-                           ftext(la.fornitura), ftext(" di “"), ftext(Prodotto), ftext("”.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("La documentazione trasmessa dovrà essere sottoscritta digitalmente con firma qualificata da un legale rappresentante/procuratore in grado di impegnare l’operatore economico.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo nicola.centorame@ipsp.cnr.it e per conoscenza a "),
-                           ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente.dati), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di “"), ftext(Prodotto), ftext("”.")), style = "Normal") |>
+                           ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("La documentazione trasmessa dovrà essere sottoscritta digitalmente con firma qualificata da un legale rappresentante/procuratore in grado di impegnare l’operatore economico.")), style = "Normal")
+
+      if(sede!='TOsi'){
+        doc <- doc |>
+        body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
+                           ftext(RAMM.email), ftext(" e per conoscenza a "),
+                           ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente.dati), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
+                             ftext(RAMM.email), ftext(" e per conoscenza a "),
+                             ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente.dati), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
+      }
+
+      doc <- doc |>
         body_add_fpar(fpar(ftext("Individuazione dell'affidatario")), style = "heading 3") |>
         body_add_fpar(fpar(ftext("L'individuazione dell'affidatario sarà operata discrezionalmente dalla Stazione Appaltante, nel caso in cui intenda procedere all’affidamento, a seguito dell'esame dei preventivi ricevuti entro la scadenza.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("Non saranno presi in considerazione preventivi di importo superiore a quanto stimato dalla Stazione Appaltante.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("L’eventuale affidamento sarà concluso con l’operatore economico selezionato mediante affidamento diretto con trattativa diretta sul Mercato Elettronico della Pubblica Amministrazione (https://www.acquistinretepa.it/). A tal fine, l’operatore economico dovrà essere iscritto ed abilitato al bando “"),
                            ftext(beni), ftext("” del Mercato Elettronico, categorie “_____” oppure “_____”.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("Obblighi dell’affidatario")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("L’operatore economico affidatario, con sede legale in Italia, sarà tenuto, prima dell’invio della lettera d’ordine, a fornire la seguente documentazione:")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("Dichiarazione sostitutiva senza DGUE ai sensi del D.lgs. 36/2023;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("L’operatore economico affidatario, con sede legale in Italia, sarà tenuto, prima dell’invio della lettera d’ordine, a fornire la seguente documentazione:")), style = "Normal")
+
+      if(Importo.senza.IVA<40000){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("Dichiarazione sostitutiva senza DGUE ai sensi del D.lgs. 36/2023;")), style = "Elenco punto")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("DGUE ai sensi del D.lgs. 36/2023;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("Comprovo assolvimento imposta di bollo;")), style = "Elenco punto")
+      }
+
+      doc <- doc |>
         body_add_fpar(fpar(ftext("Patto di integrità ai sensi del D.lgs. 36/2023;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("Comunicazione conto corrente dedicato ai sensi dell’art. 3, comma 7 della Legge 136/2010 e s.m.i.;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("Dichiarazione di cui al DPCM 187/1991.")), style = "Elenco punto") |>
