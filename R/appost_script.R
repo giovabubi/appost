@@ -115,7 +115,7 @@ appost <- function(){
     al.RSS <- 'Al Responsabile della Sede Secondaria di Legnaro'
     firma.RSS <- 'Il Responsabile della Sede Secondaria di Legnaro'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale dell’Università, 16, 35020 Legnaro (PD), Italia."
-    nomina.RSS <- "147145 del 3/5/2024 di nomina della dott.ssa Laura Scarael quale Responsabile della Sede Secondaria di Legnaro dell’IPSP per il periodo dall’1/5/2024 al 31/12/2024"
+    nomina.RSS <- "147145 del 3/5/2024 di nomina della dott.ssa Laura Scarabel quale Responsabile della Sede Secondaria di Legnaro dell’IPSP per il periodo dall’1/5/2024 al 31/12/2024"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Legnaro dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
   }else if(sede=='TOsi'){
     sede1 <- 'Torino'
