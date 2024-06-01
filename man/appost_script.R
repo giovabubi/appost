@@ -381,13 +381,13 @@ appost <- function(){
 
     doc <- doc |>
       cursor_reach("CAMPO.DEST.RAS.SEDE") |>
-      body_replace_all_text("CAMPO.DEST.RAS.SEDE", paste0(al.RSS), only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.DEST.RAS.SEDE", al.RSS, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DEST.RAS.RSS") |>
       body_replace_all_text("CAMPO.DEST.RAS.RSS", RSS, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DEST.RAS.EMAIL") |>
       body_replace_all_text("CAMPO.DEST.RAS.EMAIL", RSS.email, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
-      body_replace_all_text("CAMPO.DELLA.FORNITURA", Prodotto, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.DELLA.FORNITURA", della.fornitura, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PRODOTTO") |>
       body_replace_all_text("CAMPO.PRODOTTO", Prodotto, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PROGETTO") |>
