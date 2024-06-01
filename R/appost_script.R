@@ -67,7 +67,7 @@ appost <- function(){
     al.RSS <- 'Al Responsabile della Sede Secondaria di Bari'
     firma.RSS <- 'Il Responsabile della Sede Secondaria di Bari'
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via G. Amendola 122/D, 70126 Bari, Italia."
-    nomina.RSS <- "147145 del 3/5/2024 di nomina del dott. Giovanni Nicola Bubici quale Responsabile della Sede Secondaria di Bari dell’IPSP per il periodo dall’1/6/2024 al 31/12/2024"
+    nomina.RSS <- "177785 del 27/5/2024 e rettifica prot. 181568 del 29/5/2024 di nomina del dott. Giovanni Nicola Bubici quale Responsabile della Sede Secondaria di Bari dell’IPSP per il periodo dall’1/6/2024 al 31/12/2024"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Nicola Centorame quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
   }else if(sede=='TO'){
     sede1 <- 'Torino'
@@ -1131,6 +1131,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           body_replace_all_text("CAMPO.SEDE.PATTO", Fornitore..Sede, only_at_cursor = TRUE) |>
           cursor_reach("CAMPO.PI.PATTO") |>
           body_replace_all_text("CAMPO.PI.PATTO", as.character(Fornitore..P.IVA), only_at_cursor = TRUE) |>
+          cursor_reach("CAMPO.FIRMA.RSS.PATTO") |>
+          body_replace_all_text("CAMPO.FIRMA.RSS.PATTO", firma.RSS, only_at_cursor = TRUE) |>
           headers_replace_all_text("CAMPO.CIG.PATTO", paste0("CIG ", CIG, " (", Pagina.web, ")"), only_at_cursor = FALSE)
 
         b <- cursor_begin(doc)
