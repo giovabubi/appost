@@ -39,8 +39,10 @@ appost <- function(){
     cat("\014")
     cat("
 
-    Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
-    stop()
+    Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat, "
+
+        ")
+    stop("Grazie e arrivederci.")
   }
 
   patfile <- choose.files(default = "*.csv")
