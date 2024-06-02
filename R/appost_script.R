@@ -49,7 +49,7 @@ appost <- function(){
     quit(save="no")
   }
 
-  patfile <- choose.files(default = "*.csv")
+  patfile <- utils::choose.files(default = "*.csv")
   n <- str_locate_all(patfile, "\\\\")
   m <- max(n[[1]])
   n <- paste0("(.{", m, "}).*")
@@ -390,7 +390,7 @@ appost <- function(){
       ")
     inpt <- readline()
 
-    pr <- read.xlsx(choose.files(default = "*.xlsx"))
+    pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
     pr <- pr[,1:5]
     colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
     pr <- subset(pr, !is.na(pr$Quantità))
@@ -1584,7 +1584,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Premere INVIO per caricare il file Excel con l'elenco dei prodotti
         ")
     inpt <- readline()
-    pr <- read.xlsx(choose.files(default = "*.xlsx"))
+    pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
     pr <- pr[,1:5]
     colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
     pr <- subset(pr, !is.na(pr$Quantità))
