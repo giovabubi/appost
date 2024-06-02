@@ -43,7 +43,7 @@ appost <- function(){
     Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat, "
 
         ")
-    stop("Grazie e arrivederci.")
+    quit(save="no")
   }
 
   patfile <- choose.files(default = "*.csv")
@@ -1914,28 +1914,25 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       3: Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Comunicazione CIG
       4: Dichiarazione di prestazione resa, Provvedimento di liquidazione
 
-      Oppure
-      5: Modello Excel dell'elenco prodotti (necessario per RAS e lettera d'ordine)
-
       ")
     inpt <- readline()
     if(inpt==1){ras()}
     if(inpt==2){dac();provv_imp();pag()}
     if(inpt==3){docoe();ai();ldo();com_cig()}
     if(inpt==4){dic_pres();provv_liq()}
-    if(inpt==5){
-      # drive_deauth()
-      # drive_user()
-      # elenco.prodotti <- drive_get(as_id("1Hqjc3fruTBy04u_ULwua1Cegtbs7ndEe"))
-      # drive_download(elenco.prodotti, overwrite = TRUE)
-      #   download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
-      #   cat("\014")
-      #   cat(rep("\n", 10))
-      #   cat("\014")
-      #   cat("
-      #
-      # Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
-    }
+    # if(inpt==5){
+    #   # drive_deauth()
+    #   # drive_user()
+    #   # elenco.prodotti <- drive_get(as_id("1Hqjc3fruTBy04u_ULwua1Cegtbs7ndEe"))
+    #   # drive_download(elenco.prodotti, overwrite = TRUE)
+    # download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
+    # cat("\014")
+    # cat(rep("\n", 10))
+    # cat("\014")
+    # cat("
+    #   #
+    #   # Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
+    # }
 
     cat("
 
