@@ -39,7 +39,7 @@ appost <- function(){
     quit(save="no")
   }
 
-  if(file.exists("Ordini.csv")==FALSE{
+  if(file.exists("Ordini.csv")=="FALSE"{
   patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
   if(!require(stringr)) install.packages("stringr")
   n <- stringr::str_locate_all(patfile, "\\\\")
@@ -393,7 +393,7 @@ appost <- function(){
     cat(rep("\n", 10))
     cat("\014")
 
-    if(file.exists("Elenco prodotti.xlsx")==FALSE{
+    if(file.exists("Elenco prodotti.xlsx")=="FALSE"{
     cat("
 
     Premere INVIO per caricare il file Excel con l'elenco dei prodotti
@@ -1593,12 +1593,17 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
   # Genera Lettere d'ordine ----
   ldo <- function(){
-    cat("
+    if(file.exists("Elenco prodotti.xlsx")=="FALSE"{
+      cat("
 
     Premere INVIO per caricare il file Excel con l'elenco dei prodotti
         ")
     inpt <- readline()
     pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+    }else{
+      pr <- read.xlsx("Elenco.prodotti.xlsx")
+    }
+
     pr <- pr[,1:5]
     colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
     pr <- subset(pr, !is.na(pr$Quantità))
