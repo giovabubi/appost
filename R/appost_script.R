@@ -33,6 +33,7 @@ appost <- function(){
 
   if(ordine==0){
     pat <- choose.dir()
+    setwd(pat)
     download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     cat("\014")
     cat(rep("\n", 10))
