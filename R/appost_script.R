@@ -13,7 +13,8 @@ appost <- function(){
       ***************************
 
 
-      Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' scaricato da Teams,
+      Digitare il numero d'ordine e premere INVIO
+
       oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
       (da compilare prima di generare RAS e lettera d'ordine)
 
@@ -38,15 +39,19 @@ appost <- function(){
     quit(save="no")
   }
 
-  patfile <- utils::choose.files(default = "*.csv")
+  if(file.exists("Ordini.csv")==FALSE{
+  patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
   if(!require(stringr)) install.packages("stringr")
   n <- stringr::str_locate_all(patfile, "\\\\")
   m <- max(n[[1]])
   n <- paste0("(.{", m, "}).*")
   pat <- sub(n, "\\1", patfile)
   setwd(pat)
-
   ordini <- read.csv(patfile, na.strings = "")
+  }else{
+    ordini <- read.csv("Ordini.csv", na.strings = "")
+  }
+
   ordini <- dplyr::rename(ordini,
                           Prodotto=Descrizione.beni.servizi.lavori,
                           RDO=N..RDO.MePA,
@@ -387,14 +392,19 @@ appost <- function(){
     cat("\014")
     cat(rep("\n", 10))
     cat("\014")
+
+    if(file.exists("Elenco prodotti.xlsx")==FALSE{
     cat("
 
     Premere INVIO per caricare il file Excel con l'elenco dei prodotti
 
       ")
     inpt <- readline()
-
     pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+    }else{
+      pr <- read.xlsx("Elenco.prodotti.xlsx")
+    }
+
     pr <- pr[,1:5]
     colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
     pr <- subset(pr, !is.na(pr$Quantità))
