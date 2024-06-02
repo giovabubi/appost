@@ -1,18 +1,4 @@
 appost <- function(){
-  # Installa e carica pacchetti ----
-  if(!require(officer)) install.packages("officer")
-  if(!require(openxlsx)) install.packages("openxlsx")
-  if(!require(stringr)) install.packages("stringr")
-  if(!require(dplyr)) install.packages("dplyr")
-  #if(!require(Microsoft365R)) install.packages("Microsoft365R")
-  #if(!require(googledrive)) install.packages("googledrive")
-
-  library(officer)
-  library(openxlsx)
-  library(stringr)
-  library(dplyr)
-  #library(Microsoft365R)
-  #library(googledrive)
 
   # Carica dati ordine ----
   cat("\014")
@@ -32,7 +18,7 @@ appost <- function(){
   ordine <- readline()
 
   if(ordine==0){
-    pat <- choose.dir()
+    pat <- utils::choose.dir()
     setwd(pat)
     download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     cat("\014")
@@ -50,7 +36,8 @@ appost <- function(){
   }
 
   patfile <- utils::choose.files(default = "*.csv")
-  n <- str_locate_all(patfile, "\\\\")
+  if(!require(stringr)) install.packages("stringr")
+  n <- stringr::str_locate_all(patfile, "\\\\")
   m <- max(n[[1]])
   n <- paste0("(.{", m, "}).*")
   pat <- sub(n, "\\1", patfile)
@@ -74,6 +61,20 @@ appost <- function(){
   sc$Importo.senza.IVA <- paste("€", format(sc$Importo.senza.IVA.num, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
   sc$IVA <- paste("€", format(sc$IVA, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
   sc$Importo.con.IVA <- paste("€", format(sc$Importo.con.IVA, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+
+  # Installa e carica pacchetti ----
+  if(!require(officer)) install.packages("officer")
+  if(!require(openxlsx)) install.packages("openxlsx")
+  if(!require(dplyr)) install.packages("dplyr")
+  #if(!require(Microsoft365R)) install.packages("Microsoft365R")
+  #if(!require(googledrive)) install.packages("googledrive")
+
+  library(utils)
+  library(officer)
+  library(openxlsx)
+  library(dplyr)
+  #library(Microsoft365R)
+  #library(googledrive)
 
   ## Calcoli ----
   attach(sc)
