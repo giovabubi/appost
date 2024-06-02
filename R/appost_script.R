@@ -32,13 +32,15 @@ appost <- function(){
   ordine <- readline()
 
   if(ordine==0){
-  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = choose.files(default = "Elenco prodotti.xlsx"), method = "curl")
-  cat("\014")
-  cat(rep("\n", 10))
-  cat("\014")
-  cat("
+    pat <- choose.dir()
+    download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
+    cat("\014")
+    cat(rep("\n", 10))
+    cat("\014")
+    cat("
 
     Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
+    stop()
   }
 
   patfile <- choose.files(default = "*.csv")
