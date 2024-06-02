@@ -23,8 +23,23 @@ appost <- function(){
       *** BENVENUTI in AppOst ***
       ***************************
 
+
+      Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' scaricato da Teams,
+      oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
+      (da compilare prima di generare RAS e lettera d'ordine)
+
       ")
-  ordine <- readline("Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' scaricato da Teams:   ")
+  ordine <- readline()
+
+  if(ordine==0){
+  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
+  cat("\014")
+  cat(rep("\n", 10))
+  cat("\014")
+  cat("
+
+    Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
+  }
 
   patfile <- choose.files(default = "*.csv")
   n <- str_locate_all(patfile, "\\\\")
@@ -1908,13 +1923,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       # drive_user()
       # elenco.prodotti <- drive_get(as_id("1Hqjc3fruTBy04u_ULwua1Cegtbs7ndEe"))
       # drive_download(elenco.prodotti, overwrite = TRUE)
-      download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
-      cat("\014")
-      cat(rep("\n", 10))
-      cat("\014")
-      cat("
-
-    Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
+      #   download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
+      #   cat("\014")
+      #   cat(rep("\n", 10))
+      #   cat("\014")
+      #   cat("
+      #
+      # Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
     }
 
     cat("
