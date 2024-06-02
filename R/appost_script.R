@@ -16,7 +16,9 @@ appost <- function(){
 
   # Carica dati ordine ----
   cat("\014")
+  cat(rep("\n", 10))
   cat("
+
       ***************************
       *** BENVENUTI in AppOst ***
       ***************************
@@ -356,10 +358,9 @@ appost <- function(){
   # Genera RAS ----
   ras <- function(){
     cat("\014")
+    cat(rep("\n", 10))
+    cat("\014")
     cat("
-    ***************************
-    *** BENVENUTI in AppOst ***
-    ***************************
 
     Premere INVIO per caricare il file Excel con l'elenco dei prodotti
 
@@ -1863,7 +1864,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   # Input ----
   answ <- function(){
     cat("\014")
+    cat(rep("\n", 10))
+    cat("\014")
     cat("
+
       ***************************
       *** BENVENUTI in AppOst ***
       ***************************
