@@ -547,6 +547,9 @@ appost <- function(){
       doc <- body_remove(doc)
     }
     print(doc, target = "1 RAS.docx")
+    cat("\014")
+    cat(rep("\n", 10))
+    cat("\014")
     cat("
 
     Documento '1 RAS.docx' generato e salvato in ", pat)
@@ -889,6 +892,9 @@ appost <- function(){
       doc <- body_remove(doc)
     }
     print(doc, target = "3 Decisione a contrattare.docx")
+    cat("\014")
+    cat(rep("\n", 10))
+    cat("\014")
     cat("
 
     Documento '3 Decisione a contrattare.docx' generato e salvato in ", pat)
@@ -1252,6 +1258,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           cursor_reach("CAMPO.PROGETTO.DPCM") |>
           body_replace_all_text("CAMPO.PROGETTO.DPCM", paste0(Progetto, CUP1))
         print(doc, target = "5.4 Dichiarazione DPCM 187.docx")
+        cat("\014")
+        cat(rep("\n", 10))
+        cat("\014")
         cat("
 
     Documenti '5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx', '5.3 Dichiarazione sostitutiva senza DGUE.docx' e '5.4 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
@@ -1286,7 +1295,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           doc <- body_remove(doc)
         }
         print(doc, target = "5 Declaration on honour.docx")
+        cat("\014")
+        cat(rep("\n", 10))
+        cat("\014")
         cat("
+
     Documento '5 Declaration on honour.docx' generato e salvato in ", pat)
       }
     }
@@ -1735,6 +1748,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       doc <- body_remove(doc)
     }
     print(doc, target = "8 Dichiarazione prestazione resa.docx")
+    cat("\014")
+    cat(rep("\n", 10))
+    cat("\014")
     cat("
 
     Documento '8 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
@@ -1893,6 +1909,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       # elenco.prodotti <- drive_get(as_id("1Hqjc3fruTBy04u_ULwua1Cegtbs7ndEe"))
       # drive_download(elenco.prodotti, overwrite = TRUE)
       download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
+      cat("\014")
+      cat(rep("\n", 10))
+      cat("\014")
+      cat("
+
+    Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat)
     }
 
     cat("
