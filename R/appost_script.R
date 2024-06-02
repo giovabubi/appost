@@ -42,7 +42,10 @@ appost <- function(){
 
     Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat, "
 
+    AppOst si chiuderà a breve. Grazie e arrivederci!
+
         ")
+    Sys.sleep(5)
     quit(save="no")
   }
 
