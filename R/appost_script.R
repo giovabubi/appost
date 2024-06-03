@@ -402,7 +402,7 @@ appost <- function(){
     inpt <- readline()
     pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
     }else{
-      pr <- read.xlsx("Elenco.prodotti.xlsx")
+      pr <- read.xlsx("Elenco prodotti.xlsx")
     }
 
     pr <- pr[,1:5]
@@ -605,9 +605,11 @@ appost <- function(){
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
 
     ## Avviso pubblico ----
@@ -769,9 +771,11 @@ appost <- function(){
         manca <- paste0(manca, ",")
         manca[len] <- sub(",$", "\\.", manca[len])
         cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
         cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
       }
     }
   }
@@ -950,9 +954,11 @@ appost <- function(){
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+        **********************")
     }
   }
 
@@ -1069,7 +1075,7 @@ appost <- function(){
     Documento '4 Provv. impegno.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP.dati, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, Richiedente.dati)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP.dati, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Prot..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente.dati)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1081,9 +1087,11 @@ appost <- function(){
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
   }
 
@@ -1144,9 +1152,11 @@ appost <- function(){
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
   }
 
@@ -1315,9 +1325,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           manca <- paste0(manca, ",")
           manca[len] <- sub(",$", "\\.", manca[len])
           cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
           cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
         }
 
       }else{
@@ -1399,9 +1411,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
   }
 
@@ -1573,7 +1587,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '6 Atto istruttorio.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP.dati, RUP.dati..Luogo.di.nascita, RUP.dati..Data.di.nascita, RUP.dati..Codice.fiscale)
+    manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP.dati, RUP.dati..Luogo.di.nascita, RUP.dati..Data.di.nascita, RUP.dati..Codice.fiscale, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1585,9 +1599,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
   }
 
@@ -1601,7 +1617,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     inpt <- readline()
     pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
     }else{
-      pr <- read.xlsx("Elenco.prodotti.xlsx")
+      pr <- read.xlsx("Elenco prodotti.xlsx")
     }
 
     pr <- pr[,1:5]
@@ -1718,7 +1734,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '7 Lettera ordine.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, CIG, RUP.dati, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente.dati..Luogo.di.consegna)
+    manca <- dplyr::select(sc, CIG, RUP.dati, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente.dati..Luogo.di.consegna, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1730,9 +1746,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
   }
 
@@ -1798,7 +1816,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '8 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA)
+    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1810,9 +1828,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.
+    *********************")
     }
   }
 
@@ -1901,7 +1921,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '9 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1913,9 +1933,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       manca <- paste0(manca, ",")
       manca[len] <- sub(",$", "\\.", manca[len])
       cat("
-    Tuttavia i seguenti dati risultano mancanti:", manca)
+    ***** ATTENZIONE *****
+    Il documento è stato  generato, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.")
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.
+    **********************")
     }
   }
 
@@ -1932,15 +1954,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
       Che documento vuoi generare?
       1: RAS con eventuale avviso pubblico
-      2: Decisione a contrattare, Provvedimento d'impegno, Richiesta pagina web
-      3: Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Comunicazione CIG
+      2: Decisione a contrattare, Richiesta pagina web
+      3: Provvedimento d'impegno, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Comunicazione CIG
       4: Dichiarazione di prestazione resa, Provvedimento di liquidazione
 
       ")
     inpt <- readline()
     if(inpt==1){ras()}
-    if(inpt==2){dac();provv_imp();pag()}
-    if(inpt==3){docoe();ai();ldo();com_cig()}
+    if(inpt==2){dac();pag()}
+    if(inpt==3){provv_imp();docoe();ai();ldo();com_cig()}
     if(inpt==4){dic_pres();provv_liq()}
     # if(inpt==5){
     #   # drive_deauth()
