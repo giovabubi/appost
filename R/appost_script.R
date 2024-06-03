@@ -1878,11 +1878,18 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prodotto),
                          ftext("”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il provvedimento di impegno:")), style = "Normal") |>
+                         ftext(" il provvedimento di impegno prot. ").
+                        ftext(Prot..provv..impegno), ftext(":")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("CUP: "), ftext(CUP2), ftext(";")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("CUI: "), ftext(CUI2), ftext(";")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto")
+
+    if(!is.na(CUI)){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto")
+    }
+
+    doc <- doc |>
       body_add_fpar(fpar(ftext("Pagina web dedicata al ciclo di vita del contratto: "), ftext(Pagina.web), ftext(";")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("Impegno N° "),
                          ftext(Prot..impegno.di.spesa),
@@ -1902,7 +1909,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" N° _____ del _____ di "), ftext(Importo.con.IVA),
                          ftext(", scadenza _____. SDI registrata in attività _____;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("la liquidazione della succitata fattura ed autorizza il responsabile amministrativo all’emissione del relativo mandato di pagamento su IBAN: _____.")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("la liquidazione della succitata fattura ed autorizza il responsabile amministrativo all’emissione del relativo mandato di pagamento su IBAN: "),
+      ftext(Fornitore..IBAN), ftext(".")), style = "Normal") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
@@ -1921,7 +1929,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '9 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web, Fornitore..IBAN)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
