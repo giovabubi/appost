@@ -1,5 +1,5 @@
 appost <- function(){
-
+library(utils)
   pat <- utils::choose.dir(caption = "Seleziona la cartella dell'ordine")
   setwd(pat)
 
@@ -52,6 +52,7 @@ appost <- function(){
     ordini <- read.csv("Ordini.csv", na.strings = "")
   }
 
+  if(!require(dplyr)) install.packages("dplyr")
   ordini <- dplyr::rename(ordini,
                           Prodotto=Descrizione.beni.servizi.lavori,
                           RDO=N..RDO.MePA,
@@ -73,7 +74,6 @@ appost <- function(){
   # Installa e carica pacchetti ----
   if(!require(officer)) install.packages("officer")
   if(!require(openxlsx)) install.packages("openxlsx")
-  if(!require(dplyr)) install.packages("dplyr")
   #if(!require(Microsoft365R)) install.packages("Microsoft365R")
   #if(!require(googledrive)) install.packages("googledrive")
 
