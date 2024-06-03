@@ -1878,8 +1878,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prodotto),
                          ftext("”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il provvedimento di impegno prot. ").
-                        ftext(Prot..provv..impegno), ftext(":")), style = "Normal") |>
+                         ftext(" il provvedimento di impegno:")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("CUP: "), ftext(CUP2), ftext(";")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto")
