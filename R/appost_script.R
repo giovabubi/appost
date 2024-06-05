@@ -40,6 +40,7 @@ appost <- function(){
 
   if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
+    pat <- getwd()
   }else{
     patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
     if(!require(stringr)) install.packages("stringr")
