@@ -1,19 +1,18 @@
 appost <- function(){
-  library(utils)
-  pat <- utils::choose.dir(caption = "Seleziona la cartella dell'ordine")
-  setwd(pat)
+  # pat <- utils::choose.dir(caption = "Seleziona la cartella dell'ordine")
+  # setwd(pat)
 
   # Carica dati ordine ----
   cat("\014")
-  cat(rep("\n", 10))
+  cat(rep("\n", 20))
   cat("
 
-      ***************************\
+      ***************************
       *** BENVENUTI in AppOst ***
       ***************************
 
 
-      Digitare il numero d'ordine e premere INVIO
+      Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaricato da Teams
 
       oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
       (da compilare prima di generare RAS e lettera d'ordine)
@@ -26,7 +25,7 @@ appost <- function(){
     # setwd(pat)
     download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     cat("\014")
-    cat(rep("\n", 10))
+    cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -39,17 +38,17 @@ appost <- function(){
     quit(save="no")
   }
 
-  if(file.exists("Ordini.csv")=="FALSE"){
-  patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
-  if(!require(stringr)) install.packages("stringr")
-  n <- stringr::str_locate_all(patfile, "\\\\")
-  m <- max(n[[1]])
-  n <- paste0("(.{", m, "}).*")
-  pat <- sub(n, "\\1", patfile)
-  setwd(pat)
-  ordini <- read.csv(patfile, na.strings = "")
-  }else{
+  if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
+  }else{
+    patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
+    if(!require(stringr)) install.packages("stringr")
+    n <- stringr::str_locate_all(patfile, "\\\\")
+    m <- max(n[[1]])
+    n <- paste0("(.{", m, "}).*")
+    pat <- sub(n, "\\1", patfile)
+    setwd(pat)
+    ordini <- read.csv(patfile, na.strings = "")
   }
 
   if(!require(dplyr)) install.packages("dplyr")
@@ -77,7 +76,6 @@ appost <- function(){
   #if(!require(Microsoft365R)) install.packages("Microsoft365R")
   #if(!require(googledrive)) install.packages("googledrive")
 
-  library(utils)
   library(officer)
   library(openxlsx)
   library(dplyr)
@@ -390,7 +388,7 @@ appost <- function(){
   # Genera RAS ----
   ras <- function(){
     cat("\014")
-    cat(rep("\n", 10))
+    cat(rep("\n", 20))
     cat("\014")
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
@@ -585,7 +583,7 @@ appost <- function(){
     }
     print(doc, target = "1 RAS.docx")
     cat("\014")
-    cat(rep("\n", 10))
+    cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -934,7 +932,7 @@ appost <- function(){
     }
     print(doc, target = "3 Decisione a contrattare.docx")
     cat("\014")
-    cat(rep("\n", 10))
+    cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -1306,7 +1304,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           body_replace_all_text("CAMPO.PROGETTO.DPCM", paste0(Progetto, CUP1))
         print(doc, target = "5.4 Dichiarazione DPCM 187.docx")
         cat("\014")
-        cat(rep("\n", 10))
+        cat(rep("\n", 20))
         cat("\014")
         cat("
 
@@ -1345,7 +1343,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         }
         print(doc, target = "5 Declaration on honour.docx")
         cat("\014")
-        cat(rep("\n", 10))
+        cat(rep("\n", 20))
         cat("\014")
         cat("
 
@@ -1809,7 +1807,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     print(doc, target = "8 Dichiarazione prestazione resa.docx")
     cat("\014")
-    cat(rep("\n", 10))
+    cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -1957,7 +1955,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   # Input ----
   answ <- function(){
     cat("\014")
-    cat(rep("\n", 10))
+    cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -1984,7 +1982,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     #   # drive_download(elenco.prodotti, overwrite = TRUE)
     # download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     # cat("\014")
-    # cat(rep("\n", 10))
+    # cat(rep("\n", 20))
     # cat("\014")
     # cat("
     #   #
