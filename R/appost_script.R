@@ -1713,7 +1713,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("") |>
       body_add_fpar(fpar(ftext("La presente lettera d’ordine, perfezionata mediante scambio di corrispondenza commerciale, è sottoscritta da ciascuna Parte, anche mediante sovrascrizione, con firma digitale valida alla data di apposizione della stessa e a norma di legge, ed è successivamente scambiata tra le parti via PEC. Pertanto, l’imposta di registro sarà dovuta in caso d’uso ai sensi del D.P.R 131/1986.")), style = "Normal") |>
       body_add_par("") |>
-      body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Firma digitale", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
+      body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
 
     b <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
     b <- doc$officer_cursor$which +1
