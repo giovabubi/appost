@@ -1111,7 +1111,10 @@ appost <- function(){
       body_add_fpar(fpar(ftext("del CNR")), style = "Destinatario 2") |>
       body_add_par("", style = "Normal") |>
       body_add_par("", style = "Normal") |>
-      body_add_fpar(fpar(ftext(PRODOTTO, fpt.bi), ftext(": procedura per l’affidamento diretto, ai sensi dell’art. 50, comma 1, lettera b del D.lgs. n. 36/2023 - ", fpt.i),
+      body_add_fpar(fpar(ftext("OGGETTO", fpt.bi), ftext(": procedura per l’affidamento diretto, ai sensi dell’art. 50, comma 1, lettera b del D.lgs. n. 36/2023, ", fpt.i),
+                         ftext(della.fornitura, fpt.i), ftext(" di “", fpt.i),
+                         ftext(Prodotto, fpt.i),
+                         ftext("” - "),
                          ftext("Richiesta pagina dedicata al ciclo di vita del contratto pubblico.", fpt.bi)), style = "Normal") |>
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(ftext("Con riferimento alla procedura in oggetto ed ai fini della sua pubblicazione si chiede la cortesia di procedere all’apertura della pagina dedicata al ciclo di vita dell’affidamento di cui sopra.")), style = "Normal") |>
@@ -1369,7 +1372,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("del CNR")), style = "Destinatario 2") |>
       body_add_par("", style = "Normal") |>
       body_add_par("", style = "Normal") |>
-      body_add_fpar(fpar(ftext(PRODOTTO, fpt.bi), ftext(": ", fpt.i), ftext("procedura per l’affidamento diretto, ai sensi dell’art. 50, comma 1, lettera b del D.lgs. n. 36/2023, pagina dedicata su sito web URP: ", fpt.i),
+      body_add_fpar(fpar(ftext("OGGETTO", fpt.bi), ftext(": ", fpt.i), ftext("procedura per l’affidamento diretto, ai sensi dell’art. 50, comma 1, lettera b del D.lgs. n. 36/2023, ", fpt.i),
+                         ftext(della.fornitura, fpt.i), ftext(" di “", fpt.i),
+                         ftext(Prodotto, fpt.i),
+                         ftext("”, Riferimento Spazio su sito URP: ", fpt.i),
                          ftext(Pagina.web, fpt.i),
                          ftext(" - ", fpt.i), ftext("COMUNICAZIONE CIG", fpt.bi)), style = "Normal") |>
       body_add_par("", style = "Normal") |>
@@ -1434,7 +1440,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_forward() |>
       body_add_fpar(fpar(ftext("ATTO ISTRUTTORIO")), style = "heading 1", pos = "on") |>
       body_add_fpar(fpar(ftext("Procedura di affidamento diretto, ai sensi dell’art. 50 del D.Lgs. N. 36/2023, "),
-                         ftext(della.fornitura),ftext(" di “"),
+                         ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
                          ftext("” (CIG "),
                          ftext(CIG),
