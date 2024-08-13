@@ -343,7 +343,7 @@ appost <- function(){
   ultimi.prot <- ultimi$Prot..DocOE[1]
   ultimi.recente <- ultimi$diff[1]
 
-  # Scarica Modello.docx da GoogleDrive ----
+  # Scarica Modello.docx da GoogleDrive ---
   # drive_deauth()
   # drive_user()
   # modello <- drive_get(as_id("1AOrViONf-0tZI22Hzn1dCNDcn_xxPag-"))
@@ -483,12 +483,28 @@ appost <- function(){
     doc <- doc |>
       body_add_fpar(fpar(ftext("All’Istituto per la Protezione Sostenibile delle Piante")), style = "Destinatario", pos = "on") |>
       body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
-      body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50 DEL D.LGS. N. 36/2023, "),
+                               ftext(della.fornitura), ftext(" DI “"),
+                               ftext(PRODOTTO),
+                               ftext("”"),
+                               ftext(", nell'ambito del progetto “"),
+                               ftext(Progetto),
+                               ftext("”"),
+                               ftext(CUP1),
+                               ftext(", ORDINE CNR-IPSP-"),
+                               ftext(sede),
+                               ftext(" N° "),
+                               ftext(ordine),
+                               ftext(y)), style = "Maiuscolo") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente.dati), ftext(", "),
                          ftext(nato.ric), ftext(" "), ftext(Richiedente.dati..Luogo.di.nascita), ftext(", il "),
-                         ftext(Richiedente.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente.dati..Codice.fiscale), ftext(", "),
-                         ftext("vista la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di richiedente la fornitura di “"),
+                         ftext(Richiedente.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente.dati..Codice.fiscale), ftext(",")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di richiedente la fornitura di “"),
                          ftext(Prodotto),
                          ftext("”, ordine CNR-IPSP-"),
                          ftext(sede),
@@ -500,7 +516,9 @@ appost <- function(){
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità")), style = "Normal") |>
+                         ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
+                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;"), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("Di non incorrere in alcuna delle cause di inconferibilità e di incompatibilità previste dal D.lgs. n. 39/2013;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("Di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
