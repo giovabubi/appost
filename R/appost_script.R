@@ -61,7 +61,7 @@ appost <- function(){
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
 
-  sc$Importo.senza.IVA.num <- as.numeric(sub(",.*", "", sc$Importo.senza.IVA))
+  sc$Importo.senza.IVA.num <- as.numeric(sub(",(..)..", "\\.\\1", sc$Importo.senza.IVA))
   sc$Aliquota.IVA.num <- as.numeric(ifelse(sc$Aliquota.IVA=='22%', 0.22,
                                            ifelse(sc$Aliquota.IVA=='10%', 0.1,
                                                   ifelse(sc$Aliquota.IVA=='4%', 0.04, 0))))
@@ -84,7 +84,10 @@ appost <- function(){
   #library(googledrive)
 
   ## Calcoli ----
+  trattini <- "__________"
+  sc[is.na(sc)] <- trattini
   attach(sc)
+
   fpt.b <- fp_text(bold = TRUE, font.family = 'Source Sans Pro')
   fpt.i <- fp_text(italic = TRUE, font.family = 'Source Sans Pro')
   fpt.bi <- fp_text(italic = TRUE, bold = TRUE, font.family = 'Source Sans Pro')
@@ -198,16 +201,19 @@ appost <- function(){
     beni <- 'beni'
     della.fornitura <- 'della fornitura'
     la.fornitura <- 'la fornitura'
+    fornitura.consegnata <- 'la fornitura dovrà essere consegnata'
   }else if(Tipo.acquisizione=='Servizi'){
     bene <- 'servizio'
     beni <- 'servizi'
     della.fornitura <- 'del servizio'
     la.fornitura <- 'il servizio'
+    fornitura.consegnata <- 'il servizio dovrà essere prestato'
   }else if(Tipo.acquisizione=='Lavori'){
     bene <- 'lavoro'
     beni <- 'lavori'
     della.fornitura <- 'del lavoro'
     la.fornitura <- 'il lavoro'
+    fornitura.consegnata <- 'il lavoro dovrà essere svolto'
   }
 
   if(Richiedente.dati..Sesso=='M'){
@@ -276,9 +282,7 @@ appost <- function(){
   y <- sub("(....)-(..)-(..)",  "/\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
 
-  trattini <- "__________"
-
-  if(!is.na(CUP)){
+  if(CUP!=trattini){
     CUP1 <- paste0(" (CUP ", CUP, ")")
     Progetto1 <- paste0(Progetto, " (CUP ", CUP, ")")
     CUP2 <- CUP
@@ -288,7 +292,7 @@ appost <- function(){
     CUP2 <- ""
   }
 
-  if(!is.na(CUI)){
+  if(CUI!=trattini){
     CUI1 <- paste0(", CUI ", CUI)
     CUI2 <- CUI
     CUI3 <- CUI
@@ -301,20 +305,26 @@ appost <- function(){
   if(Tipo.ordine=='Ordine diretto MePA'){
     ordine.trattativa.scelta <- paste0(", ordine diretto MePA N° ", RDO)
     ordine.trattativa.scelta2 <- "Ordine diretto MePA N°"
+    ordine.trattativa.scelta.ldo1 <- "Ordine diretto MePA N° "
+    ordine.trattativa.scelta.ldo2 <- RDO
   }else if(Tipo.ordine=='Trattativa diretta MePA'){
     ordine.trattativa.scelta <- paste0(", trattativa diretta MePA N° ", RDO)
     ordine.trattativa.scelta2 <- "Trattativa diretta MePA N°"
+    ordine.trattativa.scelta.ldo1 <- "Trattativa diretta MePA N° "
+    ordine.trattativa.scelta.ldo2 <- RDO
   }else if(Tipo.ordine=='RDO MePA'){
     ordine.trattativa.scelta <- paste0(", RDO MePA N° ", RDO)
     ordine.trattativa.scelta2 <- "RDO MePA N°"
+    ordine.trattativa.scelta.ldo1 <- "RDO MePA N° "
+    ordine.trattativa.scelta.ldo2 <- RDO
   }else{
     ordine.trattativa.scelta <- ""
     ordine.trattativa.scelta2 <- ""
+    ordine.trattativa.scelta.ldo1 <- "Vs. offerta "
+    ordine.trattativa.scelta.ldo2 <- Preventivo..fornitore
   }
 
   if(Richiedente.dati==Responsabile.dati){firma.RAS <- "(Richiedente l’ordine, responsabile del progetto e titolare dei fondi)"}else{firma.RAS <- "(Richiedente l’ordine)"}
-
-  sc[is.na(sc)] <- trattini
 
   CAMPO.OE <- paste0(Fornitore, ', P.I/C.F. ', Fornitore..P.IVA, ', con sede in ', Fornitore..Sede, ', tel. ', Fornitore..Telefono, ', PEC ', Fornitore..PEC, ', e-mail ', Fornitore..E.mail)
   CAMPO.OE1 <- trattini
@@ -649,7 +659,7 @@ appost <- function(){
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
 
@@ -815,7 +825,7 @@ appost <- function(){
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
         cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
       }
     }
@@ -971,7 +981,7 @@ appost <- function(){
                          ftext(Fornitore..Codice.terzo.SIGLA),
                          ftext(";")), style = "Elenco liv1")
 
-    if(Importo.senza.IVA>=40000){
+    if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
         body_add_fpar(fpar(ftext("DI IMPEGNARE", fpt.b), ftext(" la spesa per un importo pari a € 35,00 sui fondi del già citato progetto, allocati sul GAE P___, voce del piano 13096 “Pubblicazione bandi di gara” per la contribuzione ANAC;")), style = "Elenco liv1")
     }
@@ -1021,7 +1031,7 @@ appost <- function(){
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
         **********************")
     }
   }
@@ -1154,7 +1164,7 @@ appost <- function(){
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
   }
@@ -1222,7 +1232,7 @@ appost <- function(){
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
   }
@@ -1395,7 +1405,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
           cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
         }
 
@@ -1484,7 +1494,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
   }
@@ -1504,7 +1514,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_begin() |>
       cursor_forward() |>
       body_add_fpar(fpar(ftext("ATTO ISTRUTTORIO")), style = "heading 1", pos = "on") |>
-      body_add_fpar(fpar(ftext("Procedura di affidamento diretto, ai sensi dell’art. 50 del D.Lgs. N. 36/2023, "),
+      body_add_fpar(fpar(ftext("Affidamento diretto, ai sensi dell’art. 50 del D.Lgs. N. 36/2023, "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
                          ftext("” (CIG "),
@@ -1526,7 +1536,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 6 novembre 2012, n. 190 recante “Disposizioni per la prevenzione e la repressione della corruzione e dell'illegalità nella pubblica amministrazione” pubblicata sulla Gazzetta Ufficiale n. 265 del 13/11/2012;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 14 marzo 2013, n. 33 recante “Riordino della disciplina riguardante il diritto di accesso civico e gli obblighi di pubblicità, trasparenza e diffusione di informazioni da parte delle pubbliche amministrazioni” pubblicato sulla Gazzetta Ufficiale n. 80 del 05/04/2013 e successive modifiche introdotte dal d.lgs. 25 maggio 2016 n. 97;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 18 aprile 2016 n. 50 pubblicato sul Supplemento Ordinario n. 10 alla G.U.R.I. n. 91 del 19/04/2016 e successive disposizioni integrative e correttive introdotte dal decreto legislativo 19 aprile 2017 n. 56, dalla legge 11 settembre 2020 n. 120 di conversione, con modificazioni, del decreto legge 16 luglio 2020 n. 76 e dalla legge 29 luglio 2021 n. 108 di conversione, con modificazioni, del decreto legge 31 maggio 2021 n. 77, per le parti non espressamente abrogate dal d.lgs. n. 36/2023 sopra richiamato;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 50, comma 1, lettera b) del Codice, il quale consente, per affidamenti di contratti di servizi e forniture, ivi compresi i servizi di ingegneria e architettura e l'attività di progettazione di importo inferiore a euro 140.000,00, di procedere ad affidamento diretto, anche senza consultazione di più operatori economici;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento relativo all’affidamento diretto "), ftext(della.fornitura), ftext(" di cui all’oggetto, prot. "),
                          ftext(Prot..DaC),
@@ -1544,7 +1553,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(RUP.dati),
                          ftext(" quale Responsabile Unico del Progetto ai sensi dell’art. 15 del Codice;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATI", fpt.b), ftext(" altresì i principi previsti dall’art. 57 del d.lgs. 36/2023 tra i quali le clausole sociali volte a garantire le pari opportunità generazionali, di genere e di inclusione lavorativa per le persone con disabilità o svantaggiate, la stabilità occupazionale del personale impiegato;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 52, comma 1 del Codice, il quale dispone che, nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro, gli operatori economici attestano con dichiarazione sostitutiva di atto di notorietà il possesso dei requisiti di partecipazione e di qualificazione richiesti e che le stazioni appaltanti procedono alla risoluzione del contratto qualora a seguito delle verifiche non sia confermato il possesso dei requisiti generali dichiarati;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva attestante il possesso dei requisiti di ordine generale previsti dal Codice ai sensi dell’art. 52 del Codice;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la Stazione appaltante verificherà, previo sorteggio di un campione individuato con modalità predeterminata, le dichiarazioni degli operatori economici affidatari;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTI", fpt.b), ftext(" gli atti della procedura in argomento ed accertata la regolarità degli stessi in relazione alla normativa ed ai regolamenti vigenti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b), ftext(" il principio del risultato;")), style = "Normal") |>
       body_add_break() |>
@@ -1552,7 +1563,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("Dichiara:")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Che il procedimento di acquisto risulta condotto in conformità alle disposizioni di legge e ai regolamenti vigenti in materia;")), style = "Elenco liv1")
 
-    if(Importo.senza.IVA>=40000){
+    if(Importo.senza.IVA.num<40000){
       doc <- doc |>
         body_add_fpar(fpar(ftext("Nulla osta all’emissione della lettera d’ordine purché munita di apposita clausola risolutiva in caso di accertamento della carenza dei requisiti di ordine generale.")), style = "Elenco liv1")
     }else{
@@ -1587,14 +1598,34 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     ## Dich. Ass. RUP ----
     doc <- cursor_reach(doc, "SEZIONE.DICH.ASS.RICH.") |>
-      body_add_fpar(fpar(ftext("All’Istituto per la Protezione Sostenibile delle Piante")), style = "Destinatario", pos = "on") |>
+      body_add_fpar(fpar(ftext("All’"),
+                         ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
       body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
-      body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(RUP.dati), ftext(", "),
+      body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50 DEL D.LGS. N. 36/2023, "),
+                         ftext(della.fornitura), ftext(" DI “"),
+                         ftext(Prodotto),
+                         ftext("” (CIG "),
+                         ftext(CIG),
+                         ftext(CUI1),
+                         ftext(", "), ftext(Pagina.web),
+                         ftext("), nell'ambito del progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(ordine.trattativa.scelta),
+                         ftext(", ordine CNR-IPSP-"),
+                         ftext(sede),
+                         ftext(" N° "),
+                         ftext(ordine),
+                         ftext(y)), style = "Maiuscolo") |>
+      body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(RUP.dati, fpt.b), ftext(", "),
                          ftext(nato.rup), ftext(" "), ftext(RUP.dati..Luogo.di.nascita), ftext(", il "),
-                         ftext(RUP.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP.dati..Codice.fiscale), ftext(", "),
-                         ftext("vista la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all’incarico di Responsabile Unico del Progetto per l’affidamento "),
+                         ftext(RUP.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP.dati..Codice.fiscale), ftext(", ")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all’incarico di Responsabile Unico del Progetto per l’affidamento "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
                          ftext("” (CIG "),
@@ -1615,17 +1646,21 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità")), style = "Normal") |>
+                         ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
+                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("Di non incorrere in alcuna delle cause di inconferibilità e di incompatibilità previste dal D.lgs. n. 39/2013;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("Di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("Di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("A non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("A comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar("Il Responsabile Unico del Progetto", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
@@ -1672,7 +1707,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ***** ATTENZIONE *****
     I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
   }
@@ -1731,9 +1766,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.RUP") |>
       body_replace_all_text("CAMPO.RUP", RUP.dati, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RDO1") |>
-      body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta2, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RDO2") |>
-      body_replace_all_text("CAMPO.RDO2", as.character(RDO), only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.RDO2", ordine.trattativa.scelta.ldo2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.WEB") |>
       body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FORNITORE") |>
@@ -1769,15 +1804,19 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("CONDIZIONI GENERALI D'AQCUISTO", style = "heading 1") |>
       body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
       body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext("franco destino.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("3. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("4. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("5. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("6. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+      body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": "), ftext(fornitura.consegnata), ftext(" entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione del presente contratto presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo") |>
+      body_add_fpar(fpar(ftext("4. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
+      body_add_fpar(fpar(ftext("5. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
+      body_add_fpar(fpar(ftext("6. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto di cui all’art.8, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia l’Aggiudicatario non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 20% (venti per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno all’Aggiudicatario, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
+      body_add_fpar(fpar(ftext("7. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo")
 
-    if(Importo.senza.IVA>=40000){
+    if(Importo.senza.IVA.num<40000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("6. Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("7. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+        body_add_fpar(fpar(ftext("8. Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("9. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("8. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
     }
 
     doc <- doc |>
@@ -1819,7 +1858,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ***** ATTENZIONE *****
     Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
     **********************")
     }
   }
@@ -1901,7 +1940,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ***** ATTENZIONE *****
     Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
     *********************")
     }
   }
@@ -2019,7 +2058,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ***** ATTENZIONE *****
     Il documento è stato  generato, ma i seguenti dati risultano mancanti:", manca)
       cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con 'NA'.
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
     **********************")
     }
   }
