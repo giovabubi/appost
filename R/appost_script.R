@@ -276,6 +276,8 @@ appost <- function(){
   y <- sub("(....)-(..)-(..)",  "/\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
 
+  trattini <- "__________"
+
   if(!is.na(CUP)){
     CUP1 <- paste0(" (CUP ", CUP, ")")
     Progetto1 <- paste0(Progetto, " (CUP ", CUP, ")")
@@ -293,7 +295,7 @@ appost <- function(){
   }else{
     CUI1 <- ""
     CUI2 <- ""
-    CUI3 <- "__________"
+    CUI3 <- trattini
   }
 
   if(Tipo.ordine=='Ordine diretto MePA'){
@@ -312,16 +314,18 @@ appost <- function(){
 
   if(Richiedente.dati==Responsabile.dati){firma.RAS <- "(Richiedente l’ordine, responsabile del progetto e titolare dei fondi)"}else{firma.RAS <- "(Richiedente l’ordine)"}
 
+  sc[is.na(sc)] <- trattini
+
   CAMPO.OE <- paste0(Fornitore, ', P.I/C.F. ', Fornitore..P.IVA, ', con sede in ', Fornitore..Sede, ', tel. ', Fornitore..Telefono, ', PEC ', Fornitore..PEC, ', e-mail ', Fornitore..E.mail)
-  CAMPO.OE1 <- '_____'
-  CAMPO.OE2 <- '_____'
+  CAMPO.OE1 <- trattini
+  CAMPO.OE2 <- trattini
   all.OE <- paste0(", all'operatore economico ", Fornitore, " (P.IVA ", Fornitore..P.IVA, ")")
   if(Scelta.fornitore=='Singolo preventivo'){
-    CAMPO.OE1 <- '_____'
+    CAMPO.OE1 <- trattini
     CAMPO.OE2 <- CAMPO.OE
   }else if(Scelta.fornitore=='Più preventivi'){
     CAMPO.OE1 <- CAMPO.OE
-    CAMPO.OE2 <- '_____'
+    CAMPO.OE2 <- trattini
   }else if(Scelta.fornitore=='Avviso pubblico'){
     all.OE <- ''
   }else{
@@ -454,7 +458,7 @@ appost <- function(){
       cursor_reach("CAMPO.GAE") |>
       body_replace_all_text("CAMPO.GAE", GAE, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CUP") |>
-      body_replace_all_text("CAMPO.CUP", CUP, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.CUP", CUP2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.OE1") |>
       body_replace_all_text("CAMPO.OE1", CAMPO.OE1, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.OE2") |>
@@ -481,26 +485,26 @@ appost <- function(){
     ## Dich. Ass. Rich. ----
     doc <- cursor_reach(doc, "SEZIONE.DICH.ASS.RICH.")
     doc <- doc |>
-      body_add_fpar(fpar(ftext("All’Istituto per la Protezione Sostenibile delle Piante")), style = "Destinatario", pos = "on") |>
+      body_add_fpar(fpar(ftext("All’"),
+      ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
       body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50 DEL D.LGS. N. 36/2023, "),
-                               ftext(della.fornitura), ftext(" DI “"),
-                               ftext(PRODOTTO),
-                               ftext("”"),
-                               ftext(", nell'ambito del progetto “"),
-                               ftext(Progetto),
-                               ftext("”"),
-                               ftext(CUP1),
-                               ftext(", ORDINE CNR-IPSP-"),
-                               ftext(sede),
-                               ftext(" N° "),
-                               ftext(ordine),
-                               ftext(y)), style = "Maiuscolo") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+                         ftext(della.fornitura), ftext(" DI “"),
+                         ftext(PRODOTTO),
+                         ftext("”"),
+                         ftext(", nell'ambito del progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", ORDINE CNR-IPSP-"),
+                         ftext(sede),
+                         ftext(" N° "),
+                         ftext(ordine),
+                         ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente.dati), ftext(", "),
+      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente.dati, fpt.b), ftext(", "),
                          ftext(nato.ric), ftext(" "), ftext(Richiedente.dati..Luogo.di.nascita), ftext(", il "),
                          ftext(Richiedente.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente.dati..Codice.fiscale), ftext(",")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
@@ -518,15 +522,16 @@ appost <- function(){
                          ftext(CUP1),
                          ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
-                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;"), style = "Normal") |>
+                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("Di non incorrere in alcuna delle cause di inconferibilità e di incompatibilità previste dal D.lgs. n. 39/2013;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("Di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("Di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("A non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("A comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
@@ -538,14 +543,30 @@ appost <- function(){
     if(Richiedente.dati!=Responsabile.dati){
       doc <- doc |>
         cursor_reach("SEZIONE.DICH.ASS.RESP.") |>
-        body_add_fpar(fpar(ftext("All’Istituto per la Protezione Sostenibile delle Piante")), style = "Destinatario", pos = "on") |>
+        body_add_fpar(fpar(ftext("All’"),
+                           ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
         body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
-        body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
-        body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.dati), ftext(", "),
+        body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50 DEL D.LGS. N. 36/2023, "),
+                           ftext(della.fornitura), ftext(" DI “"),
+                           ftext(PRODOTTO),
+                           ftext("”"),
+                           ftext(", nell'ambito del progetto “"),
+                           ftext(Progetto),
+                           ftext("”"),
+                           ftext(CUP1),
+                           ftext(", ORDINE CNR-IPSP-"),
+                           ftext(sede),
+                           ftext(" N° "),
+                           ftext(ordine),
+                           ftext(y)), style = "Maiuscolo") |>
+        body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.dati, fpt.b), ftext(", "),
                            ftext(nato.resp), ftext(" "), ftext(Responsabile..Luogo.di.nascita), ftext(", il "),
-                           ftext(Responsabile..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile..Codice.fiscale), ftext(", "),
-                           ftext("vista la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e responsabile del progetto “"),
+                           ftext(Responsabile..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile..Codice.fiscale), ftext(",")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e responsabile del progetto di ricerca “"),
                            ftext(Progetto), ftext("”"), ftext(CUP1),
                            ftext(", in relazione alla fornitura di “"),
                            ftext(Prodotto),
@@ -555,15 +576,18 @@ appost <- function(){
                            ftext(ordine),
                            ftext(y),
                            ftext(all.OE),
-                           ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità")), style = "Normal") |>
+                           ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
+                           ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("Di non incorrere in alcuna delle cause di inconferibilità e di incompatibilità previste dal D.lgs. n. 39/2013;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("Di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("Di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("A non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("A comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
         body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
@@ -615,7 +639,7 @@ appost <- function(){
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -781,7 +805,7 @@ appost <- function(){
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
       rownames(manca) <- NULL
-      manca <- subset(manca, is.na(manca$val))
+      manca <- subset(manca, manca$val==trattini)
       len <- length(manca$val)
       if(len>0){
         manca <- manca$var
@@ -824,7 +848,6 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 7 agosto 1990, n. 241 recante “Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi” pubblicata sulla Gazzetta Ufficiale n. 192 del 18/08/1990 e s.m.i.;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche - DPCNR del 12 marzo 2019 prot. AMMCNT-CNR n. 0012030 del 18 febbraio 2019, approvato con nota del Ministero dell’Istruzione dell’Università e della Ricerca prot. AOODGRIC n. 0002698 del 15 febbraio 2019, ed entrato in vigore dal 1° marzo 2019;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 59 del Regolamento di Amministrazione, Contabilità e Finanza del Consiglio Nazionale delle Ricerche rubricato “Decisione di contrattare” – DPCNR del 04 maggio 2005 prot. 0025034 pubblicato sulla G.U.R.I. n. 124 del 30/05/2005 – Supplemento Ordinario n. 101;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, con cui al dott. Francesco Di Serio è stato attribuito l’incarico di Direttore dell’IPSP del Consiglio Nazionale delle Ricerche a decorrere dal giorno 1/5/2024 per quattro anni;")), style = "Normal")
 
@@ -854,10 +877,13 @@ appost <- function(){
                          ftext(" relativa alla necessità di procedere all’acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("”"),
-                         ftext(" nell’ambito delle attività previste dal progetto “"),
+                         ftext("” (pagina web dedicata al ciclo di vita del contratto pubblico "),
+                         ftext(Pagina.web),
+                         ftext("), nell’ambito delle attività previste dal progetto “"),
                          ftext(Progetto),
-                         ftext("” mediante affidamento diretto all’operatore economico "),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", mediante affidamento diretto all’operatore economico "),
                          ftext(Fornitore),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
@@ -867,13 +893,18 @@ appost <- function(){
                          ftext(preventivo.individuato)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 50, comma 1, lettera b) del Codice, il quale consente, per affidamenti di contratti di servizi e forniture, ivi compresi i servizi di ingegneria e architettura e l'attività di progettazione di importo inferiore ad euro 140.000,00, di procedere ad affidamento diretto, anche senza consultazione di più operatori economici;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(", altresì, che la scelta dell’Operatore Economico deve essere effettuata assicurando che i soggetti individuati siano in possesso di documentate esperienze pregresse idonee all’esecuzione delle prestazioni contrattuali, anche individuati tra gli iscritti in elenchi o albi istituiti dalla stazione appaltante;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Comunicato del Presidente ANAC del 10 gennaio 2024 con cui sono state diramate indicazioni di carattere transitorio sull’applicazione delle disposizioni del codice dei contratti pubblici in materia di digitalizzazione degli affidamenti di importo inferiore a euro 5.000,00"),
+                         ftext(" [valido fino al 30.09.2024];", fpt.i)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATA", fpt.b), ftext(" l’opportunità, in ottemperanza alla suddetta normativa, di procedere ad affidamento diretto all’operatore economico "),
                          ftext(Fornitore),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
                          ftext(") mediante provvedimento contenente gli elementi essenziali descritti nell’art. 17, comma 2, del Codice, tenuto conto che il medesimo è in possesso di documentate esperienze pregresse idonee all’esecuzione della prestazione contrattuale;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO ", fpt.b),
-                         ftext(rotazione.individuata)), style = "Normal")
+                         ftext(rotazione.individuata)), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che dal 1° gennaio 2024 è fatto obbligo di utilizzare piattaforme di approvvigionamento digitale certificate (e-procurement) per svolgere le procedure di affidamento e di esecuzione dei contratti pubblici, a norma degli artt. 25 e 26 del Codice;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la stazione appaltante ai sensi dell’art. 48 comma 2 del Codice, ha accertato che il presente appalto non presenta un interesse transfrontaliero certo per cui non segue le procedure ordinarie di cui alla parte IV del Libro II;")), style = "Normal")
+
     if(Motivo.fuori.MePA!="No"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(ICT.testo)), style = "Normal")
@@ -881,10 +912,12 @@ appost <- function(){
 
     doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" l’approvazione del bilancio preventivo anno 2024 da parte del Consiglio di amministrazione del CNR con delibera nr. 371 del 28 Novembre 2023;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il bilancio di previsione del Consiglio Nazionale delle Ricerche per l'esercizio finanziario 2024, approvato dal Consiglio di Amministrazione con deliberazione n° 371/2023 del 28/11/2023, Verb. 488;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del progetto “"),
                          ftext(Progetto),
-                         ftext("”, allocati sul GAE "),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", allocati sul GAE "),
                          ftext(GAE),
                          ftext(", voce del piano "),
                          ftext(Voce.di.spesa),
@@ -905,9 +938,21 @@ appost <- function(){
                          ftext(" "),
                          ftext(RUP.dati),
                          ftext(" Responsabile Unico del Progetto il quale, ai sensi dell’art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("vigilare sullo svolgimento delle fasi di affidamento ed esecuzione "), ftext(della.fornitura), ftext(" in parola, provvedendo a creare le condizioni affinché il processo di acquisto risulti condotto in modo unitario rispetto alle esigenze ed ai costi indicati nel presente atto, in conformità a qualsiasi altra disposizione di legge e di regolamento in materia ivi incluso l’accertamento dei requisiti di carattere generale e tecnico-professionali, ove richiesti, in capo all’operatore economico individuato; ")), style = "Elenco liv2") |>
-      body_add_fpar(fpar(ftext("procedere alla prenotazione del Codice Identificativo Gara (CIG); ")), style = "Elenco liv2") |>
-      body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell’art. 15, comma 6 del Codice, il dott. Nicola Centorame in qualità di supporto al RUP;")), style = "Elenco liv1") |>
+      body_add_fpar(fpar(ftext("svolgere tutte le attività indicate nell’allegato I.2 del Codice, o che siano comunque necessarie ove non di competenza di altri organi;")), style = "Elenco liv2") |>
+      body_add_fpar(fpar(ftext("vigilare sullo svolgimento delle fasi di affidamento ed esecuzione "), ftext(della.fornitura), ftext(" in parola, provvedendo a creare le condizioni affinché il processo di acquisto risulti condotto in modo unitario rispetto alle esigenze ed ai costi indicati nel presente atto, in conformità a qualsiasi altra disposizione di legge e di regolamento in materia ivi incluso l’accertamento dei requisiti di carattere generale e tecnico-professionali, ove richiesti, in capo all’operatore economico individuato; ")), style = "Elenco liv2")
+
+
+    if(Tipo.ordine=="Trattativa diretta MePA" | Tipo.ordine=="RDO MePA" | Tipo.ordine=="Ordine diretto MePA"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("procedere alla prenotazione del Codice Identificativo Gara (CIG) tramite la piattaforma di approvvigionamento digitale certificata e a tutti gli altri adempimenti previsti dalla normativa vigente;")), style = "Elenco liv2")
+    }else{
+      doc <- doc |>
+      body_add_fpar(fpar(ftext("procedere alla prenotazione del Codice Identificativo Gara (CIG) tramite la piattaforma contratti pubblici (PCP) dell’ANAC e a tutti gli altri adempimenti previsti dalla normativa vigente;")), style = "Elenco liv2")
+    }
+
+    doc <- doc |>
+      body_add_fpar(fpar(ftext("rilasciare apposita dichiarazione, rispetto al ruolo ricoperto ed alle funzioni svolte, nella quale attesti di non trovarsi in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023;")), style = "Elenco liv2") |>
+      #body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell’art. 15, comma 6 del Codice, il dott. Nicola Centorame in qualità di supporto al RUP;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che, ai sensi dell'art. 53 del Codice l'affidatario sia esonerato dalla costituzione della garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’impegno provvisorio di spesa n. "),
@@ -916,7 +961,9 @@ appost <- function(){
                          ftext(Importo.con.IVA),
                          ftext(" comprensivo di IVA sui fondi del progetto “"),
                          ftext(Progetto),
-                         ftext("”, allocati sul GAE "),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", allocati sul GAE "),
                          ftext(GAE),
                          ftext(", voce del piano "),
                          ftext(Voce.di.spesa),
@@ -932,7 +979,7 @@ appost <- function(){
     doc <- doc |>
       body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" alla pubblicazione del presente provvedimento ai sensi del combinato disposto dell’Art. 37 del d.lgs. 14 marzo 2013, n. 33 e dell’art. 20 del Codice;")), style = "Elenco liv1") |>
       body_add_par("DICHIARA", style = "heading 2") |>
-      body_add_par("L’insussistenza a proprio carico di situazioni di conflitto di interesse di cui all’art. 16 del Codice.", style = "Normal") |>
+      body_add_par("l’insussistenza a proprio carico di situazioni di conflitto di interesse di cui all’art. 16 del Codice.", style = "Normal") |>
       body_add_par("", style = "Normal") |>
       body_add_par("Visto di regolarità contabile", style = "Firma 1") |>
       body_add_par("Il Responsabile Amministrativo", style = "Firma 1") |>
@@ -964,7 +1011,7 @@ appost <- function(){
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1044,7 +1091,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("CUP: "), ftext(CUP2), ftext(";")), style = "Elenco punto liv2") |>
       body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto liv2")
 
-      if(!is.na(CUI)){
+      if(CUI!=trattini){
       doc <- doc |>
         body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto liv2")
       }
@@ -1097,7 +1144,7 @@ appost <- function(){
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1165,7 +1212,7 @@ appost <- function(){
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1338,7 +1385,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         colnames(manca) <- "val"
         manca$var <- rownames(manca)
         rownames(manca) <- NULL
-        manca <- subset(manca, is.na(manca$val))
+        manca <- subset(manca, manca$val==trattini)
         len <- length(manca$val)
         if(len>0){
           manca <- manca$var
@@ -1427,7 +1474,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1615,7 +1662,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1762,7 +1809,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1844,7 +1891,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
@@ -1904,7 +1951,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" il provvedimento di impegno:")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto")
 
-    if(!is.na(CUP)){
+    if(CUP!=trattini){
       doc <- doc |>
         body_add_fpar(fpar(ftext("CUP: "), ftext(CUP), ftext(";")), style = "Elenco punto")
     }
@@ -1912,7 +1959,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- doc |>
       body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto")
 
-    if(!is.na(CUI)){
+    if(CUI!=trattini){
       doc <- doc |>
         body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto")
     }
@@ -1962,7 +2009,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
     rownames(manca) <- NULL
-    manca <- subset(manca, is.na(manca$val))
+    manca <- subset(manca, manca$val==trattini)
     len <- length(manca$val)
     if(len>0){
       manca <- manca$var
