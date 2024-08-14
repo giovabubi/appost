@@ -202,18 +202,21 @@ appost <- function(){
     della.fornitura <- 'della fornitura'
     la.fornitura <- 'la fornitura'
     fornitura.consegnata <- 'la fornitura dovrà essere consegnata'
+    materiale.conforme <- "che il materiale è conforme all’ordine e perfettamente funzionante e utilizzabile."
   }else if(Tipo.acquisizione=='Servizi'){
     bene <- 'servizio'
     beni <- 'servizi'
     della.fornitura <- 'del servizio'
     la.fornitura <- 'il servizio'
     fornitura.consegnata <- 'il servizio dovrà essere prestato'
+    materiale.conforme <- "che il servizio è conforme all’ordine e completamente prestato."
   }else if(Tipo.acquisizione=='Lavori'){
     bene <- 'lavoro'
     beni <- 'lavori'
     della.fornitura <- 'del lavoro'
     la.fornitura <- 'il lavoro'
     fornitura.consegnata <- 'il lavoro dovrà essere svolto'
+    materiale.conforme <- "che il lavoro è conforme all’ordine e completamente svolto."
   }
 
   if(Richiedente.dati..Sesso=='M'){
@@ -307,21 +310,25 @@ appost <- function(){
     ordine.trattativa.scelta2 <- "Ordine diretto MePA N°"
     ordine.trattativa.scelta.ldo1 <- "Ordine diretto MePA N° "
     ordine.trattativa.scelta.ldo2 <- RDO
+    ordine.trattativa.scelta.pres <- paste0("l'ordine diretto MePA N° ", RDO, ";")
   }else if(Tipo.ordine=='Trattativa diretta MePA'){
     ordine.trattativa.scelta <- paste0(", trattativa diretta MePA N° ", RDO)
     ordine.trattativa.scelta2 <- "Trattativa diretta MePA N°"
     ordine.trattativa.scelta.ldo1 <- "Trattativa diretta MePA N° "
     ordine.trattativa.scelta.ldo2 <- RDO
+    ordine.trattativa.scelta.pres <- paste0("la trattativa diretta MePA N° ", RDO, ";")
   }else if(Tipo.ordine=='RDO MePA'){
     ordine.trattativa.scelta <- paste0(", RDO MePA N° ", RDO)
     ordine.trattativa.scelta2 <- "RDO MePA N°"
     ordine.trattativa.scelta.ldo1 <- "RDO MePA N° "
     ordine.trattativa.scelta.ldo2 <- RDO
+    ordine.trattativa.scelta.pres <- paste0("la RDO MePA N° ", RDO, ";")
   }else{
     ordine.trattativa.scelta <- ""
     ordine.trattativa.scelta2 <- ""
     ordine.trattativa.scelta.ldo1 <- "Vs. offerta "
-    ordine.trattativa.scelta.ldo2 <- Preventivo..fornitore
+    ordine.trattativa.scelta.ldo2 <- Preventivo.fornitore
+    ordine.trattativa.scelta.pres <- paste0("l'offerta ", Preventivo.fornitore, " dell'operatore economico ", Fornitore, ", P.I/C.F. ", Fornitore..P.IVA, ";")
   }
 
   if(Richiedente.dati==Responsabile.dati){firma.RAS <- "(Richiedente l’ordine, responsabile del progetto e titolare dei fondi)"}else{firma.RAS <- "(Richiedente l’ordine)"}
@@ -1552,9 +1559,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" "),
                          ftext(RUP.dati),
                          ftext(" quale Responsabile Unico del Progetto ai sensi dell’art. 15 del Codice;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA ", fpt.b),
+                         ftext(ordine.trattativa.scelta.pres)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATI", fpt.b), ftext(" altresì i principi previsti dall’art. 57 del d.lgs. 36/2023 tra i quali le clausole sociali volte a garantire le pari opportunità generazionali, di genere e di inclusione lavorativa per le persone con disabilità o svantaggiate, la stabilità occupazionale del personale impiegato;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 52, comma 1 del Codice, il quale dispone che, nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro, gli operatori economici attestano con dichiarazione sostitutiva di atto di notorietà il possesso dei requisiti di partecipazione e di qualificazione richiesti e che le stazioni appaltanti procedono alla risoluzione del contratto qualora a seguito delle verifiche non sia confermato il possesso dei requisiti generali dichiarati;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva attestante il possesso dei requisiti di ordine generale previsti dal Codice ai sensi dell’art. 52 del Codice;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva attestante il possesso dei requisiti di ordine generale previsti dal Codice ai sensi dell’art. 52 del Codice, archiviata con prot. "),
+                         ftext(Prot..DocOE), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la Stazione appaltante verificherà, previo sorteggio di un campione individuato con modalità predeterminata, le dichiarazioni degli operatori economici affidatari;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTI", fpt.b), ftext(" gli atti della procedura in argomento ed accertata la regolarità degli stessi in relazione alla normativa ed ai regolamenti vigenti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b), ftext(" il principio del risultato;")), style = "Normal") |>
@@ -1768,7 +1778,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.RDO1") |>
       body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RDO2") |>
-      body_replace_all_text("CAMPO.RDO2", ordine.trattativa.scelta.ldo2, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.RDO2", as.character(ordine.trattativa.scelta.ldo2), only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.WEB") |>
       body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FORNITORE") |>
@@ -1881,27 +1891,34 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il “Regolamento per le acquisizioni in economia di beni e servizi” pubblicato sulla Gazzetta Ufficiale dell’8 giugno 2013 n. 133;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
-                         ftext(" N° "),ftext(ordine),ftext(y),
-                         ftext(", relativa all'acquisizione "),
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento relativo all’affidamento diretto prot. "),
+                         ftext(Prot..DaC), ftext(" per l'acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
                          ftext("” (CIG "),
                          ftext(CIG),
-                         ftext(", "), ftext(Pagina.web), ftext(")"),
-                         ftext(" di "),ftext(Importo.con.IVA),
-                         ftext(" emessa nei confronti dell'operatore economico "),
-                         ftext(Fornitore),ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
+                         ftext(CUI1),
+                         ftext(", "), ftext(Pagina.web),
+                         ftext("), nell'ambito del progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(";")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("VISTA ", fpt.b),
+                         ftext(ordine.trattativa.scelta.pres)), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la fattura N° _____ del _____ emessa dal suddetto operatore economico, per l'importo di "),
-                         ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa;")), style = "Elenco punto") |>
+                         ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
+                         ftext(" N° "), ftext(ordine), ftext(y),
+                         ftext(" di "), ftext(Importo.con.IVA),
+                         ftext(" IVA inclusa (prot. "),
+                         ftext(Prot..lettera.ordine),
+                         ftext(") emessa nei confronti dell'operatore economico "),
+                         ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il documento di trasporto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("di aver svolto la procedura secondo la normativa vigente;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("che il materiale è conforme all’ordine e perfettamente funzionante e utilizzabile.")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext(materiale.conforme)), style = "Elenco punto") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
       body_add_par("") |>
@@ -1966,7 +1983,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il DP CNR n. 0025034 in data 4 maggio 2005 concernente il Regolamento di amministrazione, contabilità e finanza del Consiglio Nazionale delle Ricerche e in particolare l’art. 29 “Liquidazione” e l’art. 30 “Titoli di pagamento”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il provvedimento CNR n. 114 del 30/10/2013 (prot. n. 0065484) relativo alla costituzione dell’Istituto per la Protezione Sostenibile delle Piante con successivi provvedimenti del Presidente n. 120 del 07/10/2014 (prot. n. 72102) e n. 2 del 11/01/2019 di conferma e sostituzione del precedente atto costitutivo;")), style = "Normal") |>
+                         ftext(" il Provvedimento del Presidente del CNR n. 02 del 11/01/2019 di modifica e sostituzione dell’Atto Costitutivo dell’IPSP;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Provvedimento del Presidente del CNR 26/2022 di modifica e sostituzione dell’Atto Costitutivo dell’IPSP;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, con cui al dott. Francesco Di Serio è stato attribuito l’incarico di Direttore dell’IPSP del Consiglio Nazionale delle Ricerche a decorrere dal giorno 1/5/2024 per quattro anni;")), style = "Normal")
 
@@ -1977,15 +1996,24 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
 
     doc <- doc |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
-                         ftext(" che le prestazioni rese sono state regolarmente eseguite;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la decisione a contrattare prot. "),
-                         ftext(Prot..DaC),
-                         ftext(" relativa all'acquisizione "),
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento relativo all’affidamento diretto prot. "),
+                         ftext(Prot..DaC), ftext(" per l'acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("”;")), style = "Normal") |>
+                         ftext("” ("),
+                         ftext(Pagina.web),
+                         ftext("), nell'ambito del progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                         ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
+                         ftext(" N° "), ftext(ordine), ftext(y),
+                         ftext(" di "), ftext(Importo.con.IVA),
+                         ftext(" IVA inclusa (prot. "),
+                         ftext(Prot..lettera.ordine),
+                         ftext(");")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il provvedimento di impegno:")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto")
@@ -2004,7 +2032,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
 
     doc <- doc |>
-      body_add_fpar(fpar(ftext("Pagina web dedicata al ciclo di vita del contratto: "), ftext(Pagina.web), ftext(";")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("Impegno N° "),
                          ftext(Prot..impegno.di.spesa),
                          ftext(" di "),
@@ -2016,12 +2043,17 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(", C/R _____, natura _____;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("Repertorio Contratti n°_____; DURC scadenza: _____;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b),
-                         ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari”;")), style = "Normal") |>
+                         ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari” (prot. "),
+                         ftext(Prot..DocOE), ftext(");")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la fattura della ditta "),
                          ftext(Fornitore),
                          ftext(" N° _____ del _____ di "), ftext(Importo.con.IVA),
                          ftext(", scadenza _____. SDI registrata in attività _____;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
+                         ftext(" che le prestazioni rese sono state regolarmente eseguite, come attestato nella dichiarazione di prestazione resa prot. "),
+                         ftext(Prot..prestazione.resa),
+                         ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("la liquidazione della succitata fattura ed autorizza il responsabile amministrativo all’emissione del relativo mandato di pagamento su IBAN: "),
       ftext(Fornitore..IBAN), ftext(".")), style = "Normal") |>
@@ -2037,6 +2069,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
+    doc <- body_remove(doc)
+    doc <- body_remove(doc)
     print(doc, target = "9 Provv. liquidazione.docx")
     cat("
 
