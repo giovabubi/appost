@@ -1425,91 +1425,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             cat("\014")
             cat("
     Documento '5.3 Dichiarazione possesso requisiti di partecipazione.docx' generato e salvato in ", pat)
-
-          }else{
-            ## Bollo ----
-            doc <- doc.bollo
-            b <- cursor_begin(doc)
-            b <- b$officer_cursor$which
-            e <- cursor_reach(doc, "DICHIARAZIONE POSSESSO REQUISITI DI PARTECIPAZIONE E DI QUALIFICAZIONE")
-            e <- e$officer_cursor$which
-            doc <- cursor_begin(doc)
-            for(i in 1:(e-b)){
-              doc <- body_remove(doc)
-            }
-
-            b <- cursor_reach(doc, "DICHIARAZIONE POSSESSO REQUISITI DI PARTECIPAZIONE E DI QUALIFICAZIONE")
-            b <- b$officer_cursor$which
-            e <- cursor_end(doc)
-            e <- e$officer_cursor$which
-            doc <- cursor_reach(doc, "DICHIARAZIONE POSSESSO REQUISITI DI PARTECIPAZIONE E DI QUALIFICAZIONE")
-            for(i in 1:(e-b)){
-              doc <- body_remove(doc)
-            }
-            doc <- doc |>
-              headers_replace_all_text(".*", "", only_at_cursor = TRUE) |>
-              cursor_begin() |>
-              body_add_fpar(fpar(ftext("")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("COMPROVA IMPOSTA DI BOLLO", fpt.b), run_footnote(x=block_list(fpar(ftext(" Sono esenti i contratti di importo inferiore a 40.000,00 euro. Pagamento di 40 euro, per i contratti di importo maggiore o uguale a 40 mila e inferiore a 150mila euro.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Affidamento diretto, ai sensi dell’art. 50 del D.Lgs. N. 36/2023, "),
-                                 ftext(della.fornitura), ftext(" di “"),
-                                 ftext(Prodotto),
-                                 ftext("” (CIG "),
-                                 ftext(CIG),
-                                 ftext(CUI1),
-                                 ftext(", "), ftext(Pagina.web),
-                                 ftext("), nell'ambito del progetto “"),
-                                 ftext(Progetto),
-                                 ftext("”"),
-                                 ftext(CUP1),
-                                 ftext(ordine.trattativa.scelta),
-                                 ftext(", ordine CNR-IPSP-"),
-                                 ftext(sede),
-                                 ftext(" N° "),
-                                 ftext(ordine),
-                                 ftext(y),
-                                 ftext(".")), style = "Oggetto maiuscoletto") |>
-              body_add_fpar(fpar(ftext("")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Il sottoscritto ____________________")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Codice fiscale ____________________")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Nella sua qualità di:")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("   Titolare o Legale rappresentante")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("   Procuratore")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("del concorrente ____________________")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("consapevole che le false dichiarazioni, la falsità degli atti e l’uso di atti falsi sono puniti ai sensi del codice penale (Artt. 75 e 76 del D.P.R. 445/2000)")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-              body_add_fpar(fpar(ftext("che l’imposta di bollo è stata assolta in modalità telematica, utilizzando il modello “F24 Versamenti con elementi identificativi” (F24 ELIDE) e che la relativa quietanza è allegata al documento a comprova del versamento;")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("di essere a conoscenza che la Stazione appaltante potrà effettuare controlli sui documenti presentati e pertanto si impegna a conservare il presente documento fino al termine di decadenza triennale previsto per l’accertamento da parte dell’Amministrazione finanziaria (Art. 37 D.P.R. N° 642/1972) e a renderlo disponibile ai fini dei successivi controlli.")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Firma digitale"), run_footnote(x=block_list(fpar(ftext("   Per gli operatori economici italiani o stranieri residenti in Italia, la dichiarazione deve essere sottoscritta da un legale rappresentante ovvero da un procuratore3 del legale rappresentante, apponendo la firma digitale. Per gli operatori economici stranieri non residenti in Italia, la dichiarazione può essere sottoscritta dai medesimi soggetti apponendo la firma autografa ed allegando copia di un documento di identità del firmatario in corso di validità.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")),
-                                 ftext(" del legale rappresentante/procuratore"), run_footnote(x=block_list(fpar(ftext(" Nel caso in cui la dichiarazione sia firmata da un procuratore del legale rappresentante deve essere allegata copia conforme all’originale della procura oppure nel solo caso in cui dalla visura camerale dell’operatore economico risulti l’indicazione espressa dei poteri rappresentativi conferiti con la procura, la dichiarazione sostitutiva resa dal procuratore/legale rappresentante sottoscrittore attestante la sussistenza dei poteri rappresentativi risultanti dalla visura.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
-              body_add_break()|>
-              body_add_fpar(fpar(ftext("Indicazioni per il pagamento dell’imposta di bollo sul contratto", fpt.b)), style = "Normal") |>
-              body_add_fpar(fpar(ftext("")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Ai sensi dell’art. 18, comma 10 del Codice, con la tabella di cui all’allegato I.4 al Codice è individuato il valore dell’imposta di bollo che l’aggiudicatario assolve una tantum al momento della stipula del contratto e in proporzione al valore dello stesso.")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Il pagamento dell’imposta di bollo sul contratto deve essere effettuato con versamento tramite modello “F24 Versamenti con elementi identificativi” (F24 ELIDE) ai sensi del provvedimento del Direttore dell’Agenzia delle Entrate (AdE) Prot. n. 240013/2023 del 28/06/2023. Le modalità di compilazione del modello F24 ELIDE sono individuate nella Risoluzione AdE n. 37/E del 28/06/2023.")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Nel caso specifico l’imposta da versare con le modalità di cui sopra è pari a € 40,00; segue il riepilogo dei campi da compilare e dei dati da utilizzare:")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Sezione contribuente:")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Codice fiscale")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Dati anagrafici")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Codice fiscale del coobbligato")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Codice identificativo")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Sezione erario e altro")), style = "Normal") |>
-              body_add_fpar(fpar(ftext("Codice ufficio e Codice atto [non compilare]")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Tipo")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Elementi identificativi [codice CIG]")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Codice")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Anno di riferimento")), style = "Elenco punto") |>
-              body_add_fpar(fpar(ftext("Importi a debito versati")), style = "Elenco punto")
-
-            print(doc, target = "5.5 Comprova imposta di bollo.docx")
-
-            cat("\014")
-            cat(rep("\n", 20))
-            cat("\014")
-            cat("
-    Documento '5.5 Comprova imposta di bollo.docx' generato e salvato in ", pat)
           }
         }
       }else{
@@ -1530,9 +1445,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cat("
 
     Documento '5 Declaration on honour.docx' generato e salvato in ", pat)
-
         if(Importo.senza.IVA.num>=40000){
-         ## Bollo ----
+          ## Bollo ----
           doc <- doc.bollo
           b <- cursor_begin(doc)
           b <- b$officer_cursor$which
@@ -1583,8 +1497,17 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             body_add_fpar(fpar(ftext("del concorrente ____________________")), style = "Normal") |>
             body_add_fpar(fpar(ftext("")), style = "Normal") |>
             body_add_fpar(fpar(ftext("consapevole che le false dichiarazioni, la falsità degli atti e l’uso di atti falsi sono puniti ai sensi del codice penale (Artt. 75 e 76 del D.P.R. 445/2000)")), style = "Normal") |>
-            body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-            body_add_fpar(fpar(ftext("che l’imposta di bollo è stata assolta mediante bonifico bancario pertanto si allega copia dello stesso a comprova del versamento;")), style = "Elenco punto") |>
+            body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2")
+
+          if(Nazione=="Italiana"){
+            doc <- doc |>
+              body_add_fpar(fpar(ftext("che l’imposta di bollo è stata assolta in modalità telematica, utilizzando il modello “F24 Versamenti con elementi identificativi” (F24 ELIDE) e che la relativa quietanza è allegata al documento a comprova del versamento;")), style = "Elenco punto")
+          }else{
+            doc <- doc |>
+              body_add_fpar(fpar(ftext("che l’imposta di bollo è stata assolta mediante bonifico bancario pertanto si allega copia dello stesso a comprova del versamento;")), style = "Elenco punto")
+          }
+
+          doc <- doc |>
             body_add_fpar(fpar(ftext("di essere a conoscenza che la Stazione appaltante potrà effettuare controlli sui documenti presentati e pertanto si impegna a conservare il presente documento fino al termine di decadenza triennale previsto per l’accertamento da parte dell’Amministrazione finanziaria (Art. 37 D.P.R. N° 642/1972) e a renderlo disponibile ai fini dei successivi controlli.")), style = "Elenco punto") |>
             body_add_fpar(fpar(ftext("")), style = "Normal") |>
             body_add_fpar(fpar(ftext("Firma digitale"), run_footnote(x=block_list(fpar(ftext("   Per gli operatori economici italiani o stranieri residenti in Italia, la dichiarazione deve essere sottoscritta da un legale rappresentante ovvero da un procuratore3 del legale rappresentante, apponendo la firma digitale. Per gli operatori economici stranieri non residenti in Italia, la dichiarazione può essere sottoscritta dai medesimi soggetti apponendo la firma autografa ed allegando copia di un documento di identità del firmatario in corso di validità.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")),
@@ -1616,9 +1539,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           cat("
     Documento '5.5 Comprova imposta di bollo.docx' generato e salvato in ", pat)
         }
-      }
     }
   }
+}
   # Genera Comunicazione CIG ----
   com_cig <- function(){
     doc <- doc.com.cig |>
@@ -1745,8 +1668,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(ordine.trattativa.scelta.pres)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATI", fpt.b), ftext(" altresì i principi previsti dall’art. 57 del d.lgs. 36/2023 tra i quali le clausole sociali volte a garantire le pari opportunità generazionali, di genere e di inclusione lavorativa per le persone con disabilità o svantaggiate, la stabilità occupazionale del personale impiegato;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 52, comma 1 del Codice, il quale dispone che, nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro, gli operatori economici attestano con dichiarazione sostitutiva di atto di notorietà il possesso dei requisiti di partecipazione e di qualificazione richiesti e che le stazioni appaltanti procedono alla risoluzione del contratto qualora a seguito delle verifiche non sia confermato il possesso dei requisiti generali dichiarati;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva attestante il possesso dei requisiti di ordine generale previsti dal Codice ai sensi dell’art. 52 del Codice, archiviata con prot. "),
-                         ftext(Prot..DocOE), ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva attestante il possesso dei requisiti di ordine generale previsti dal Codice ai sensi dell’art. 52 del Codice, archiviata con prot. ")), style = "Normal") |>
+      #                   ftext(Prot..DocOE), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la Stazione appaltante verificherà, previo sorteggio di un campione individuato con modalità predeterminata, le dichiarazioni degli operatori economici affidatari;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTI", fpt.b), ftext(" gli atti della procedura in argomento ed accertata la regolarità degli stessi in relazione alla normativa ed ai regolamenti vigenti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b), ftext(" il principio del risultato;")), style = "Normal") |>
@@ -2092,9 +2015,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
                          ftext(" N° "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa (prot. "),
-                         ftext(Prot..lettera.ordine),
-                         ftext(") emessa nei confronti dell'operatore economico "),
+                         ftext(" IVA inclusa
+                               #(prot. "),
+                         #ftext(Prot..lettera.ordine),
+                         #ftext(")
+                         ftext(" emessa nei confronti dell'operatore economico "),
                          ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il documento di trasporto;")), style = "Elenco punto") |>
