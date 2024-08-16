@@ -61,7 +61,12 @@ appost <- function(){
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
 
-  sc$Importo.senza.IVA.num <- as.numeric(sub(",(..)..", "\\.\\1", sc$Importo.senza.IVA))
+  sc$Importo.senza.IVA.num <- sub("..$", "", sc$Importo.senza.IVA)
+  sc$Importo.senza.IVA.num <- sub(".(..)$", "_\\1", sc$Importo.senza.IVA.num)
+  sc$Importo.senza.IVA.num <- gsub(",", "", sc$Importo.senza.IVA.num)
+  sc$Importo.senza.IVA.num <- gsub("\\.", "", sc$Importo.senza.IVA.num)
+  sc$Importo.senza.IVA.num <- gsub("_", ".", sc$Importo.senza.IVA.num)
+  sc$Importo.senza.IVA.num <- as.numeric(sc$Importo.senza.IVA.num)
   sc$Aliquota.IVA.num <- as.numeric(ifelse(sc$Aliquota.IVA=='22%', 0.22,
                                            ifelse(sc$Aliquota.IVA=='10%', 0.1,
                                                   ifelse(sc$Aliquota.IVA=='4%', 0.04, 0))))
