@@ -1424,7 +1424,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             cat("\014")
             cat("
     Documento '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
-
+          }
             if(Importo.senza.IVA.num>=40000){
               ## Qual. ----
               doc <- doc.qual
@@ -1525,7 +1525,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cat("
 
     Documento '5.7 Declaration on honour.docx' generato e salvato in ", pat)
-
+      }
         if(Importo.senza.IVA.num>=40000){
           ## Bollo ----
           doc <- doc.bollo
