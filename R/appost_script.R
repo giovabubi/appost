@@ -1424,9 +1424,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             doc <- body_remove(doc)
             print(doc, target = "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx")
 
-            cat("\014")
-            cat(rep("\n", 20))
-            cat("\014")
             cat("
     Documento '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
           }
@@ -1468,9 +1465,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               }
               print(doc, target = "5.4 Dichiarazione possesso requisiti di qualificazione.docx")
 
-              cat("\014")
-              cat(rep("\n", 20))
-              cat("\014")
               cat("
     Documento '5.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
 
@@ -1491,9 +1485,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
               print(doc, target = "5.5 Dichiarazione del soggetto ausiliario.docx")
 
-              cat("\014")
-              cat(rep("\n", 20))
-              cat("\014")
               cat("
     Documento '5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
             }
@@ -1618,9 +1609,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
           print(doc, target = "5.6 Comprova imposta di bollo.docx")
 
-          cat("\014")
-          cat(rep("\n", 20))
-          cat("\014")
           cat("
     Documento '5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
         }
