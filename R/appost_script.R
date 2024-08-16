@@ -403,7 +403,8 @@ appost <- function(){
   doc.pag <- read_docx("Modello.docx")
   doc.pi <- read_docx("Modello.docx")
   doc.cc <- read_docx("Modello.docx")
-  doc.dgue <- read_docx("Modello.docx")
+  doc.part.qual <- read_docx("Modello.docx")
+  doc.qual <- read_docx("Modello.docx")
   doc.aus <- read_docx("Modello.docx")
   doc.dpcm <- read_docx("Modello.docx")
   doc.doh <- read_docx("Modello.docx")
@@ -1338,7 +1339,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- doc.dpcm
         b <- cursor_begin(doc)
         b <- b$officer_cursor$which
-        e <- cursor_reach(doc, "CAMPO.DELLA.FORNITURA.DPCM")
+        e <- cursor_reach(doc, "CAMPO.INT.DOC.DPCM")
         e <- e$officer_cursor$which
         doc <- cursor_begin(doc)
         for(i in 1:(e-b)){
@@ -1346,15 +1347,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         }
 
         doc <- doc |>
-          cursor_begin() |>
-          cursor_reach("CAMPO.DELLA.FORNITURA.DPCM") |>
-          body_replace_all_text("CAMPO.DELLA.FORNITURA.DPCM", della.fornitura, only_at_cursor = TRUE) |>
-          cursor_reach("CAMPO.PRODOTTO.DPCM") |>
-          body_replace_all_text("CAMPO.PRODOTTO.DPCM", Prodotto) |>
-          cursor_reach("CAMPO.CIG.DPCM") |>
-          body_replace_all_text("CAMPO.CIG.DPCM", paste0(CIG, CUI1, ", ", Pagina.web)) |>
-          cursor_reach("CAMPO.PROGETTO.DPCM") |>
-          body_replace_all_text("CAMPO.PROGETTO.DPCM", paste0(Progetto, CUP1))
+          cursor_reach("CAMPO.INT.DOC.DPCM") |>
+          body_replace_all_text("CAMPO.INT.DOC.DPCM", int.doc, only_at_cursor = TRUE)
 
         b <- cursor_reach(doc, "DECLARATION ON HONOUR")
         b <- b$officer_cursor$which
@@ -1367,13 +1361,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- cursor_reach(doc, "del legale rappresentante/procuratore")
         doc <- cursor_forward(doc)
         doc <- body_remove(doc)
-        print(doc, target = "5.4 Dichiarazione DPCM 187.docx")
+        print(doc, target = "5.3 Dichiarazione DPCM 187.docx")
         cat("\014")
         cat(rep("\n", 20))
         cat("\014")
         cat("
 
-    Documenti '5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.4 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
+    Documenti '5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
 
         ## Dati mancanti ---
         manca <- dplyr::select(sc, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Prodotto, Progetto, Pagina.web)
@@ -1393,9 +1387,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           cat("
     Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
+
           if(Importo.senza.IVA.num<40000){
-            ## DGUE ----
-            doc <- doc.dgue
+            ## Part.Qual. ----
+            doc <- doc.part.qual
             b <- cursor_begin(doc)
             b <- b$officer_cursor$which
             e <- cursor_reach(doc, "DICHIARAZIONE POSSESSO REQUISITI DI PARTECIPAZIONE E DI QUALIFICAZIONE")
@@ -1407,37 +1402,74 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
             doc <- doc |>
               cursor_begin() |>
-              cursor_reach("CAMPO.DELLA.FORNITURA.DGUE") |>
-              body_replace_all_text("CAMPO.DELLA.FORNITURA.DGUE", della.fornitura, only_at_cursor = TRUE) |>
-              cursor_reach("CAMPO.PRODOTTO.DGUE") |>
-              body_replace_all_text("CAMPO.PRODOTTO.DGUE", Prodotto) |>
-              cursor_reach("CAMPO.CIG.DGUE") |>
-              body_replace_all_text("CAMPO.CIG.DGUE", paste0(CIG, CUI1, ", ", Pagina.web)) |>
-              cursor_reach("CAMPO.PROGETTO.DGUE") |>
-              body_replace_all_text("CAMPO.PROGETTO.DGUE", paste0(Progetto, CUP1)) |>
+              cursor_reach("CAMPO.INT.DOC") |>
+              body_replace_all_text("CAMPO.INT.DOC", int.doc, only_at_cursor = TRUE) |>
               headers_replace_all_text("“Dichiarazione di cui al DPCM 187/1991”", "")
 
-            b <- cursor_reach(doc, "CAMPO.DELLA.FORNITURA.DPCM")
+            b <- cursor_reach(doc, "DICHIARAZIONE RELATIVA AL POSSESSO DEI REQUISITI DI QUALIFICAZIONE")
             b <- b$officer_cursor$which
             e <- cursor_end(doc)
             e <- e$officer_cursor$which
-            doc <- cursor_reach(doc, "CAMPO.DELLA.FORNITURA.DPCM")
+            doc <- cursor_reach(doc, "DICHIARAZIONE RELATIVA AL POSSESSO DEI REQUISITI DI QUALIFICAZIONE")
             for(i in 1:(e-b)){
               doc <- body_remove(doc)
             }
             doc <- cursor_backward(doc)
             doc <- cursor_backward(doc)
             doc <- body_remove(doc)
-            print(doc, target = "5.3 Dichiarazione possesso requisiti partecipazione.docx")
+            print(doc, target = "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx")
 
             cat("\014")
             cat(rep("\n", 20))
             cat("\014")
             cat("
-    Documento '5.3 Dichiarazione possesso requisiti di partecipazione.docx' generato e salvato in ", pat)
+    Documento '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
 
-            ## AUS ----
             if(Importo.senza.IVA.num>=40000){
+              ## Qual. ----
+              doc <- doc.qual
+              b <- cursor_begin(doc)
+              b <- b$officer_cursor$which
+              e <- cursor_reach(doc, "DICHIARAZIONE RELATIVA AL POSSESSO DEI REQUISITI DI QUALIFICAZIONE")
+              e <- e$officer_cursor$which
+              doc <- cursor_begin(doc)
+              for(i in 1:(e-b)){
+                doc <- body_remove(doc)
+              }
+
+              doc <- doc |>
+                cursor_begin() |>
+                cursor_reach("CAMPO.INT.DOC") |>
+                body_replace_all_text("CAMPO.INT.DOC", int.doc, only_at_cursor = TRUE) |>
+                headers_replace_all_text("“Dichiarazione di cui al DPCM 187/1991”", "")
+
+              b <- cursor_reach(doc, "CAMPO.INT.DOC.DPCM")
+              b <- b$officer_cursor$which
+              e <- cursor_end(doc)
+              e <- e$officer_cursor$which
+              doc <- cursor_reach(doc, "CAMPO.INT.DOC.DPCM")
+              for(i in 1:(e-b)){
+                doc <- body_remove(doc)
+              }
+              b <- cursor_reach(doc, "del legale rappresentante/procuratore")
+              b <- b$officer_cursor$which
+              e <- cursor_end(doc)
+              e <- e$officer_cursor$which -1
+              doc <- cursor_reach(doc, "del legale rappresentante/procuratore")
+              doc <- cursor_forward(doc)
+              for(i in 1:(e-b)){
+                doc <- body_remove(doc)
+              }
+              print(doc, target = "5.4 Dichiarazione possesso requisiti di qualificazione.docx")
+
+              cat("\014")
+              cat(rep("\n", 20))
+              cat("\014")
+              cat("
+    Documento '5.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
+
+
+              ## AUS ----
               doc <- doc.aus
               b <- cursor_begin(doc)
               b <- b$officer_cursor$which
@@ -1452,13 +1484,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                 cursor_reach("CAMPO.INT.DOC") |>
                 body_replace_all_text("CAMPO.INT.DOC", int.doc, only_at_cursor = TRUE)
 
-              print(doc, target = "5.6 Dichiarazione del soggetto ausiliario.docx")
+              print(doc, target = "5.5 Dichiarazione del soggetto ausiliario.docx")
 
               cat("\014")
               cat(rep("\n", 20))
               cat("\014")
               cat("
-    Documento '5.6 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
+    Documento '5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
 
           }
         }
@@ -1473,13 +1505,27 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         for(i in 1:(e-b)){
           doc <- body_remove(doc)
         }
-        print(doc, target = "5 Declaration on honour.docx")
+
+        b <- cursor_reach(doc, "DICHIARAZIONE SOSTITUTIVA DEL SOGGETTO AUSILIARIO")
+        b <- b$officer_cursor$which
+        e <- cursor_end(doc)
+        e <- e$officer_cursor$which
+        doc <- cursor_reach(doc, "DICHIARAZIONE SOSTITUTIVA DEL SOGGETTO AUSILIARIO")
+        for(i in 1:(e-b)){
+          doc <- body_remove(doc)
+        }
+        doc <- cursor_reach(doc, "Signature")
+        doc <- cursor_forward(doc)
+        doc <- body_remove(doc)
+
+        print(doc, target = "5.7 Declaration on honour.docx")
         cat("\014")
         cat(rep("\n", 20))
         cat("\014")
         cat("
 
-    Documento '5 Declaration on honour.docx' generato e salvato in ", pat)
+    Documento '5.7 Declaration on honour.docx' generato e salvato in ", pat)
+
         if(Importo.senza.IVA.num>=40000){
           ## Bollo ----
           doc <- doc.bollo
@@ -1534,7 +1580,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             body_add_fpar(fpar(ftext("consapevole che le false dichiarazioni, la falsità degli atti e l’uso di atti falsi sono puniti ai sensi del codice penale (Artt. 75 e 76 del D.P.R. 445/2000)")), style = "Normal") |>
             body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2")
 
-          if(Nazione=="Italiana"){
+          if(Fornitore..Nazione=="Italiana"){
             doc <- doc |>
               body_add_fpar(fpar(ftext("che l’imposta di bollo è stata assolta in modalità telematica, utilizzando il modello “F24 Versamenti con elementi identificativi” (F24 ELIDE) e che la relativa quietanza è allegata al documento a comprova del versamento;")), style = "Elenco punto")
           }else{
@@ -1566,13 +1612,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             body_add_fpar(fpar(ftext("Anno di riferimento")), style = "Elenco punto") |>
             body_add_fpar(fpar(ftext("Importi a debito versati")), style = "Elenco punto")
 
-          print(doc, target = "5.5 Comprova imposta di bollo.docx")
+          print(doc, target = "5.6 Comprova imposta di bollo.docx")
 
           cat("\014")
           cat(rep("\n", 20))
           cat("\014")
           cat("
-    Documento '5.5 Comprova imposta di bollo.docx' generato e salvato in ", pat)
+    Documento '5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
         }
     }
   }
