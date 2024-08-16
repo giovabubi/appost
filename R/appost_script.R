@@ -349,6 +349,12 @@ appost <- function(){
     all.OE <- ''
   }
 
+  int.doc <- toupper(paste0("Affidamento diretto, ai sensi dell’art. 50 del D.Lgs. N. 36/2023, ",
+                    della.fornitura, " di “", Prodotto, "” (CIG ", CIG, CUI1, ", ", Pagina.web, ") ",
+                    "nell'ambito del progetto “", Progetto, "”", CUP1,
+                    ordine.trattativa.scelta,
+                    ", ordine CNR-IPSP-", sede, " N° ", ordine, y, ".", sep=""))
+
   # Ultimi DocOE ----
   ultimi <- subset(ordini, ordini$Fornitore==sc$Fornitore)
   ultimi <- dplyr::select(ultimi, Ordine.N., Fornitore, Prot..DocOE)
@@ -398,6 +404,7 @@ appost <- function(){
   doc.pi <- read_docx("Modello.docx")
   doc.cc <- read_docx("Modello.docx")
   doc.dgue <- read_docx("Modello.docx")
+  doc.aus <- read_docx("Modello.docx")
   doc.dpcm <- read_docx("Modello.docx")
   doc.doh <- read_docx("Modello.docx")
   doc.bollo <- read_docx("Modello.docx")
@@ -1428,6 +1435,31 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             cat("\014")
             cat("
     Documento '5.3 Dichiarazione possesso requisiti di partecipazione.docx' generato e salvato in ", pat)
+
+            ## AUS ----
+            if(Importo.senza.IVA.num>=40000){
+              doc <- doc.aus
+              b <- cursor_begin(doc)
+              b <- b$officer_cursor$which
+              e <- cursor_reach(doc, "DICHIARAZIONE SOSTITUTIVA DEL SOGGETTO AUSILIARIO")
+              e <- e$officer_cursor$which
+              doc <- cursor_begin(doc)
+              for(i in 1:(e-b)){
+                doc <- body_remove(doc)
+              }
+
+              doc <- doc |>
+                cursor_reach("CAMPO.INT.DOC") |>
+                body_replace_all_text("CAMPO.INT.DOC", int.doc, only_at_cursor = TRUE)
+
+              print(doc, target = "5.6 Dichiarazione del soggetto ausiliario.docx")
+
+              cat("\014")
+              cat(rep("\n", 20))
+              cat("\014")
+              cat("
+    Documento '5.6 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
+
           }
         }
       }else{
