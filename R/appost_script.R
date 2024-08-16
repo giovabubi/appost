@@ -2008,7 +2008,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
       body_add_par("CONDIZIONI GENERALI D'AQCUISTO", style = "heading 1") |>
       body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext("franco destino.")), style = "Riquadro paragrafo") |>
+      body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo") |>
       body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": "), ftext(fornitura.consegnata), ftext(" entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione del presente contratto presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo") |>
       body_add_fpar(fpar(ftext("4. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
       body_add_fpar(fpar(ftext("5. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
