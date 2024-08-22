@@ -372,10 +372,12 @@ appost <- function(){
   ultimi$diff <- as.numeric(round(today - ultimi$data, 0))
   ultimi$diff[which(is.na(ultimi$data))] <- 999
   ultimi <- subset(ultimi, ultimi$Ordine.N.!=ordine)
+  lng.doc <- length(ultimi$Fornitore)
   ultimi <- ultimi[order(ultimi$diff),]
   ultimi.ordine <- ultimi$Ordine.N.[1]
   ultimi.prot <- ultimi$Prot..DocOE[1]
   ultimi.recente <- ultimi$diff[1]
+  if(lng.doc==0){ultimi.recente <- 999}
 
   # Rotazione fornitore ----
   rota <- subset(ordini, ordini$CPV==sc$CPV)
@@ -1296,13 +1298,13 @@ appost <- function(){
   # Genera DocOE ----
   docoe <- function(){
     inpt.oe <- 1
-#     if(ultimi.recente>0 & ultimi.recente<180){
-#       cat(paste0("I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
-# Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
-#   1: Sì
-#   2: No"))
-#       inpt.oe <- readline()
-#     }
+    if(ultimi.recente>0 & ultimi.recente<180){
+      cat(paste0("I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
+Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
+  1: Sì
+  2: No"))
+      inpt.oe <- readline()
+    }
 
     if(inpt.oe==1){
       if(Fornitore..Nazione=="Italiana"){
