@@ -2133,9 +2133,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" N° "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.con.IVA),
                          ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
-                         #(prot. "),
                          #ftext(Prot..lettera.ordine),
-                         #ftext(")"),
                          ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il documento di trasporto;")), style = "Elenco punto") |>
