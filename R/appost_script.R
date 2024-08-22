@@ -2132,11 +2132,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
                          ftext(" N° "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa
-                               #(prot. "),
+                         ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
+                         #(prot. "),
                          #ftext(Prot..lettera.ordine),
-                         #ftext(")
-                         ftext(" emessa nei confronti dell'operatore economico "),
+                         #ftext(")"),
                          ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il documento di trasporto;")), style = "Elenco punto") |>
@@ -2235,9 +2234,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
                          ftext(" N° "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa (prot. "),
-                         ftext(Prot..lettera.ordine),
-                         ftext(");")), style = "Normal") |>
+                         #ftext(" IVA inclusa (prot. "),
+                         #ftext(Prot..lettera.ordine),
+                         ftext(" IVA inclusa;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il provvedimento di impegno:")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto")
@@ -2267,8 +2266,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(", C/R _____, natura _____;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("Repertorio Contratti n°_____; DURC scadenza: _____;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b),
-                         ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari” (prot. "),
-                         ftext(Prot..DocOE), ftext(");")), style = "Normal") |>
+                         ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari”;")), style = "Normal") |>
+                         #ftext(Prot..DocOE), ftext(")
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la fattura della ditta "),
                          ftext(Fornitore),
