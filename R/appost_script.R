@@ -368,8 +368,9 @@ appost <- function(){
   ultimi$data <- as.POSIXct(ultimi$data, tz="CET", format = "%d/%m/%Y")
   today <- format(Sys.Date(), "%d/%m/%Y", tz="CET")
   today <- as.POSIXct(today, tz="CET", format = "%d/%m/%Y")
-  ultimi$diff <- as.numeric(round(today - ultimi$data, 0))[1]
+  ultimi$diff <- as.numeric(round(today - ultimi$data, 0))
   ultimi$diff[which(is.na(ultimi$data))] <- 999
+  ultimi <- subset(ultimi, ultimi$Ordine.N.!=ordine)
   ultimi <- ultimi[order(ultimi$diff),]
   ultimi.ordine <- ultimi$Ordine.N.[1]
   ultimi.prot <- ultimi$Prot..DocOE[1]
