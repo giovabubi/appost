@@ -14,10 +14,11 @@ appost <- function(){
 
       Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaricato da Teams
 
-      oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
-      (da compilare prima di generare RAS e lettera d'ordine)
 
       ")
+    # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
+  # (da compilare prima di generare RAS e lettera d'ordine)
+
   ordine <- readline()
 
   if(ordine==0){
