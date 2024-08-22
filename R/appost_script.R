@@ -595,7 +595,7 @@ appost <- function(){
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.dati, fpt.b), ftext(", "),
                            ftext(nato.resp), ftext(" "), ftext(Responsabile.dati..Luogo.di.nascita), ftext(", il "),
-                           ftext(Responsabile.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile..Codice.fiscale), ftext(",")), style = "Normal") |>
+                           ftext(Responsabile.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile.dati..Codice.fiscale), ftext(",")), style = "Normal") |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
                            ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e responsabile del progetto di ricerca “"),
                            ftext(Progetto), ftext("”"), ftext(CUP1),
@@ -831,7 +831,7 @@ appost <- function(){
 
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
-                             Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile..Codice.fiscale)
+                             Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile.dati..Codice.fiscale)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
@@ -1040,7 +1040,7 @@ appost <- function(){
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
-                           Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile..Codice.fiscale)
+                           Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile.dati..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
