@@ -58,6 +58,7 @@ appost <- function(){
                           RDO=N..RDO.MePA,
                           sede=Sede)
   ordini$Fornitore..P.IVA <- as.character(ordini$Fornitore..P.IVA)
+  ordini$CPV <- as.character(ordini$CPV)
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
 
@@ -376,6 +377,24 @@ appost <- function(){
   ultimi.prot <- ultimi$Prot..DocOE[1]
   ultimi.recente <- ultimi$diff[1]
 
+  # Rotazione fornitore ----
+  rota <- subset(ordini, ordini$CPV==sc$CPV)
+  rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto)
+  rota$Data <- as.POSIXct(rota$Data, tz="CET", format = "%d/%m/%Y")
+  data.ordine <- subset(rota, rota$Ordine.N.==ordine)
+  data.ordine <- data.ordine$Data
+  rota <- subset(rota, rota$Data<=data.ordine)
+  rota$CPV.iniz <- sub("(...).*", "\\1", rota$CPV)
+  rota <- subset(rota, rota$Ordine.N.!=ordine)
+  rota <- rota[order(rota$Data),]
+  lng <- length(rota$Ordine.N.)
+  rota <- rota[lng,]
+  rota.display <- dplyr::select(rota, Ordine.N., Fornitore, CPV, Prodotto)
+  ordine.uscente <- rota$Ordine.N.
+  fornitore.uscente <- rota$Fornitore
+  cpv.usente <- rota$CPV.iniz
+  prodotto.uscente <- rota$Prodotto
+
   # Scarica Modello.docx da GoogleDrive ---
   # drive_deauth()
   # drive_user()
@@ -427,6 +446,17 @@ appost <- function(){
     cat("\014")
     #cat(rep("\n", 20))
     cat("\014")
+
+    if(Fornitore==fornitore.uscente){
+      cat(paste0(
+        "***** ATTENZIONE *****\n",
+        Fornitore, " è il fornitore uscente.\n",
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", Prodotto, "'.\n",
+        "Si prega di intraprendere le azioni opportune.\n",
+        "*********************\n",
+        " Premere INVIO per proseguire"))
+      readline()
+    }
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
     cat("
@@ -1265,13 +1295,13 @@ appost <- function(){
   # Genera DocOE ----
   docoe <- function(){
     inpt.oe <- 1
-    if(ultimi.recente>0 & ultimi.recente<180){
-      cat(paste0("I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
-Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
-  1: Sì
-  2: No"))
-      inpt.oe <- readline()
-    }
+#     if(ultimi.recente>0 & ultimi.recente<180){
+#       cat(paste0("I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
+# Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
+#   1: Sì
+#   2: No"))
+#       inpt.oe <- readline()
+#     }
 
     if(inpt.oe==1){
       if(Fornitore..Nazione=="Italiana"){
