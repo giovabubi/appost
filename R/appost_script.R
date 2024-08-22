@@ -2298,7 +2298,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '9 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web, Fornitore..IBAN)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web, Fornitore..IBAN, Prot..prestazione.resa)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
