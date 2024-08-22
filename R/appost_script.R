@@ -21,8 +21,8 @@ appost <- function(){
   ordine <- readline()
 
   if(ordine==0){
-    pat <- utils::choose.dir()
-    setwd(pat)
+    # pat <- utils::choose.dir()
+    # setwd(pat)
     download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     cat("\014")
     cat(rep("\n", 20))
@@ -665,7 +665,7 @@ appost <- function(){
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
-                           Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile..Luogo.di.nascita, Responsabile..Codice.fiscale)
+                           Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile.dati..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
