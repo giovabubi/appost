@@ -394,6 +394,7 @@ appost <- function(){
   fornitore.uscente <- rota$Fornitore
   cpv.usente <- rota$CPV.iniz
   prodotto.uscente <- rota$Prodotto
+  if(lng==0){fornitore.uscente <- "nessuno"}
 
   # Scarica Modello.docx da GoogleDrive ---
   # drive_deauth()
@@ -451,7 +452,7 @@ appost <- function(){
       cat(paste0(
         "***** ATTENZIONE *****\n",
         Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", Prodotto, "'.\n",
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "'.\n",
         "Si prega di intraprendere le azioni opportune.\n",
         "*********************\n",
         " Premere INVIO per proseguire"))
