@@ -4,7 +4,7 @@ appost <- function(){
 
   # Carica dati ordine ----
   cat("\014")
-  cat(rep("\n", 20))
+  #cat(rep("\n", 20))
   cat("
 
       ***************************
@@ -25,7 +25,7 @@ appost <- function(){
     # setwd(pat)
     download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     cat("\014")
-    cat(rep("\n", 20))
+    #cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -425,7 +425,7 @@ appost <- function(){
   # Genera RAS ----
   ras <- function(){
     cat("\014")
-    cat(rep("\n", 20))
+    #cat(rep("\n", 20))
     cat("\014")
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
@@ -658,7 +658,7 @@ appost <- function(){
     }
     print(doc, target = "1 RAS.docx")
     cat("\014")
-    cat(rep("\n", 20))
+    #cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -1033,7 +1033,7 @@ appost <- function(){
     }
     print(doc, target = "3 Decisione a contrattare.docx")
     cat("\014")
-    cat(rep("\n", 20))
+    #cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -1369,7 +1369,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- body_remove(doc)
         print(doc, target = "5.3 Dichiarazione DPCM 187.docx")
         cat("\014")
-        cat(rep("\n", 20))
+        #cat(rep("\n", 20))
         cat("\014")
         cat("
 
@@ -1515,7 +1515,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
         print(doc, target = "5.7 Declaration on honour.docx")
         cat("\014")
-        cat(rep("\n", 20))
+        #cat(rep("\n", 20))
         cat("\014")
         cat("
 
@@ -2126,7 +2126,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     print(doc, target = "8 Dichiarazione prestazione resa.docx")
     cat("\014")
-    cat(rep("\n", 20))
+    #cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -2291,7 +2291,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   # Input ----
   answ <- function(){
     cat("\014")
-    cat(rep("\n", 20))
+    #cat(rep("\n", 20))
     cat("\014")
     cat("
 
@@ -2318,7 +2318,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     #   # drive_download(elenco.prodotti, overwrite = TRUE)
     # download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
     # cat("\014")
-    # cat(rep("\n", 20))
+    # #cat(rep("\n", 20))
     # cat("\014")
     # cat("
     #   #
