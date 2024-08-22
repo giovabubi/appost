@@ -595,7 +595,7 @@ appost <- function(){
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.dati, fpt.b), ftext(", "),
                            ftext(nato.resp), ftext(" "), ftext(Responsabile.dati..Luogo.di.nascita), ftext(", il "),
-                           ftext(Responsabile..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile..Codice.fiscale), ftext(",")), style = "Normal") |>
+                           ftext(Responsabile.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile..Codice.fiscale), ftext(",")), style = "Normal") |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
                            ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e responsabile del progetto di ricerca “"),
                            ftext(Progetto), ftext("”"), ftext(CUP1),
