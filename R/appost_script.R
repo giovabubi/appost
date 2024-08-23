@@ -1950,8 +1950,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     Premere INVIO per caricare il file Excel con l'elenco dei prodotti
         ")
-    inpt <- readline()
-    pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+      inpt <- readline()
+      pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
     }else{
       pr <- read.xlsx("Elenco prodotti.xlsx")
     }
@@ -1965,10 +1965,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     prt <- pr[,-5]
     colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
 
+    ## Inglese
+    prt.en <- prt
+    colnames(prt.en) <- c("Amount", "Description", "Unit cost", "Total")
+    Prot..DaC.en <- sub("del", "of", Prot..DaC)
+
     doc <- doc.ldo
     b <- cursor_begin(doc)
     b <- b$officer_cursor$which
-    e <- cursor_reach(doc, "CAMPO.CUP.LDO")
+    e <- cursor_reach(doc, "CAMPO.CUP.LDO.IT")
     e <- e$officer_cursor$which -2
     doc <- cursor_begin(doc)
     for(i in 1:(e-b)){
@@ -1988,14 +1993,16 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_forward() |>
       body_add_fpar(fpar(ftext("LETTERA D’ORDINE CNR-IPSP-"), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
       body_add_par("") |>
-      cursor_reach("CAMPO.CUP.LDO") |>
-      body_replace_all_text("CAMPO.CUP.LDO", CUP2, only_at_cursor = TRUE) |>
+      cursor_reach("CAMPO.CUP.LDO.IT") |>
+      body_replace_all_text("CAMPO.CUP.LDO.IT", CUP2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CIG") |>
       body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CUI") |>
       body_replace_all_text("CAMPO.CUI", CUI2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RUP") |>
       body_replace_all_text("CAMPO.RUP", RUP.dati, only_at_cursor = TRUE) |>
+      cursor_reach("CAMPO.OFFERTA.LDO") |>
+      body_replace_all_text("CAMPO.OFFERTA.LDO", Preventivo.fornitore, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DAC.LDO") |>
       body_replace_all_text("CAMPO.DAC.LDO", Prot..DaC, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RDO1") |>
@@ -2029,7 +2036,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_replace_all_text("CAMPO.CONSEGNA", Richiedente.dati..Luogo.di.consegna, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FATTURAZIONE") |>
       body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.FIRMA") |>
+      cursor_reach("CAMPO.FIRMA.LDO.IT") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
       body_add_break() |>
@@ -2059,18 +2066,112 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
 
     b <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
-    b <- doc$officer_cursor$which +1
+    b <- doc$officer_cursor$which + 15
     e <- cursor_end(doc)
-    e <- e$officer_cursor$which -1
+    e <- e$officer_cursor$which
+    doc <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
+    doc <- cursor_forward(doc)
     for(i in 1:(e-b)){
-      doc <- cursor_end(doc)
       doc <- body_remove(doc)
     }
-    doc <- cursor_reach(doc, "Per accettazione")
-    doc <- cursor_forward(doc)
+    doc <- cursor_end(doc)
+    doc <- body_remove(doc)
+    doc <- cursor_backward(doc)
     doc <- body_remove(doc)
 
+    if(Fornitore..Nazione=="Italiana"){
+      b <- cursor_reach(doc, "CAMPO.INIZIO.LDO.EN")
+      b <- doc$officer_cursor$which
+      e <- cursor_end(doc)
+      e <- e$officer_cursor$which +10
+      doc <- cursor_reach(doc, "CAMPO.FIRMA.LDO.EN")
+      for(i in 1:(e-b)){
+        doc <- body_remove(doc)
+      }
+      doc <- cursor_end(doc)
+      doc <- body_remove(doc)
+      doc <- cursor_backward(doc)
+      doc <- body_remove(doc)
+    }else{
+      doc <- doc |>
+        cursor_reach("CAMPO.INIZIO.LDO.EN") |>
+        body_add_fpar(fpar(ftext("PURCHASE ORDER CNR-IPSP-"), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
+        body_add_par("") |>
+        cursor_reach("CAMPO.CUP.LDO.EN") |>
+        body_replace_all_text("CAMPO.CUP.LDO.EN", CUP2, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.CIG") |>
+        body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.CUI") |>
+        body_replace_all_text("CAMPO.CUI", CUI2, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.RUP") |>
+        body_replace_all_text("CAMPO.RUP", RUP.dati, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.QUOTATION") |>
+        body_replace_all_text("CAMPO.QUOTATION", Preventivo.fornitore, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.DAC.LDO") |>
+        body_replace_all_text("CAMPO.DAC.LDO", Prot..DaC.en, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.RDO1") |>
+        body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.RDO2") |>
+        body_replace_all_text("CAMPO.RDO2", as.character(ordine.trattativa.scelta.ldo2), only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.WEB") |>
+        body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.FORNITORE") |>
+        body_replace_all_text("CAMPO.FORNITORE", Fornitore, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.SEDE") |>
+        body_replace_all_text("CAMPO.SEDE", Fornitore..Sede, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.PIVA") |>
+        body_replace_all_text("CAMPO.PIVA", as.character(Fornitore..P.IVA), only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.PEC") |>
+        body_replace_all_text("CAMPO.PEC", Fornitore..PEC, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.EMAIL") |>
+        body_replace_all_text("CAMPO.EMAIL", Fornitore..E.mail, only_at_cursor = TRUE) |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_table(prt.en, style = "Tabella LdO", pos = "on") |>
+        cursor_reach("CAMPO.IMPONIBILE") |>
+        body_replace_all_text("CAMPO.IMPONIBILE", Importo.senza.IVA, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.ALIQUOTA") |>
+        body_replace_all_text("CAMPO.ALIQUOTA", paste0("VAT (", Aliquota.IVA, ")"), only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.IVA") |>
+        body_replace_all_text("CAMPO.IVA", IVA, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.IMPORTO") |>
+        body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.CONSEGNA") |>
+        body_replace_all_text("CAMPO.CONSEGNA", Richiedente.dati..Luogo.di.consegna, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.FATTURAZIONE") |>
+        body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
+        cursor_reach("CAMPO.FIRMA.LDO.EN") |>
+        body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
+        body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
+        body_add_break() |>
+
+        body_add_par("GENERAL PURCHASE CONDITION", style = "heading 1") |>
+        body_add_fpar(fpar(ftext("1. Scope of application", fpt.b), ftext(": These general conditions of purchase are intended to uniformly regulate contractual relationships with suppliers from whom CNR purchases goods and/or services in application of the laws and regulations. The supplier's conditions of sale will in no case be applicable to contractual relationships with CNR, even if they were referred to in any document originating from the supplier itself.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("2. Delivery", fpt.b), ftext(": to the destination.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("3. Duration", fpt.b), ftext(": "), ftext(" the order must be delivered within 30 consecutive calendar days from the date of signing this contract at the location indicated on the previous page.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("4. Invoice", fpt.b), ftext(": the invoice, drawn up in accordance with current legislation, must include, under penalty of rejection, the order number (corresponding to the protocol registration number), the CIG and the CUP.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("5. Payment", fpt.b), ftext(": payment will be made within 30 days from the date of the certificate of proper execution.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("6. Penalties", fpt.b), ftext(": for each natural and consecutive day of delay with respect to the terms provided for the execution of the contract referred to in art. 8, a penalty equal to 1‰ (one per thousand) of the contractual amount will be applied, net of VAT and any costs relating to safety in the workplace arising from risks of an interfering nature. For supply contracts only, in the event that the first conformity check of the supply has an unfavorable outcome, the penalties will not apply; however, if the Successful Bidder does not make the supply available again for the conformity check within 20 (twenty) natural and consecutive days following the first unfavorable outcome, or the conformity check is again negative, the penalty referred to above will be applied for each calendar day of delay. In the event that the amount of the applicable penalties exceeds the amount equal to 20% (twenty percent) of the contractual amount, net of VAT and any costs relating to safety in the workplace arising from interference risks, the Entity will terminate the contract to the detriment of the Successful Bidder, without prejudice to the right to compensation for any further damage suffered.")), style = "Riquadro paragrafo") |>
+        body_add_fpar(fpar(ftext("7. Traceability of financial flows", fpt.b), ftext(": the supplier assumes all obligations of traceability of financial flows pursuant to art. 3 of Law 136/2010 and subsequent amendments. Failure to use bank or postal transfers or other collection or payment instruments suitable for allowing full traceability of transactions constitutes grounds for unilateral termination of the contract. The supplier undertakes to allow the Administration to carry out the verification pursuant to paragraph 9 of art. 3 of Law 136/2010 and subsequent amendments and to immediately notify the Administration and the Prefecture-UTG of the province where the Administration is based of the news of the failure of its counterpart (subcontractor/subcontractor) to comply with the obligations of financial traceability.")), style = "Riquadro paragrafo")
+
+      if(Importo.senza.IVA.num<40000){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("8. Express termination clause", fpt.b), ftext(": the order is issued in application of the provisions contained in art. 52, paragraphs 1 and 2 of Legislative Decree 36/2023. The CNR has the right to terminate the contract/order in the event of a lack of participation requirements being ascertained. For the termination of the contract, art. 122 of Legislative Decree 36/2023, as well as articles 1453 et seq. of the Civil Code, apply. The CNR will formally communicate the termination to the supplier, with a ban on proceeding with the payment of the fees, except within the limits of the services already performed.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("9. Competent court", fpt.b), ftext(": the Court of Rome will have exclusive jurisdiction over any dispute.")), style = "Riquadro paragrafo")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("8. Competent court", fpt.b), ftext(": the Court of Rome will have exclusive jurisdiction over any dispute.")), style = "Riquadro paragrafo")
+      }
+
+      doc <- doc |>
+        body_add_par("") |>
+        body_add_fpar(fpar(ftext("This order letter, perfected through the exchange of commercial correspondence, is signed by each Party, also by overwriting, with a digital signature valid on the date of affixing thereof and in accordance with the law, and is subsequently exchanged between the parties via PEC. Therefore, the registration tax will be due in case of use pursuant to Presidential Decree 131/1986.")), style = "Normal") |>
+        body_add_par("") |>
+        body_add_fpar(fpar("Signature for acceptance", run_footnote(x=block_list(fpar(ftext(" The declarant must sign with a qualified digital signature or attach a photocopy of a valid identity document (art. 38 of Presidential Decree no. 445/2000 and subsequent amendments).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
+    }
+
     print(doc, target = "7 Lettera ordine.docx")
+
     cat("
 
     Documento '7 Lettera ordine.docx' generato e salvato in ", pat)
