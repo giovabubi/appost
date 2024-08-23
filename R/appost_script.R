@@ -1300,7 +1300,9 @@ appost <- function(){
   docoe <- function(){
     inpt.oe <- 1
     if(ultimi.recente>0 & ultimi.recente<180){
-      cat(paste0("I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
+      cat(paste0("
+
+      I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
 Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
   1: Sì
   2: No"))
