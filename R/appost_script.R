@@ -63,9 +63,8 @@ appost <- function(){
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
 
-  sc$Importo.senza.IVA.num <- sub("..$", "", sc$Importo.senza.IVA)
-  sc$Importo.senza.IVA.num <- sub(".(..)$", "_\\1", sc$Importo.senza.IVA.num)
-  sc$Importo.senza.IVA.num <- gsub(",", "", sc$Importo.senza.IVA.num)
+  #sc$Importo.senza.IVA.num <- sub("..$", "", sc$Importo.senza.IVA)
+  sc$Importo.senza.IVA.num <- sub(",(..)$", "_\\1", sc$Importo.senza.IVA)
   sc$Importo.senza.IVA.num <- gsub("\\.", "", sc$Importo.senza.IVA.num)
   sc$Importo.senza.IVA.num <- gsub("_", ".", sc$Importo.senza.IVA.num)
   sc$Importo.senza.IVA.num <- as.numeric(sc$Importo.senza.IVA.num)
@@ -364,7 +363,7 @@ appost <- function(){
                     ", ordine CNR-IPSP-", sede, " N° ", ordine, y, ".", sep=""))
 
   pre.nome.file <- paste0("Ordine CNR-IPSP-", sede, " ", ordine, ".", y2, " - ")
-  
+
   # Ultimi DocOE ----
   ultimi <- subset(ordini, ordini$Fornitore==sc$Fornitore)
   ultimi <- dplyr::select(ultimi, Ordine.N., Fornitore, Prot..DocOE)
@@ -694,7 +693,7 @@ appost <- function(){
       doc <- body_remove(doc)
     }
     print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
-    
+
     cat("\014")
     #cat(rep("\n", 20))
     cat("\014")
@@ -1071,7 +1070,7 @@ appost <- function(){
     }
     print(doc, target = paste0(pre.nome.file, "3 Decisione a contrattare.docx"))
     print(doc, target = paste0(pre.nome.file, "3 Decisione a contrattare per URP.docx"))
-    
+
     cat("\014")
     #cat(rep("\n", 20))
     cat("\014")
