@@ -1277,10 +1277,10 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "3.1 Richiesta pagina web.docx"))
+    print(doc, target = paste0(pre.nome.file, "1.1 Richiesta pagina web.docx"))
     cat("
 
-    Documento '", pre.nome.file, "3.1 Richiesta pagina web.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "1.1 Richiesta pagina web.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP.dati)
