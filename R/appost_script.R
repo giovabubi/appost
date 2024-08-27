@@ -693,13 +693,14 @@ appost <- function(){
       doc <- body_remove(doc)
       doc <- body_remove(doc)
     }
-    print(doc, target = "1 RAS.docx")
+    print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
+    
     cat("\014")
     #cat(rep("\n", 20))
     cat("\014")
     cat("
 
-    Documento '1 RAS.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
@@ -820,7 +821,7 @@ appost <- function(){
       for(i in 1:(e-b)){
         doc <- body_remove(doc)
       }
-      print(doc, target = "Avviso pubblico.docx")
+      print(doc, target = paste0(pre.nome.file, "Avviso pubblico.docx"))
 
       ## Allegato ----
       doc <- doc.all |>
@@ -862,10 +863,10 @@ appost <- function(){
         doc <- body_remove(doc)
       }
       doc <- headers_replace_all_text(doc, "*.*", "")
-      print(doc, target = "Allegato.docx")
+      print(doc, target = paste0(pre.nome.file, "Allegato.docx"))
       cat("
 
-    Documenti '2 Avviso pubblico.docx' e '2.1 Allegato.docx' generati e salvati in ", pat)
+    Documenti '", pre.nome.file, "2 Avviso pubblico.docx' e '", pre.nome.file, "2.1 Allegato.docx' generati e salvati in ", pat)
 
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
@@ -1208,10 +1209,10 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = "4 Provv. impegno.docx")
+    print(doc, target = paste0(pre.nome.file, "4 Provv. impegno.docx"))
     cat("
 
-    Documento '4 Provv. impegno.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4 Provv. impegno.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP.dati, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Prot..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente.dati)
@@ -1276,10 +1277,10 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = "3.1 Richiesta pagina web.docx")
+    print(doc, target = paste0(pre.nome.file, "3.1 Richiesta pagina web.docx"))
     cat("
 
-    Documento '3.1 Richiesta pagina web.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3.1 Richiesta pagina web.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP.dati)
@@ -1357,7 +1358,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         }
         doc <- cursor_backward(doc)
         doc <- body_remove(doc)
-        print(doc, target = "5.1 Patto di integrità.docx")
+        print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
 
         ## CC dedicato ----
         doc <- doc.cc
@@ -1381,7 +1382,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- cursor_reach(doc, "del legale rappresentante/procuratore")
         doc <- cursor_forward(doc)
         doc <- body_remove(doc)
-        print(doc, target = "5.2 Comunicazione cc dedicato.docx")
+        print(doc, target = paste0(pre.nome.file, "5.2 Comunicazione cc dedicato.docx"))
 
         ## DPCM ----
         doc <- doc.dpcm
@@ -1409,13 +1410,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- cursor_reach(doc, "del legale rappresentante/procuratore")
         doc <- cursor_forward(doc)
         doc <- body_remove(doc)
-        print(doc, target = "5.3 Dichiarazione DPCM 187.docx")
+        print(doc, target = paste0(pre.nome.file, "5.3 Dichiarazione DPCM 187.docx"))
         cat("\014")
         #cat(rep("\n", 20))
         cat("\014")
         cat("
 
-    Documenti '5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
+    Documenti '", pre.nome.file, "5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
 
         ## Dati mancanti ---
         manca <- dplyr::select(sc, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Prodotto, Progetto, Pagina.web)
@@ -1465,10 +1466,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             doc <- cursor_backward(doc)
             doc <- cursor_backward(doc)
             doc <- body_remove(doc)
-            print(doc, target = "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx")
+            print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
 
             cat("
-    Documento '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
           }
 
             if(Importo.senza.IVA.num>=40000){
@@ -1506,10 +1507,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               for(i in 1:(e-b)){
                 doc <- body_remove(doc)
               }
-              print(doc, target = "5.4 Dichiarazione possesso requisiti di qualificazione.docx")
+              print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx"))
 
               cat("
-    Documento '5.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
 
               ## AUS ----
               doc <- doc.aus
@@ -1526,10 +1527,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                 cursor_reach("CAMPO.INT.DOC") |>
                 body_replace_all_text("CAMPO.INT.DOC", int.doc, only_at_cursor = TRUE)
 
-              print(doc, target = "5.5 Dichiarazione del soggetto ausiliario.docx")
+              print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
 
               cat("
-    Documento '5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
             }
       }else{
         ## Declaration on honour ----
@@ -1555,13 +1556,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- cursor_forward(doc)
         doc <- body_remove(doc)
 
-        print(doc, target = "5.7 Declaration on honour.docx")
+        print(doc, target = paste0(pre.nome.file, "5.7 Declaration on honour.docx"))
         cat("\014")
         #cat(rep("\n", 20))
         cat("\014")
         cat("
 
-    Documento '5.7 Declaration on honour.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "5.7 Declaration on honour.docx' generato e salvato in ", pat)
       }
 
         if(Importo.senza.IVA.num>=40000){
@@ -1650,10 +1651,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             body_add_fpar(fpar(ftext("Anno di riferimento")), style = "Elenco punto") |>
             body_add_fpar(fpar(ftext("Importi a debito versati")), style = "Elenco punto")
 
-          print(doc, target = "5.6 Comprova imposta di bollo.docx")
+          print(doc, target = paste0(pre.nome.file, "5.6 Comprova imposta di bollo.docx"))
 
           cat("
-    Documento '5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
+        Documento '", pre.nome.file, "5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
         }
     }
   }
@@ -1700,10 +1701,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = "3.2 Comunicazione CIG.docx")
+    print(doc, target = paste0(pre.nome.file, "3.2 Comunicazione CIG.docx"))
     cat("
 
-    Documento '3.2 Comunicazione CIG.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3.2 Comunicazione CIG.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP.dati, Pagina.web, CIG)
@@ -1925,10 +1926,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- body_remove(doc)
     doc <- body_remove(doc)
 
-    print(doc, target = "6 Atto istruttorio.docx")
+    print(doc, target = paste0(pre.nome.file, "6 Atto istruttorio.docx"))
     cat("
 
-    Documento '6 Atto istruttorio.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "6 Atto istruttorio.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP.dati, RUP.dati..Luogo.di.nascita, RUP.dati..Data.di.nascita, RUP.dati..Codice.fiscale, Pagina.web)
@@ -2178,11 +2179,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar("Signature for acceptance", run_footnote(x=block_list(fpar(ftext(" The declarant must sign with a qualified digital signature or attach a photocopy of a valid identity document (art. 38 of Presidential Decree no. 445/2000 and subsequent amendments).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
     }
 
-    print(doc, target = "7 Lettera ordine.docx")
+    print(doc, target = paste0(pre.nome.file, "7 Lettera ordine.docx"))
 
     cat("
 
-    Documento '7 Lettera ordine.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "7 Lettera ordine.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP.dati, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente.dati..Luogo.di.consegna, Pagina.web)
@@ -2264,13 +2265,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = "8 Dichiarazione prestazione resa.docx")
+    print(doc, target = paste0(pre.nome.file, "8 Dichiarazione prestazione resa.docx"))
     cat("\014")
     #cat(rep("\n", 20))
     cat("\014")
     cat("
 
-    Documento '8 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "8 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
@@ -2402,10 +2403,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     doc <- body_remove(doc)
     doc <- body_remove(doc)
-    print(doc, target = "9 Provv. liquidazione.docx")
+    print(doc, target = paste0(pre.nome.file, "9 Provv. liquidazione.docx"))
     cat("
 
-    Documento '9 Provv. liquidazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web, Fornitore..IBAN, Prot..prestazione.resa)
