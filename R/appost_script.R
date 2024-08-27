@@ -290,6 +290,7 @@ appost <- function(){
 
   da <- as.character(Sys.Date())
   y <- sub("(....)-(..)-(..)",  "/\\1", da)
+  y2 <- sub("(....)-(..)-(..)",  "\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
 
   if(CUP!=trattini){
@@ -362,6 +363,8 @@ appost <- function(){
                     ordine.trattativa.scelta,
                     ", ordine CNR-IPSP-", sede, " N° ", ordine, y, ".", sep=""))
 
+  pre.nome.file <- paste0("Ordine CNR-IPSP-", sede, " ", ordine, , ".", y2, " - ")
+  
   # Ultimi DocOE ----
   ultimi <- subset(ordini, ordini$Fornitore==sc$Fornitore)
   ultimi <- dplyr::select(ultimi, Ordine.N., Fornitore, Prot..DocOE)
@@ -1065,7 +1068,7 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = "3 Decisione a contrattare.docx")
+    print(doc, target = paste0(pre.nome.file, "3 Decisione a contrattare.docx"))
     print(doc, target = "3 Decisione a contrattare per URP.docx")
     
     cat("\014")
