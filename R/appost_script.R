@@ -363,7 +363,7 @@ appost <- function(){
                     ordine.trattativa.scelta,
                     ", ordine CNR-IPSP-", sede, " N° ", ordine, y, ".", sep=""))
 
-  pre.nome.file <- paste0("Ordine CNR-IPSP-", sede, " ", ordine, , ".", y2, " - ")
+  pre.nome.file <- paste0("Ordine CNR-IPSP-", sede, " ", ordine, ".", y2, " - ")
   
   # Ultimi DocOE ----
   ultimi <- subset(ordini, ordini$Fornitore==sc$Fornitore)
