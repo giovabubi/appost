@@ -1410,9 +1410,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- cursor_forward(doc)
         doc <- body_remove(doc)
         print(doc, target = paste0(pre.nome.file, "5.3 Dichiarazione DPCM 187.docx"))
-        cat("\014")
+        #cat("\014")
         #cat(rep("\n", 20))
-        cat("\014")
+        #cat("\014")
         cat("
 
     Documenti '", pre.nome.file, "5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
@@ -2265,9 +2265,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       doc <- body_remove(doc)
     }
     print(doc, target = paste0(pre.nome.file, "8 Dichiarazione prestazione resa.docx"))
-    cat("\014")
+    #cat("\014")
     #cat(rep("\n", 20))
-    cat("\014")
+    #cat("\014")
     cat("
 
     Documento '", pre.nome.file, "8 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
