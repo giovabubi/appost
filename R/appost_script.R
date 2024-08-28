@@ -2251,7 +2251,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("di aver svolto la procedura secondo la normativa vigente;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext(materiale.conforme)), style = "Elenco punto") |>
       body_add_par("") |>
-      body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
+      body_add_fpar(fpar(ftext(sede1), ftext(", __/__"), ftext(y)), style = "Normal") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto (RUP)")), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(Dott.rup), ftext(" "), ftext(RUP.dati), ftext(")")), style = "Firma 2") |>
