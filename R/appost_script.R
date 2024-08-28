@@ -2442,15 +2442,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       Che documento vuoi generare?
       1: RAS, con eventuale avviso pubblico, Richiesta pagina web
       2: Decisione a contrattare
-      3: Provvedimento d'impegno, Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine
-      4: Dichiarazione di prestazione resa, Provvedimento di liquidazione
+      3: Provvedimento d'impegno, Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa
+      4: Provvedimento di liquidazione
 
       ")
     inpt <- readline()
     if(inpt==1){ras();pag()}
     if(inpt==2){dac()}
-    if(inpt==3){provv_imp();com_cig();docoe();ai();ldo()}
-    if(inpt==4){dic_pres();provv_liq()}
+    if(inpt==3){provv_imp();com_cig();docoe();ai();ldo();dic_pres()}
+    if(inpt==4){provv_liq()}
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
