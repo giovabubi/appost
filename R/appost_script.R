@@ -2449,7 +2449,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     inpt <- readline()
     if(inpt==1){ras();pag()}
     if(inpt==2){dac()}
-    if(inpt==3){provv_imp();com_cig();docoe();ai();ldo();dic_pres()}
+    if(inpt==3){com_cig();provv_imp();docoe();ai();ldo();dic_pres()}
     if(inpt==4){provv_liq()}
     # if(inpt==5){
     #   # drive_deauth()
