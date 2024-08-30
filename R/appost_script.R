@@ -1333,7 +1333,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           cursor_reach("CAMPO.DELLA.FORNITURA.PATTO") |>
           body_replace_all_text("CAMPO.DELLA.FORNITURA.PATTO", paste0(della.fornitura, " di “", Prodotto, "” (CIG ", CIG, ", ", Pagina.web, "), nell'ambito del progetto ", Progetto1), only_at_cursor = TRUE) |>
           cursor_reach("CAMPO.FORNITORE.PATTO") |>
-          body_replace_all_text("CAMPO.FORNITORE.PATTO", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..sede, ", C.F./P.IVA ", Fornitore..P.IVA, ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", Fornitore..Rappresentante.ruolo, ","), only_at_cursor = TRUE) |>
+          body_replace_all_text("CAMPO.FORNITORE.PATTO", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", Fornitore..P.IVA, ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", Fornitore..Rappresentante.ruolo, ","), only_at_cursor = TRUE) |>
           cursor_reach("CAMPO.SEDE.PATTO") |>
           body_replace_all_text("CAMPO.SEDE.PATTO", Fornitore..Sede, only_at_cursor = TRUE) |>
           cursor_reach("CAMPO.PI.PATTO") |>
