@@ -1076,8 +1076,7 @@ appost <- function(){
     cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "3 Decisione a contrattare.docx' generato e salvato in ", pat,
-    "Documento '", pre.nome.file, "3 Decisione a contrattare per URP.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3 Decisione a contrattare.docx' e 'Decisione a contrattare per URP.docx' generati e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
