@@ -1099,6 +1099,14 @@ appost <- function(){
     Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
         **********************")
     }
+
+    ## DURC
+    if(Fornitore..DURC.scadenza<=da){
+      cat("
+    ***** ATTENZIONE *****
+    Il DURC di", Fornitore, "è scaduto il giorno", Fornitore..DURC.scadenza, "
+    **********************")
+    }
   }
 
   # Genera Provv. impegno ----
@@ -2372,7 +2380,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(", voce di spesa "),
                          ftext(Voce.di.spesa),
                          ftext(", C/R _____, natura _____;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("Repertorio Contratti n°_____; DURC scadenza: _____;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("Repertorio Contratti n°_____; DURC scadenza: "),
+                         ftext(Fornitore..DURC.scadenza),
+                         ftext(";")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b),
                          ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari”;")), style = "Normal") |>
                          #ftext(Prot..DocOE), ftext(")
@@ -2408,7 +2418,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "9 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web, Fornitore..IBAN, Prot..prestazione.resa)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -2442,15 +2452,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       Che documento vuoi generare?
       1: RAS, con eventuale avviso pubblico, Richiesta pagina web
       2: Decisione a contrattare
-      3: Provvedimento d'impegno, Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa
-      4: Provvedimento di liquidazione
+      3: Provvedimento d'impegno, Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
 
       ")
     inpt <- readline()
     if(inpt==1){ras();pag()}
     if(inpt==2){dac()}
     if(inpt==3){com_cig();provv_imp();docoe();ai();ldo();dic_pres()}
-    if(inpt==4){provv_liq()}
+    #if(inpt==4){provv_liq()}
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
