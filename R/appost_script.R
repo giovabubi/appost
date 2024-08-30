@@ -1101,11 +1101,13 @@ appost <- function(){
     }
 
     ## DURC
-    if(Fornitore..DURC.scadenza<=da){
-      cat("
+    if(Fornitore..DURC.scadenza!=trattini){
+      if(Fornitore..DURC.scadenza<=da){
+        cat("
     ***** ATTENZIONE *****
     Il DURC di", Fornitore, "è scaduto il giorno", Fornitore..DURC.scadenza, "
     **********************")
+      }
     }
   }
 
