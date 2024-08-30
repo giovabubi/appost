@@ -1333,7 +1333,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           cursor_reach("CAMPO.DELLA.FORNITURA.PATTO") |>
           body_replace_all_text("CAMPO.DELLA.FORNITURA.PATTO", paste0(della.fornitura, " di “", Prodotto, "” (CIG ", CIG, ", ", Pagina.web, "), nell'ambito del progetto ", Progetto1), only_at_cursor = TRUE) |>
           cursor_reach("CAMPO.FORNITORE.PATTO") |>
-          body_replace_all_text("CAMPO.FORNITORE.PATTO", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", Fornitore..Ruolo.rappresentante, ","), only_at_cursor = TRUE) |>
+          body_replace_all_text("CAMPO.FORNITORE.PATTO", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ","), only_at_cursor = TRUE) |>
           cursor_reach("CAMPO.FIRMA.RSS.PATTO") |>
           body_replace_all_text("CAMPO.FIRMA.RSS.PATTO", firma.RSS, only_at_cursor = TRUE) |>
           headers_replace_all_text("CAMPO.CIG.PATTO", paste0("CIG ", CIG, " (", Pagina.web, ")"), only_at_cursor = FALSE)
