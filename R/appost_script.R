@@ -59,7 +59,8 @@ appost <- function(){
                           RDO=N..RDO.MePA,
                           sede=Sede)
   ordini$Fornitore..P.IVA <- as.character(ordini$Fornitore..P.IVA)
-  ordini$CPV <- as.character(ordini$CPV)
+  ordini$CPV <- NULL
+  ordini$CPV <- as.character(ordini$CPV..CPV)
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
 
