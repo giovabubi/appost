@@ -226,7 +226,7 @@ appost <- function(){
     materiale.conforme <- "che il lavoro è conforme all’ordine e completamente svolto."
   }
 
-  if(Richiedente.dati..Sesso=='M'){
+  if(Richiedente..Sesso=='M'){
     Dott.ric <- 'Dott.'
     dott.ric <- 'dott.'
     il.dott.ric <- 'il dott.'
@@ -247,7 +247,7 @@ appost <- function(){
     assegna <- 'assegnataria'
     sottoscritto.ric <- 'La sottoscritta'
   }
-  if(Responsabile.dati..Sesso=='M'){
+  if(Responsabile.progetto..Sesso=='M'){
     Dott.resp <- "Dott."
     dott.resp <- 'dott.'
     il.dott.resp <- 'il dott.'
@@ -266,7 +266,7 @@ appost <- function(){
     nato.resp <- 'nata a'
     sottoscritto.resp <- 'La sottoscritta'
   }
-  if(RUP.dati..Sesso=='M'){
+  if(RUP..Sesso=='M'){
     Dott.rup <- 'Dott.'
     dott.rup <- 'dott.'
     il.dott.rup <- 'il dott.'
@@ -339,7 +339,7 @@ appost <- function(){
     ordine.trattativa.scelta.pres <- paste0("l'offerta ", Preventivo.fornitore, " dell'operatore economico ", Fornitore, ", P.I/C.F. ", Fornitore..P.IVA, ";")
   }
 
-  if(Richiedente.dati==Responsabile.dati){firma.RAS <- "(Richiedente l’ordine, responsabile del progetto e titolare dei fondi)"}else{firma.RAS <- "(Richiedente l’ordine)"}
+  if(Richiedente==Responsabile.progetto){firma.RAS <- "(Richiedente l’ordine, responsabile del progetto e titolare dei fondi)"}else{firma.RAS <- "(Richiedente l’ordine)"}
 
   CAMPO.OE <- paste0(Fornitore, ', P.I/C.F. ', Fornitore..P.IVA, ', con sede in ', Fornitore..Sede, ', tel. ', Fornitore..Telefono, ', PEC ', Fornitore..PEC, ', e-mail ', Fornitore..E.mail)
   CAMPO.OE1 <- trattini
@@ -511,7 +511,7 @@ appost <- function(){
       cursor_reach("CAMPO.SOTTOSCRITTO") |>
       body_replace_all_text("CAMPO.SOTTOSCRITTO", sottoscritto.ric, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RICHIEDENTE") |>
-      body_replace_all_text("CAMPO.RICHIEDENTE", Richiedente.dati, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.RICHIEDENTE", Richiedente, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.BENI") |>
       body_replace_all_text("CAMPO.BENI", bene, only_at_cursor = FALSE) |>
       body_add_par("") |>
@@ -535,12 +535,12 @@ appost <- function(){
       cursor_reach("CAMPO.DATA") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
       body_add_par("") |>
-      body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente.dati)), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2") |>
       cursor_reach("CAMPO.DATA") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
       body_add_par("") |>
-      body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente.dati)), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2") |>
       cursor_reach("CAMPO.LA.FORNITURA") |>
       body_replace_all_text("CAMPO.LA.FORNITURA", la.fornitura, only_at_cursor = TRUE) |>
@@ -573,9 +573,9 @@ appost <- function(){
                          ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente.dati, fpt.b), ftext(", "),
-                         ftext(nato.ric), ftext(" "), ftext(Richiedente.dati..Luogo.di.nascita), ftext(", il "),
-                         ftext(Richiedente.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente.dati..Codice.fiscale), ftext(",")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
+                         ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(", il "),
+                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(",")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di richiedente la fornitura di “"),
                          ftext(Prodotto),
@@ -605,11 +605,11 @@ appost <- function(){
       body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(paste0(Dott.ric," ", Richiedente.dati), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+      body_add_fpar(fpar(paste0(Dott.ric," ", Richiedente), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
       body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
 
     ## Dich. Ass. Resp. ----
-    if(Richiedente.dati!=Responsabile.dati){
+    if(Richiedente!=Responsabile.progetto){
       doc <- doc |>
         cursor_reach("SEZIONE.DICH.ASS.RESP.") |>
         body_add_fpar(fpar(ftext("All’"),
@@ -631,9 +631,9 @@ appost <- function(){
                            ftext(y)), style = "Maiuscolo") |>
         body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
-        body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.dati, fpt.b), ftext(", "),
-                           ftext(nato.resp), ftext(" "), ftext(Responsabile.dati..Luogo.di.nascita), ftext(", il "),
-                           ftext(Responsabile.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile.dati..Codice.fiscale), ftext(",")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.progetto, fpt.b), ftext(", "),
+                           ftext(nato.resp), ftext(" "), ftext(Responsabile.progetto..Luogo.di.nascita), ftext(", il "),
+                           ftext(Responsabile.progetto..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile.progetto..Codice.fiscale), ftext(",")), style = "Normal") |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
                            ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e responsabile del progetto di ricerca “"),
                            ftext(Progetto), ftext("”"), ftext(CUP1),
@@ -661,7 +661,7 @@ appost <- function(){
         body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
         body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
-        body_add_fpar(fpar(paste0(Dott.resp," ",Responsabile.dati), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+        body_add_fpar(fpar(paste0(Dott.resp," ",Responsabile.progetto), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("(Responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
 
       b <- cursor_reach(doc, "CAMPO.CUP.LDO")
@@ -703,8 +703,8 @@ appost <- function(){
     Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
-                           Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile.dati..Codice.fiscale)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+                           Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -756,8 +756,8 @@ appost <- function(){
                            ftext(Importo.senza.IVA), ftext(" oltre IVA.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("Modalità di presentazione del preventivo")), style = "heading 3") |>
         body_add_fpar(fpar(ftext("Gli operatori economici in possesso dei requisiti sopra indicati potranno inviare il proprio preventivo, corredato della dichiarazione attestante il possesso dei requisiti predisposta secondo il modello allegato al presente avviso (allegato 1), entro e non oltre 15 giorni dalla pubblicazione del presente avviso a mezzo PEC all’indirizzo protocollo.ipsp@pec.cnr.it e per conoscenza a "),
-                           ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "),
-                           ftext(dott.ric), ftext(" "), ftext(Richiedente.dati),
+                           ftext(Richiedente..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "),
+                           ftext(dott.ric), ftext(" "), ftext(Richiedente),
                            ftext(": preventivo relativo all’avviso pubblico per "),
                            ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La documentazione trasmessa dovrà essere sottoscritta digitalmente con firma qualificata da un legale rappresentante/procuratore in grado di impegnare l’operatore economico.")), style = "Normal")
@@ -766,12 +766,12 @@ appost <- function(){
         doc <- doc |>
         body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
                            ftext(RAMM.email), ftext(" e per conoscenza a "),
-                           ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente.dati), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
+                           ftext(Richiedente..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
       }else{
         doc <- doc |>
           body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
                              ftext(RAMM.email), ftext(" e per conoscenza a "),
-                             ftext(Richiedente.dati..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente.dati), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
+                             ftext(Richiedente..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
       }
 
       doc <- doc |>
@@ -804,8 +804,8 @@ appost <- function(){
         body_add_fpar(fpar(ftext("Chiarimenti")), style = "heading 3") |>
         body_add_fpar(fpar(ftext("Per eventuali ri chieste inerenti il servizio e chiarimenti di natura procedurale/amministrativa l’operatore economico dovrà rivolgersi "),
                            ftext(al.ric),ftext(" referente della Stazione Appaltante, "),
-                           ftext(dott.ric),ftext(" "),ftext(Richiedente.dati),
-                           ftext(", all’indirizzo e-mail "),ftext(Richiedente.dati..E.mail),ftext(".")),style = "Normal") |>
+                           ftext(dott.ric),ftext(" "),ftext(Richiedente),
+                           ftext(", all’indirizzo e-mail "),ftext(Richiedente..E.mail),ftext(".")),style = "Normal") |>
         body_add_fpar(fpar(ftext("Trattamento dei dati personali")), style = "heading 3") |>
         body_add_fpar(fpar(ftext("I dati raccolti sono trattati e conservati ai sensi del Regolamento UE n. 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati, del decreto legislativo 30 giugno 2003, n. 196 recante il “Codice in materia di protezione dei dati personali” e s.m.i., del decreto della Presidenza del Consiglio dei ministri n. 148/21 e dei relativi atti di attuazione.")), style = "Normal") |>
         body_add_par("", style = "Normal") |>
@@ -869,8 +869,8 @@ appost <- function(){
     Documenti '", pre.nome.file, "2 Avviso pubblico.docx' e '", pre.nome.file, "2.1 Allegato.docx' generati e salvati in ", pat)
 
       ## Dati mancanti ---
-      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
-                             Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile.dati..Codice.fiscale)
+      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+                             Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
@@ -943,7 +943,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il decreto-legge 7 maggio 2012 n. 52, convertito dalla legge 6 luglio 2012 n. 94 recante “Disposizioni urgenti per la razionalizzazione della spesa pubblica”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il decreto-legge 6 luglio 2012 n. 95, convertito con modificazioni dalla legge 7 agosto 2012 n. 135, recante “Disposizioni urgenti per la revisione della spesa pubblica con invarianza dei servizi ai cittadini”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
-                         ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente.dati),
+                         ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
                          ftext(" relativa alla necessità di procedere all’acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
@@ -1006,7 +1006,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("DI NOMINARE ", fpt.b),
                          ftext(il.dott.rup),
                          ftext(" "),
-                         ftext(RUP.dati),
+                         ftext(RUP),
                          ftext(" Responsabile Unico del Progetto il quale, ai sensi dell’art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("svolgere tutte le attività indicate nell’allegato I.2 del Codice, o che siano comunque necessarie ove non di competenza di altri organi;")), style = "Elenco liv2") |>
       body_add_fpar(fpar(ftext("vigilare sullo svolgimento delle fasi di affidamento ed esecuzione "), ftext(della.fornitura), ftext(" in parola, provvedendo a creare le condizioni affinché il processo di acquisto risulti condotto in modo unitario rispetto alle esigenze ed ai costi indicati nel presente atto, in conformità a qualsiasi altra disposizione di legge e di regolamento in materia ivi incluso l’accertamento dei requisiti di carattere generale e tecnico-professionali, ove richiesti, in capo all’operatore economico individuato; ")), style = "Elenco liv2")
@@ -1080,8 +1080,8 @@ appost <- function(){
     Documento '", pre.nome.file, "3 Decisione a contrattare.docx' e 'Decisione a contrattare per URP.docx' generati e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente.dati, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente.dati..Luogo.di.nascita,
-                           Richiedente.dati..Codice.fiscale, Responsabile.dati, Responsabile.dati..Luogo.di.nascita, Responsabile.dati..Codice.fiscale)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+                           Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1155,7 +1155,7 @@ appost <- function(){
                          ftext(" che la fornitura in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("SENTITO", fpt.b),
                          ftext(" il parere del RUP, "),
-                         ftext(dott.rup), ftext(" "), ftext(RUP.dati),
+                         ftext(dott.rup), ftext(" "), ftext(RUP),
                          ftext(", che ha espletato un’adeguata indagine di mercato con la quale ha aggiudicato all'operatore economico "),
                          ftext(Fornitore),
                          ftext(" (P.IVA "),
@@ -1198,7 +1198,7 @@ appost <- function(){
           body_add_fpar(fpar(ftext("di inventariare il bene e nominare "),
                              ftext(assegna),
                              ftext(" "),
-                             ftext(il.dott.ric), ftext(" "), ftext(Richiedente.dati), ftext(".")), style = "Elenco punto")
+                             ftext(il.dott.ric), ftext(" "), ftext(Richiedente), ftext(".")), style = "Elenco punto")
       }
     }else{
       doc <- doc |>
@@ -1224,7 +1224,7 @@ appost <- function(){
     Documento '", pre.nome.file, "4 Provv. impegno.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP.dati, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Prot..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente.dati)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Prot..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1275,7 +1275,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("("),
                          ftext(Dott.rup),
                          ftext(" "),
-                         ftext(RUP.dati),
+                         ftext(RUP),
                          ftext(")")), style = "Firma 2") |>
       body_end_section_continuous()
 
@@ -1292,7 +1292,7 @@ appost <- function(){
     Documento '", pre.nome.file, "1.1 Richiesta pagina web.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, RUP.dati)
+    manca <- dplyr::select(sc, Prodotto, RUP)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1695,7 +1695,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("("),
                          ftext(Dott.rup),
                          ftext(" "),
-                         ftext(RUP.dati),
+                         ftext(RUP),
                          ftext(")")), style = "Firma 2") |>
       body_end_section_continuous()
 
@@ -1712,7 +1712,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "3.2 Comunicazione CIG.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, RUP.dati, Pagina.web, CIG)
+    manca <- dplyr::select(sc, Prodotto, RUP, Pagina.web, CIG)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1783,7 +1783,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" "),
                          ftext(il.dott.rup),
                          ftext(" "),
-                         ftext(RUP.dati),
+                         ftext(RUP),
                          ftext(" quale Responsabile Unico del Progetto ai sensi dell’art. 15 del Codice;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA ", fpt.b),
                          ftext(ordine.trattativa.scelta.pres)), style = "Normal") |>
@@ -1822,7 +1822,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("("),
                          ftext(Dott.rup),
                          ftext(" "),
-                         ftext(RUP.dati),
+                         ftext(RUP),
                          ftext(")")), style = "Firma 2") |>
       body_end_section_continuous()
 
@@ -1866,9 +1866,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(RUP.dati, fpt.b), ftext(", "),
-                         ftext(nato.rup), ftext(" "), ftext(RUP.dati..Luogo.di.nascita), ftext(", il "),
-                         ftext(RUP.dati..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP.dati..Codice.fiscale), ftext(", ")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(RUP, fpt.b), ftext(", "),
+                         ftext(nato.rup), ftext(" "), ftext(RUP..Luogo.di.nascita), ftext(", il "),
+                         ftext(RUP..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP..Codice.fiscale), ftext(", ")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all’incarico di Responsabile Unico del Progetto per l’affidamento "),
                          ftext(della.fornitura), ftext(" di “"),
@@ -1912,7 +1912,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("("),
                          ftext(Dott.rup),
                          ftext(" "),
-                         ftext(RUP.dati),
+                         ftext(RUP),
                          ftext(")")), style = "Firma 2") |>
       body_end_section_continuous()
 
@@ -1937,7 +1937,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "6 Atto istruttorio.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP.dati, RUP.dati..Luogo.di.nascita, RUP.dati..Data.di.nascita, RUP.dati..Codice.fiscale, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP, RUP..Luogo.di.nascita, RUP..Data.di.nascita, RUP..Codice.fiscale, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -2014,7 +2014,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.CUI") |>
       body_replace_all_text("CAMPO.CUI", CUI2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RUP") |>
-      body_replace_all_text("CAMPO.RUP", RUP.dati, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.RUP", RUP, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.OFFERTA.LDO") |>
       body_replace_all_text("CAMPO.OFFERTA.LDO", Preventivo.fornitore, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DAC.LDO") |>
@@ -2047,7 +2047,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.IMPORTO") |>
       body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CONSEGNA") |>
-      body_replace_all_text("CAMPO.CONSEGNA", Richiedente.dati..Luogo.di.consegna, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FATTURAZIONE") |>
       body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FIRMA.LDO.IT") |>
@@ -2118,7 +2118,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cursor_reach("CAMPO.CUI") |>
         body_replace_all_text("CAMPO.CUI", CUI2, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.RUP") |>
-        body_replace_all_text("CAMPO.RUP", RUP.dati, only_at_cursor = TRUE) |>
+        body_replace_all_text("CAMPO.RUP", RUP, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.QUOTATION") |>
         body_replace_all_text("CAMPO.QUOTATION", Preventivo.fornitore, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.DAC.LDO") |>
@@ -2151,7 +2151,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cursor_reach("CAMPO.IMPORTO") |>
         body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.CONSEGNA") |>
-        body_replace_all_text("CAMPO.CONSEGNA", Richiedente.dati..Luogo.di.consegna, only_at_cursor = TRUE) |>
+        body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.FATTURAZIONE") |>
         body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.FIRMA.LDO.EN") |>
@@ -2191,7 +2191,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "7 Lettera ordine.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, CIG, RUP.dati, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente.dati..Luogo.di.consegna, Pagina.web)
+    manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente..Luogo.di.consegna, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -2260,7 +2260,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext(sede1), ftext(", __/__"), ftext(y)), style = "Normal") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto (RUP)")), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("), ftext(Dott.rup), ftext(" "), ftext(RUP.dati), ftext(")")), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext("("), ftext(Dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2") |>
       body_end_section_continuous()
 
     b <- doc$officer_cursor$which +1
