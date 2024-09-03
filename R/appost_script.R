@@ -1025,7 +1025,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che, ai sensi dell'art. 53 del Codice l'affidatario sia esonerato dalla costituzione della garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’impegno provvisorio di spesa n. "),
-                         ftext(Prot..impegno.di.spesa),
+                         ftext(N..impegno.di.spesa),
                          ftext(" per un importo pari a euro "),
                          ftext(Importo.con.IVA),
                          ftext(" comprensivo di IVA sui fondi del progetto “"),
@@ -1183,7 +1183,7 @@ appost <- function(){
 
     doc <- doc |>
       body_add_fpar(fpar(ftext("l’assunzione dell'impegno di spesa n° "),
-                         ftext(Prot..impegno.di.spesa),
+                         ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
                          ftext(" con imputazione sulla voce di spesa "),
@@ -1224,7 +1224,7 @@ appost <- function(){
     Documento '", pre.nome.file, "4 Provv. impegno.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Prot..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -2370,7 +2370,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     doc <- doc |>
       body_add_fpar(fpar(ftext("Impegno N° "),
-                         ftext(Prot..impegno.di.spesa),
+                         ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
                          ftext(", GAE "),
@@ -2416,7 +2416,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "9 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, Prot..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
