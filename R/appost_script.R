@@ -426,7 +426,7 @@ appost <- function(){
   # file.remove(modello$name)
 
   # Scarica Modello.docx da Github ----
-  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello.docx", destfile = "Modello.docx", method = "curl")
+  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
   doc.ras <- read_docx("Modello.docx")
   doc.avv <- read_docx("Modello.docx")
   doc.all <- read_docx("Modello.docx")
@@ -513,7 +513,7 @@ appost <- function(){
       cursor_reach("CAMPO.RICHIEDENTE") |>
       body_replace_all_text("CAMPO.RICHIEDENTE", Richiedente, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.BENI") |>
-      body_replace_all_text("CAMPO.BENI", bene, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.BENI", beni, only_at_cursor = FALSE) |>
       body_add_par("") |>
       body_add_table(pr, style = "Stile1") |>
       cursor_reach("CAMPO.SEDE") |>
