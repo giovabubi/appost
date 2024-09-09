@@ -185,7 +185,7 @@ appost <- function(){
     preventivo.individuato <- "allegato alla richiesta medesima;"
   }
 
-  if(Rotazione.fornitore=="importo <5.000€"){
+  if(Rotazione.fornitore=="Importo <5.000€"){
     rotazione.individuata <- "che, in relazione a quanto indicato all'art. 49, comma 6, del Codice è possibile derogare dall'applicazione del principio di rotazione in caso di affidamenti di importo inferiore a euro 5.000,00;"
   }else if(Rotazione.fornitore=="Avviso pubblico"){
     rotazione.individuata <- "che non si applica il principio di rotazione in quanto è stata espletata un'indagine di mercato aperta alla partecipazione di tutti gli operatori economici in possesso di tutti i requisiti richiesti;"
