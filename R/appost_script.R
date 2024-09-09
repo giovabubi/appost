@@ -916,7 +916,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 31 dicembre 2009 n. 213, recante “Riordino del Consiglio Nazionale delle Ricerche in attuazione dell’articolo 1 della Legge 27 settembre 2007, n. 165“;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 25 novembre 2016 n. 218, recante “Semplificazione delle attività degli enti pubblici di ricerca ai sensi dell'articolo 13 della legge 7 agosto 2015, n. 124”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 7 agosto 1990, n. 241 recante “Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi” pubblicata sulla Gazzetta Ufficiale n. 192 del 18/08/1990 e s.m.i.;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche - DPCNR del 12 marzo 2019 prot. AMMCNT-CNR n. 0012030 del 18 febbraio 2019, approvato con nota del Ministero dell’Istruzione dell’Università e della Ricerca prot. AOODGRIC n. 0002698 del 15 febbraio 2019, ed entrato in vigore dal 1° marzo 2019;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 59 del Regolamento di Amministrazione, Contabilità e Finanza del Consiglio Nazionale delle Ricerche rubricato “Decisione di contrattare” – DPCNR del 04 maggio 2005 prot. 0025034 pubblicato sulla G.U.R.I. n. 124 del 30/05/2005 – Supplemento Ordinario n. 101;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, con cui al dott. Francesco Di Serio è stato attribuito l’incarico di Direttore dell’IPSP del Consiglio Nazionale delle Ricerche a decorrere dal giorno 1/5/2024 per quattro anni;")), style = "Normal")
@@ -1122,7 +1122,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("LETTERA D'ORDINE CNR-IPSP-"), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1") |>
       body_add_fpar(fpar(firma.RSS), style = "heading 2") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il Regolamento di Organizzazione e Funzionamento del CNR, emanato con provvedimento del Presidente del CNR n. 14 prot. AMMCNT-CNR n. 0012030 del 18 febbraio 2019, di cui è stato dato l’avviso di pubblicazione sul sito del Ministero dell’Istruzione, dell’Università e della Ricerca, in data 19 febbraio 2019, entrato in vigore dal 1° marzo 2019;")), style = "Normal") |>
+                         ftext(" il Regolamento di Organizzazione e Funzionamento del CNR emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il DP CNR n. 0025034 in data 4 maggio 2005 concernente il Regolamento di amministrazione, contabilità e finanza del Consiglio Nazionale delle Ricerche e in particolare l’art. 28 “Impegno”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
@@ -2316,7 +2316,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext(firma.RSS)), style = "heading 1") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il Regolamento di Organizzazione e Funzionamento del CNR, emanato con provvedimento del Presidente del CNR n. 14 prot. AMMCNT-CNR n. 0012030 del 18 febbraio 2019, di cui è stato dato l’avviso di pubblicazione sul sito del Ministero dell’Istruzione, dell’Università e della Ricerca, in data 19 febbraio 2019, entrato in vigore dal 1° marzo 2019;")), style = "Normal") |>
+                         ftext(" il Regolamento di Organizzazione e Funzionamento del CNR emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il DP CNR n. 0025034 in data 4 maggio 2005 concernente il Regolamento di amministrazione, contabilità e finanza del Consiglio Nazionale delle Ricerche e in particolare l’art. 29 “Liquidazione” e l’art. 30 “Titoli di pagamento”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
