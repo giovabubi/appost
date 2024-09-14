@@ -61,14 +61,17 @@ appost <- function(){
   ordini$Fornitore..P.IVA <- as.character(ordini$Fornitore..P.IVA)
   ordini$CPV <- NULL
   ordini$CPV <- as.character(ordini$CPV..CPV)
+  ordini$Importo.senza.IVA.num <- sub(",(..)$", "_\\1", ordini$Importo.senza.IVA)
+  ordini$Importo.senza.IVA.num <- gsub("\\.", "", ordini$Importo.senza.IVA.num)
+  ordini$Importo.senza.IVA.num <- gsub("_", ".", ordini$Importo.senza.IVA.num)
+  ordini$Importo.senza.IVA.num <- as.numeric(ordini$Importo.senza.IVA.num)
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
 
-  #sc$Importo.senza.IVA.num <- sub("..$", "", sc$Importo.senza.IVA)
-  sc$Importo.senza.IVA.num <- sub(",(..)$", "_\\1", sc$Importo.senza.IVA)
-  sc$Importo.senza.IVA.num <- gsub("\\.", "", sc$Importo.senza.IVA.num)
-  sc$Importo.senza.IVA.num <- gsub("_", ".", sc$Importo.senza.IVA.num)
-  sc$Importo.senza.IVA.num <- as.numeric(sc$Importo.senza.IVA.num)
+  # sc$Importo.senza.IVA.num <- sub(",(..)$", "_\\1", sc$Importo.senza.IVA)
+  # sc$Importo.senza.IVA.num <- gsub("\\.", "", sc$Importo.senza.IVA.num)
+  # sc$Importo.senza.IVA.num <- gsub("_", ".", sc$Importo.senza.IVA.num)
+  # sc$Importo.senza.IVA.num <- as.numeric(sc$Importo.senza.IVA.num)
   sc$Aliquota.IVA.num <- as.numeric(ifelse(sc$Aliquota.IVA=='22%', 0.22,
                                            ifelse(sc$Aliquota.IVA=='10%', 0.1,
                                                   ifelse(sc$Aliquota.IVA=='4%', 0.04, 0))))
@@ -384,8 +387,16 @@ appost <- function(){
   if(lng.doc==0){ultimi.recente <- 999}
 
   # Rotazione fornitore ----
-  rota <- subset(ordini, ordini$CPV==sc$CPV)
-  rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto)
+  if(sc$Importo.senza.IVA.num<=5000){
+    ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<=5000)
+    }else if(sc$Importo.senza.IVA.num>5000 & sc$Importo.senza.IVA.num<=40000){
+      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>5000 & ordini$Importo.senza.IVA.num<=40000)
+    }else if(sc$Importo.senza.IVA.num>40000){
+      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<=5000)
+    }
+
+  rota <- subset(ordini.fascia, ordini.fascia$CPV==sc$CPV)
+  rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA)
   rota$Data <- as.POSIXct(rota$Data, tz="CET", format = "%d/%m/%Y")
   data.ordine <- subset(rota, rota$Ordine.N.==ordine)
   data.ordine <- data.ordine$Data
@@ -395,11 +406,12 @@ appost <- function(){
   rota <- rota[order(rota$Data),]
   lng <- length(rota$Ordine.N.)
   rota <- rota[lng,]
-  rota.display <- dplyr::select(rota, Ordine.N., Fornitore, CPV, Prodotto)
+  rota.display <- dplyr::select(rota, Ordine.N., Fornitore, CPV, Prodotto, Importo.senza.IVA)
   ordine.uscente <- rota$Ordine.N.
   fornitore.uscente <- rota$Fornitore
   cpv.usente <- rota$CPV.iniz
   prodotto.uscente <- rota$Prodotto
+  importo.uscente <- rota$Importo.senza.IVA
   if(lng==0){fornitore.uscente <- "nessuno"}
 
   # Scarica Modello.docx da GoogleDrive ---
@@ -458,10 +470,18 @@ appost <- function(){
       cat(paste0(
         "***** ATTENZIONE *****\n",
         Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "'.\n",
-        "Si prega di intraprendere le azioni opportune.\n",
-        "*********************\n",
-        " Premere INVIO per proseguire"))
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di ", importo.uscente, ".\n"))
+      if(Rotazione.fornitore=="Non è il contraente uscente"){
+        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
+      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
+        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
+        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+      }
+        cat("*********************\n",
+        " Premere INVIO per proseguire")
       readline()
     }
 
