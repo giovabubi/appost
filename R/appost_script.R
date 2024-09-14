@@ -470,7 +470,7 @@ appost <- function(){
       cat(paste0(
         "***** ATTENZIONE *****\n",
         Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di ", importo.uscente, ".\n"))
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
       if(Rotazione.fornitore=="Non è il contraente uscente"){
         cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
       }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
