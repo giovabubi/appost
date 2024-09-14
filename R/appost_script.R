@@ -913,6 +913,26 @@ appost <- function(){
 
   # Genera DaC ----
   dac <- function(){
+
+    if(Fornitore==fornitore.uscente){
+      cat(paste0(
+        "***** ATTENZIONE *****\n",
+        Fornitore, " è il fornitore uscente.\n",
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
+      if(Rotazione.fornitore=="Non è il contraente uscente"){
+        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
+      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
+        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
+        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+      }
+      cat("*********************\n",
+          " Premere INVIO per proseguire")
+      readline()
+    }
+
     doc <- doc.dac |>
       headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE) |>
       cursor_begin() |>
