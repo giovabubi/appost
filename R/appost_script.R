@@ -1201,13 +1201,13 @@ appost <- function(){
                          ftext(Fornitore..Codice.terzo.SIGLA),
                          ftext(") per un importo stimato di "),
                          ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA.")), style = "Normal") |>
+                         ftext(" oltre IVA;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la verifica effettuata dal Responsabile Amministrativo della copertura finanziaria (art. 28, comma 2 Regolamento di contabilità);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
                          ftext(" che la fornitura in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
-      body_add_fpar(fpar(ftext("l’assunzione dell'impegno di spesa n°"),
+      body_add_fpar(fpar(ftext("l’assunzione dell'impegno di spesa n° "),
                          ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
@@ -1218,8 +1218,7 @@ appost <- function(){
                          ftext(", progetto “"),
                          ftext(Progetto),
                          ftext("”"),
-                         ftext(CUP1),
-                         ftext(") con:")), style = "Elenco punto")
+                         ftext(CUP1)), style = "Elenco punto")
 
       # if(CUI!=trattini){
       # doc <- doc |>
