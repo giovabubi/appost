@@ -1109,15 +1109,15 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "3 Decisione a contrattare.docx"))
-    print(doc, target = paste0(pre.nome.file, "3 Decisione a contrattare per URP.docx"))
+    print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare.docx"))
+    print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare per URP.docx"))
 
     cat("\014")
     #cat(rep("\n", 20))
     cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "3 Decisione a contrattare.docx' e 'Decisione a contrattare per URP.docx' generati e salvato in ", pat)
+    Documento '", pre.nome.file, "4 Decisione a contrattare.docx' e 'Decisione a contrattare per URP.docx' generati e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
@@ -1182,57 +1182,51 @@ appost <- function(){
                          ftext(nomina.RAMM)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
                          ftext(sede2), ftext(" dell’IPSP prot. 153859 dell’8/5/2024 per il periodo dall’8/5/2024 al 31/12/2024 ad effettuare il controllo interno di regolarità amministrativa e copertura finanziaria per gli affidamenti diretti ed apporre il visto sulla “Decisione di contrattare” prevista dall’art. 59 del Regolamento di amministrazione, contabilità e finanza del CNR (Decreto del Presidente del CNR prot. 25034 del 4/5/2005);")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la decisione a contrattare prot. n. "),
-                         ftext(Prot..DaC),
-                         ftext(" relativa all'acquisizione "),
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
+                         ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                         ftext(" relativa alla necessità di procedere all’acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("”;")), style = "Normal") |>
+                         ftext("” (pagina web dedicata al ciclo di vita del contratto pubblico "),
+                         ftext(Pagina.web),
+                         ftext("), nell’ambito delle attività previste dal progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", mediante affidamento diretto all’operatore economico "),
+                         ftext(Fornitore),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext(", codice terzo SIGLA "),
+                         ftext(Fornitore..Codice.terzo.SIGLA),
+                         ftext(") per un importo stimato di "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" oltre IVA.")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la verifica effettuata dal Responsabile Amministrativo della copertura finanziaria (art. 28, comma 2 Regolamento di contabilità);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
                          ftext(" che la fornitura in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("SENTITO", fpt.b),
-                         ftext(" il parere del RUP, "),
-                         ftext(dott.rup), ftext(" "), ftext(RUP),
-                         ftext(", che ha espletato un’adeguata indagine di mercato con la quale ha aggiudicato all'operatore economico "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext(") tramite l’affidamento diretto ai sensi dell’dell’art. 50, comma 1, lett. b) del D.lgs. n. 36/2023;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
-      body_add_fpar(fpar(ftext("l’affidamento "),
-                         ftext(della.fornitura),
-                         ftext(" di “"),
-                         ftext(Prodotto),
-                         ftext("” alla ditta "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("; codice terzo SIGLA "),
-                         ftext(Fornitore..Codice.terzo.SIGLA),
-                         ftext(") con:")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("CUP: "), ftext(CUP2), ftext(";")), style = "Elenco punto liv2") |>
-      body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto liv2")
-
-      if(CUI!=trattini){
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto liv2")
-      }
-
-    doc <- doc |>
-      body_add_fpar(fpar(ftext("l’assunzione dell'impegno di spesa n° "),
+      body_add_fpar(fpar(ftext("l’assunzione dell'impegno di spesa n°"),
                          ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
-                         ftext(" con imputazione sulla voce di spesa "),
+                         ftext(" IVA inclusa, con imputazione sulla voce di spesa "),
                          ftext(Voce.di.spesa),
                          ftext(", GAE "),
                          ftext(GAE),
-                         ftext(", C/R: _____, natura _____;")), style = "Elenco punto")
+                         ftext(", progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(") con:")), style = "Elenco punto")
 
-    if(Tipo.acquisizione=='Beni'){
+      # if(CUI!=trattini){
+      # doc <- doc |>
+      #   body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto liv2")
+      # }
+
+      if(Tipo.acquisizione=='Beni'){
       if(Inventariabile=='Inventariabile'){
         doc <- doc |>
           body_add_fpar(fpar(ftext("di inventariare il bene e nominare "),
@@ -1258,13 +1252,13 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "4 Provv. impegno.docx"))
+    print(doc, target = paste0(pre.nome.file, "3 Provv. impegno.docx"))
     cat("
 
-    Documento '", pre.nome.file, "4 Provv. impegno.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3 Provv. impegno.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, RUP, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, CIG, Richiedente)
+    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, Richiedente)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1746,10 +1740,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "3.2 Comunicazione CIG.docx"))
+    print(doc, target = paste0(pre.nome.file, "6 Comunicazione CIG.docx"))
     cat("
 
-    Documento '", pre.nome.file, "3.2 Comunicazione CIG.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "6 Comunicazione CIG.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP, Pagina.web, CIG)
@@ -1971,10 +1965,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- body_remove(doc)
     doc <- body_remove(doc)
 
-    print(doc, target = paste0(pre.nome.file, "6 Atto istruttorio.docx"))
+    print(doc, target = paste0(pre.nome.file, "7 Atto istruttorio.docx"))
     cat("
 
-    Documento '", pre.nome.file, "6 Atto istruttorio.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "7 Atto istruttorio.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP, RUP..Luogo.di.nascita, RUP..Data.di.nascita, RUP..Codice.fiscale, Pagina.web)
@@ -2224,11 +2218,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar("Signature for acceptance", run_footnote(x=block_list(fpar(ftext(" The declarant must sign with a qualified digital signature or attach a photocopy of a valid identity document (art. 38 of Presidential Decree no. 445/2000 and subsequent amendments).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
     }
 
-    print(doc, target = paste0(pre.nome.file, "7 Lettera ordine.docx"))
+    print(doc, target = paste0(pre.nome.file, "8 Lettera ordine.docx"))
 
     cat("
 
-    Documento '", pre.nome.file, "7 Lettera ordine.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "8 Lettera ordine.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente..Luogo.di.consegna, Pagina.web)
@@ -2310,13 +2304,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "8 Dichiarazione prestazione resa.docx"))
+    print(doc, target = paste0(pre.nome.file, "9 Dichiarazione prestazione resa.docx"))
     #cat("\014")
     #cat(rep("\n", 20))
     #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "8 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
@@ -2423,7 +2417,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(";")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b),
                          ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari”;")), style = "Normal") |>
-                         #ftext(Prot..DocOE), ftext(")
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la fattura della ditta "),
                          ftext(Fornitore),
@@ -2450,10 +2443,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     doc <- body_remove(doc)
     doc <- body_remove(doc)
-    print(doc, target = paste0(pre.nome.file, "9 Provv. liquidazione.docx"))
+    print(doc, target = paste0(pre.nome.file, "10 Provv. liquidazione.docx"))
     cat("
 
-    Documento '", pre.nome.file, "9 Provv. liquidazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "10 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
@@ -2489,14 +2482,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
       Che documento vuoi generare?
       1: RAS, con eventuale avviso pubblico, Richiesta pagina web
-      2: Decisione a contrattare
-      3: Provvedimento d'impegno, Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
+      2: Provvedimento d'impegno, Decisione a contrattare
+      3: Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
 
       ")
     inpt <- readline()
     if(inpt==1){ras();pag()}
-    if(inpt==2){dac()}
-    if(inpt==3){com_cig();provv_imp();docoe();ai();ldo();dic_pres();provv_liq()}
+    if(inpt==2){provv_imp();dac()}
+    if(inpt==3){com_cig();docoe();ai();ldo();dic_pres();provv_liq()}
     #if(inpt==4){provv_liq()}
     # if(inpt==5){
     #   # drive_deauth()
