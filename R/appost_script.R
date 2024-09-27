@@ -1112,9 +1112,8 @@ appost <- function(){
     print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare.docx"))
     print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare per URP.docx"))
 
-    cat("\014")
+    #cat("\014")
     #cat(rep("\n", 20))
-    cat("\014")
     cat("
 
     Documento '", pre.nome.file, "4 Decisione a contrattare.docx' e 'Decisione a contrattare per URP.docx' generati e salvato in ", pat)
@@ -1218,7 +1217,8 @@ appost <- function(){
                          ftext(", progetto “"),
                          ftext(Progetto),
                          ftext("”"),
-                         ftext(CUP1)), style = "Elenco punto")
+                         ftext(CUP1),
+                         ftext(";")), style = "Elenco punto")
 
       # if(CUI!=trattini){
       # doc <- doc |>
