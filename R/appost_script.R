@@ -2004,6 +2004,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       pr <- read.xlsx("Elenco prodotti.xlsx")
     }
 
+    Imponibile.ldo <- colnames(pr)[7]
+    IVA.ldo <- pr[1,7]
+    Importo.ldo <- pr[2,7]
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+
     pr <- pr[,1:5]
     colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
     pr <- subset(pr, !is.na(pr$Quantità))
@@ -2073,13 +2080,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("") |>
       body_add_table(prt, style = "Tabella LdO", pos = "on") |>
       cursor_reach("CAMPO.IMPONIBILE") |>
-      body_replace_all_text("CAMPO.IMPONIBILE", Importo.senza.IVA, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.IMPONIBILE", Imponibile.ldo.txt, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.ALIQUOTA") |>
       body_replace_all_text("CAMPO.ALIQUOTA", paste0("IVA (", Aliquota.IVA, ")"), only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.IVA") |>
-      body_replace_all_text("CAMPO.IVA", IVA, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.IVA", IVA.ldo.txt, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.IMPORTO") |>
-      body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.IMPORTO", Importo.ldo.txt, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CONSEGNA") |>
       body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FATTURAZIONE") |>
@@ -2247,6 +2254,25 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
   # Genera Dich. Prestazione resa ----
   dic_pres <- function(){
+    if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
+      cat("
+
+    Premere INVIO per caricare il file Excel con l'elenco dei prodotti
+        ")
+      inpt <- readline()
+      pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+    }else{
+      pr <- read.xlsx("Elenco prodotti.xlsx")
+    }
+
+    Imponibile.ldo <- colnames(pr)[7]
+    IVA.ldo <- pr[1,7]
+    Importo.ldo <- pr[2,7]
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+
+
     doc <- doc.dic.pres |>
       headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
 
