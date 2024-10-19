@@ -53,6 +53,21 @@ appost <- function(){
     ordini <- read.csv(patfile, na.strings = "")
   }
 
+  # if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
+  #   cat("
+  #
+  #   Premere INVIO per caricare il file Excel con l'elenco dei prodotti
+  #       ")
+  #   inpt <- readline()
+  #   file.elenco.prodotti <- utils::choose.files(default = "*.xlsx")
+  #   n <- stringr::str_locate_all(file.elenco.prodotti, "\\\\")
+  #   m <- max(n[[1]])
+  #   n <- paste0(".{", m, "}")
+  #   file.elenco.prodotti2 <- sub(n, "", file.elenco.prodotti)
+  # }else{
+  #   file.elenco.prodotti <- "Elenco prodotti.xlsx"
+  # }
+
   if(!require(dplyr)) install.packages("dplyr")
   ordini <- dplyr::rename(ordini,
                           Prodotto=Descrizione.beni.servizi.lavori,
@@ -1991,7 +2006,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
 
-  # Genera Lettere d'ordine ----
+  # Genera Lettera d'ordine ----
   ldo <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -2254,23 +2269,23 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
   # Genera Dich. Prestazione resa ----
   dic_pres <- function(){
-    if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
-      cat("
-
-    Premere INVIO per caricare il file Excel con l'elenco dei prodotti
-        ")
-      inpt <- readline()
-      pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
-    }else{
-      pr <- read.xlsx("Elenco prodotti.xlsx")
-    }
-
-    Imponibile.ldo <- colnames(pr)[7]
-    IVA.ldo <- pr[1,7]
-    Importo.ldo <- pr[2,7]
-    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    # if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
+    #   cat("
+    #
+    # Premere INVIO per caricare il file Excel con l'elenco dei prodotti
+    #     ")
+    #   inpt <- readline()
+    #   pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+    # }else{
+    #   pr <- read.xlsx("Elenco prodotti.xlsx")
+    # }
+    #
+    # Imponibile.ldo <- colnames(pr)[7]
+    # IVA.ldo <- pr[1,7]
+    # Importo.ldo <- pr[2,7]
+    # Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    # IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    # Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
 
 
     doc <- doc.dic.pres |>
