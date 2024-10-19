@@ -2269,23 +2269,23 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
   # Genera Dich. Prestazione resa ----
   dic_pres <- function(){
-    # if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
-    #   cat("
-    #
-    # Premere INVIO per caricare il file Excel con l'elenco dei prodotti
-    #     ")
-    #   inpt <- readline()
-    #   pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
-    # }else{
-    #   pr <- read.xlsx("Elenco prodotti.xlsx")
-    # }
-    #
-    # Imponibile.ldo <- colnames(pr)[7]
-    # IVA.ldo <- pr[1,7]
-    # Importo.ldo <- pr[2,7]
-    # Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-    # IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-    # Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
+      cat("
+
+    Premere INVIO per caricare il file Excel con l'elenco dei prodotti
+        ")
+      inpt <- readline()
+      pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+    }else{
+      pr <- read.xlsx("Elenco prodotti.xlsx")
+    }
+
+    Imponibile.ldo <- colnames(pr)[7]
+    IVA.ldo <- pr[1,7]
+    Importo.ldo <- pr[2,7]
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
 
 
     doc <- doc.dic.pres |>
