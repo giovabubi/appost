@@ -102,6 +102,7 @@ appost <- function(){
   fpt.i <- fp_text(italic = TRUE, font.family = 'Source Sans Pro')
   fpt.bi <- fp_text(italic = TRUE, bold = TRUE, font.family = 'Source Sans Pro')
   PRODOTTO <- toupper(Prodotto)
+  Prot..DaC <- tolower(Prot..DaC)
 
   if(sede=='BA'){
     sede1 <- 'Bari'
