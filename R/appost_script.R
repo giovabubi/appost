@@ -2307,7 +2307,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
                          ftext(" N° "), ftext(ordine), ftext(y),
-                         ftext(" di "), ftext(Importo.con.IVA),
+                         ftext(" di "), ftext(Importo.ldo.txt),
                          ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
                          #ftext(Prot..lettera.ordine),
                          ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
@@ -2361,6 +2361,25 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
   # Genera Provv. Liquidazione ----
   provv_liq <- function(){
+    if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
+      cat("
+
+    Premere INVIO per caricare il file Excel con l'elenco dei prodotti
+        ")
+      inpt <- readline()
+      pr <- read.xlsx(utils::choose.files(default = "*.xlsx"))
+    }else{
+      pr <- read.xlsx("Elenco prodotti.xlsx")
+    }
+
+    Imponibile.ldo <- colnames(pr)[7]
+    IVA.ldo <- pr[1,7]
+    Importo.ldo <- pr[2,7]
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+
+
     doc <- doc.prov.liq |>
       headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
 
@@ -2407,7 +2426,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine CNR-IPSP-"), ftext(sede),
                          ftext(" N° "), ftext(ordine), ftext(y),
-                         ftext(" di "), ftext(Importo.con.IVA),
+                         ftext(" di "), ftext(Importo.ldo.txt),
                          #ftext(" IVA inclusa (prot. "),
                          #ftext(Prot..lettera.ordine),
                          ftext(" IVA inclusa;")), style = "Normal") |>
@@ -2446,7 +2465,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la fattura della ditta "),
                          ftext(Fornitore),
-                         ftext(" N° _____ del _____ di "), ftext(Importo.con.IVA),
+                         ftext(" N° _____ del _____ di "), ftext(Importo.ldo.txt),
                          ftext(", scadenza _____. SDI registrata in attività _____;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
                          ftext(" che le prestazioni rese sono state regolarmente eseguite, come attestato nella dichiarazione di prestazione resa prot. "),
