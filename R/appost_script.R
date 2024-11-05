@@ -1126,13 +1126,10 @@ appost <- function(){
       doc <- body_remove(doc)
     }
     print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare.docx"))
-    print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare per URP.docx"))
 
-    #cat("\014")
-    #cat(rep("\n", 20))
     cat("
 
-    Documento '", pre.nome.file, "4 Decisione a contrattare.docx' e 'Decisione a contrattare per URP.docx' generati e salvato in ", pat)
+    Documento '", pre.nome.file, "4 Decisione a contrattare.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
