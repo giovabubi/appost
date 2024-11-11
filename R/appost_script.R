@@ -2873,9 +2873,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8"){
       download.file(paste(lnk, "RUP.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
         footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
       file.remove("tmp.docx")
+      file.remove(logo)
     }else{
       doc <- doc.ras |>
         headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
