@@ -2097,7 +2097,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     prt.en <- prt
     colnames(prt.en) <- c("Amount", "Description", "Unit cost", "Total")
     Prot..DaC.en <- sub("del", "of", Prot..DaC)
-    doc.ldo <- read_docx("LdO.docx")
+
     doc <- doc.ldo
     doc <- doc |>
       headers_replace_text_at_bkm("bookmark_headers", sede1)
