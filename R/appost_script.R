@@ -494,10 +494,14 @@ appost <- function(){
   doc.bollo <- read_docx("Modello.docx")
   doc.com.cig <- read_docx("Modello.docx")
   doc.ai <- read_docx("Modello.docx")
-  doc.ldo <- read_docx("Modello.docx")
+  #doc.ldo <- read_docx("Modello.docx")
   doc.dic.pres <- read_docx("Modello.docx")
   doc.prov.liq <- read_docx("Modello.docx")
   file.remove("Modello.docx")
+
+  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/LdO.docx", destfile = "LdO.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+  doc.ldo <- read_docx("LdO.docx")
+  file.remove("LdO.docx")
 
   # Genera RAS ----
   ras <- function(){
@@ -2093,19 +2097,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     prt.en <- prt
     colnames(prt.en) <- c("Amount", "Description", "Unit cost", "Total")
     Prot..DaC.en <- sub("del", "of", Prot..DaC)
-
+    doc.ldo <- read_docx("LdO.docx")
     doc <- doc.ldo
-    b <- cursor_begin(doc)
-    b <- b$officer_cursor$which
-    e <- cursor_reach(doc, "CAMPO.CUP.LDO.IT")
-    e <- e$officer_cursor$which -2
-    doc <- cursor_begin(doc)
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
-
     doc <- doc |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+      headers_replace_text_at_bkm("bookmark_headers", sede1)
 
     if(sede=="TOsi"){
       doc <- doc |>
@@ -2114,12 +2109,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     doc <- doc |>
       cursor_begin() |>
-      cursor_forward() |>
       body_add_fpar(fpar(ftext("LETTERA D’ORDINE CNR-IPSP-"), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
-      body_add_par("") |>
-      body_replace_text_at_bkm(bookmark = "bookmark_cup_ldo_it", CUP2) |>
-      body_replace_text_at_bkm("bookmark_cig_ldo_it", CIG) |>
-      body_replace_text_at_bkm("bookmark_cui_ldo_it", CUI2) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_cup_it", CUP2) |>
+      body_replace_text_at_bkm("bookmark_cig_it", CIG) |>
+      body_replace_text_at_bkm("bookmark_cui_it", CUI2) |>
       cursor_reach("CAMPO.RUP") |>
       body_replace_all_text("CAMPO.RUP", RUP, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.OFFERTA.LDO") |>
@@ -2157,13 +2150,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FATTURAZIONE") |>
       body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
-      cursor_forward() |>
-      body_add_fpar(fpar(ftext(dicitura.fatturazione))) |>
+      body_replace_text_at_bkm("bookmark_fatturazione2", dicitura.fatturazione) |>
       cursor_reach("CAMPO.FIRMA.LDO.IT") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
       body_add_break() |>
-
       body_add_par("CONDIZIONI GENERALI D'AQCUISTO", style = "heading 1") |>
       body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
       body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo") |>
@@ -2188,33 +2179,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("") |>
       body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
 
-    b <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
-    b <- doc$officer_cursor$which + 15
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
-    doc <- cursor_forward(doc)
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
-    doc <- cursor_end(doc)
-    doc <- body_remove(doc)
-    doc <- cursor_backward(doc)
-    doc <- body_remove(doc)
-
     if(Fornitore..Nazione=="Italiana"){
       b <- cursor_reach(doc, "CAMPO.INIZIO.LDO.EN")
       b <- doc$officer_cursor$which
       e <- cursor_end(doc)
-      e <- e$officer_cursor$which +10
-      doc <- cursor_reach(doc, "CAMPO.FIRMA.LDO.EN")
+      e <- e$officer_cursor$which
+      doc <- cursor_reach(doc, "CAMPO.INIZIO.LDO.EN")
       for(i in 1:(e-b)){
         doc <- body_remove(doc)
       }
-      doc <- cursor_end(doc)
-      doc <- body_remove(doc)
-      doc <- cursor_backward(doc)
-      doc <- body_remove(doc)
     }else{
       doc <- doc |>
         cursor_reach("CAMPO.INIZIO.LDO.EN") |>
@@ -2263,8 +2236,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.FATTURAZIONE") |>
         body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
-        cursor_forward() |>
-        body_add_fpar(fpar(ftext(dicitura.fatturazione.eng, fpt.b))) |>
+        body_replace_text_at_bkm("bookmark_fatturazione2_eng", dicitura.fatturazione.eng) |>
         cursor_reach("CAMPO.FIRMA.LDO.EN") |>
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
         body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
