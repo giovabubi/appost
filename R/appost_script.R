@@ -18,7 +18,7 @@ appost <- function(){
       ")
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
-  #ordine <- 201
+  #ordine <- 175
   ordine <- readline()
 
   if(ordine==0){
@@ -2264,12 +2264,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cursor_reach("CAMPO.FATTURAZIONE") |>
         body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
         cursor_forward() |>
-        body_add_fpar(fpar(ftext(dicitura.fatturazione.eng, fpt.b) |>
+        body_add_fpar(fpar(ftext(dicitura.fatturazione.eng, fpt.b))) |>
         cursor_reach("CAMPO.FIRMA.LDO.EN") |>
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
         body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
         body_add_break() |>
-
         body_add_par("GENERAL PURCHASE CONDITION", style = "heading 1") |>
         body_add_fpar(fpar(ftext("1. Scope of application", fpt.b), ftext(": These general conditions of purchase are intended to uniformly regulate contractual relationships with suppliers from whom CNR purchases goods and/or services in application of the laws and regulations. The supplier's conditions of sale will in no case be applicable to contractual relationships with CNR, even if they were referred to in any document originating from the supplier itself.")), style = "Riquadro paragrafo") |>
         body_add_fpar(fpar(ftext("2. Delivery", fpt.b), ftext(": to the destination.")), style = "Riquadro paragrafo") |>
@@ -2294,7 +2293,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_par("") |>
         body_add_fpar(fpar("Signature for acceptance", run_footnote(x=block_list(fpar(ftext(" The declarant must sign with a qualified digital signature or attach a photocopy of a valid identity document (art. 38 of Presidential Decree no. 445/2000 and subsequent amendments).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
     }
-
     print(doc, target = paste0(pre.nome.file, "8 Lettera ordine.docx"))
 
     cat("
