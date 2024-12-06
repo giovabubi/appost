@@ -4814,8 +4814,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(inpt==1){ras();pag()}
     if(inpt==2){provv_imp();dac()}
     if(inpt==3){com_cig();docoe();ai();ldo();dic_pres();provv_liq()}
-    if(inpt==4){ras.pnrr();pag()}
-    if(inpt==5){rup.pnrr();provv_imp()}
+    #if(inpt==4){ras.pnrr();pag()}
+    if(inpt==5){rup.pnrr()}
+    if(inpt==7){dac.pnrr()}
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
