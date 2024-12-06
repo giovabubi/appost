@@ -18,9 +18,9 @@ appost <- function(){
       ")
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
-  #ordine <- "AGRITECH-FI 05"
-  #ordine <- 197
-  ordine <- readline()
+  ordine <- "AGRITECH-FI 01"
+  #ordine <- 199
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -438,7 +438,7 @@ appost <- function(){
   }else{
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/"
   }
-  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8"){
+  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4"){
     logo <- "logo_agritech.png"
     CUP2 <- "B83C22002840001"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 3138 del 16/12/2021 di emanazione di un “Avviso pubblico per la presentazione di Proposte di intervento per il Potenziamento di strutture di ricerca e creazione di campioni nazionali di R&S su alcune Key Enabling Technologies” da finanziare nell’ambito del Piano Nazionale di Ripresa e Resilienza, missione 4, componente 2, investimento 1.4 “Potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune Key Enabling Technologies”, finanziato dall’Unione europea – NextGenerationEU;"
@@ -448,6 +448,10 @@ appost <- function(){
   if(PNRR=="Agritech Spoke 3"){
     Progetto <- "Agritech Spoke 3"
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 3, codice identificativo CN00000022 - CUP B83C22002840001'
+  }
+  if(PNRR=="Agritech Spoke 4"){
+    Progetto <- "Agritech Spoke 4"
+    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 4, codice identificativo CN00000022 - CUP B83C22002840001'
   }
   if(PNRR=="Agritech Spoke 8"){
     Progetto <- "Agritech Spoke 8"
@@ -3580,8 +3584,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(toupper(Prodotto), fpt.b),
                          ftext("”"),
                          ftext(", ORDINE N° "),
-                         #ftext(sede),
-                         #ftext(" N° "),
+                         ftext(sede, fpt.b),
+                         ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(" ("),
