@@ -19,8 +19,8 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 05"
-  ordine <- 197
-  #ordine <- readline()
+  #ordine <- 197
+  ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
