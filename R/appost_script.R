@@ -18,9 +18,9 @@ appost <- function(){
       ")
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
-  ordine <- "AGRITECH-FI 01"
+  #ordine <- "AGRITECH-FI 01"
   #ordine <- 199
-  #ordine <- readline()
+  ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -4098,7 +4098,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   dac.pnrr <- function(){
     cat("\014")
     
-    if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8"){
+    if(PNRR!="No"){
       download.file(paste(lnk, "DaC.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
