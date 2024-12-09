@@ -504,16 +504,16 @@ appost <- function(){
     decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 'ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction', codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006;"
     dicitura.fattura <- "PRIN 2022 ARES - Codice progetto MUR: 2022F79TR4_LS9_PRIN2022"
   }
-  if(PNRR=="No"){
-    Progetto.int <- paste("progetto", Progetto.cup)
-  }
-  
+
   Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
   dicitura.fatturazione.eng <- paste0("In the invoice, plese report the following information: purchase order n° ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of the purchase order page), CIG ", CIG, ", CUP ", CUP, ".")
   if(PNRR!="No"){
     dicitura.fatturazione <- sub(".$", paste0(" e la seguente dicitura: '", dicitura.fattura, "'."), dicitura.fatturazione)
     dicitura.fatturazione.eng <- sub(".$", paste0(" and the following phrase: '", dicitura.fattura, "'."), dicitura.fatturazione.eng)
+  }
+  if(PNRR=="No"){
+    Progetto.int <- paste("progetto", Progetto.cup)
   }
   
   # Ultimi DocOE ----
