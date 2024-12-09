@@ -3316,7 +3316,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     cat("
 
-    Documento '", pre.nome.file, "5.2 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "5.3 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web, RUP)
