@@ -4795,7 +4795,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       3: Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
       
       
-      Prossimamente ... Documenti per ordini PNRR e PRIN!
+      Solo per PNRR e PRIN:
+      5: Nomina RUP, Dichiarazioni assenza conflitto interesse
+      7: Decisione a contrattare
+      
+      
+      Prossimamente ... altri documenti per ordini PNRR e PRIN!
 
 ")
       # Solo per PNRR (< 40.000 €):
