@@ -20,7 +20,7 @@ appost <- function(){
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
   #ordine <- 199
-  #ordine <- readline()
+  ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
