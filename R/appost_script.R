@@ -810,9 +810,10 @@ appost <- function(){
                            ftext(Prodotto),
                            ftext("”, ordine "),
                            ftext(sede),
-                           ftext(" N° "),
+                           ftext(" "),
                            ftext(ordine),
                            ftext(y),
+                           ftext(" "),
                            ftext(all.OE),
                            ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
