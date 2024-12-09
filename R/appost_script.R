@@ -20,7 +20,7 @@ appost <- function(){
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
   #ordine <- 199
-  ordine <- readline()
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -3050,27 +3050,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     prt <- pr[,-5]
     colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
     
-    if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8"){
-      download.file(paste(lnk, "RUP.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.ras |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-    }
-    
+    download.file(paste(lnk, "RUP.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+
     doc <- doc |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
-      # body_replace_all_text("CAMPO.DELLA.FORNITURA", toupper(paste0(della.fornitura, " DI “", Prodotto, "”, ordine ",
-      #                                                               sede, " N° ", ordine, y, " (", Pagina.web, "), NELL'AMBITO DEL ", Progetto.int, ".")), only_at_cursor = TRUE) |>
       body_remove() |>
       cursor_backward() |>
       body_add_fpar(fpar(ftext("OGGETTO", fpt.b),
@@ -3202,23 +3189,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
     
     ## Dich. Ass. RSS ----
-    if(PNRR!="No"){
-      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.ras |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-      file.remove("tmp.docx")
-    }
+    download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
     
     doc <- doc |>
       cursor_begin() |>
@@ -3231,7 +3205,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext(sottoscritto.rss), ftext(RSS, fpt.b), ftext(","), ftext(nato.rss)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
-                         ftext(RSS.dich),
+                         ftext(RSS.dich, fpt.b),
                          ftext(" e in relazione all'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
@@ -3276,108 +3250,76 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     Documento '", pre.nome.file, "5.2 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
     
-    ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web)
-    manca <- as.data.frame(t(manca))
-    colnames(manca) <- "val"
-    manca$var <- rownames(manca)
-    rownames(manca) <- NULL
-    manca <- subset(manca, manca$val==trattini)
-    len <- length(manca$val)
-    if(len>0){
-      manca <- manca$var
-      manca <- paste0(manca, ",")
-      manca[len] <- sub(",$", "\\.", manca[len])
-      cat("
-    ***** ATTENZIONE *****
-    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
-      cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
-    **********************")
-    }
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
-    if(PNRR!="No"){
-      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      
       doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
         footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.ras |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-      file.remove("tmp.docx")
-    }
-    
-    doc <- doc |>
-      cursor_begin() |>
-      body_add_fpar(fpar(ftext("All’"),
-                         ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
-      body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.sup), ftext(" "), ftext(dott.sup), ftext(" "), ftext(Supporto.RUP, fpt.b), ftext(", "), 
-                         ftext(nato.sup), ftext(" "), ftext(Supporto.RUP..Luogo.di.nascita),
-                        ftext(" il "), ftext(Supporto.RUP..Data.di.nascita),
-                        ftext(", codice fiscale "), ftext(Supporto.RUP..Codice.fiscale), ftext(",")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
-                         ftext("supporto al RUP", fpt.b),
-                         ftext(" nella procedura di affidamento diretto "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(sede, fpt.b),
-                         ftext(" "),
-                         ftext(ordine, fpt.b),
-                         ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext(") all'operatore economico "),
-                         ftext(Fornitore, fpt.b),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(";")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
-                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar("Il supporto al RUP", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("),
-                         ftext(dott.sup),
-                         ftext(" "),
-                         ftext(Supporto.RUP),
-                         ftext(")")), style = "Firma 2") |>
-      body_add_break()
-    
-    print(doc, target = paste0(pre.nome.file, "5.3 Dichiarazione assenza conflitto SUP.docx"))
+      
+      doc <- doc |>
+        cursor_begin() |>
+        body_add_fpar(fpar(ftext("All’"),
+                           ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
+        body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sottoscritto.sup), ftext(" "), ftext(dott.sup), ftext(" "), ftext(Supporto.RUP, fpt.b), ftext(", "), 
+                           ftext(nato.sup), ftext(" "), ftext(Supporto.RUP..Luogo.di.nascita),
+                           ftext(" il "), ftext(Supporto.RUP..Data.di.nascita),
+                           ftext(", codice fiscale "), ftext(Supporto.RUP..Codice.fiscale), ftext(",")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
+                           ftext("supporto al RUP", fpt.b),
+                           ftext(" nella procedura di affidamento diretto "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" ("),
+                           ftext(Pagina.web),
+                           ftext(") all'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(";")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
+                           ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
+        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
+        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
+        body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar("Il supporto al RUP", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("("),
+                           ftext(dott.sup),
+                           ftext(" "),
+                           ftext(Supporto.RUP),
+                           ftext(")")), style = "Firma 2") |>
+        body_add_break()
+      
+      print(doc, target = paste0(pre.nome.file, "5.3 Dichiarazione assenza conflitto SUP.docx"))
     
     cat("
 
     Documento '", pre.nome.file, "5.2 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web, RUP)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3396,6 +3338,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     **********************")
     }
     }
+    file.remove("tmp.docx")
+    file.remove(logo)
   }
   
   # DocOE PNRR ----
@@ -4105,7 +4049,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       file.remove("tmp.docx")
       file.remove(logo)
     }else{
-      doc <- doc.ras |>
+      doc <- doc.dac |>
         headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
       if(sede=="TOsi"){
         doc <- doc |>
@@ -4117,8 +4061,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
       body_remove() |>
       cursor_backward() |>
-            #body_replace_all_text("CAMPO.DELLA.FORNITURA", toupper(paste0(della.fornitura, " DI “", Prodotto, "”, ordine ",
-      #                                                              sede, " N° ", ordine, y, " (", Pagina.web, "), NELL'AMBITO DEL ", Progetto.int, ".")), only_at_cursor = TRUE) |>
       body_add_fpar(fpar(ftext("OGGETTO", fpt.b), ftext(": DECISIONE DI CONTRATTARE PER L’AFFIDAMENTO DIRETTO "),
                          ftext(toupper(della.fornitura)), ftext(" DI “"),
                          ftext(toupper(Prodotto), fpt.b),
@@ -4231,9 +4173,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(Fornitore..Codice.terzo.SIGLA),
                            ftext("), con sede legale in "),
                            ftext(Fornitore..Sede),
-                           ftext(", che ha presentato il proprio preventivo, ammontante a "),
+                           ftext(", che ha presentato il proprio preventivo ammontante a "),
                            ftext(Importo.senza.IVA, fpt.b),
-                           ftext(" oltre IVA;")), style = "Normal")
+                           ftext(" oltre IVA;")), style = "Elenco numero")
         # body_replace_text_at_bkm(bookmark = "bookmark_procedere", paste0("all'acquisizione ", della.fornitura, " di cui trattasi, mediante affidamento diretto all'operatore economico ", all.OE, 
         #                                             ", P.IVA ", Fornitore..P.IVA, ", codice terzo SIGLA ", Fornitore..Codice.terzo.SIGLA, ", con sede legale in ",
         #                                             Fornitore..Sede,
@@ -4242,14 +4184,23 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         #                                             " oltre IVA;"))
     }else{
       doc <- doc |>
-        cursor_reach("CAMPO.PROCEDERE") |>
-        body_replace_all_text("CAMPO.PROCEDERE", paste0("all'acquisizione ", della.fornitura, " di cui trattasi, mediante affidamento diretto, immediatamente effice, ", all.OE, 
-                                                        ", P.IVA ", Fornitore..P.IVA, ", codice terzo SIGLA ", Fornitore..Codice.terzo.SIGLA, ", con sede legale in ",
-                                                        Fornitore..Sede,
-                                                        ", che ha presentato la propria offerta, ammontante a ",
-                                                        Importo.senza.IVA,
-                                                        " oltre IVA,",
-                                                        preventivo.individuato), only_at_cursor = TRUE)
+        cursor_bookmark("bookmark_procedere") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("DI PROCEDRE", fpt.b),
+                           ftext(" all'acquisizione "),
+                           ftext(della.fornitura),
+                           ftext(" di cui trattasi, mediante affidamento diretto, immediatamente efficace, all'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(", codice terzo SIGLA "),
+                           ftext(Fornitore..Codice.terzo.SIGLA),
+                           ftext("), con sede legale in "),
+                           ftext(Fornitore..Sede),
+                           ftext(", che ha presentato il proprio preventivo ammontante a "),
+                           ftext(Importo.senza.IVA, fpt.b),
+                           ftext(" oltre IVA;")), style = "Elenco numero")
     }
     doc <- doc |>
       cursor_reach("CAMPO.DI.IMPEGNARE") |>
