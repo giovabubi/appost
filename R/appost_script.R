@@ -736,7 +736,7 @@ appost <- function(){
                          ftext(CUP1),
                          ftext(", ORDINE "),
                          ftext(sede),
-                         ftext(" N° "),
+                         ftext(" "),
                          ftext(ordine),
                          ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
@@ -794,7 +794,7 @@ appost <- function(){
                            ftext(CUP1),
                            ftext(", ORDINE "),
                            ftext(sede),
-                           ftext(" N° "),
+                           ftext(" "),
                            ftext(ordine),
                            ftext(y)), style = "Maiuscolo") |>
         body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
@@ -1096,7 +1096,7 @@ appost <- function(){
                          ftext(CUP1),
                          ftext(", ordine "),
                          ftext(sede),
-                         ftext(" N° "),
+                         ftext(" "),
                          ftext(ordine),
                          ftext(y),
                          ftext(".")), style = "Oggetto") |>
@@ -1341,7 +1341,7 @@ appost <- function(){
       cursor_forward() |>
       body_add_fpar(fpar(ftext("CdR 121.001.000 IPSP ", fpt.b), ftext(sede2, fpt.b)), style = "Normal") |>
       body_add_fpar(fpar(ftext("PROVVEDIMENTO DI IMPEGNO DELLA")), style = "heading 1") |>
-      body_add_fpar(fpar(ftext("LETTERA D'ORDINE "), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1") |>
+      body_add_fpar(fpar(ftext("LETTERA D'ORDINE "), ftext(sede), ftext(" "), ftext(ordine), ftext(y)), style = "heading 1") |>
       body_add_fpar(fpar(firma.RSS), style = "heading 2") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il Regolamento di Organizzazione e Funzionamento del CNR emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
@@ -1977,7 +1977,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(ordine.trattativa.scelta),
                          ftext(", ordine "),
                          ftext(sede),
-                         ftext(" N° "),
+                         ftext(" "),
                          ftext(ordine),
                          ftext(y),
                          ftext(".")), style = "Oggetto maiuscoletto") |>
@@ -2077,7 +2077,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(ordine.trattativa.scelta),
                          ftext(", ordine "),
                          ftext(sede),
-                         ftext(" N° "),
+                         ftext(" "),
                          ftext(ordine),
                          ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
@@ -2228,7 +2228,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
-      body_add_fpar(fpar(ftext("LETTERA D’ORDINE "), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
+      body_add_fpar(fpar(ftext("LETTERA D’ORDINE "), ftext(sede), ftext(" "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
       body_add_par("") |>
       cursor_reach("CAMPO.CUP.LDO.IT") |>
       body_replace_all_text("CAMPO.CUP.LDO.IT", CUP2, only_at_cursor = TRUE) |>
@@ -2488,7 +2488,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(ordine.trattativa.scelta.pres)), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine "), ftext(sede),
-                         ftext(" N° "), ftext(ordine), ftext(y),
+                         ftext(" "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.ldo.txt),
                          ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
                          #ftext(Prot..lettera.ordine),
@@ -2607,7 +2607,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine "), ftext(sede),
-                         ftext(" N° "), ftext(ordine), ftext(y),
+                         ftext(" "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.ldo.txt),
                          #ftext(" IVA inclusa (prot. "),
                          #ftext(Prot..lettera.ordine),
@@ -2774,9 +2774,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" DI “"),
                          ftext(toupper(Prodotto), fpt.b),
                          ftext("”, "),
-                         ftext(toupper("ordine n° "), fpt.b),
-                         #ftext(sede, fpt.b),
-                         #ftext(" "),
+                         ftext(toupper("ordine "), fpt.b),
+                         ftext(sede, fpt.b),
+                         ftext(" "),
                          ftext(toupper(ordine), fpt.b),
                          ftext(toupper(y), fpt.b),
                          ftext(", NELL'AMBITO DEL "),
@@ -2870,9 +2870,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" l'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
-                         ftext("”, ordine n° "),
-                         #ftext(sede),
-                         #ftext(" N° "),
+                         ftext("”, ordine "),
+                         ftext(sede, fpt.b),
+                         ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(" ("),
@@ -2955,9 +2955,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all'affidamento diretto "),
                            ftext(della.fornitura), ftext(" di “"),
                            ftext(Prodotto, fpt.b),
-                           ftext("”, ordine n° "),
-                           #ftext(sede),
-                           #ftext(" N° "),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
                            ftext(" ("),
@@ -3077,9 +3077,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" DI “"),
                          ftext(toupper(Prodotto), fpt.b),
                          ftext("”"),
-                         ftext(", ORDINE N° "),
+                         ftext(", ORDINE "),
                          ftext(sede, fpt.b),
-                         #ftext(" N° "),
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
@@ -3234,9 +3233,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" e in relazione all'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
-                         ftext("”, ordine n° "),
+                         ftext("”, ordine "),
                          ftext(sede, fpt.b),
-                         #ftext(" N° "),
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
@@ -3333,9 +3331,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" nella procedura di affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
-                         ftext("”, ordine n° "),
+                         ftext("”, ordine "),
                          ftext(sede, fpt.b),
-                         #ftext(" N° "),
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
@@ -3485,7 +3482,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prodotto),
                          ftext("”, ordine "),
                          ftext(sede),
-                         ftext(" N° "),
+                         ftext(" "),
                          ftext(ordine),
                          ftext(y),
                          ftext(" ("),
@@ -3533,8 +3530,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" di “"),
                          ftext(Prodotto, fpt.b),
                          ftext("”, ordine "),
-                         ftext(sede),
-                         ftext(" N° "),
+                         ftext(sede, fpt.b),
+                         ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(" ("),
@@ -3583,7 +3580,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" DI “"),
                          ftext(toupper(Prodotto), fpt.b),
                          ftext("”"),
-                         ftext(", ORDINE N° "),
+                         ftext(", ORDINE "),
                          ftext(sede, fpt.b),
                          ftext(" "),
                          ftext(ordine, fpt.b),
@@ -3737,9 +3734,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(") per l'affidamento "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
-                         ftext("”, ordine n° "),
-                         #ftext(sede),
-                         #ftext(" N° "),
+                         ftext("”, ordine "),
+                         ftext(sede, fpt.b),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(" ("),
@@ -4124,9 +4120,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("OGGETTO", fpt.b), ftext(": DECISIONE DI CONTRATTARE PER L’AFFIDAMENTO DIRETTO "),
                          ftext(toupper(della.fornitura)), ftext(" DI “"),
                          ftext(toupper(Prodotto), fpt.b),
-                         ftext("”, ORDINE N° "),
+                         ftext("”, ORDINE "),
                          ftext(sede, fpt.b),
-                         #ftext(" N° "),
                          ftext(" "),
                          ftext(ordine, fpt.b), ftext(y, fpt.b),
                          ftext(", CIG "),
@@ -4659,7 +4654,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(ordine.trattativa.scelta.pres)), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine "), ftext(sede),
-                         ftext(" N° "), ftext(ordine), ftext(y),
+                         ftext(" "), ftext(ordine), ftext(y),
                          ftext(" di "), ftext(Importo.ldo.txt),
                          ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
                          #ftext(Prot..lettera.ordine),
@@ -4729,7 +4724,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("Il sottoscritto dott. Francesco Di Serio, nato a Cava de’ Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R, direttore dell'IPSP a decorrere dal giorno 1/5/2024 per quattro anni in base al provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, in relazione all'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
-                         ftext("”, ordine n° "),
+                         ftext("”, ordine "),
                          ftext(ordine),
                          ftext(y),
                          ftext(", "),
