@@ -18,8 +18,8 @@ appost <- function(){
       ")
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
-  #ordine <- "AGRITECH-FI 01"
-  #ordine <- 199
+  #ordine <- "AGRITECH-FI 05"
+  #ordine <- 211
   ordine <- readline()
 
   if(ordine==0){
@@ -3141,6 +3141,24 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prot..RAS), ftext(";")), style = "Normal") |>
       cursor_reach("CAMPO.NOMINA.RUP") |>
       body_replace_all_text("CAMPO.NOMINA.RUP", paste(il.dott.rup, RUP), only_at_cursor = TRUE) |>
+      cursor_bookmark("bookmark_sup")
+      
+      if(Supporto.RUP!=trattini){
+        doc <- doc |>
+          #body_replace_text_at_bkm(bookmark = "bookmark_sup", "") |>
+          body_remove() |>
+          cursor_backward() |>
+          body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(", ai sensi dell’art. 15 comma 6 del Codice, "),
+                             ftext(il.dott.sup), ftext(" "),
+                             ftext(Supporto.RUP),
+                             ftext(" in qualità di "),
+                             ftext("supporto al RUP", fpt.b),
+                             ftext(", fermo restando i compiti e le mansioni a cui gli stessi sono già assegnati;")), style = "Elenco numero")
+      }else{
+        doc <- doc |>
+          body_remove()
+      }
+    doc <- doc |>
       body_replace_text_at_bkm(bookmark = "bookmark_A1", Importo.senza.IVA2) |>
       body_replace_text_at_bkm(bookmark = "bookmark_A4", Importo.senza.IVA2) |>
       body_replace_text_at_bkm(bookmark = "bookmark_A", Importo.senza.IVA2) |>
@@ -4550,7 +4568,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   # Prestazione resa PNRR ----
   dic_pres.pnrr <- function(){
     if(PNRR!="No"){
-      download.file(paste(lnk, "Prestazione.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
@@ -4652,7 +4670,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   # Doppio finanziamento ----
   doppio_fin.pnrr <- function(){
     if(PNRR!="No"){
-      download.file(paste(lnk, "Prestazione.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
@@ -4731,6 +4749,90 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
  
+  # Doppio funzionalità bene ----
+  fun_bene.pnrr <- function(){
+    if(Inventariabile=='Inventariabile'){
+    if(PNRR!="No"){
+      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      file.remove("tmp.docx")
+      file.remove(logo)
+    }else{
+      doc <- doc.dic.pres |>
+        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+      }
+    }
+    
+    doc <- doc |>
+      cursor_begin() |>
+      cursor_forward() |>
+      body_add_par("DICHIARAZIONE DI FUNZIONALITÀ DEL BENE", style = "heading 1", pos = "on") |>
+      body_add_par("ai sensi degli artt. 46 e 47 del D.P.R. 28 dicembre 2000, n. 445", style = "heading 1") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext("Il sottoscritto "), ftext(dott.ric), ftext(" "), ftext(Richiedente), ftext(", "),
+                         ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(" il "),
+                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(", in merito allo strumento “"),
+                         ftext(Prodotto, fpt.b),
+                         ftext("”, acquisito con affidamento diretto, ordine "),
+                         ftext(ordine, fpt.b),
+                         ftext(y, fpt.b),
+                         ftext(", "),
+                         ftext("CIG ", fpt.b),
+                         ftext(CIG, fpt.b),
+                         ftext(" ("),
+                         ftext(Pagina.web),
+                         ftext("), decisione a contrattare prot. n. "),
+                         ftext(Prot..DaC),
+                         ftext(", dall'operatore economico "),
+                         ftext(Fornitore),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext("), nell'ambito del "),
+                         ftext(Progetto.int),
+                         ftext(", ")), style = "Normal") |>
+                      body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
+                      body_add_fpar(fpar(ftext("che le apparecchiature sono di fondamentale importanza per lo svolgimento delle attività del progetto in relazione allo scopo di mantenere aggiornate ed efficienti le apparecchiature scientifiche indispensabili per lo svolgimento delle azioni di ricerca programmate;")), style = "Elenco punto") |>
+                      body_add_fpar(fpar(ftext("che l’acquisto è perfettamente allineato con le previsioni di spesa del progetto e con la relativa ripartizione delle disponibilità economiche come previsto in fase di costruzione e redazione del progetto stesso;")), style = "Elenco punto") |>
+                      body_add_fpar(fpar(ftext("che, tutto questo considerato, le apparecchiature sono funzionali alle attività del progetto e verranno utilizzate esclusivamente per il conseguimento degli obiettivi realizzativi dello stesso.")), style = "Elenco punto") |>
+                      body_add_par("") |>
+                      body_add_fpar(fpar(ftext("Il direttore dell'IPSP")), style = "Firma 2") |>
+                      body_add_fpar(fpar(ftext("(dott. Francesco Di Serio)")), style = "Firma 2")
+    
+    print(doc, target = paste0(pre.nome.file, "11 Dichiarazione funzionalità bene.docx"))
+    
+    cat("
+
+    Documento '", pre.nome.file, "11 Dichiarazione funzionalità bene.docx' generato e salvato in ", pat)
+    
+    ## Dati mancanti ---
+    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
+    manca <- as.data.frame(t(manca))
+    colnames(manca) <- "val"
+    manca$var <- rownames(manca)
+    rownames(manca) <- NULL
+    manca <- subset(manca, manca$val==trattini)
+    len <- length(manca$val)
+    if(len>0){
+      manca <- manca$var
+      manca <- paste0(manca, ",")
+      manca[len] <- sub(",$", "\\.", manca[len])
+      cat("
+    ***** ATTENZIONE *****
+    Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
+      cat("
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
+    *********************")
+    }
+    }
+  }
+  
+  
     # Input ----
   answ <- function(){
     cat("\014")
