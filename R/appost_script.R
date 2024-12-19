@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 211
+  #ordine <- 193
   ordine <- readline()
 
   if(ordine==0){
@@ -444,6 +444,9 @@ appost <- function(){
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 3138 del 16/12/2021 di emanazione di un “Avviso pubblico per la presentazione di Proposte di intervento per il Potenziamento di strutture di ricerca e creazione di campioni nazionali di R&S su alcune Key Enabling Technologies” da finanziare nell’ambito del Piano Nazionale di Ripresa e Resilienza, missione 4, componente 2, investimento 1.4 “Potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune Key Enabling Technologies”, finanziato dall’Unione europea – NextGenerationEU;"
     decreto.pnrr <- " il Decreto Direttoriale MUR n. 1032 del 17/6/2022 rettificato con Decreto Direttoriale n. 3175 del 18/12/2021, registrato alla Corte dei Conti l’8/7/2022 al n. 1826 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione presentata dal Centro Nazionale “National Research Centre for Agricultural Technologies”, tematica “Tecnologie dell’Agricoltura (Agritech)”, contrassegnata dal codice identificativo CN00000022, per la realizzazione del Programma di Ricerca dal titolo “NationalResearch Centre for Agricultural Technologies”, CUP B83C22002840001;"
     dicitura.fattura <- "PNRR AGRITECH - Codice progetto MUR: CN00000022"
+    investimento <- "Investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”"
+    intervento <- "Centro Nazionale di Ricerca per le Tecnologie dell’Agricoltura (Agritech), codice progetto CN00000022"
+    attuatore <- "Centro Nazionale per le Tecnologie dell’Agricoltura “National Research Centre for Agricultural Technologies” (Agritech)"
   }
   if(PNRR=="Agritech Spoke 3"){
     Progetto <- "Agritech Spoke 3"
@@ -461,7 +464,7 @@ appost <- function(){
   if(PNRR=="onFoods Spoke 4"){
     logo <- "logo_onfoods.jpg"
     Progetto <- "onFoods Spoke 4"
-    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1550 dell’11/10/2022 - progetto “Research and innovation network on food and nutrition sustainability, safety and security - working on foods” (ON Foods), spoke 4, codice identificativo PE00000003, CUP B83C22004790001'
+    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1550 dell’11/10/2022 - progetto “Research and innovation network on food and nutrition sustainability, safety and security - working on foods” (ON Foods), spoke 4, codice identificativo PE00000003, CUP B83C22004790001'
     CUP2 <- "B83C22004790001"
     avviso.pnrr <- " l'avviso pubblico n. 341 del 15/03/2022 per la presentazione di proposte di intervento per la creazione di “Partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base” nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU;"
     decreto.pnrr <- " il Decreto Direttoriale MUR n. 1243 del 02-08-2022, con il quale il quale il MUR approva gli esiti delle valutazioni delle proposte progettuali presentate nell’ambito del sopra citato Avviso Pubblico con il quale viene ammesso a finanziamento il Progetto PNRR - Codice progetto PE00000003, PE10 - Modelli per un’alimentazione sostenibile, “ON Foods” - Research and innovation network on food and nutrition Sustainability, Safety and Security – Working ON Foods;"
@@ -476,10 +479,13 @@ appost <- function(){
     decreto.pnrr10 <- " che il CNR partecipa allo Spoke 3 nel ruolo di Affiliato all’Università di Bari e che ai sensi dell’art. 5 dell’Accordo per la regolamentazione dei rapporti tra Hub ed i Soggetti Realizzatori (Spoke e Affiliati), ciascun Affiliato è tenuto a provvedere alla rendicontazione delle proprie spese, che saranno approvate dallo Spoke di riferimento;"
     decreto.pnrr11 <- " che nello Spoke 3 il CNR (IPSP) Istituto per la Protezione Sostenibile delle Piante, con Sede istituzionale a Torino partecipa in qualità di capofila CNR nei confronti degli altri Istituti CNR partecipanti (CNR-ISPA, CNR-IBBR, CNR-ISAFOM, CNR-ISB e CNR-ISA) e che il budget totale della partecipazione CNR allo Spoke 3 è pari a € 1.850.000,20;"
     dicitura.fattura <- "PNRR ONFOODS - Codice progetto MUR: PE00000003"
+    investimento <- "Investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”"
+    intervento <- "On Foods – Research and Innovation Network On Food and Nutrition Sustainability, Safety and Security – Working On Foods, codice progetto PE0000003"
+    attuatore <- "Fondazione OnFoods"
   }
   if(PNRR=="DIVINGRAFT"){
     Progetto <- "PRIN 2022 DIVINGRAFT"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2 'dalla ricerca all’impresa', investimento 1.1 'progetti di ricerca di rilevante interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants', codice identificativo 2022BZW9PF, CUP B53D23017480006"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 'progetti di ricerca di rilevante interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants', codice identificativo 2022BZW9PF, CUP B53D23017480006"
     logo <- "logo_divingraft.jpg"
     CUP2 <- "B53D23017480006"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2, investimento 1.1;"
@@ -488,7 +494,7 @@ appost <- function(){
   }
   if(PNRR=="CIRCUFUN"){
     Progetto <- "PRIN 2022 PNRR CIRCUFUN"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2 'dalla ricerca all’impresa', investimento 1.1 'progetti di ricerca di significativo interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches', codice identificativo P2022XX55J, CUP B53D23023750001"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 'progetti di ricerca di significativo interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches', codice identificativo P2022XX55J, CUP B53D23023750001"
     logo <- "logo_circufun.png"
     CUP2 <- "B53D23023750001"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022 PNRR, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2, investimento 1.1;"
@@ -497,7 +503,7 @@ appost <- function(){
   }
   if(PNRR=="ARES"){
     Progetto <- "PRIN 2022 ARES"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2 'dalla ricerca all’impresa', investimento 1.1 'progetti di ricerca di significativo interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction', codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 'progetti di ricerca di significativo interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction', codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006"
     logo <- "logo_ares.jpg"
     CUP2 <- "B53D23017580006"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2, investimento 1.1;"
@@ -3602,10 +3608,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" oltre IVA;")), style = "Normal")
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
-      body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art.47 del decreto legge n. 77/2021, mediante acquisizione dei seguenti documenti:")), style = "Normal")
+      body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art. 47 del decreto legge n. 77/2021, mediante acquisizione dei seguenti documenti:")), style = "Normal")
     }else{
       doc <- doc |>
-      body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art.47 del decreto legge n. 77/2021, nonché in ordine all’assenza delle cause di esclusione di cui agli artt. 94 e 95 del Codice ed eventuale possesso dei requisiti di cui all’art. 100 del codice, richiesti per l’esecuzione del contratto, mediante acquisizione dei seguenti documenti:")), style = "Normal")
+      body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art. 47 del decreto legge n. 77/2021, nonché in ordine all’assenza delle cause di esclusione di cui agli artt. 94 e 95 del Codice ed eventuale possesso dei requisiti di cui all’art. 100 del codice, richiesti per l’esecuzione del contratto, mediante acquisizione dei seguenti documenti:")), style = "Normal")
     }
     doc <- doc |>
       body_add_fpar(fpar(ftext("(indicare le certificazioni fornite per il rispetto dei principi DNSH);")), style = "Elenco punto") |> 
@@ -3649,7 +3655,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "5 Atto istruttorio.docx' generato e salvato in ", pat)
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, RUP,Prot..RAS, Prot..RUP, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, RUP,Prot..RAS, Prot..provv..impegno, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3706,6 +3712,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prodotto, fpt.b),
                          ftext("”, ordine "),
                          ftext(sede, fpt.b),
+                         ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(" ("),
@@ -4838,6 +4845,79 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
  
+  # Checklist ----
+  chklst.pnrr <- function(){
+    download.file(paste(lnk, "Checklist.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+    file.remove("tmp.docx")
+    file.remove(logo)
+    
+    doc <- doc |>
+      cursor_begin() |>
+      cursor_forward() |>
+      body_add_par("DICHIARAZIONE SOSTITUTIVA DI ASSENZA DOPPIO FINANZIAMENTO", style = "heading 1", pos = "on") |>
+      body_add_par("ai sensi degli artt. 46 e 47 del D.P.R. 28 dicembre 2000, n. 445", style = "heading 1") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext("Il sottoscritto dott. Francesco Di Serio, nato a Cava de’ Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R, direttore dell'IPSP a decorrere dal giorno 1/5/2024 per quattro anni in base al provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, in relazione all'affidamento diretto "),
+                         ftext(della.fornitura), ftext(" di “"),
+                         ftext(Prodotto, fpt.b),
+                         ftext("”, ordine "),
+                         ftext(ordine),
+                         ftext(y),
+                         ftext(", "),
+                         ftext("CIG ", fpt.b),
+                         ftext(CIG, fpt.b),
+                         ftext(" ("),
+                         ftext(Pagina.web),
+                         ftext("), decisione a contrattare prot. n. "),
+                         ftext(Prot..DaC),
+                         ftext(", all'operatore economico "),
+                         ftext(Fornitore),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext("), nell'ambito del "),
+                         ftext(Progetto.int),
+                         ftext(", consapevole della responsabilità penale cui può andare incontro in caso di dichiarazione falsa o comunque non corrispondente al vero (art. 76 del D.P.R. n. 445 del 28/12/2000), ai sensi del D.P.R. n. 445 del 28/12/2000 e ss.mm.ii.")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTA ", fpt.b),
+      #                    ftext(ordine.trattativa.scelta.pres)), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
+      body_add_fpar(fpar(ftext("l’"),
+                         ftext("assenza del doppio finanziamento", fpt.b),
+                         ftext(" a valere su fonti di finanziamento pubbliche anche di diversa natura, come specificato dalla Circolare n. 33 del 31 dicembre 2021 del Ministero dell’Economia e delle Finanze.")), style = "Normal") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext("Il direttore dell'IPSP")), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext("(dott. Francesco Di Serio)")), style = "Firma 2")
+    
+    print(doc, target = paste0(pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx"))
+    
+    cat("
+
+    Documento '", pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx' generato e salvato in ", pat)
+    
+    ## Dati mancanti ---
+    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
+    manca <- as.data.frame(t(manca))
+    colnames(manca) <- "val"
+    manca$var <- rownames(manca)
+    rownames(manca) <- NULL
+    manca <- subset(manca, manca$val==trattini)
+    len <- length(manca$val)
+    if(len>0){
+      manca <- manca$var
+      manca <- paste0(manca, ",")
+      manca[len] <- sub(",$", "\\.", manca[len])
+      cat("
+    ***** ATTENZIONE *****
+    Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
+      cat("
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
+    *********************")
+    }
+  }
+  
     # Input ----
   answ <- function(){
     cat("\014")
