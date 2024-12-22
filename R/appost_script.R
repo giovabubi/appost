@@ -4883,12 +4883,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Che documento vuoi generare?
       1: RAS, con eventuale avviso pubblico, Richiesta pagina web
       2: Provvedimento d'impegno, Decisione a contrattare
-      3: Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
+      3: Comunicazione CIG, Autocertificazioni operatore economico, Atto istruttorio, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
       
       
     Solo per PNRR e PRIN:
       4: RAS, Assenza conflitto interesse, Richiesta pagina web
-      5: Nomina RUP, Assenza conflitto interesse, Documenti Operatore Economico
+      5: Nomina RUP, Assenza conflitto interesse, Autocertificazioni operatore economico
       6: Atto istruttorio, Assenza conflitto interesse, Comunicazione CIG
       7: Decisione a contrattare
       8: Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
