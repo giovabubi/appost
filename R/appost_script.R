@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 193
+  #ordine <- 199
   ordine <- readline()
 
   if(ordine==0){
@@ -432,6 +432,14 @@ appost <- function(){
   #pre.nome.file <- paste0("Ordine ", sede, " ", ordine, "_", y2, " - ")
   pre.nome.file <- paste0("Ordine ", ordine, "_", y2, " - ")
   
+  ### Durata affidamento
+  dat1 <- as.Date(sub(".*del ", "", Prot..DaC), "%d/%m/%Y")
+  dat2 <- as.Date(sub(".*del ", "", Prot..prestazione.resa), "%d/%m/%Y")
+  gg <- as.numeric(difftime(dat2, dat1, units = "days"))
+  dat1 <- format(dat1, "%d/%m/%Y")
+  dat2 <- format(dat2, "%d/%m/%Y")
+  durata.affidamento <- paste0(gg, " giorni, dal ", dat1, " al ", dat2, " (decisione a contrattare prot. n. ", Prot..DaC, "; dichiarazione prestazione resa prot. n. ", Prot..prestazione.resa, ")")
+  
   ### PNRR ----
   if(PNRR!="No"){
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/PNRR/"
@@ -447,6 +455,11 @@ appost <- function(){
     investimento <- "Investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”"
     intervento <- "Centro Nazionale di Ricerca per le Tecnologie dell’Agricoltura (Agritech), codice progetto CN00000022"
     attuatore <- "Centro Nazionale per le Tecnologie dell’Agricoltura “National Research Centre for Agricultural Technologies” (Agritech)"
+    avvio <- "Avvio: 01.09.2022; Conclusione: 31.08.2025"
+    costo.totale <- "346.342.467,00 €"
+    costo.ammesso <- "320.070.095,50 €"
+    decreto.concessione <- "1032 del 17/6/2022"
+    codice.progetto <- "CN00000022"
   }
   if(PNRR=="Agritech Spoke 3"){
     Progetto <- "Agritech Spoke 3"
@@ -4682,22 +4695,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # Doppio finanziamento ----
   doppio_fin.pnrr <- function(){
-    if(PNRR!="No"){
-      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.dic.pres |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-    }
+    download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+    # file.remove("tmp.docx")
+    # file.remove(logo)
     
     doc <- doc |>
       cursor_begin() |>
@@ -4740,47 +4744,18 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("
 
     Documento '", pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx' generato e salvato in ", pat)
-    
-    ## Dati mancanti ---
-    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
-    manca <- as.data.frame(t(manca))
-    colnames(manca) <- "val"
-    manca$var <- rownames(manca)
-    rownames(manca) <- NULL
-    manca <- subset(manca, manca$val==trattini)
-    len <- length(manca$val)
-    if(len>0){
-      manca <- manca$var
-      manca <- paste0(manca, ",")
-      manca[len] <- sub(",$", "\\.", manca[len])
-      cat("
-    ***** ATTENZIONE *****
-    Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
-      cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
-    *********************")
-    }
   }
   
   # Funzionalità bene ----
   fun_bene.pnrr <- function(){
     if(Inventariabile=='Inventariabile'){
-      if(PNRR!="No"){
-        download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-        doc <- read_docx("tmp.docx")
-        download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-        doc <- doc |>
-          footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-        file.remove("tmp.docx")
-        file.remove(logo)
-      }else{
-        doc <- doc.dic.pres |>
-          headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-        if(sede=="TOsi"){
-          doc <- doc |>
-            headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-        }
-      }
+      #download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      #download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      # file.remove("tmp.docx")
+      # file.remove(logo)
       
       doc <- doc |>
         cursor_begin() |>
@@ -4822,26 +4797,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cat("
 
     Documento '", pre.nome.file, "10 Dichiarazione funzionalità bene.docx' generato e salvato in ", pat)
-      
-      ## Dati mancanti ---
-      manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
-      manca <- as.data.frame(t(manca))
-      colnames(manca) <- "val"
-      manca$var <- rownames(manca)
-      rownames(manca) <- NULL
-      manca <- subset(manca, manca$val==trattini)
-      len <- length(manca$val)
-      if(len>0){
-        manca <- manca$var
-        manca <- paste0(manca, ",")
-        manca[len] <- sub(",$", "\\.", manca[len])
-        cat("
-    ***** ATTENZIONE *****
-    Il documento è stato generato, ma i seguenti dati risultano mancanti:", manca)
-        cat("
-    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
-    *********************")
-      }
     }
   }
  
@@ -4849,56 +4804,52 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   chklst.pnrr <- function(){
     download.file(paste(lnk, "Checklist.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    #download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- doc |>
       footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
     file.remove("tmp.docx")
     file.remove(logo)
     
     doc <- doc |>
-      cursor_begin() |>
-      cursor_forward() |>
-      body_add_par("DICHIARAZIONE SOSTITUTIVA DI ASSENZA DOPPIO FINANZIAMENTO", style = "heading 1", pos = "on") |>
-      body_add_par("ai sensi degli artt. 46 e 47 del D.P.R. 28 dicembre 2000, n. 445", style = "heading 1") |>
-      body_add_par("") |>
-      body_add_fpar(fpar(ftext("Il sottoscritto dott. Francesco Di Serio, nato a Cava de’ Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R, direttore dell'IPSP a decorrere dal giorno 1/5/2024 per quattro anni in base al provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, in relazione all'affidamento diretto "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(ordine),
-                         ftext(y),
-                         ftext(", "),
-                         ftext("CIG ", fpt.b),
-                         ftext(CIG, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext("), decisione a contrattare prot. n. "),
-                         ftext(Prot..DaC),
-                         ftext(", all'operatore economico "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(", consapevole della responsabilità penale cui può andare incontro in caso di dichiarazione falsa o comunque non corrispondente al vero (art. 76 del D.P.R. n. 445 del 28/12/2000), ai sensi del D.P.R. n. 445 del 28/12/2000 e ss.mm.ii.")), style = "Normal") |>
-      # body_add_fpar(fpar(ftext("VISTA ", fpt.b),
-      #                    ftext(ordine.trattativa.scelta.pres)), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("l’"),
-                         ftext("assenza del doppio finanziamento", fpt.b),
-                         ftext(" a valere su fonti di finanziamento pubbliche anche di diversa natura, come specificato dalla Circolare n. 33 del 31 dicembre 2021 del Ministero dell’Economia e delle Finanze.")), style = "Normal") |>
-      body_add_par("") |>
-      body_add_fpar(fpar(ftext("Il direttore dell'IPSP")), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("(dott. Francesco Di Serio)")), style = "Firma 2")
+      body_replace_text_at_bkm("investimento", investimento) |>
+      body_replace_text_at_bkm("investimento2", sub("(.*[0-9]\\.[0-9]) .*", "\\1", investimento)) |>
+      body_replace_text_at_bkm("intervento", intervento) |>
+      body_replace_text_at_bkm("attuatore", attuatore) |>
+      body_replace_text_at_bkm("avvio", avvio) |>
+      body_replace_text_at_bkm("costo", costo.totale) |>
+      body_replace_text_at_bkm("costo_ammesso", costo.ammesso) |>
+      body_replace_text_at_bkm("sede", sede2) |>
+      body_replace_text_at_bkm("sede2", sede2) |>
+      body_replace_all_text("CAMPO.DAC", Prot..DaC, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.IMPORTO", Importo.senza.IVA, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.IVA", IVA, only_at_cursor = FALSE) |>
+      body_replace_text_at_bkm("prodotto", Prodotto) |>
+      body_replace_text_at_bkm("fornitore", paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ")")) |>
+      #cursor_begin() |>
+      body_replace_all_text("CAMPO.ISTRUTTORIA", Prot..atto.istruttorio, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.LDO", Prot..lettera.ordine, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.RUP", Prot..provv..impegno, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.DOCOE", Prot..atto.istruttorio, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.CUP", CUP, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.RDO", as.character(RDO), only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.PAGINA", Pagina.web, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.DECRETO", decreto.concessione, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.CODICE.PROGETTO", codice.progetto, only_at_cursor = FALSE)
+    if(Tipo.acquisizione!="Beni"){
+      doc <- doc |>
+        body_replace_text_at_bkm("durata_affidamento", durata.affidamento) |>
+        body_replace_text_at_bkm("durata_affidamento2", durata.affidamento)
+    }
     
-    print(doc, target = paste0(pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx"))
-    
+    print(doc, target = paste0(pre.nome.file, "11 Checklst.docx"))
+
     cat("
 
-    Documento '", pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "11 Checklist.docx' generato e salvato in ", pat)
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
+    manca <- dplyr::select(sc, Prot..DaC, Prot..atto.istruttorio, Prot..lettera.ordine, Prot..provv..impegno, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -4927,36 +4878,32 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       *** BENVENUTI in AppOst ***
       ***************************
 
-      Che documento vuoi generare?
+    Che documento vuoi generare?
       1: RAS, con eventuale avviso pubblico, Richiesta pagina web
       2: Provvedimento d'impegno, Decisione a contrattare
       3: Comunicazione CIG, Documenti dell'Operatore Economico, Atto istruttorio, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
       
       
-      Solo per PNRR e PRIN:
-      5: Nomina RUP, Dichiarazioni assenza conflitto interesse
+    Solo per PNRR e PRIN:
+      4: RAS, Assenza conflitto interesse, Richiesta pagina web
+      5: Nomina RUP, Assenza conflitto interesse, Documenti Operatore Economico
+      6: Atto istruttorio, Assenza conflitto interesse, Comunicazione CIG
       7: Decisione a contrattare
-      
-      
-      Prossimamente ... altri documenti per ordini PNRR e PRIN!
+      8: Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
+      9: Assenza doppio finanziamento, Funzionalità del bene, Checklist
 
 ")
-      # Solo per PNRR (< 40.000 €):
-      # 4: RAS, Richiesta pagina web
-      # 5: Nomina RUP, Dichiarazioni assenza conflitto interesse
-      # 6: Autocertificazioni operatore economico, Atto istruttorio
-      # 7: Decisione a contrattare
-      # 8: Comunicazione CIG, Lettera d'ordine, Dichiarazione di prestazione resa, Provvedimento di liquidazione
-      # 9: Dichiarazione assenza doppio finanziamento, Dichiarazione funzionalità del bene, Checklist
-      # 
-      # ")
+      
     inpt <- readline()
     if(inpt==1){ras();pag()}
     if(inpt==2){provv_imp();dac()}
     if(inpt==3){com_cig();docoe();ai();ldo();dic_pres();provv_liq()}
-    #if(inpt==4){ras.pnrr();pag()}
-    if(inpt==5){rup.pnrr()}
+    if(inpt==4){ras.pnrr();pag()}
+    if(inpt==5){rup.pnrr();docoe.pnrr()}
+    if(inpt==6){ai.pnrr();com_cig()}
     if(inpt==7){dac.pnrr()}
+    if(inpt==8){ldo.pnrr();dic_pres.pnrr();provv_liq()}
+    if(inpt==9){doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
