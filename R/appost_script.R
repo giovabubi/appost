@@ -358,7 +358,11 @@ appost <- function(){
   y <- sub("(....)-(..)-(..)",  "/\\1", da)
   y2 <- sub("(....)-(..)-(..)",  "\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
-
+if(ordine<50 | ordine>500){
+  y <- "/2024"
+  y2 <- 2024
+}
+  
   if(CUP!=trattini){
     CUP1 <- paste0(" (CUP ", CUP, ")")
     Progetto1 <- paste0(Progetto, " (CUP ", CUP, ")")
