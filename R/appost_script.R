@@ -1166,7 +1166,7 @@ if(ordine<50 | ordine>500){
     if(sede!="TOsi"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
-                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 10.000,000 (IVA esclusa);")), style = "Normal")
+                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 15.000,00 (IVA esclusa);")), style = "Normal")
     }
 
     doc <- doc |>
@@ -1412,7 +1412,7 @@ if(ordine<50 | ordine>500){
     if(sede!="TOsi"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
-                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 10.000,000 (IVA esclusa);")), style = "Normal")
+                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 15.000,00 (IVA esclusa);")), style = "Normal")
     }
 
     doc <- doc |>
@@ -2648,7 +2648,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(sede!="TOsi"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
-                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 10.000,000 (IVA esclusa);")), style = "Normal")
+                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 15.000,00 (IVA esclusa);")), style = "Normal")
     }
 
     doc <- doc |>
@@ -3140,7 +3140,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(sede!="TOsi"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
-                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 10.000,000 (IVA esclusa);")), style = "Normal")
+                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 15.000,00 (IVA esclusa);")), style = "Normal")
     }
     
     doc <- doc |>
@@ -4169,7 +4169,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(sede!="TOsi"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
-                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 10.000,000 (IVA esclusa);")), style = "Normal")
+                           ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 15.000,00 (IVA esclusa);")), style = "Normal")
     }
     
     doc <- doc |>
