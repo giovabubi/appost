@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 199
+  #ordine <- 1
   ordine <- readline()
 
   if(ordine==0){
@@ -1136,7 +1136,14 @@ if(ordine>50 | ordine<1){
     }
 
     doc <- doc.dac |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE) |>
+      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+    
+    if(sede=="TOsi"){
+      doc <- doc |>
+        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+    }
+    
+    doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
       body_add_par("PROVVEDIMENTO", style = "heading 1", pos = "on") |>
@@ -1393,7 +1400,14 @@ if(ordine>50 | ordine<1){
   # Genera Provv. impegno ----
   provv_imp <- function(){
     doc <- doc.prov.imp |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE) |>
+      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+    
+    if(sede=="TOsi"){
+      doc <- doc |>
+        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+    }
+    
+    doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
       body_add_fpar(fpar(ftext("CdR 121.001.000 IPSP ", fpt.b), ftext(sede2, fpt.b)), style = "Normal") |>
