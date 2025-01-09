@@ -129,7 +129,7 @@ appost <- function(){
     al.RSS <- "Al responsabile della sede secondaria di Bari"
     firma.RSS <- "Il responsabile della sede secondaria di Bari dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via G. Amendola 122/D, 70126 Bari, Italia."
-    nomina.RSS <- "177785 del 27/5/2024 e rettifica prot. 181568 del 29/5/2024 di nomina del dott. Giovanni Nicola Bubici quale Responsabile della Sede Secondaria di Bari dell’IPSP per il periodo dall’1/6/2024 al 31/12/2024"
+    nomina.RSS <- "3903 dell'8/1/2025 di nomina del dott. Giovanni Nicola Bubici quale Responsabile della Sede Secondaria di Bari dell’IPSP per il periodo dall’8/1/2025 al 31/12/2025"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Nicola Centorame quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "Il responsabile amministrativo della sede secondaria di Bari dell'IPSP"
     sottoscritto.rss <- "Il sottoscritto "
