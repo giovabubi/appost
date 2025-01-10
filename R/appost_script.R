@@ -4918,7 +4918,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_replace_text_at_bkm("durata_affidamento2", durata.affidamento)
     }
     
-    print(doc, target = paste0(pre.nome.file, "11 Checklst.docx"))
+    print(doc, target = paste0(pre.nome.file, "11 Checklist.docx"))
 
     cat("
 
