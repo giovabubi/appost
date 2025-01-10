@@ -507,11 +507,11 @@ if(ordine>50 | ordine<1){
   }
   if(PNRR=="DIVINGRAFT"){
     Progetto <- "PRIN 2022 DIVINGRAFT"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 'progetti di ricerca di rilevante interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants', codice identificativo 2022BZW9PF, CUP B53D23017480006"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto “DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants” codice identificativo 2022BZW9PF, CUP B53D23017480006"
     logo <- "logo_divingraft.jpg"
     CUP2 <- "B53D23017480006"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 'DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants', codice identificativo 2022BZW9PF, CUP B53D23017480006;"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
+    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants”, codice identificativo 2022BZW9PF, CUP B53D23017480006;"
     dicitura.fattura <- "PRIN 2022 DIVINGRAFT - Codice progetto MUR: 2022BZW9PF"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
     intervento <- "PRIN 2022 “DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants”, codice identificativo 2022BZW9PF, CUP B53D23017480006"
@@ -524,11 +524,11 @@ if(ordine>50 | ordine<1){
   }
   if(PNRR=="CIRCUFUN"){
     Progetto <- "PRIN 2022 PNRR CIRCUFUN"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 'progetti di ricerca di significativo interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches', codice identificativo P2022XX55J, CUP B53D23023750001"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto “CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches”, codice identificativo P2022XX55J, CUP B53D23023750001"
     logo <- "logo_circufun.png"
     CUP2 <- "B53D23023750001"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022 PNRR, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1180 del 27/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 PNRR 'CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches', codice identificativo P2022XX55J, CUP B53D23023750001;"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022 PNRR, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
+    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1180 del 27/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 PNRR “CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches”, codice identificativo P2022XX55J, CUP B53D23023750001;"
     dicitura.fattura <- "PRIN 2022 PNRR CIRCUFUN - Codice progetto MUR: P2022XX55J"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
     intervento <- "PRIN 2022 PNRR “CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches”, codice identificativo P2022XX55J, CUP B53D23023750001"
@@ -541,20 +541,37 @@ if(ordine>50 | ordine<1){
   }
   if(PNRR=="ARES"){
     Progetto <- "PRIN 2022 ARES"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 'progetti di ricerca di significativo interesse nazionale (PRIN)', finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto 'ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction', codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto “ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction”, codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006"
     logo <- "logo_ares.jpg"
     CUP2 <- "B53D23017580006"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 'istruzione e ricerca', componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 'ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction', codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006;"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
+    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction”, codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006;"
     dicitura.fattura <- "PRIN 2022 ARES - Codice progetto MUR: 2022F79TR4_LS9_PRIN2022"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
     intervento <- "PRIN 2022: “Apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction” (ARES). Codice progetto: 2022F79TR4_LS9_PRIN2022"
-    attuatore <- "Capofila Università degli Studi di Bologna (DiSTAL)"
+    attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
     avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
     costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
     costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
     decreto.concessione <- "1048 del 14/7/2023"
     codice.progetto <- "2022F79TR4_LS9_PRIN2022"
+  }
+  if(PNRR=="KNOWS"){
+    Progetto <- "PRIN 2022 PNRR KNOWS"
+    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 1409 del 14/9/2022 - progetto “KNOWS: Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control”, codice identificativo P2022LJ5TM_LS9_PRIN2022PNRR, CUP B53D2303218 0001"
+    logo <- "logo_knows.jpg"
+    CUP2 <- "B53D2303218 0001"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
+    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1377 dell'1/9/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “KNOWS: Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control”, codice identificativo P2022LJ5TM_LS9_PRIN2022PNRR, CUP B53D2303218 0001"
+    dicitura.fattura <- "PRIN 2022 PNRR KNOWS - Codice progetto MUR: P2022LJ5TM_LS9_PRIN2022PNRR"
+    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
+    intervento <- "PRIN 2022 PNRR: “Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control” (KNOWS). Codice progetto: P2022LJ5TM_LS9_PRIN2022PNRR"
+    attuatore <- "Università degli Studi di Bari Aldo Moro (capofila)"
+    avvio <- "Avvio: 1/12/2023; Conclusione: 30/11/2025"
+    costo.totale <- "224.963,00 €, di cui a Unità CNR (IPSP-BA) 36.924,00 €"
+    costo.ammesso <- "224.963,00 €, di cui a Unità CNR (IPSP-BA) 36.924,00 €"
+    decreto.concessione <- "1409 del 14/9/2022"
+    codice.progetto <- "P2022LJ5TM_LS9_PRIN2022PNRR"
   }
 
   Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
