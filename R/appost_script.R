@@ -559,7 +559,7 @@ if(ordine>50 | ordine<1){
   if(PNRR=="KNOWS"){
     Progetto <- "PRIN 2022 PNRR KNOWS"
     Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 1409 del 14/9/2022 - progetto “KNOWS: Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control”, codice identificativo P2022LJ5TM_LS9_PRIN2022PNRR, CUP B53D2303218 0001"
-    logo <- "logo_knows.jpg"
+    logo <- "logo_knows.jpeg"
     CUP2 <- "B53D2303218 0001"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     decreto.pnrr <- " il Decreto Direttoriale MUR n. 1377 dell'1/9/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “KNOWS: Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control”, codice identificativo P2022LJ5TM_LS9_PRIN2022PNRR, CUP B53D2303218 0001"
