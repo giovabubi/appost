@@ -19,8 +19,8 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 1
-  ordine <- readline()
+  ordine <- 1
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -77,6 +77,7 @@ appost <- function(){
                           Prodotto=Descrizione.beni.servizi.lavori,
                           RDO=N..RDO.MePA,
                           sede=Sede)
+  colnames(ordini)[3] <- "Data"
   ordini$Fornitore..P.IVA <- as.character(ordini$Fornitore..P.IVA)
   ordini$CPV <- NULL
   ordini$CPV <- as.character(ordini$CPV..CPV)
