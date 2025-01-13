@@ -43,7 +43,7 @@ appost <- function(){
   if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
     pat <- getwd()
-  }elseif(file.exists("Ordini_2025.csv")=="TRUE"){
+  }else if(file.exists("Ordini_2025.csv")=="TRUE"){
     ordini <- read.csv("Ordini_2025.csv", na.strings = "")
     pat <- getwd()
   }else{
