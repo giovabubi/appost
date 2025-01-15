@@ -19,8 +19,8 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 193
-  ordine <- readline()
+  ordine <- 211
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -359,12 +359,15 @@ appost <- function(){
   }
 
   da <- as.character(Sys.Date())
-  y <- sub("(....)-(..)-(..)",  "/\\1", da)
-  y2 <- sub("(....)-(..)-(..)",  "\\1", da)
+  # y <- sub("(....)-(..)-(..)",  "/\\1", da)
+  # y2 <- sub("(....)-(..)-(..)",  "\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
 if(ordine>40 | ordine<1){
   y <- "/2024"
   y2 <- 2024
+}else{
+  y <- "/2025"
+  y2 <- 2025
 }
   
   if(CUP!=trattini){
