@@ -362,13 +362,13 @@ appost <- function(){
   # y <- sub("(....)-(..)-(..)",  "/\\1", da)
   # y2 <- sub("(....)-(..)-(..)",  "\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
-if(ordine>40 | ordine<1){
+#if(ordine>40 | ordine<1){
   y <- "/2024"
   y2 <- 2024
-}else{
-  y <- "/2025"
-  y2 <- 2025
-}
+#}else{
+#  y <- "/2025"
+#  y2 <- 2025
+#}
   
   if(CUP!=trattini){
     CUP1 <- paste0(" (CUP ", CUP, ")")
