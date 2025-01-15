@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 1
+  #ordine <- 193
   ordine <- readline()
 
   if(ordine==0){
@@ -453,6 +453,7 @@ if(ordine>40 | ordine<1){
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/PNRR/"
   }else{
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/"
+    dicitura.fattura <- trattini
   }
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4"){
     logo <- "logo_agritech.png"
