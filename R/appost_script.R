@@ -88,11 +88,11 @@ appost <- function(){
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
   
-  anno <- grep("\\/2024$", sc$Ordine.N.)
+  anno <- grep("_2024", sc$Ordine.N.)
   if(length(anno==1)){
     y <- "/2024"
     y2 <- 2024
-    sc$Ordine.N. <- sub("\\/2024$", "", sc$Ordine.N.)
+    sc$Ordine.N. <- sub("_2024", "", sc$Ordine.N.)
   }else{
     y <- "/2025"
     y2 <- 2025
