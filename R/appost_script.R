@@ -93,6 +93,7 @@ appost <- function(){
     y <- "/2024"
     y2 <- 2024
     sc$Ordine.N. <- sub("_2024", "", sc$Ordine.N.)
+    ordine <- sub("_2024", "", ordine)
   }else{
     y <- "/2025"
     y2 <- 2025
