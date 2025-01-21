@@ -87,6 +87,16 @@ appost <- function(){
   ordini$Importo.senza.IVA.num <- as.numeric(ordini$Importo.senza.IVA.num)
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
+  
+  anno <- grep("\\/2024$", sc$Ordine.N.)
+  if(length(anno==1)){
+    y <- "/2024"
+    y2 <- 2024
+    sc$Ordine.N. <- sub("\\/2024$", "", sc$Ordine.N.)
+  }else{
+    y <- "/2025"
+    y2 <- 2025
+  }
 
   sc$Aliquota.IVA.num <- as.numeric(ifelse(sc$Aliquota.IVA=='22%', 0.22,
                                            ifelse(sc$Aliquota.IVA=='10%', 0.1,
@@ -363,7 +373,10 @@ appost <- function(){
   # y2 <- sub("(....)-(..)-(..)",  "\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
 
-  anno <- grep("\\/2024$", sc$Prot..RAS)
+  if(length(anno==1)){
+  }else{
+    anno <- grep("\\/2024$", sc$Prot..RAS)
+  }
   
   #if(ordine>40 | ordine<1){
   if(length(anno==1)){
