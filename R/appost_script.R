@@ -4990,9 +4990,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       4: RAS, Assenza conflitto interesse, Richiesta pagina web
       5: Nomina RUP, Assenza conflitto interesse, Autocertificazioni operatore economico
       6: Atto istruttorio, Assenza conflitto interesse, Comunicazione CIG
-      7: Decisione a contrattare
-      8: Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
-      9: Assenza doppio finanziamento, Funzionalità del bene, Checklist
+      7: Decisione a contrattare, Assenza doppio finanziamento, Funzionalità del bene
+      8: Lettera d'ordine, Prestazione resa
+      9: Provvedimento di liquidazione, Checklist
 
 ")
       
@@ -5003,9 +5003,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(inpt==4){ras.pnrr();pag()}
     if(inpt==5){rup.pnrr();docoe.pnrr()}
     if(inpt==6){ai.pnrr();com_cig()}
-    if(inpt==7){dac.pnrr()}
-    if(inpt==8){ldo.pnrr();dic_pres.pnrr();provv_liq()}
-    if(inpt==9){doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
+    if(inpt==7){dac.pnrr();doppio_fin.pnrr();fun_bene.pnrr()}
+    if(inpt==8){ldo.pnrr();dic_pres.pnrr()}
+    if(inpt==9){provv_liq();chklst.pnrr()}
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
