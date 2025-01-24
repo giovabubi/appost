@@ -4948,7 +4948,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     print(doc, target = paste0(pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx"))
     
-    cat("\014")
+    #cat("\014")
     cat("
 
     Documento '", pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx' generato e salvato in ", pat)
