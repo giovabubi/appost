@@ -706,7 +706,7 @@ appost <- function(){
     dicitura.fatturazione.eng <- sub(".$", paste0(" and the following phrase: '", dicitura.fattura, "'."), dicitura.fatturazione.eng)
   }
   
-  if(PNRR!="No"){
+  if(finanziamento=="PRIN 2022" | finanziamento=="PRIN 2022 PNRR"){
     Progetto <- paste(finanziamento, PNRR)
     Progetto.int <- paste0(mis.com.inv.esteso, " - progetto “", PNRR, ": ", titolo, "”, codice identificativo ", codice.progetto, ", CUP ", CUP2)
     decreto.pnrr <- paste0(" il Decreto Direttoriale MUR n. ", decreto.concessione, " (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto ", finanziamento, " “", PNRR, ": ", titolo, "”, codice identificativo ", codice.progetto, ", CUP ", CUP2, ";")
