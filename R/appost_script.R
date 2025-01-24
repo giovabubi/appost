@@ -476,9 +476,26 @@ appost <- function(){
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/"
     dicitura.fattura <- trattini
   }
+  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4"){
+    finanziamento <- "PNRR"
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC"){
+    finanziamento <- "PRIN 2022"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
+    mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
+    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
+  }
+  else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH"){
+    finanziamento <- "PRIN 2022 PNRR"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
+    mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
+    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
+  }
+  
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4"){
-    logo <- "logo_agritech.png"
+    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 3, codice identificativo CN00000022 - CUP B83C22002840001'
+    codice.progetto <- "CN00000022"
     CUP2 <- "B83C22002840001"
+    decreto.concessione <- "1032 del 17/6/2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 3138 del 16/12/2021 di emanazione di un “Avviso pubblico per la presentazione di Proposte di intervento per il Potenziamento di strutture di ricerca e creazione di campioni nazionali di R&S su alcune Key Enabling Technologies” da finanziare nell’ambito del Piano Nazionale di Ripresa e Resilienza, missione 4, componente 2, investimento 1.4 “Potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune Key Enabling Technologies”, finanziato dall’Unione europea – NextGenerationEU;"
     decreto.pnrr <- " il Decreto Direttoriale MUR n. 1032 del 17/6/2022 rettificato con Decreto Direttoriale n. 3175 del 18/12/2021, registrato alla Corte dei Conti l’8/7/2022 al n. 1826 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione presentata dal Centro Nazionale “National Research Centre for Agricultural Technologies”, tematica “Tecnologie dell’Agricoltura (Agritech)”, contrassegnata dal codice identificativo CN00000022, per la realizzazione del Programma di Ricerca dal titolo “NationalResearch Centre for Agricultural Technologies”, CUP B83C22002840001;"
     dicitura.fattura <- "PNRR AGRITECH - Codice progetto MUR: CN00000022"
@@ -488,27 +505,21 @@ appost <- function(){
     avvio <- "Avvio: 1/9/2022; Conclusione: 31/8/2025"
     costo.totale <- "346.342.467,00 €"
     costo.ammesso <- "320.070.095,50 €"
-    decreto.concessione <- "1032 del 17/6/2022"
-    codice.progetto <- "CN00000022"
-  }
-  if(PNRR=="Agritech Spoke 3"){
-    Progetto <- "Agritech Spoke 3"
-    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 3, codice identificativo CN00000022 - CUP B83C22002840001'
+    logo <- "logo_agritech.png"
   }
   if(PNRR=="Agritech Spoke 4"){
-    Progetto <- "Agritech Spoke 4"
-    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 4, codice identificativo CN00000022 - CUP B83C22002840001'
+    Progetto.int <- sub("spoke 3", "spoke 4", Progetto.int)
   }
   if(PNRR=="Agritech Spoke 8"){
-    Progetto <- "Agritech Spoke 8"
-    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 – progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 8, codice identificativo CN00000022 - CUP B83C22002840001'
+    Progetto.int <- sub("spoke 3", "spoke 8", Progetto.int)
     dicitura.fattura <- "Finanziamento Unione Europea NextGenerationEU progetto PNRR AGRITECH Spoke8 M4.C2.I1.4 - Codice progetto MUR: CN00000022"
   }
   if(PNRR=="onFoods Spoke 4"){
-    logo <- "logo_onfoods.jpg"
     Progetto <- "onFoods Spoke 4"
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1550 dell’11/10/2022 - progetto “Research and innovation network on food and nutrition sustainability, safety and security - working on foods” (ON Foods), spoke 4, codice identificativo PE00000003, CUP B83C22004790001'
+    codice.progetto <- "PE00000003"    
     CUP2 <- "B83C22004790001"
+    decreto.concessione <- "1550 dell’11/10/2022"
     avviso.pnrr <- " l'avviso pubblico n. 341 del 15/03/2022 per la presentazione di proposte di intervento per la creazione di “Partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base” nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU;"
     decreto.pnrr <- " il Decreto Direttoriale MUR n. 1243 del 02-08-2022, con il quale il quale il MUR approva gli esiti delle valutazioni delle proposte progettuali presentate nell’ambito del sopra citato Avviso Pubblico con il quale viene ammesso a finanziamento il Progetto PNRR - Codice progetto PE00000003, PE10 - Modelli per un’alimentazione sostenibile, “ON Foods” - Research and innovation network on food and nutrition Sustainability, Safety and Security – Working ON Foods;"
     decreto.pnrr2 <- " il Decreto Direttoriale di concessione n. 1550 dell’11 ottobre 2022, ha ammesso al finanziamento, il Partenariato Esteso denominato ON Foods” - Research and innovation network on food and nutrition Sustainability, Safety and Security – Working ON Foods” corredato dagli allegati A-B-C-D-E;"
@@ -521,92 +532,187 @@ appost <- function(){
     decreto.pnrr9 <- " che il CNR partecipa al Progetto ON Foods nel ruolo sia di Spoke Leader (Spoke 2) che di Affiliato agli Spoke 3 (Università di Bari), Spoke 4 (Università di Milano), Spoke 5 (Università di Napoli) e Spoke 6 (Università di Pavia) e che il contributo a favore del CNR, pari a complessivi € 9.210.000,00 di cui € 4.600.000 al Mezzogiorno, è finanziato al 100%;"
     decreto.pnrr10 <- " che il CNR partecipa allo Spoke 3 nel ruolo di Affiliato all’Università di Bari e che ai sensi dell’art. 5 dell’Accordo per la regolamentazione dei rapporti tra Hub ed i Soggetti Realizzatori (Spoke e Affiliati), ciascun Affiliato è tenuto a provvedere alla rendicontazione delle proprie spese, che saranno approvate dallo Spoke di riferimento;"
     decreto.pnrr11 <- " che nello Spoke 3 il CNR (IPSP) Istituto per la Protezione Sostenibile delle Piante, con Sede istituzionale a Torino partecipa in qualità di capofila CNR nei confronti degli altri Istituti CNR partecipanti (CNR-ISPA, CNR-IBBR, CNR-ISAFOM, CNR-ISB e CNR-ISA) e che il budget totale della partecipazione CNR allo Spoke 3 è pari a € 1.850.000,20;"
-    dicitura.fattura <- "PNRR ONFOODS - Codice progetto MUR: PE00000003"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     investimento <- "Investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”"
     intervento <- "On Foods – Research and Innovation Network On Food and Nutrition Sustainability, Safety and Security – Working On Foods, codice progetto PE0000003"
     attuatore <- "Fondazione OnFoods"
     avvio <- "Avvio: 1/11/2022; Conclusione: 31/10/2025"
     costo.totale <- "115.303.750,00 €"
     costo.ammesso <- "114.500.000,00 €"
-    decreto.concessione <- "1550 dell’11/10/2022"
-    codice.progetto <- "PE00000003"
+    logo <- "logo_onfoods.jpg"
   }
   if(PNRR=="DIVINGRAFT"){
-    Progetto <- "PRIN 2022 DIVINGRAFT"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto “DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants” codice identificativo 2022BZW9PF, CUP B53D23017480006"
-    logo <- "logo_divingraft.jpg"
+    titolo <- "dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants"
+    codice.progetto <- "2022BZW9PF"
     CUP2 <- "B53D23017480006"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants”, codice identificativo 2022BZW9PF, CUP B53D23017480006;"
-    dicitura.fattura <- "PRIN 2022 DIVINGRAFT - Codice progetto MUR: 2022BZW9PF"
-    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-    intervento <- "PRIN 2022 “DIVINGRAFT: dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants”, codice identificativo 2022BZW9PF, CUP B53D23017480006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche (CNR), Istituto per la Protezione Sostenibile delle Piante (IPSP)"
     avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
     costo.totale <- "264.979,00 €, di cui al CNR-IPSP 133.549,00 €"
     costo.ammesso <- "206.154,00 €, di cui al CNR-IPSP 103.900,00 €"
-    decreto.concessione <- "1048 del 14/7/2023"
-    codice.progetto <- "2022BZW9PF"
+    logo <- "logo_divingraft.jpg"
   }
   if(PNRR=="CIRCUFUN"){
-    Progetto <- "PRIN 2022 PNRR CIRCUFUN"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto “CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches”, codice identificativo P2022XX55J, CUP B53D23023750001"
-    logo <- "logo_circufun.png"
+    titolo <- "assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches"
+    codice.progetto <- "P2022XX55J"
     CUP2 <- "B53D23023750001"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022 PNRR, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1180 del 27/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 PNRR “CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches”, codice identificativo P2022XX55J, CUP B53D23023750001;"
-    dicitura.fattura <- "PRIN 2022 PNRR CIRCUFUN - Codice progetto MUR: P2022XX55J"
-    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-    intervento <- "PRIN 2022 PNRR “CIRCUFUN: Assessment of biodiversity and functional roles of infectious circular viroid-like RNAs in fungi from different ecological niches”, codice identificativo P2022XX55J, CUP B53D23023750001"
+    decreto.concessione <- "1180 del 27/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche (CNR), Istituto per la Protezione Sostenibile delle Piante (IPSP)"
     avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
     costo.totale <- "237.299,00 €, di cui al CNR-IPSP 114.690,00 €"
     costo.ammesso <- "237.299,00 €, di cui al CNR-IPSP 114.690,00 €"
-    decreto.concessione <- "1180 del 27/7/2023"
-    codice.progetto <- "P2022XX55J"
+    logo <- "logo_circufun.png"
   }
   if(PNRR=="ARES"){
-    Progetto <- "PRIN 2022 ARES"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022 - progetto “ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction”, codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006"
-    logo <- "logo_ares.jpg"
+    titolo <- "apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction"
+    codice.progetto <- "2022F79TR4_LS9_PRIN2022"
     CUP2 <- "B53D23017580006"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1048 del 14/7/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “ARES: apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction”, codice identificativo 2022F79TR4_LS9_PRIN2022, CUP B53D23017580006;"
-    dicitura.fattura <- "PRIN 2022 ARES - Codice progetto MUR: 2022F79TR4_LS9_PRIN2022"
-    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-    intervento <- "PRIN 2022: “Apricot genomics and transcriptomics to unravel the genetic bases of resistance to Sharka and the plant/virus interaction” (ARES). Codice progetto: 2022F79TR4_LS9_PRIN2022"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
     avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
     costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
     costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    decreto.concessione <- "1048 del 14/7/2023"
-    codice.progetto <- "2022F79TR4_LS9_PRIN2022"
+    logo <- "logo_bianco.jpg"
   }
   if(PNRR=="KNOWS"){
-    Progetto <- "PRIN 2022 PNRR KNOWS"
-    Progetto.int <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 1409 del 14/9/2022 - progetto “KNOWS: Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control”, codice identificativo P2022LJ5TM_LS9_PRIN2022PNRR, CUP B53D2303218 0001"
-    logo <- "logo_knows.jpeg"
+    titolo <- "Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control"
+    codice.progetto <- "P2022LJ5TM_LS9_PRIN2022PNRR"
     CUP2 <- "B53D2303218 0001"
-    avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
-    decreto.pnrr <- " il Decreto Direttoriale MUR n. 1377 dell'1/9/2023 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto PRIN 2022 “KNOWS: Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control”, codice identificativo P2022LJ5TM_LS9_PRIN2022PNRR, CUP B53D2303218 0001"
-    dicitura.fattura <- "PRIN 2022 PNRR KNOWS - Codice progetto MUR: P2022LJ5TM_LS9_PRIN2022PNRR"
-    investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-    intervento <- "PRIN 2022 PNRR: “Generating KNOWledge on insect-pathogen-agroecosystem interaction for a Sustainable Xylella fastidiosa control” (KNOWS). Codice progetto: P2022LJ5TM_LS9_PRIN2022PNRR"
+    decreto.concessione <- "1377 dell'1/9/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Bari Aldo Moro (capofila)"
     avvio <- "Avvio: 1/12/2023; Conclusione: 30/11/2025"
     costo.totale <- "224.963,00 €, di cui a Unità CNR (IPSP-BA) 36.924,00 €"
     costo.ammesso <- "224.963,00 €, di cui a Unità CNR (IPSP-BA) 36.924,00 €"
-    decreto.concessione <- "1409 del 14/9/2022"
-    codice.progetto <- "P2022LJ5TM_LS9_PRIN2022PNRR"
+    logo <- "logo_knows.jpeg"
   }
-
-  Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
+  if(PNRR=="MINACROP"){
+    titolo <- "The dark side of MIcro- and NAanoplastics in the soil: impact on CROP physiology and pathogen resistance"
+    codice.progetto <- "2022LF3SZE_LS8_PRIN2022"
+    CUP2 <- "B53D23012120006"
+    decreto.concessione <- "1015 del 7/7/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="MONTANA"){
+    titolo <- "Ulmus glabra protection in Italian peninsula"
+    codice.progetto <- "2022SFNMYC_LS8_PRIN2022"
+    CUP2 <- "B53D23012340006"
+    decreto.concessione <- "1015 del 7/7/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alessia Lucia PEPORI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="SpecFor"){
+    titolo <- "spectroscopic detection of forest damage: investigating new Italian holm oak declines from leaf to landscape level"
+    codice.progetto <- "20223AR37M"
+    CUP2 <- "B53D23017080006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. dott.ssa BARBERINI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="Mimic"){
+    titolo <- "mimic the interplay of phytohormones and Biogenic Volatile Organic Compounds (BVOC) by genome editing approaches to boost rice meristem development and yield"
+    codice.progetto <- "2022NKSSKM_LS2_PRIN2022"
+    CUP2 <- "B53D23008290006"
+    decreto.concessione <- "970 del 30/6/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="StreeTLAMP"){
+    titolo <- "new streetlamp solution to reduce the impact of urban light pollution on tree and lichen species"
+    codice.progetto <- "20222YF92Y_LS9 _PRIN2022"
+    CUP2 <- "B53D23017060006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Cecilia BRUNETTI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="Fore-VOC"){
+    titolo <- "plants talk, but do they listen? Unveiling plant responses to incoming (foreign) volatile organic compounds"
+    codice.progetto <- "2022ZYCCJJ_LS8_PRIN2022"
+    CUP2 <- "B53D23012480006"
+    decreto.concessione <- "1015 del 7/7/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Susanna POLLASTRI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="PEP-HERB"){
+    titolo <- "developing PEPtide molecules targeting the plant immune system to fight HERBicide-resistant weeds"
+    codice.progetto <- "P2022NEJ8K_LS9_PRIN2022PNRR"
+    CUP2 <- "B53D23032230001"
+    decreto.concessione <- "1377 dell'1/9/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="NEUROPLANT"){
+    titolo <- "the development of an artificial intelligence tool to predict phytoremediation of indoor air, through NEURal netwOrks trained with measurements of pollutants removal by PLANTs and their associated microbiome at different spatial and temporal scale"
+    codice.progetto <- "P2022MNX4S_LS9_PRIN2022PNRR"
+    CUP2 <- "B53D23032230001"
+    decreto.concessione <- "1377 dell'1/9/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="SAVEASH"){
+    titolo <- "SAVE the Apennine aSh from Hymenoscyphus fraxineus"
+    codice.progetto <- "P2022CHMFZ_LS9_PRIN2022PNRR"
+    CUP2 <- "B53D23032100001"
+    decreto.concessione <- "1377 dell'1/9/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alberto SANTINI")
+    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
+    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
   dicitura.fatturazione.eng <- paste0("In the invoice, plese report the following information: purchase order n° ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of the purchase order page), CIG ", CIG, ", CUP ", CUP, ".")
+  
   if(PNRR!="No"){
     dicitura.fatturazione <- sub(".$", paste0(" e la seguente dicitura: '", dicitura.fattura, "'."), dicitura.fatturazione)
     dicitura.fatturazione.eng <- sub(".$", paste0(" and the following phrase: '", dicitura.fattura, "'."), dicitura.fatturazione.eng)
   }
+  
+  if(PNRR!="No"){
+    Progetto <- paste(finanziamento, PNRR)
+    Progetto.int <- paste0(mis.com.inv.esteso, " - progetto “", PNRR, ": ", titolo, "”, codice identificativo ", codice.progetto, ", CUP ", CUP2)
+    decreto.pnrr <- paste0(" il Decreto Direttoriale MUR n. ", decreto.concessione, " (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto ", finanziamento, " “", PNRR, ": ", titolo, "”, codice identificativo ", codice.progetto, ", CUP ", CUP2, ";")
+    intervento <- paste0(finanziamento, ": “", titolo, "” (", PNRR, "). Codice progetto: ", codice.progetto)
+  }
+  Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
   if(PNRR=="No"){
     Progetto.int <- paste("progetto", Progetto.cup)
   }
