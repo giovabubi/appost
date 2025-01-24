@@ -4304,7 +4304,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
       }
       file.remove("tmp.docx")
-      file.remove("tmp.docx")
+      file.remove(logo)
     }
     
     doc <- doc |>
@@ -4516,6 +4516,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     **********************")
     }
   }
+  
   # Lettera d'ordine PNRR ----
   ldo.pnrr <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
@@ -4909,8 +4910,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- doc |>
       footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-    # file.remove("tmp.docx")
-    # file.remove(logo)
+    file.remove("tmp.docx")
+    file.remove(logo)
     
     doc <- doc |>
       cursor_begin() |>
@@ -4959,9 +4960,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   # Funzionalità bene ----
   fun_bene.pnrr <- function(){
     if(Inventariabile=='Inventariabile'){
-      #download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
-      #download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
         footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
       file.remove("tmp.docx")
