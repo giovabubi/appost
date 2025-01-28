@@ -595,11 +595,11 @@ appost <- function(){
     CUP2 <- "B53D23012120006"
     decreto.concessione <- "1015 del 7/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "Università degli Studi di Firenze (capofila)"
+    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
+    costo.totale <- "239.149,00 €, di cui a Unità CNR (IPSP-FI) 60.109,00 €"
+    costo.ammesso <- "239.149,00 €, di cui a Unità CNR (IPSP-FI) 60.109,00 €"
+    logo <- "logo_minacrop.tif"
   }
   if(PNRR=="MONTANA"){
     titolo <- "Ulmus glabra protection in Italian peninsula"
@@ -607,11 +607,11 @@ appost <- function(){
     CUP2 <- "B53D23012340006"
     decreto.concessione <- "1015 del 7/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alessia Lucia PEPORI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "CNR, Isttuto per la Protezione Sostenibile delle Piante"
+    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
+    costo.totale <- "234.924,00 €, di cui a Unità CNR (IPSP-FI) 173.305,00 €"
+    costo.ammesso <- "185.671,00 €, di cui a Unità CNR (IPSP-FI) 133.251,00 €"
+    logo <- "logo_montana.png"
   }
   if(PNRR=="SpecFor"){
     titolo <- "spectroscopic detection of forest damage: investigating new Italian holm oak declines from leaf to landscape level"
@@ -619,11 +619,11 @@ appost <- function(){
     CUP2 <- "B53D23017080006"
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. dott.ssa BARBERINI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "Università di Pisa"
+    avvio <- "Avvio: 14/10/2023; Conclusione: 13/10/2025"
+    costo.totale <- "320.101,00 €, di cui a Unità CNR (IPSP-FI) 103.163,00 €"
+    costo.ammesso <- "267.724,00 €, di cui a Unità CNR (IPSP-FI) 85.316,00 €"
+    logo <- "logo_specfor.jpg"
   }
   if(PNRR=="Mimic"){
     titolo <- "mimic the interplay of phytohormones and Biogenic Volatile Organic Compounds (BVOC) by genome editing approaches to boost rice meristem development and yield"
@@ -631,10 +631,10 @@ appost <- function(){
     CUP2 <- "B53D23008290006"
     decreto.concessione <- "970 del 30/6/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    attuatore <- "Università degli Studi di Milano"
+    avvio <- "Avvio: 30/9/2023; Conclusione: 29/9/2025"
+    costo.totale <- "299.674,00 €, di cui a Unità CNR (IPSP-FI) 154.132,00 €"
+    costo.ammesso <- "248.429,00 €, di cui a Unità CNR (IPSP-FI) 100.500,00 €"
     logo <- "logo_bianco.jpg"
   }
   if(PNRR=="StreeTLAMP"){
@@ -643,11 +643,11 @@ appost <- function(){
     CUP2 <- "B53D23017060006"
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Cecilia BRUNETTI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "Università di Pisa"
+    avvio <- "Avvio: 18/9/2023; Conclusione: 17/6/2025"
+    costo.totale <- "233.000,00 €, di cui a Unità CNR (IPSP-FI) 58.000,00 €"
+    costo.ammesso <- "193.024,00 €, di cui a Unità CNR (IPSP-FI) 49.200,00 €"
+    logo <- "logo_streetlamp.jpg"
   }
   if(PNRR=="Fore-VOC"){
     titolo <- "plants talk, but do they listen? Unveiling plant responses to incoming (foreign) volatile organic compounds"
@@ -655,11 +655,11 @@ appost <- function(){
     CUP2 <- "B53D23012480006"
     decreto.concessione <- "1015 del 7/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Susanna POLLASTRI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "Università di Napoli"
+    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
+    costo.totale <- "313.279,00 €, di cui a Unità CNR (IPSP-FI) 119.146,00 €"
+    costo.ammesso <- "257.828,00 €, di cui a Unità CNR (IPSP-FI) 98.056,00 €"
+    logo <- "logo_forevoc.png"
   }
   if(PNRR=="PEP-HERB"){
     titolo <- "developing PEPtide molecules targeting the plant immune system to fight HERBicide-resistant weeds"
@@ -667,11 +667,11 @@ appost <- function(){
     CUP2 <- "B53D23032230001"
     decreto.concessione <- "1377 dell'1/9/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
+    costo.totale <- "224.324,00 €, di cui a Unità CNR (IPSP-FI) 73.387,00 €"
+    costo.ammesso <- "224.324,00 €, di cui a Unità CNR (IPSP-FI) 73.387,00 €"
+    logo <- "logo_pepherb.jpg"
   }
   if(PNRR=="NEUROPLANT"){
     titolo <- "the development of an artificial intelligence tool to predict phytoremediation of indoor air, through NEURal netwOrks trained with measurements of pollutants removal by PLANTs and their associated microbiome at different spatial and temporal scale"
@@ -679,10 +679,10 @@ appost <- function(){
     CUP2 <- "B53D23032230001"
     decreto.concessione <- "1377 dell'1/9/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 1/12/2023; Conclusione: 30/11/2025"
+    costo.totale <- "299.541,00 €, di cui a Unità CNR (IPSP-FI) 153.976,00 €"
+    costo.ammesso <- "224.656,00 €, di cui a Unità CNR (IPSP-FI) 115.482,00 €"
     logo <- "logo_bianco.jpg"
   }
   if(PNRR=="SAVEASH"){
@@ -691,11 +691,11 @@ appost <- function(){
     CUP2 <- "B53D23032100001"
     decreto.concessione <- "1377 dell'1/9/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alberto SANTINI")
-    # attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    # avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
-    # costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    # costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
-    logo <- "logo_bianco.jpg"
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 31/10/2025"
+    costo.totale <- "264.789,00 €, di cui a Unità CNR (IPSP-FI) 119.585,00 €"
+    costo.ammesso <- "222.305,00 €, di cui a Unità CNR (IPSP-FI) 102.000,00 €"
+    logo <- "logo_saveash.jpg"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
