@@ -691,7 +691,7 @@ appost <- function(){
     decreto.concessione <- "1377 dell'1/9/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alberto SANTINI")
     attuatore <- "Consiglio Nazionale delle Ricerche"
-    avvio <- "Avvio: 30/11/2023; Conclusione: 31/10/2025"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
     costo.totale <- "264.789,00 €, di cui a Unità CNR (IPSP-FI) 119.585,00 €"
     costo.ammesso <- "222.305,00 €, di cui a Unità CNR (IPSP-FI) 102.000,00 €"
     logo <- "logo_saveash.jpg"
