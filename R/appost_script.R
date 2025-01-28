@@ -598,7 +598,7 @@ appost <- function(){
     avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
     costo.totale <- "239.149,00 €, di cui a Unità CNR (IPSP-FI) 60.109,00 €"
     costo.ammesso <- "239.149,00 €, di cui a Unità CNR (IPSP-FI) 60.109,00 €"
-    logo <- "logo_minacrop.tif"
+    logo <- "logo_minacrop.png"
   }
   if(PNRR=="MONTANA"){
     titolo <- "Ulmus glabra protection in Italian peninsula"
