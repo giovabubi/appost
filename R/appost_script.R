@@ -472,10 +472,10 @@ appost <- function(){
   ### PNRR ----
   if(PNRR!="No"){
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/PNRR/"
-    finanziamento <- "No"
   }else{
     lnk <- "https://raw.githubusercontent.com/giovabubi/appost/main/models/"
     dicitura.fattura <- trattini
+    finanziamento <- "No"
   }
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4"){
     finanziamento <- "PNRR"
