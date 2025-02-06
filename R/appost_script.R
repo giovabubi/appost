@@ -1415,7 +1415,7 @@ appost <- function(){
                          ftext(CUP1),
                          ftext(", allocati sul GAE "),
                          ftext(GAE),
-                         ftext(", voce del piano "),
+                         ftext(", voce COAN "),
                          ftext(Voce.di.spesa),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che vi sono i presupposti normativi e di fatto per acquisire "), ftext(la.fornitura), ftext(" in oggetto, nel rispetto dei principi generali enunciati nel Codice;")), style = "Normal") |>
@@ -1458,7 +1458,7 @@ appost <- function(){
     doc <- doc |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che, ai sensi dell'art. 53 del Codice l'affidatario sia esonerato dalla costituzione della garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’impegno provvisorio di spesa n. "),
+      body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’anticipata n. "),
                          ftext(N..impegno.di.spesa),
                          ftext(" per un importo pari a euro "),
                          ftext(Importo.con.IVA),
@@ -1468,7 +1468,7 @@ appost <- function(){
                          ftext(CUP1),
                          ftext(", allocati sul GAE "),
                          ftext(GAE),
-                         ftext(", voce del piano "),
+                         ftext(", voce COAN "),
                          ftext(Voce.di.spesa),
                          ftext(", a favore del soggetto registrato in U-Gov con il n. "),
                          ftext(Fornitore..Codice.terzo.SIGLA),
@@ -1477,7 +1477,7 @@ appost <- function(){
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
         body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'avvio dell'esecuzione del contratto o la sottoscrizione dello stesso/l’invio della lettera d’ordine siano subordinati all'esito della verifica dei requisiti di ordine generale, e speciale se previsti, senza rilevare cause ostative;")), style = "Elenco liv1") |>
-        body_add_fpar(fpar(ftext("DI IMPEGNARE", fpt.b), ftext(" la spesa per un importo pari a € 35,00 sui fondi del già citato progetto, allocati sul GAE P___, voce del piano 13096 “Pubblicazione bandi di gara” per la contribuzione ANAC;")), style = "Elenco liv1")
+        body_add_fpar(fpar(ftext("DI IMPEGNARE", fpt.b), ftext(" la spesa per un importo pari a € 35,00 sui fondi del già citato progetto, allocati sul GAE P___, voce COAN 13096 “Pubblicazione bandi di gara” per la contribuzione ANAC;")), style = "Elenco liv1")
     }else{
       doc <- doc |>
         body_add_fpar(fpar(ftext("DI SOTTOPORRE", fpt.b), ftext(" la lettera d’ordine alla condizione risolutiva in caso di accertamento della carenza dei requisiti di ordine generale;")), style = "Elenco liv1")
@@ -1610,11 +1610,11 @@ appost <- function(){
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
                          ftext(" che la fornitura in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
-      body_add_fpar(fpar(ftext("l’assunzione dell'impegno di spesa n° "),
+      body_add_fpar(fpar(ftext("l’assunzione dell'anticipata n. "),
                          ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa, con imputazione sulla voce di spesa "),
+                         ftext(" IVA inclusa, con imputazione sulla voce COAN "),
                          ftext(Voce.di.spesa),
                          ftext(", GAE "),
                          ftext(GAE),
@@ -2851,13 +2851,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
 
     doc <- doc |>
-      body_add_fpar(fpar(ftext("Impegno N° "),
+      body_add_fpar(fpar(ftext("Anticipata n. "),
                          ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
                          ftext(", GAE "),
                          ftext(GAE),
-                         ftext(", voce di spesa "),
+                         ftext(", voce COAN "),
                          ftext(Voce.di.spesa),
                          ftext(", C/R _____, natura _____;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("Repertorio Contratti n°_____; DURC scadenza: "),
@@ -3352,12 +3352,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_remove() |>
       body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del già richiamato progetto, allocati al GAE "),
                          ftext(GAE),
-                         ftext(", voce del piano "), ftext(Voce.di.spesa), ftext(";")), style = "Normal") |>
+                         ftext(", voce COAN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(", pertanto, la necessità di procedere:")), style = "Normal") |>
       body_add_fpar(fpar(ftext(" - alla nomina del responsabile unico del progetto (RUP) per la programmazione, progettazione, affidamento e l’esecuzione dell’affidamento "),
       ftext(della.fornitura), ftext(" di “"),
       ftext(Prodotto), ftext("”;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(" - all’impegno provvisorio delle somme necessarie indicate nella richiesta d’acquisto prot. n. "),
+      body_add_fpar(fpar(ftext(" - all’anticipata delle somme necessarie indicate nella richiesta d’acquisto prot. n. "),
                          ftext(Prot..RAS), ftext(";")), style = "Normal") |>
       cursor_reach("CAMPO.NOMINA.RUP") |>
       body_replace_all_text("CAMPO.NOMINA.RUP", paste(il.dott.rup, RUP), only_at_cursor = TRUE) |>
@@ -3378,14 +3378,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext(Importo.con.IVA),
       ftext(" IVA inclusa sui fondi del progetto "),
       ftext(Progetto.cup),
-      ftext(", voce del piano "),
+      ftext(", voce COAN "),
       ftext(Voce.di.spesa),
       ftext(", sul GAE "),
       ftext(GAE),
       ftext(";")), style = "Elenco punto liv2")
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("€ 35,00, Voce del piano 13096 “Pubblicazione bandi di gara” sul GAE [completare] per la quota stazione appaltante della contribuzione ANAC;")), style = "Elenco punto liv2")
+        body_add_fpar(fpar(ftext("€ 35,00, Voce COAN 13096 “Pubblicazione bandi di gara” sul GAE [completare] per la quota stazione appaltante della contribuzione ANAC;")), style = "Elenco punto liv2")
     }
         #   4.	(eventuale, solo nel caso di servizi diversi da quelli di natura intellettuale e di forniture con posa in opera) DI DARE ATTO che:
     #   •	ai sensi dell’art.11 del D.Lgs. 36/2023, ai dipendenti dell’O.E. affidatario dovrà essere applicato il CCNL [completare] ovvero un diverso CCNL avente le medesime tutele;
@@ -4407,7 +4407,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_backward() |>
       body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del già richiamato progetto, allocati al GAE "),
                          ftext(GAE),
-                         ftext(", voce del piano "), ftext(Voce.di.spesa), ftext(";")), style = "Normal")
+                         ftext(", voce COAN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal")
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
         cursor_bookmark("bookmark_procedere") |>
@@ -4457,20 +4457,20 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.DI.IMPEGNARE") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar(ftext("impegno di spesa n. "),
+      body_add_fpar(fpar(ftext("anticipata n. "),
                          ftext(N..impegno.di.spesa),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
                          ftext(" IVA inclusa sui fondi del progetto "),
                          ftext(Progetto.cup),
-                         ftext(", voce del piano "),
+                         ftext(", voce COAN "),
                          ftext(Voce.di.spesa),
                          ftext(", sul GAE "),
                          ftext(GAE),
                          ftext(";")), style = "Elenco punto liv2")
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("€ 35,00, Voce del piano 13096 “Pubblicazione bandi di gara” sul GAE [completare] per la quota stazione appaltante della contribuzione ANAC;")), style = "Elenco punto liv2")
+        body_add_fpar(fpar(ftext("€ 35,00, Voce COAN 13096 “Pubblicazione bandi di gara” sul GAE [completare] per la quota stazione appaltante della contribuzione ANAC;")), style = "Elenco punto liv2")
     } 
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
