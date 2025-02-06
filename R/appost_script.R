@@ -1470,7 +1470,7 @@ appost <- function(){
                          ftext(GAE),
                          ftext(", voce del piano "),
                          ftext(Voce.di.spesa),
-                         ftext(", a favore del codice terzo registrato in SIGLA con il n. "),
+                         ftext(", a favore del soggetto registrato in U-Gov con il n. "),
                          ftext(Fornitore..Codice.terzo.SIGLA),
                          ftext(";")), style = "Elenco liv1")
 
@@ -1600,7 +1600,7 @@ appost <- function(){
                          ftext(Fornitore),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
-                         ftext(", codice terzo SIGLA "),
+                         ftext(", soggetto U-Gov "),
                          ftext(Fornitore..Codice.terzo.SIGLA),
                          ftext(") per un importo stimato di "),
                          ftext(Importo.senza.IVA),
@@ -2713,7 +2713,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" di "), ftext(Importo.ldo.txt),
                          ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
                          #ftext(Prot..lettera.ordine),
-                         ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
+                         ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; soggetto U-Gov "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il documento di trasporto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
@@ -2835,7 +2835,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" IVA inclusa;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il provvedimento di impegno:")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto")
+      body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; soggetto U-Gov "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto")
 
     if(CUP!=trattini){
       doc <- doc |>
@@ -3845,7 +3845,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("(eventuale) inserire le certificazioni/documenti acquisiti per la dimostrazione del possesso dei requisiti di cui all’art. 100 del D.Lgs. 36/2023 se richiesti;")), style = "Elenco punto")
     }
     doc <- doc |> 
-      body_replace_text_at_bkm(bookmark = "bookmark_oe", paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", codice terzo SIGLA ", Fornitore..Codice.terzo.SIGLA, ")"))
+      body_replace_text_at_bkm(bookmark = "bookmark_oe", paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", soggetto U-Gov ", Fornitore..Codice.terzo.SIGLA, ")"))
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |> 
       cursor_reach("CAMPO.PROPONE") |>
@@ -4420,7 +4420,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
                            ftext(Fornitore..P.IVA),
-                           ftext(", codice terzo SIGLA "),
+                           ftext(", soggetto U-Gov "),
                            ftext(Fornitore..Codice.terzo.SIGLA),
                            ftext("), con sede legale in "),
                            ftext(Fornitore..Sede),
@@ -4445,7 +4445,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
                            ftext(Fornitore..P.IVA),
-                           ftext(", codice terzo SIGLA "),
+                           ftext(", soggetto U-Gov "),
                            ftext(Fornitore..Codice.terzo.SIGLA),
                            ftext("), con sede legale in "),
                            ftext(Fornitore..Sede),
@@ -4866,7 +4866,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" di "), ftext(Importo.ldo.txt),
                          ftext(" IVA inclusa emessa nei confronti dell'operatore economico "),
                          #ftext(Prot..lettera.ordine),
-                         ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; codice terzo SIGLA "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
+                         ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; soggetto U-Gov "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il documento di trasporto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
