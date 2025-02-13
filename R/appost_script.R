@@ -1625,9 +1625,11 @@ appost <- function(){
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
                          ftext(" che la fornitura in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
-      body_add_fpar(fpar(ftext("l’assunzione dell'anticipata n. "),
+      body_add_fpar(fpar(ftext("l’assunzione della scrittura anticipata n. "),
+                         ftext(Anticipata),
+                         ftext(" (da migrazione impegno di spesa in SIGLA n. "),
                          ftext(N..impegno.di.spesa),
-                         ftext(" di "),
+                         ftext(") di "),
                          ftext(Importo.con.IVA),
                          ftext(" IVA inclusa, con imputazione sulla voce COAN "),
                          ftext(Voce.di.spesa),
