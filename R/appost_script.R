@@ -1413,10 +1413,10 @@ appost <- function(){
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", allocati sul GAE "),
-                         ftext(GAE),
-                         ftext(", voce COAN "),
+                         ftext(", allocati sulla voce COAN "),
                          ftext(Voce.di.spesa),
+                         ftext(", scrittura anticipata n. "),
+                         ftext(Anticipata),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che vi sono i presupposti normativi e di fatto per acquisire "), ftext(la.fornitura), ftext(" in oggetto, nel rispetto dei principi generali enunciati nel Codice;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
@@ -1458,21 +1458,36 @@ appost <- function(){
     doc <- doc |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che, ai sensi dell'art. 53 del Codice l'affidatario sia esonerato dalla costituzione della garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’anticipata n. "),
-                         ftext(N..impegno.di.spesa),
-                         ftext(" per un importo pari a euro "),
-                         ftext(Importo.con.IVA),
-                         ftext(" comprensivo di IVA sui fondi del progetto “"),
-                         ftext(Progetto),
-                         ftext("”"),
-                         ftext(CUP1),
-                         ftext(", allocati sul GAE "),
-                         ftext(GAE),
-                         ftext(", voce COAN "),
-                         ftext(Voce.di.spesa),
-                         ftext(", a favore del soggetto registrato in U-Gov con il n. "),
-                         ftext(Fornitore..Codice.terzo.SIGLA),
-                         ftext(";")), style = "Elenco liv1")
+      # body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’anticipata n. "),
+      #                    ftext(N..impegno.di.spesa),
+      #                    ftext(" per un importo pari a euro "),
+      #                    ftext(Importo.con.IVA),
+      #                    ftext(" comprensivo di IVA sui fondi del progetto “"),
+      #                    ftext(Progetto),
+      #                    ftext("”"),
+      #                    ftext(CUP1),
+      #                    ftext(", allocati sul GAE "),
+      #                    ftext(GAE),
+      #                    ftext(", voce COAN "),
+      #                    ftext(Voce.di.spesa),
+      #                    ftext(", a favore del soggetto registrato in U-Gov con il n. "),
+      #                    ftext(Fornitore..Codice.terzo.SIGLA),
+      #                    ftext(";")), style = "Elenco liv1")
+    body_add_fpar(fpar(ftext("DI RIPORTARE", fpt.b), ftext(" all'esercizio 2025 la scrittura anticipata n. "),
+                       ftext(Anticipata),
+                       ftext(" (da migrazione impegno in SIGLA n. "),
+                       ftext(N..impegno.di.spesa),
+                       ftext(") per un importo pari a euro "),
+                       ftext(Importo.con.IVA),
+                       ftext(" comprensivo di IVA sui fondi del progetto “"),
+                       ftext(Progetto),
+                       ftext("”"),
+                       ftext(CUP1),
+                       ftext(", allocati sulla voce COAN "),
+                       ftext(Voce.di.spesa),
+                       ftext(", a favore del soggetto registrato in U-Gov con il n. "),
+                       ftext(Fornitore..Codice.terzo.SIGLA),
+                       ftext(";")), style = "Elenco liv1")
 
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
