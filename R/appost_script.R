@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 193
+  #ordine <- 175
   ordine <- readline()
 
   if(ordine==0){
@@ -806,6 +806,7 @@ appost <- function(){
   doc.ai <- read_docx("Modello.docx")
   doc.ldo <- read_docx("Modello.docx")
   doc.dic.pres <- read_docx("Modello.docx")
+  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello_intestata.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
   doc.prov.liq <- read_docx("Modello.docx")
   file.remove("Modello.docx")
 
@@ -2799,18 +2800,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
 
-
     doc <- doc.prov.liq |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-
+      headers_replace_text_at_bkm("bookmark_headers", sede1)
+    
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_ss", "Istituzionale", only_at_cursor = TRUE)
     }
 
     doc <- doc |>
-      cursor_begin() |>
-      cursor_forward() |>
       body_add_par("PROVVEDIMENTO DI LIQUIDAZIONE E PAGAMENTO FATTURA", style = "heading 1", pos = "on") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "heading 1") |>
       body_add_par("") |>
@@ -2841,14 +2839,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la decisione a contrattare prot. n. "),
                          ftext(Prot..DaC), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la RDO MePA n. "),
-                         ftext(RDO), ftext(";")), style = "Normal") |>
+                         ftext(as.character(RDO)), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine "), ftext(sede),
                          ftext(" "), ftext(ordine), ftext(y),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la dichiarazione di prestazione resa del RUP "),
                          ftext(dott.rup), ftext(" "), ftext(RUP), ftext(" prot. n. "),
-                         ftext(Prot..Prestazione.resa), ftext(";")), style = "Normal") |>
+                         ftext(Prot..prestazione.resa), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la scrittura anticipata in U-Gov n. "),
                          ftext(Anticipata), ftext(", associata all'ordine "), ftext(trattini), ftext(":")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Soggetto registrato in U-Gov: "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(" - "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext(")")), style = "Elenco punto") |>
@@ -2870,24 +2868,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" registrata in attività ISTITUZIONALE;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("la liquidazione e il pagamento della succitata fattura dell'operatore economico "),
-                         ftext(Fornitore), ftext(" di euro"), ftext(Importo.con.IVA), ftext(" sul conto corrente IBAN "),
+                         ftext(Fornitore), ftext(" di "), ftext(Importo.con.IVA), ftext(" sul conto corrente IBAN "),
                          ftext(Fornitore..IBAN), ftext(".")), style = "Normal") |>
       body_add_fpar(fpar(ftext("Progetto: "), ftext(Progetto)), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("CUP: "), ftext(CUP)), style = "Elenco punto") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
-      body_end_section_continuous()
+      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
 
-    b <- doc$officer_cursor$which +1
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc$officer_cursor$which <- b
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
-    doc <- body_remove(doc)
-    doc <- body_remove(doc)
     print(doc, target = paste0(pre.nome.file, "10 Provv. liquidazione.docx"))
     cat("
 
