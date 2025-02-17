@@ -2811,17 +2811,19 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
-      body_add_par("PROVVEDIMENTO DI LIQUIDAZIONE E PAGAMENTO", style = "heading 1", pos = "on") |>
+      body_add_par("PROVVEDIMENTO DI LIQUIDAZIONE E PAGAMENTO FATTURA", style = "heading 1", pos = "on") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "heading 1") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il Regolamento di Organizzazione e Funzionamento del CNR emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
+                         ftext(" il d.lgs. 31 dicembre 2009 n. 213, recante “Riordino del Consiglio Nazionale delle Ricerche in attuazione dell’articolo 1 della Legge 27 settembre 2007, n. 165”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il d.lgs. 25 novembre 2016 n. 218, recante “Semplificazione delle attività degli enti pubblici di ricerca ai sensi dell'articolo 13 della legge 7 agosto 2015, n. 124”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il nuovo Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche - DPCNR n. 119 prot. AMMCNT-CNR n. 241776 del 10 luglio 2024, approvato con nota del Ministero dell’Istruzione dell’Università e della Ricerca prot. AOODGRIC n. 0021110 del 1° novembre 2023, ed entrato in vigore dal 1° agosto 2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il Regolamento di Amministrazione Contabilità e Finanza (RACF) del Consiglio Nazionale delle Ricerche, emanato con provvedimento della Presidente CNR n. 201 del 23 dicembre 2024, in vigore dal 1° gennaio 2025;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il Provvedimento del Presidente del CNR n. 02 del 11/01/2019 di modifica e sostituzione dell’Atto Costitutivo dell’IPSP;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il Provvedimento del Presidente del CNR 26/2022 di modifica e sostituzione dell’Atto Costitutivo dell’IPSP;")), style = "Normal") |>
+                         ftext(" il Provvedimento CNR n. 000114 del 30/10/2013 (prot. n.  0065484)  relativo alla costituzione dell’Istituto per la Protezione Sostenibile delle Piante con successivi Provvedimento del Presidente n. 120 del 07/10/2014 (prot. n. 0072102) e Provvedimento. n. 26 del 29/03/2022 di modifica e sostituzione del precedente atto costitutivo;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, con cui al dott. Francesco Di Serio è stato attribuito l’incarico di Direttore dell’IPSP del Consiglio Nazionale delle Ricerche a decorrere dal giorno 1/5/2024 per quattro anni;")), style = "Normal")
 
@@ -2830,70 +2832,48 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
                            ftext(nomina.RSS), ftext(", il quale è autorizzato ad intraprendere ogni atto necessario per procedere agli acquisti di beni e servizi, nonché esecuzione di lavori, fino all’importo complessivo € 15.000,00 (IVA esclusa);")), style = "Normal")
     }
-
+    
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento relativo all’affidamento diretto prot. "),
-                         ftext(Prot..DaC), ftext(" per l'acquisizione "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto),
-                         ftext("” ("),
-                         ftext(Pagina.web),
-                         ftext("), nell'ambito del progetto “"),
-                         ftext(Progetto),
-                         ftext("”"),
-                         ftext(CUP1),
-                         ftext(";")), style = "Normal") |>
+    body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                       ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, UO 121.000) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la decisione a contrattare prot. n. "),
+                         ftext(Prot..DaC), ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la RDO MePA n. "),
+                         ftext(RDO), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine "), ftext(sede),
                          ftext(" "), ftext(ordine), ftext(y),
-                         ftext(" di "), ftext(Importo.ldo.txt),
-                         #ftext(" IVA inclusa (prot. "),
-                         #ftext(Prot..lettera.ordine),
-                         ftext(" IVA inclusa;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il provvedimento di impegno:")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("Fornitore: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; soggetto U-Gov "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto")
-
-    if(CUP!=trattini){
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("CUP: "), ftext(CUP), ftext(";")), style = "Elenco punto")
-    }
-
-    doc <- doc |>
-      body_add_fpar(fpar(ftext("CIG: "), ftext(CIG), ftext(";")), style = "Elenco punto")
-
+                         ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la dichiarazione di prestazione resa del RUP "),
+                         ftext(dott.rup), ftext(" "), ftext(RUP), ftext(" prot. n. "),
+                         ftext(Prot..Prestazione.resa), ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la scrittura anticipata in U-Gov n. "),
+                         ftext(Anticipata), ftext(", associata all'ordine "), ftext(trattini), ftext(":")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("Soggetto registrato in U-Gov: "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(" - "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext(")")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("CIG: "), ftext(CIG)), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("CUP: "), ftext(CUP)), style = "Elenco punto")
     if(CUI!=trattini){
       doc <- doc |>
         body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto")
     }
-
     doc <- doc |>
-      body_add_fpar(fpar(ftext("Anticipata n. "),
-                         ftext(N..impegno.di.spesa),
-                         ftext(" di "),
-                         ftext(Importo.con.IVA),
-                         ftext(", GAE "),
-                         ftext(GAE),
-                         ftext(", voce COAN "),
-                         ftext(Voce.di.spesa),
-                         ftext(", C/R _____, natura _____;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("Repertorio Contratti n°_____; DURC scadenza: "),
-                         ftext(Fornitore..DURC.scadenza),
-                         ftext(";")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("Progetto: "), ftext(Progetto)), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("Voce COAN: "), ftext(Voce.di.spesa)), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("Importo: "), ftext(Importo.con.IVA)), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b),
                          ftext(" di aver ottemperato agli obblighi previsti dalla Legge 136/2010 “Tracciabilità dei flussi finanziari”;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la fattura della ditta "),
-                         ftext(Fornitore),
-                         ftext(" N° _____ del _____ di "), ftext(Importo.ldo.txt),
-                         ftext(", scadenza _____. SDI registrata in attività _____;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
-                         ftext(" che le prestazioni rese sono state regolarmente eseguite, come attestato nella dichiarazione di prestazione resa prot. "),
-                         ftext(Prot..prestazione.resa),
-                         ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("RICEVUTA", fpt.b),
+                         ftext(" la fattura n. __________ del _____ d'importo di euro "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" registrata in attività ISTITUZIONALE;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("la liquidazione della succitata fattura ed autorizza il responsabile amministrativo all’emissione del relativo mandato di pagamento su IBAN: "),
-      ftext(Fornitore..IBAN), ftext(".")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("la liquidazione e il pagamento della succitata fattura dell'operatore economico "),
+                         ftext(Fornitore), ftext(" di euro"), ftext(Importo.con.IVA), ftext(" sul conto corrente IBAN "),
+                         ftext(Fornitore..IBAN), ftext(".")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("Progetto: "), ftext(Progetto)), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("CUP: "), ftext(CUP)), style = "Elenco punto") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
