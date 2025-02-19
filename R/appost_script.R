@@ -1290,7 +1290,7 @@ appost <- function(){
     
     download.file(paste(lnk, "RUP.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    file.remove("tmp.docx")
+    #file.remove("tmp.docx")
     
     doc <- doc |>
       headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1398,7 +1398,7 @@ appost <- function(){
     ## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    file.remove("tmp.docx")
+    #file.remove("tmp.docx")
     
     doc <- doc |>
       headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1467,7 +1467,7 @@ appost <- function(){
     if(Supporto.RUP!=trattini){
       download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
-      file.remove("tmp.docx")
+      #file.remove("tmp.docx")
       
       doc <- doc |>
         headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1558,7 +1558,6 @@ appost <- function(){
       }
     }
     file.remove("tmp.docx")
-    file.remove(logo)
   }
   
   
