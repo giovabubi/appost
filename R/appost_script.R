@@ -1465,7 +1465,7 @@ appost <- function(){
     
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
-      doc <- read_docx("Dich_conf.docx")
+      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
       
