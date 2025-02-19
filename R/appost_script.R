@@ -5375,7 +5375,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       ***************************
 
     Che documento vuoi generare?
-      1: RAS, con eventuale avviso pubblico, Richiesta pagina web
+      1: RAS, con eventuale avviso pubblico, Nomina RUP, Richiesta pagina web
       2: Provvedimento d'impegno, Decisione a contrattare
       3: Comunicazione CIG, Autocertificazioni operatore economico, Atto istruttorio, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
       
