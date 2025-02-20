@@ -813,8 +813,6 @@ appost <- function(){
   # Genera RAS ----
   ras <- function(){
     cat("\014")
-    #cat(rep("\n", 20))
-    cat("\014")
 
     if(Fornitore==fornitore.uscente){
       cat(paste0(
@@ -1397,7 +1395,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "2 Nomina RUP.docx"))
     
-    cat("\014")
+    #cat("\014")
     cat("
 
     Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
