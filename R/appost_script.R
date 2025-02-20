@@ -975,7 +975,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
                          ftext("richiedente", fpt.b),
-                         ftext("la fornitura di “"),
+                         ftext(" la fornitura di “"),
                          ftext(Prodotto, fpt.b),
                          ftext("”, ordine "),
                          ftext(sede, fpt.b),
@@ -983,7 +983,7 @@ appost <- function(){
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(" "),
-                         ftext(all.OE, fpt.b),
+                         ftext(all.OE),
                          ftext(", nell'ambito del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
@@ -3062,11 +3062,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("di aver svolto la procedura secondo la normativa vigente;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext(materiale.conforme)), style = "Elenco punto") |>
-      body_add_par("") |>
-      body_add_fpar(fpar(ftext(sede1), ftext(", __/__"), ftext(y)), style = "Normal") |>
+      # body_add_par("") |>
+      # body_add_fpar(fpar(ftext(sede1), ftext(", __/__"), ftext(y)), style = "Normal") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto (RUP)")), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("), ftext(Dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext("("), ftext(dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2") |>
       body_end_section_continuous()
 
     b <- doc$officer_cursor$which +1
@@ -3076,11 +3076,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "9 Dichiarazione prestazione resa.docx"))
+    print(doc, target = paste0(pre.nome.file, "10 Dichiarazione prestazione resa.docx"))
     #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "9 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "10 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
@@ -3199,10 +3199,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
 
-    print(doc, target = paste0(pre.nome.file, "10 Provv. liquidazione.docx"))
+    print(doc, target = paste0(pre.nome.file, "11 Provv. liquidazione.docx"))
     cat("
 
-    Documento '", pre.nome.file, "10 Provv. liquidazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "11 Provv. liquidazione.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
