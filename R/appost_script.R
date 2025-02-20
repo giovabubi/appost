@@ -5404,7 +5404,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 ")
       
     inpt <- readline()
-    if(inpt==1){ras();rup();pag();docoe}
+    if(inpt==1){ras();rup();pag();docoe()}
     if(inpt==2){ai();com_cig();dac()}
     if(inpt==3){ldo();dic_pres();provv_liq()}
     if(inpt==4){ras.pnrr();rup.pnrr();pag();docoe.pnrr()}
