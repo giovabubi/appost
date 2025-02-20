@@ -1100,6 +1100,7 @@ appost <- function(){
     **********************")
     }
     }
+    
     ## Avviso pubblico ----
     if(Scelta.fornitore=='Avviso pubblico'){
       doc <- doc.avv |>
@@ -1269,8 +1270,6 @@ appost <- function(){
   }
   # RUP ----
   rup <- function(){
-    cat("\014")
-    
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
 
@@ -1393,6 +1392,7 @@ appost <- function(){
       body_remove() |>
       body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
+    
     print(doc, target = paste0(pre.nome.file, "2 Nomina RUP.docx"))
     
     #cat("\014")
