@@ -1099,7 +1099,7 @@ appost <- function(){
     Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
-
+    }
     ## Avviso pubblico ----
     if(Scelta.fornitore=='Avviso pubblico'){
       doc <- doc.avv |>
