@@ -1632,6 +1632,8 @@ appost <- function(){
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
+                         ftext(", "),
+                         ftext(Pagina.web),
                          ftext(", ordine "),
                          ftext(sede),
                          ftext(" "),
@@ -2534,15 +2536,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("Affidamento diretto, ai sensi dell’art. 50, comma 1, lett. b) del D.Lgs. N. 36/2023, "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("” (CIG "),
-                         ftext(CIG),
+                         ftext("”"),
                          ftext(CUI1),
                          ftext(", "), ftext(Pagina.web),
-                         ftext("), nell'ambito del progetto “"),
+                         ftext(", nell'ambito del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         #ftext(ordine.trattativa.scelta),
+                         ftext(ordine.trattativa.scelta),
                          ftext(", ordine "),
                          ftext(sede),
                          ftext(" "),
@@ -2610,6 +2611,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(RUP),
                          ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "5 Atto istruttorio.docx"))
+    cat("\014")
     cat("
 
     Documento '", pre.nome.file, "5 Atto istruttorio.docx' generato e salvato in ", pat)
@@ -5394,27 +5396,27 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     Che documento vuoi generare?
       1: RAS, Nomina RUP, Richiesta pagina web, Autocertificazioni operatore economico
-      2: Atto istruttorio, Comunicazione CIG, Decisione a contrattare
-      3: Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
+      2: Atto istruttorio, Decisione a contrattare
+      3: Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
       
       
     Solo per PNRR e PRIN:
       4: RAS, Nomina RUP, Richiesta pagina web, Autocertificazioni operatore economico
-      5: Atto istruttorio, Comunicazione CIG, Decisione a contrattare
+      5: Atto istruttorio, Decisione a contrattare
       6: Assenza doppio finanziamento, Funzionalità del bene
-      7: Lettera d'ordine, Prestazione resa
+      7: Comunicazione CIG, Lettera d'ordine, Prestazione resa
       8: Provvedimento di liquidazione, Checklist
 
 ")
       
     inpt <- readline()
     if(inpt==1){ras();rup();pag();docoe()}
-    if(inpt==2){ai();com_cig();dac()}
-    if(inpt==3){ldo();dic_pres();provv_liq()}
+    if(inpt==2){ai();dac()}
+    if(inpt==3){com_cig();ldo();dic_pres();provv_liq()}
     if(inpt==4){ras.pnrr();rup.pnrr();pag();docoe.pnrr()}
-    if(inpt==5){ai.pnrr();com_cig();dac.pnrr()}
+    if(inpt==5){ai.pnrr();dac.pnrr()}
     if(inpt==6){doppio_fin.pnrr();fun_bene.pnrr()}
-    if(inpt==7){ldo.pnrr();dic_pres.pnrr()}
+    if(inpt==7){com_cig();ldo.pnrr();dic_pres.pnrr()}
     if(inpt==8){provv_liq();chklst.pnrr()}
     # if(inpt==5){
     #   # drive_deauth()
