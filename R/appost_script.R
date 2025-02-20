@@ -857,14 +857,18 @@ appost <- function(){
     prt <- pr[,-5]
     colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
 
-    doc <- doc.ras |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-
+    download.file(paste(lnk, "RAS.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
     }
-
+    
     doc <- doc |>
       cursor_reach("CAMPO.DEST.RAS.SEDE") |>
       body_replace_all_text("CAMPO.DEST.RAS.SEDE", al.RSS, only_at_cursor = TRUE) |>
@@ -920,6 +924,13 @@ appost <- function(){
       body_replace_all_text("CAMPO.IMPORTO", Importo.senza.IVA, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
       body_replace_all_text("CAMPO.DELLA.FORNITURA", della.fornitura, only_at_cursor = TRUE)
+    
+    print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
+    
+    cat("\014")
+    cat("
+
+    Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
 
     ## Dich. Ass. Rich. ----
     doc <- cursor_reach(doc, "SEZIONE.DICH.ASS.RICH.")
@@ -941,7 +952,7 @@ appost <- function(){
                          ftext(" "),
                          ftext(ordine),
                          ftext(y)), style = "Maiuscolo") |>
-      body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+      body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
                          ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(", il "),
@@ -978,6 +989,12 @@ appost <- function(){
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(paste0(Dott.ric," ", Richiedente), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
       body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
+    
+    print(doc, target = paste0(pre.nome.file, "4.1 Dichiarazione assenza conflitto RICH.docx"))
+    
+    cat("
+
+    Documento '", pre.nome.file, "4.1 Dichiarazione assenza conflitto RICH.docx' generato e salvato in ", pat)
 
     ## Dich. Ass. Resp. ----
     if(Richiedente!=Responsabile.progetto){
@@ -1035,44 +1052,12 @@ appost <- function(){
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(paste0(Dott.resp," ",Responsabile.progetto), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("(Responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
+      
+      print(doc, target = paste0(pre.nome.file, "4.1 Dichiarazione assenza conflitto RESP.docx"))
+      
+      cat("
 
-      b <- cursor_reach(doc, "CAMPO.CUP.LDO")
-      b <- b$officer_cursor$which
-      e <- cursor_end(doc)
-      e <- e$officer_cursor$which
-      doc <- cursor_reach(doc, "CAMPO.CUP.LDO")
-      for(i in 1:(e-b)){
-        doc <- body_remove(doc)
-      }
-      doc <- cursor_end(doc)
-      doc <- cursor_backward(doc)
-      doc <- cursor_backward(doc)
-      doc <- cursor_backward(doc)
-      doc <- body_remove(doc)
-    }else{
-      b <- cursor_reach(doc, "SEZIONE.DICH.ASS.RESP.")
-      b <- b$officer_cursor$which
-      e <- cursor_end(doc)
-      e <- e$officer_cursor$which
-      doc <- cursor_reach(doc, "SEZIONE.DICH.ASS.RESP.")
-      for(i in 1:(e-b)){
-        doc <- body_remove(doc)
-      }
-      doc <- cursor_end(doc)
-      doc <- cursor_backward(doc)
-      doc <- cursor_backward(doc)
-      doc <- cursor_backward(doc)
-      doc <- body_remove(doc)
-      doc <- body_remove(doc)
-    }
-    print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
-
-    cat("\014")
-    #cat(rep("\n", 20))
-    cat("\014")
-    cat("
-
-    Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4.2 Dichiarazione assenza conflitto RESP.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
