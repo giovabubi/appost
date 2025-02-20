@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 175
+  #ordine <- 4
   ordine <- readline()
 
   if(ordine==0){
@@ -969,19 +969,21 @@ appost <- function(){
                          ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
+      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(dott.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
                          ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(", il "),
                          ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(",")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di richiedente la fornitura di “"),
-                         ftext(Prodotto),
+                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
+                         ftext("richiedente", fpt.b),
+                         ftext("la fornitura di “"),
+                         ftext(Prodotto, fpt.b),
                          ftext("”, ordine "),
-                         ftext(sede),
+                         ftext(sede, fpt.b),
                          ftext(" "),
-                         ftext(ordine),
-                         ftext(y),
+                         ftext(ordine, fpt.b),
+                         ftext(y, fpt.b),
                          ftext(" "),
-                         ftext(all.OE),
+                         ftext(all.OE, fpt.b),
                          ftext(", nell'ambito del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
@@ -1045,21 +1047,23 @@ appost <- function(){
                            ftext(y)), style = "Maiuscolo") |>
         body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
-        body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.progetto, fpt.b), ftext(", "),
+        body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(dott.resp), ftext(" "), ftext(Responsabile.progetto, fpt.b), ftext(", "),
                            ftext(nato.resp), ftext(" "), ftext(Responsabile.progetto..Luogo.di.nascita), ftext(", il "),
                            ftext(Responsabile.progetto..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile.progetto..Codice.fiscale), ftext(",")), style = "Normal") |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e responsabile del progetto di ricerca “"),
+                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e "),
+                           ftext("responsabile del progetto di ricerca", fpt.b),
+                           ftext("“"),
                            ftext(Progetto), ftext("”"), ftext(CUP1),
                            ftext(", in relazione alla fornitura di “"),
-                           ftext(Prodotto),
+                           ftext(Prodotto, fpt.b),
                            ftext("”, ordine "),
-                           ftext(sede),
+                           ftext(sede, fpt.b),
                            ftext(" "),
-                           ftext(ordine),
-                           ftext(y),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
                            ftext(" "),
-                           ftext(all.OE),
+                           ftext(all.OE, fpt.b),
                            ftext(", consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
@@ -2654,13 +2658,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(RUP, fpt.b), ftext(", "),
+      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(dott.rup), ftext(" "), ftext(RUP, fpt.b), ftext(", "),
                          ftext(nato.rup), ftext(" "), ftext(RUP..Luogo.di.nascita), ftext(", il "),
                          ftext(RUP..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP..Codice.fiscale), ftext(", ")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all’incarico di Responsabile Unico del Progetto per l’affidamento "),
+                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all’incarico di "),
+                         ftext("Responsabile Unico del Progetto (RUP)", fpt.b),
+                         ftext(" per l’affidamento "),
                          ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto),
+                         ftext(Prodotto, fpt.b),
                          ftext("” (CIG "),
                          ftext(CIG),
                          ftext(CUI1),
@@ -2668,12 +2674,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(")"),
                          ftext(ordine.trattativa.scelta),
                          ftext(", ordine "),
-                         ftext(sede),
+                         ftext(sede, fpt.b),
                          ftext(" "),
-                         ftext(ordine),
-                         ftext(y),
+                         ftext(ordine, fpt.b),
+                         ftext(y, fpt.b),
                          ftext(", all’operatore economico "),
-                         ftext(Fornitore),
+                         ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext(")"),
                          ftext(", nell'ambito del progetto “"),
                          ftext(Progetto),
@@ -3071,8 +3077,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       doc <- body_remove(doc)
     }
     print(doc, target = paste0(pre.nome.file, "9 Dichiarazione prestazione resa.docx"))
-    #cat("\014")
-    #cat(rep("\n", 20))
     #cat("\014")
     cat("
 
