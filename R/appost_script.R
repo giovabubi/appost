@@ -150,6 +150,7 @@ appost <- function(){
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Foggia il giorno 11/11/1977, codice fiscale BBCGNN77S11D643H,"
     RSS.dich <- "responsabile della sede secondaria di Bari dell'IPSP"
+    CUU <- "4S488Q"
   }else if(sede=='TO'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Secondaria di Torino'
@@ -167,6 +168,7 @@ appost <- function(){
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a __________ il __________, codice fiscale __________,"
     RSS.dich <- " responsabile della sede secondaria di Torino "
+    CUU <- "_____"
   }else if(sede=='NA'){
     sede1 <- 'Portici'
     sede2 <- 'Sede Secondaria di Portici'
@@ -183,6 +185,7 @@ appost <- function(){
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a __________ il __________, codice fiscale __________,"
     RSS.dich <- " responsabile della sede secondaria di Portici dell'IPSP "
+    CUU <- "_____"
   }else if(sede=='FI'){
     sede1 <- 'Sesto Fiorentino'
     sede2 <- 'Sede Secondaria di Sesto Fiorentino'
@@ -199,6 +202,7 @@ appost <- function(){
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a __________ il __________, codice fiscale __________,"
     RSS.dich <- " responsabile della sede secondaria di Sesto Fiorentino dell'IPSP "
+    CUU <- "KWH4FD"
   }else if(sede=='PD'){
     sede1 <- 'Legnaro'
     sede2 <- 'Sede Secondaria di Legnaro'
@@ -215,6 +219,7 @@ appost <- function(){
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a __________ il __________, codice fiscale __________,"
     RSS.dich <- " responsabile della sede secondaria di Legnaro dell'IPSP "
+    CUU <- "_____"
   }else if(sede=='TOsi'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Istituzionale'
@@ -231,6 +236,7 @@ appost <- function(){
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a __________ il __________, codice fiscale __________,"
     RSS.dich <- " direttore dell'IPSP "
+    CUU <- "_____"
   }
 
   if(Scelta.fornitore=='Avviso pubblico'){
@@ -2819,6 +2825,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_replace_all_text("CAMPO.IMPORTO", Importo.ldo.txt, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CONSEGNA") |>
       body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
+      body_replace_text_at_bkm("bookmark_cuu", CUU) |>
       cursor_reach("CAMPO.FATTURAZIONE") |>
       body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FIRMA.LDO.IT") |>
@@ -2923,6 +2930,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.CONSEGNA") |>
         body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
+        body_replace_text_at_bkm("bookmark_cuu_en", CUU) |>
         cursor_reach("CAMPO.FATTURAZIONE") |>
         body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.FIRMA.LDO.EN") |>
