@@ -999,11 +999,11 @@ appost <- function(){
       body_add_fpar(fpar(paste0(Dott.ric," ", Richiedente), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
       body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
     
-    print(doc, target = paste0(pre.nome.file, "4.1 Dichiarazione assenza conflitto RICH.docx"))
+    print(doc, target = paste0(pre.nome.file, "9.1 Dichiarazione assenza conflitto RICH.docx"))
     
     cat("
 
-    Documento '", pre.nome.file, "4.1 Dichiarazione assenza conflitto RICH.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9.1 Dichiarazione assenza conflitto RICH.docx' generato e salvato in ", pat)
 
     ## Dich. Ass. Resp. ----
     if(Richiedente!=Responsabile.progetto){
@@ -1073,11 +1073,11 @@ appost <- function(){
         body_add_fpar(fpar(paste0(Dott.resp," ",Responsabile.progetto), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("(Responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
       
-      print(doc, target = paste0(pre.nome.file, "4.2 Dichiarazione assenza conflitto RESP.docx"))
+      print(doc, target = paste0(pre.nome.file, "9.2 Dichiarazione assenza conflitto RESP.docx"))
       
       cat("
 
-    Documento '", pre.nome.file, "4.2 Dichiarazione assenza conflitto RESP.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9.2 Dichiarazione assenza conflitto RESP.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
@@ -1319,8 +1319,6 @@ appost <- function(){
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(toupper(Pagina.web)),
                          ftext("), NELL'AMBITO DEL "),
                          ftext(toupper(Progetto.int)),
                          ftext(".")), style = "Normal") |>
@@ -1472,11 +1470,11 @@ appost <- function(){
                          ftext(RSS),
                          ftext(")")), style = "Firma 2")
 
-    print(doc, target = paste0(pre.nome.file, "4.3 Dichiarazione assenza conflitto RSS.docx"))
+    print(doc, target = paste0(pre.nome.file, "9.3 Dichiarazione assenza conflitto RSS.docx"))
     
     cat("
 
-    Documento '", pre.nome.file, "4.3 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9.3 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
     
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
@@ -1556,11 +1554,11 @@ appost <- function(){
                            ftext(Supporto.RUP),
                            ftext(")")), style = "Firma 2")
         
-      print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione assenza conflitto SUP.docx"))
+      print(doc, target = paste0(pre.nome.file, "9.4 Dichiarazione assenza conflitto SUP.docx"))
       
       cat("
 
-    Documento '", pre.nome.file, "4.4 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9.4 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
       
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS, RUP)
@@ -1844,14 +1842,12 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare.docx"))
-    #print(doc, target = paste0(pre.nome.file, "4 Decisione a contrattare per URP.docx"))
-
+    print(doc, target = paste0(pre.nome.file, "7 Decisione a contrattare.docx"))
+    
     #cat("\014")
-    #cat(rep("\n", 20))
     cat("
 
-    Documento '", pre.nome.file, "4 Decisione a contrattare.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "7 Decisione a contrattare.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
@@ -2064,10 +2060,10 @@ appost <- function(){
     for(i in 1:(e-b)){
       doc <- body_remove(doc)
     }
-    print(doc, target = paste0(pre.nome.file, "1.1 Richiesta pagina web.docx"))
+    print(doc, target = paste0(pre.nome.file, "3 Richiesta pagina web.docx"))
     cat("
 
-    Documento '", pre.nome.file, "1.1 Richiesta pagina web.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3 Richiesta pagina web.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP)
@@ -2199,7 +2195,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         #cat("\014")
         cat("
 
-    Documenti '", pre.nome.file, "5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
+    Documenti '", pre.nome.file, "4.1 Patto di integrità.docx', '4.2 Comunicazione cc dedicato.docx' e '4.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
 
         ## Dati mancanti ---
         manca <- dplyr::select(sc, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Prodotto, Progetto, Pagina.web)
@@ -2252,7 +2248,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
 
             cat("
-    Documento '", pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
           }
 
             if(Importo.senza.IVA.num>=40000){
@@ -2290,10 +2286,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               for(i in 1:(e-b)){
                 doc <- body_remove(doc)
               }
-              print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx"))
+              print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione possesso requisiti di qualificazione.docx"))
 
               cat("
-    Documento '", pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
 
               ## AUS ----
               doc <- doc.aus
@@ -2310,10 +2306,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                 cursor_reach("CAMPO.INT.DOC") |>
                 body_replace_all_text("CAMPO.INT.DOC", int.doc, only_at_cursor = TRUE)
 
-              print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
+              print(doc, target = paste0(pre.nome.file, "4.5 Dichiarazione del soggetto ausiliario.docx"))
 
               cat("
-    Documento '", pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
             }
       }else{
         ## Declaration on honour ----
@@ -2434,10 +2430,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             body_add_fpar(fpar(ftext("Anno di riferimento")), style = "Elenco punto") |>
             body_add_fpar(fpar(ftext("Importi a debito versati")), style = "Elenco punto")
 
-          print(doc, target = paste0(pre.nome.file, "5.6 Comprova imposta di bollo.docx"))
+          print(doc, target = paste0(pre.nome.file, "4.6 Comprova imposta di bollo.docx"))
 
           cat("
-        Documento '", pre.nome.file, "5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
+        Documento '", pre.nome.file, "4.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
         }
     }
   }
@@ -2471,7 +2467,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto")), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("),
-                         ftext(Dott.rup),
+                         ftext(dott.rup),
                          ftext(" "),
                          ftext(RUP),
                          ftext(")")), style = "Firma 2") |>
@@ -2607,10 +2603,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" "),
                          ftext(RUP),
                          ftext(")")), style = "Firma 2")
-    print(doc, target = paste0(pre.nome.file, "7 Atto istruttorio.docx"))
+    print(doc, target = paste0(pre.nome.file, "5 Atto istruttorio.docx"))
     cat("
 
-    Documento '", pre.nome.file, "7 Atto istruttorio.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "5 Atto istruttorio.docx' generato e salvato in ", pat)
       
     ## Dich. Ass. RUP ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2699,10 +2695,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(RUP),
                          ftext(")")), style = "Firma 2")
 
-    print(doc, target = paste0(pre.nome.file, "4.5 Dichiarazione assenza conflitto RUP.docx"))
+    print(doc, target = paste0(pre.nome.file, "9.5 Dichiarazione assenza conflitto RUP.docx"))
     cat("
 
-    Documento '", pre.nome.file, "4.5 Dichiarazione assenza conflitto RUP.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "9.5 Dichiarazione assenza conflitto RUP.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP, RUP..Luogo.di.nascita, RUP..Data.di.nascita, RUP..Codice.fiscale, Pagina.web)
