@@ -933,21 +933,32 @@ appost <- function(){
     Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
 
     ## Dich. Ass. Rich. ----
-    doc <- cursor_reach(doc, "SEZIONE.DICH.ASS.RICH.")
+    download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
     doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    
+    if(sede=="TOsi"){
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    }
+    
+    doc <- doc |>
+      cursor_begin() |>
       body_add_fpar(fpar(ftext("All’"),
-      ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
+                         ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
       body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50 DEL D.LGS. N. 36/2023, "),
+      body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50, COMMA 1, LETT. B) DEL D.LGS. N. 36/2023, "),
                          ftext(della.fornitura), ftext(" DI “"),
-                         ftext(PRODOTTO),
-                         ftext("”"),
-                         ftext(", nell'ambito del progetto “"),
+                         ftext(Prodotto),
+                         ftext("” nell'ambito del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", ORDINE "),
+                         ftext(", ordine "),
                          ftext(sede),
                          ftext(" "),
                          ftext(ordine),
@@ -998,26 +1009,37 @@ appost <- function(){
 
     ## Dich. Ass. Resp. ----
     if(Richiedente!=Responsabile.progetto){
+      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
       doc <- doc |>
-        cursor_reach("SEZIONE.DICH.ASS.RESP.") |>
+        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      }
+      
+      doc <- doc |>
+        cursor_begin() |>
         body_add_fpar(fpar(ftext("All’"),
                            ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
         body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50 DEL D.LGS. N. 36/2023, "),
+        body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50, COMMA 1, LETT. B) DEL D.LGS. N. 36/2023, "),
                            ftext(della.fornitura), ftext(" DI “"),
-                           ftext(PRODOTTO),
-                           ftext("”"),
-                           ftext(", nell'ambito del progetto “"),
+                           ftext(Prodotto),
+                           ftext("” nell'ambito del progetto “"),
                            ftext(Progetto),
                            ftext("”"),
                            ftext(CUP1),
-                           ftext(", ORDINE "),
+                           ftext(", ordine "),
                            ftext(sede),
                            ftext(" "),
                            ftext(ordine),
                            ftext(y)), style = "Maiuscolo") |>
-        body_add_fpar(fpar(ftext("AUTODICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+        body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext(sottoscritto.resp), ftext(" "), ftext(Responsabile.progetto, fpt.b), ftext(", "),
                            ftext(nato.resp), ftext(" "), ftext(Responsabile.progetto..Luogo.di.nascita), ftext(", il "),
@@ -1053,14 +1075,14 @@ appost <- function(){
         body_add_fpar(fpar(paste0(Dott.resp," ",Responsabile.progetto), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("(Responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
       
-      print(doc, target = paste0(pre.nome.file, "4.1 Dichiarazione assenza conflitto RESP.docx"))
+      print(doc, target = paste0(pre.nome.file, "4.2 Dichiarazione assenza conflitto RESP.docx"))
       
       cat("
 
     Documento '", pre.nome.file, "4.2 Dichiarazione assenza conflitto RESP.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
                            Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
@@ -1383,7 +1405,7 @@ appost <- function(){
     ## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    #file.remove("tmp.docx")
+    file.remove("tmp.docx")
     
     doc <- doc |>
       headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1399,6 +1421,18 @@ appost <- function(){
                          ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
       body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50, COMMA 1, LETT. B) DEL D.LGS. N. 36/2023, "),
+                         ftext(della.fornitura), ftext(" DI “"),
+                         ftext(Prodotto),
+                         ftext("” nell'ambito del progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", ordine "),
+                         ftext(sede),
+                         ftext(" "),
+                         ftext(ordine),
+                         ftext(y)), style = "Maiuscolo") |>
       body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sottoscritto.rss), ftext(RSS, fpt.b), ftext(","), ftext(nato.rss)), style = "Normal") |>
@@ -1413,9 +1447,7 @@ appost <- function(){
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext("), all'operatore economico "),
+                         ftext(" all'operatore economico "),
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
@@ -1452,7 +1484,7 @@ appost <- function(){
     if(Supporto.RUP!=trattini){
       download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
-      #file.remove("tmp.docx")
+      file.remove("tmp.docx")
       
       doc <- doc |>
         headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1468,6 +1500,18 @@ appost <- function(){
                            ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
         body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("AFFIDAMENTO DIRETTO, AI SENSI DELL’ART. 50, COMMA 1, LETT. B) DEL D.LGS. N. 36/2023, "),
+                           ftext(della.fornitura), ftext(" DI “"),
+                           ftext(Prodotto),
+                           ftext("” nell'ambito del progetto “"),
+                           ftext(Progetto),
+                           ftext("”"),
+                           ftext(CUP1),
+                           ftext(", ordine "),
+                           ftext(sede),
+                           ftext(" "),
+                           ftext(ordine),
+                           ftext(y)), style = "Maiuscolo") |>
         body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext(sottoscritto.sup), ftext(" "), ftext(dott.sup), ftext(" "), ftext(Supporto.RUP, fpt.b), ftext(", "), 
@@ -1485,9 +1529,7 @@ appost <- function(){
                            ftext(" "),
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
-                           ftext(" ("),
-                           ftext(Pagina.web),
-                           ftext(") all'operatore economico "),
+                           ftext(" all'operatore economico "),
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
                            ftext(Fornitore..P.IVA),
@@ -1516,14 +1558,14 @@ appost <- function(){
                            ftext(Supporto.RUP),
                            ftext(")")), style = "Firma 2")
         
-      print(doc, target = paste0(pre.nome.file, "4.5 Dichiarazione assenza conflitto SUP.docx"))
+      print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione assenza conflitto SUP.docx"))
       
       cat("
 
-    Documento '", pre.nome.file, "4.5 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4.4 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
       
       ## Dati mancanti ---
-      manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web, RUP)
+      manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS, RUP)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
@@ -2625,7 +2667,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(ordine.trattativa.scelta),
                          ftext(", ordine "),
                          ftext(sede),
-                         ftext(" N° "),
+                         ftext(" "),
                          ftext(ordine),
                          ftext(y),
                          ftext(", all’operatore economico "),
@@ -2659,10 +2701,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(RUP),
                          ftext(")")), style = "Firma 2")
 
-    print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione assenza conflitto RUP.docx"))
+    print(doc, target = paste0(pre.nome.file, "4.5 Dichiarazione assenza conflitto RUP.docx"))
     cat("
 
-    Documento '", pre.nome.file, "4.4 Dichiarazione assenza conflitto RUP.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "4.5 Dichiarazione assenza conflitto RUP.docx' generato e salvato in ", pat)
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP, RUP..Luogo.di.nascita, RUP..Data.di.nascita, RUP..Codice.fiscale, Pagina.web)
