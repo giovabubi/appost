@@ -5238,29 +5238,27 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       ***************************
 
     Che documento vuoi generare?
-      1: RAS, Nomina RUP, Richiesta pagina web, Autocertificazioni operatore economico
-      2: Atto istruttorio, Decisione a contrattare
-      3: Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
-      
-      
-    Solo per PNRR e PRIN:
-      4: RAS, Nomina RUP, Richiesta pagina web, Autocertificazioni operatore economico
-      5: Atto istruttorio, Decisione a contrattare
-      6: Assenza doppio finanziamento, Funzionalità del bene
-      7: Comunicazione CIG, Lettera d'ordine, Prestazione resa
-      8: Provvedimento di liquidazione, Checklist
+      1: RAS, Nomina RUP, Richiesta pagina web
+      2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
+         Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
+
+    [in aggiornamento] Solo per PNRR e PRIN:
+      3: RAS, Nomina RUP, Richiesta pagina web, 
+      4: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
+         Comunicazione CIG, Lettera d'ordine, Prestazione resa
+      5: Assenza doppio finanziamento, Funzionalità del bene
+      6: Provvedimento di liquidazione, Checklist
 
 ")
       
     inpt <- readline()
-    if(inpt==1){ras();rup();pag();docoe()}
-    if(inpt==2){ai();dac()}
-    if(inpt==3){com_cig();ldo();dic_pres();provv_liq()}
-    if(inpt==4){ras.pnrr();rup.pnrr();pag();docoe.pnrr()}
-    if(inpt==5){ai.pnrr();dac.pnrr()}
-    if(inpt==6){doppio_fin.pnrr();fun_bene.pnrr()}
-    if(inpt==7){com_cig();ldo.pnrr();dic_pres.pnrr()}
-    if(inpt==8){provv_liq();chklst.pnrr()}
+    if(inpt==1){ras();rup();pag()}
+    if(inpt==2){docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
+    
+    # if(inpt==3){ras.pnrr();rup.pnrr();pag()}
+    # if(inpt==4){docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
+    # if(inpt==5){doppio_fin.pnrr();fun_bene.pnrr()}
+    # if(inpt==6){provv_liq();chklst.pnrr()}
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
