@@ -814,7 +814,6 @@ appost <- function(){
   doc.bollo <- read_docx("Modello.docx")
   doc.com.cig <- read_docx("Modello.docx")
   doc.ai <- read_docx("Modello.docx")
-  doc.ldo <- read_docx("Modello.docx")
   doc.dic.pres <- read_docx("Modello.docx")
   download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello_intestata.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
   doc.prov.liq <- read_docx("Modello.docx")
@@ -2291,6 +2290,63 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               cat("
     Documento '", pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
             }
+        ## Condizioni d'acquisto ----
+        download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        
+        if(sede=="TOsi"){
+          doc <- doc |>
+            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        }
+        
+        doc <- doc |>
+          cursor_begin() |>
+          body_add_par("CONDIZIONI GENERALI D'ACQUISTO", style = "heading 1", pos = "on") |>
+          body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": "), ftext(fornitura.consegnata), ftext(" entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione del presente contratto presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("4. Subappalto", fpt.b), ftext(": in caso di subappalto trovano applicazione le disposizioni di cui all'art. 119 del codice dei contratti.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("5. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("6. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("7. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto di cui all’art.8, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia l’Aggiudicatario non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 20% (venti per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno all’Aggiudicatario, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("8. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("9. Osservanza leggi, regolamenti, contratti collettivi nazionali di lavoro, norme per la prevenzione infortuni ed igiene sul lavoro", fpt.b), ftext(": al personale impiegato nei servizi/forniture oggetto del presente appalto è applicato il contratto collettivo nazionale e territoriale in vigore per il settore e la zona nella quale si eseguono le prestazioni, stipulato dalle associazioni dei datori e dei prestatori di lavoro comparativamente più rappresentative sul piano nazionale e quello il cui ambito di applicazione sia strettamente connesso con l’attività oggetto dell’appalto svolta dall’impresa anche in maniera prevalente.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("L’obbligo permane anche dopo la scadenza dei suindicati contratti collettivi e fino alla loro sostituzione. L’affidatario che applica un differente contratto collettivo deve garantire le stesse tutele economiche e normative rispetto a quello indicato dalla Stazione Appaltante e come evidenziato nella dichiarazione di equivalenza presentata. I sopraccitati obblighi vincolano l’affidatario, anche nel caso che non sia aderente alle associazioni stipulanti o receda da esse ed indipendentemente dalla natura artigiana o industriale della struttura o dimensione della Società stessa e da ogni altra sua qualificazione giuridica, economica o sindacale, ivi compresa la forma cooperativa. L’affidatario è tenuto, inoltre, all’osservanza ed all’applicazione di tutte le norme relative alle assicurazioni obbligatorie ed antinfortunistiche, previdenziali ed assistenziali, nei confronti del proprio personale dipendente e dei soci lavoratori nel caso di cooperative. A richiesta della stazione appaltante, l’affidatario deve certificare l’applicazione del trattamento retributivo previsto dal CCNL delle imprese di settore e dagli accordi integrativi territoriali, ai lavoratori, compresi i soci lavoratori qualora si tratti di cooperativa, impiegati nell’appalto. La stazione appaltante si riserva di verificare, in qualsiasi momento, la regolarità dell’assolvimento degli obblighi inerenti al versamento dei contributi obbligatori ai sensi di legge. La stazione appaltante verifica, ai fini del pagamento della rata del corrispettivo, l’ottemperanza a tali obblighi, da parte dell’affidatario. La stazione appaltante si riserva di verificare, anche direttamente, il rispetto delle disposizioni in materia di assicurazioni obbligatorie per legge.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("Per inadempimenti contributivi o retributivi si applica il comma 6 dell’art. 11 del Codice.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("10. Modifiche contrattuali", fpt.b), ftext(": la stazione appaltante, fermo quanto previsto dall’articolo sulla revisione dei prezzi [se presente], può modificare il contratto d’appalto conformemente a quanto disposto all'art.120 del codice dei contratti pubblici.")), style = "Riquadro paragrafo")
+        
+        if(Inventariabile=='Inventariabile'){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("11. Verifica di conformità", fpt.b), ftext(": la presente fornitura è soggetta a verifica di conformità da effettuarsi, secondo quanto previsto all'art. 116 e nell'allegato II.14 del codice dei contratti entro 1 mese. A seguito della verifica di conformità si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Servizi"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("11. Verifica di regolare esecuzione", fpt.b), ftext(": la stazione appaltante, per il tramite del RUP, emette il certificato di regolare esecuzione, secondo le modalità indicate nell'allegato II.14 al codice dei contratti pubblici, entro 1 mese. A seguito dell’emissione del certificato di regolare esecuzione si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
+        }
+        
+        if(Importo.senza.IVA.num<40000){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("12. Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
+            body_add_fpar(fpar(ftext("13. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+        }else{
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("12. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+        }
+        
+        doc <- doc |>
+          body_add_par("") |>
+          body_add_fpar(fpar(ftext("Le presenti condizioni generali di acquisto sono accettate mediante sovrascrizione, con firma digitale valida alla data di apposizione della stessa e a norma di legge.")), style = "Normal") |>
+          body_add_par("") |>
+          body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
+        
+        print(doc, target = paste0(pre.nome.file, "5.8 Condizioni acquisto.docx"))
+        cat("
+    Documento '", pre.nome.file, "5.8 Condizioni acquisto.docx' generato e salvato in ", pat)
+        
       }else{
         ## Declaration on honour ----
         download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2302,7 +2358,64 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cat("
 
     Documento '", pre.nome.file, "5.7 Declaration on honour.docx' generato e salvato in ", pat)
+        
+        ## Purchase conditions ----
+        download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        
+        if(sede=="TOsi"){
+          doc <- doc |>
+            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        }
+        
+        doc <- doc |>
+          body_add_par("GENERAL PURCHASE CONDITIONS", style = "heading 1", pos = "on") |>
+          body_add_fpar(fpar(ftext("1. Scope of application", fpt.b), ftext(": These general conditions of purchase are intended to uniformly regulate contractual relationships with suppliers from whom CNR purchases goods and/or services in application of the laws and regulations. The supplier's conditions of sale will in no case be applicable to contractual relationships with CNR, even if they were referred to in any document originating from the supplier itself.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("2. Delivery", fpt.b), ftext(": to the destination.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("3. Duration", fpt.b), ftext(": the order must be delivered within 30 consecutive calendar days from the date of signing this contract at the location indicated on the previous page.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("4. Subcontracting", fpt.b), ftext(": in the event of subcontracting, the provisions of art. 119 of the Contracts Code apply.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("5. Invoice", fpt.b), ftext(": the invoice, drawn up in accordance with current legislation, must include, under penalty of rejection, the order number (corresponding to the protocol registration number), the CIG and the CUP.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("6. Payment", fpt.b), ftext(": payment will be made within 30 days from the date of the certificate of proper execution.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("7. Penalties", fpt.b), ftext(": for each natural and consecutive day of delay with respect to the terms provided for the execution of the contract referred to in art. 8, a penalty equal to 1‰ (one per thousand) of the contractual amount will be applied, net of VAT and any costs relating to safety in the workplace arising from risks of an interfering nature. For supply contracts only, in the event that the first conformity check of the supply has an unfavorable outcome, the penalties will not apply; however, if the Successful Bidder does not make the supply available again for the conformity check within 20 (twenty) natural and consecutive days following the first unfavorable outcome, or the conformity check is again negative, the penalty referred to above will be applied for each calendar day of delay. In the event that the amount of the applicable penalties exceeds the amount equal to 20% (twenty percent) of the contractual amount, net of VAT and any costs relating to safety in the workplace arising from interference risks, the Entity will terminate the contract to the detriment of the Successful Bidder, without prejudice to the right to compensation for any further damage suffered.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("8. Traceability of financial flows", fpt.b), ftext(": the supplier assumes all obligations of traceability of financial flows pursuant to art. 3 of Law 136/2010 and subsequent amendments. Failure to use bank or postal transfers or other collection or payment instruments suitable for allowing full traceability of transactions constitutes grounds for unilateral termination of the contract. The supplier undertakes to allow the Administration to carry out the verification pursuant to paragraph 9 of art. 3 of Law 136/2010 and subsequent amendments and to immediately notify the Administration and the Prefecture-UTG of the province where the Administration is based of the news of the failure of its counterpart (subcontractor/subcontractor) to comply with the obligations of financial traceability.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("9. Compliance with laws, regulations, national collective labor agreements, accident prevention and workplace hygiene standards", fpt.b), ftext(": the personnel employed in the services/supplies covered by this contract shall be subject to the national and territorial collective agreement in force for the sector and the area in which the services are performed, stipulated by the most representative employers' and workers' associations at national level and the one whose scope of application is strictly connected with the activity covered by the contract carried out by the company even in a prevalent manner.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("The obligation remains even after the expiry of the aforementioned collective agreements and until their replacement. The contractor who applies a different collective agreement must guarantee the same economic and regulatory protections compared to the one indicated by the Contracting Authority and as highlighted in the declaration of equivalence presented. The aforementioned obligations bind the contractor, even if it is not a member of the stipulating associations or withdraws from them and regardless of the artisan or industrial nature of the structure or size of the Company itself and of any other legal, economic or trade union qualification, including the cooperative form. The contractor is also required to comply with and apply all the rules relating to compulsory and accident prevention, social security and welfare insurance, with respect to its own employees and worker members in the case of cooperatives. At the request of the contracting authority, the contractor must certify the application of the remuneration treatment provided for by the CCNL of sector companies and by the territorial supplementary agreements, to the workers, including worker members in the case of a cooperative, employed in the contract. The contracting authority reserves the right to verify, at any time, the regularity of the fulfillment of the obligations relating to the payment of mandatory contributions pursuant to the law. The contracting authority verifies, for the purposes of payment of the instalment of the consideration, compliance with such obligations by the contractor. The contracting authority reserves the right to verify, even directly, compliance with the provisions regarding mandatory insurance by law.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("For non-compliance with contributions or wages, paragraph 6 of art. 11 of the Code applies.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("10. Contractual changes", fpt.b), ftext(": the contracting authority, without prejudice to the provisions of the article on price revision [if present], may modify the procurement contract in accordance with the provisions of art. 120 of the public procurement code.")), style = "Riquadro paragrafo")
+        
+        if(Inventariabile=='Inventariabile'){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("11. Compliance check", fpt.b), ftext(": this supply is subject to a conformity check to be carried out, as per art. 116 and Annex II.14 of the Contracts Code within 1 month. Following the conformity check, the balance instalment will be paid and the deposit will be released.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Servizi"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("11. Verification of proper execution", fpt.b), ftext(": the contracting authority, through the RUP, issues the certificate of proper execution, according to the methods indicated in Annex II.14 to the Public Contracts Code, within 1 month. Following the issuance of the certificate of proper execution, the balance instalment is paid and the security is released.")), style = "Riquadro paragrafo")
+        }
+        
+        if(Importo.senza.IVA.num<40000){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("12. Express termination clause", fpt.b), ftext(": the order is issued in application of the provisions contained in art. 52, paragraphs 1 and 2 of Legislative Decree 36/2023. The CNR has the right to terminate the contract/order in the event of a lack of participation requirements being ascertained. For the termination of the contract, art. 122 of Legislative Decree 36/2023, as well as articles 1453 et seq. of the Civil Code, apply. The CNR will formally communicate the termination to the supplier, with a ban on proceeding with the payment of the fees, except within the limits of the services already performed.")), style = "Riquadro paragrafo") |>
+            body_add_fpar(fpar(ftext("13. Competent court", fpt.b), ftext(": the Court of Rome will have exclusive jurisdiction over any dispute.")), style = "Riquadro paragrafo")
+        }else{
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("12. Competent court", fpt.b), ftext(": the Court of Rome will have exclusive jurisdiction over any dispute.")), style = "Riquadro paragrafo")
+        }
+        
+        doc <- doc |>
+          body_add_par("") |>
+          body_add_fpar(fpar(ftext("These general conditions of purchase are accepted by overwriting, with a digital signature valid on the date of affixing the same and in accordance with the law.")), style = "Normal") |>
+          body_add_par("") |>
+          body_add_fpar(fpar("Signature for acceptance", run_footnote(x=block_list(fpar(ftext(" The declarant must sign with a qualified digital signature or attach a photocopy of a valid identity document (art. 38 of Presidential Decree no. 445/2000 and subsequent amendments).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
+        
+        print(doc, target = paste0(pre.nome.file, "5.8 Purchase conditions.docx"))
+        cat("
+    Documento '", pre.nome.file, "5.8 Purchase conditions.docx' generato e salvato in ", pat)
       }
+    }
 
         if(Importo.senza.IVA.num>=40000){
           ## Bollo ----
@@ -2608,208 +2721,90 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     colnames(prt.en) <- c("Amount", "Description", "Unit cost", "Total")
     Prot..DaC.en <- sub("del", "of", Prot..DaC)
 
-    doc <- doc.ldo
-    b <- cursor_begin(doc)
-    b <- b$officer_cursor$which
-    e <- cursor_reach(doc, "CAMPO.CUP.LDO.IT")
-    e <- e$officer_cursor$which -2
-    doc <- cursor_begin(doc)
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
-
+    download.file(paste(lnk, "LdO.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
     doc <- doc |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1) |>
+      headers_replace_text_at_bkm("bookmark_headers_sede_en", sede1)
+    
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale") |>
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale_en", "Istituzionale")
     }
 
     doc <- doc |>
       cursor_begin() |>
-      cursor_forward() |>
       body_add_fpar(fpar(ftext("LETTERA D’ORDINE "), ftext(sede), ftext(" "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
-      body_add_par("") |>
-      cursor_reach("CAMPO.CUP.LDO.IT") |>
-      body_replace_all_text("CAMPO.CUP.LDO.IT", CUP2, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.CIG") |>
-      body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.CUI") |>
-      body_replace_all_text("CAMPO.CUI", CUI2, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.RUP") |>
-      body_replace_all_text("CAMPO.RUP", RUP, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.OFFERTA.LDO") |>
-      body_replace_all_text("CAMPO.OFFERTA.LDO", Preventivo.fornitore, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.DAC.LDO") |>
-      body_replace_all_text("CAMPO.DAC.LDO", Prot..DaC, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.RDO1") |>
-      body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.RDO2") |>
-      body_replace_all_text("CAMPO.RDO2", as.character(ordine.trattativa.scelta.ldo2), only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.WEB") |>
-      body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.FORNITORE") |>
-      body_replace_all_text("CAMPO.FORNITORE", Fornitore, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.SEDE") |>
-      body_replace_all_text("CAMPO.SEDE", Fornitore..Sede, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.PIVA") |>
-      body_replace_all_text("CAMPO.PIVA", as.character(Fornitore..P.IVA), only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.PEC") |>
-      body_replace_all_text("CAMPO.PEC", Fornitore..PEC, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.EMAIL") |>
-      body_replace_all_text("CAMPO.EMAIL", Fornitore..E.mail, only_at_cursor = TRUE) |>
-      body_add_par("") |>
-      body_add_par("") |>
+      body_replace_text_at_bkm("bookmark_cup", CUP2) |>
+      body_replace_text_at_bkm("bookmark_cig", CIG) |>
+      body_replace_text_at_bkm("bookmark_cui", CUI2) |>
+      body_replace_text_at_bkm("bookmark_rup", RUP) |>
+      body_replace_text_at_bkm("bookmark_offerta", Preventivo.fornitore) |>
+      body_replace_text_at_bkm("bookmark_dac", Prot..DaC) |>
+      body_replace_text_at_bkm("bookmark_rdo1", ordine.trattativa.scelta.ldo1) |>
+      body_replace_text_at_bkm("bookmark_rdo2", as.character(ordine.trattativa.scelta.ldo2)) |>
+      body_replace_text_at_bkm("bookmark_web", Pagina.web) |>
+      body_replace_text_at_bkm("bookmark_fornitore", Fornitore) |>
+      body_replace_text_at_bkm("bookmark_sede", Fornitore..Sede) |>
+      body_replace_text_at_bkm("bookmark_piva", as.character(Fornitore..P.IVA)) |>
+      body_replace_text_at_bkm("bookmark_pec", Fornitore..PEC) |>
+      body_replace_text_at_bkm("bookmark_email", Fornitore..E.mail) |>
+      cursor_bookmark("bookmark_tabella") |>
       body_add_table(prt, style = "Tabella LdO", pos = "on") |>
-      cursor_reach("CAMPO.IMPONIBILE") |>
-      body_replace_all_text("CAMPO.IMPONIBILE", Imponibile.ldo.txt, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.ALIQUOTA") |>
-      body_replace_all_text("CAMPO.ALIQUOTA", paste0("IVA (", Aliquota.IVA, ")"), only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.IVA") |>
-      body_replace_all_text("CAMPO.IVA", IVA.ldo.txt, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.IMPORTO") |>
-      body_replace_all_text("CAMPO.IMPORTO", Importo.ldo.txt, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.CONSEGNA") |>
-      body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
+      body_replace_text_at_bkm("bookmark_imponibile", Imponibile.ldo.txt) |>
+      body_replace_text_at_bkm("bookmark_aliquota", paste0("IVA (", Aliquota.IVA, ")")) |>
+      body_replace_text_at_bkm("bookmark_iva", IVA.ldo.txt) |>
+      body_replace_text_at_bkm("bookmark_importo", Importo.ldo.txt) |>
+      body_replace_text_at_bkm("bookmark_consegna", Richiedente..Luogo.di.consegna) |>
       body_replace_text_at_bkm("bookmark_cuu", CUU) |>
-      cursor_reach("CAMPO.FATTURAZIONE") |>
-      body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.FIRMA.LDO.IT") |>
+      body_replace_text_at_bkm("bookmark_fatturazione", fatturazione) |>
+      cursor_bookmark("bookmark_firma") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
-      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
-      body_add_break() |>
-
-      body_add_par("CONDIZIONI GENERALI D'ACQUISTO", style = "heading 1") |>
-      body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": "), ftext(fornitura.consegnata), ftext(" entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione del presente contratto presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("4. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("5. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("6. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto di cui all’art.8, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia l’Aggiudicatario non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 20% (venti per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno all’Aggiudicatario, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
-      body_add_fpar(fpar(ftext("7. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo")
-
-    if(Importo.senza.IVA.num<40000){
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("8. Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("9. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
-    }else{
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("8. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
-    }
-
-    doc <- doc |>
-      body_add_par("") |>
-      body_add_fpar(fpar(ftext("La presente lettera d’ordine, perfezionata mediante scambio di corrispondenza commerciale, è sottoscritta da ciascuna Parte, anche mediante sovrascrizione, con firma digitale valida alla data di apposizione della stessa e a norma di legge, ed è successivamente scambiata tra le parti via PEC. Pertanto, l’imposta di registro sarà dovuta in caso d’uso ai sensi del D.P.R 131/1986.")), style = "Normal") |>
-      body_add_par("") |>
-      body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
-
-    b <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
-    b <- doc$officer_cursor$which + 15
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc <- cursor_reach(doc, "NORMATIVA DI RIFERIMENTO")
-    doc <- cursor_forward(doc)
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
-    doc <- cursor_end(doc)
-    doc <- body_remove(doc)
-    doc <- cursor_backward(doc)
-    doc <- body_remove(doc)
-
+      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
+      
     if(Fornitore..Nazione=="Italiana"){
-      b <- cursor_reach(doc, "CAMPO.INIZIO.LDO.EN")
+      b <- cursor_bookmark(doc, "bookmark_ldo_en")
       b <- doc$officer_cursor$which
       e <- cursor_end(doc)
-      e <- e$officer_cursor$which +10
-      doc <- cursor_reach(doc, "CAMPO.FIRMA.LDO.EN")
+      e <- e$officer_cursor$which
+      doc <- cursor_bookmark(doc, "bookmark_ldo_en")
       for(i in 1:(e-b)){
         doc <- body_remove(doc)
       }
-      doc <- cursor_end(doc)
-      doc <- body_remove(doc)
-      doc <- cursor_backward(doc)
-      doc <- body_remove(doc)
     }else{
       doc <- doc |>
-        cursor_reach("CAMPO.INIZIO.LDO.EN") |>
+        cursor_bookmark("bookmark_ldo_en") |>
         body_add_fpar(fpar(ftext("PURCHASE ORDER "), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
-        body_add_par("") |>
-        cursor_reach("CAMPO.CUP.LDO.EN") |>
-        body_replace_all_text("CAMPO.CUP.LDO.EN", CUP2, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.CIG") |>
-        body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.CUI") |>
-        body_replace_all_text("CAMPO.CUI", CUI2, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.RUP") |>
-        body_replace_all_text("CAMPO.RUP", RUP, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.QUOTATION") |>
-        body_replace_all_text("CAMPO.QUOTATION", Preventivo.fornitore, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.DAC.LDO") |>
-        body_replace_all_text("CAMPO.DAC.LDO", Prot..DaC.en, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.RDO1") |>
-        body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.RDO2") |>
-        body_replace_all_text("CAMPO.RDO2", as.character(ordine.trattativa.scelta.ldo2), only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.WEB") |>
-        body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.FORNITORE") |>
-        body_replace_all_text("CAMPO.FORNITORE", Fornitore, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.SEDE") |>
-        body_replace_all_text("CAMPO.SEDE", Fornitore..Sede, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.PIVA") |>
-        body_replace_all_text("CAMPO.PIVA", as.character(Fornitore..P.IVA), only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.PEC") |>
-        body_replace_all_text("CAMPO.PEC", Fornitore..PEC, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.EMAIL") |>
-        body_replace_all_text("CAMPO.EMAIL", Fornitore..E.mail, only_at_cursor = TRUE) |>
-        body_add_par("") |>
-        body_add_par("") |>
+        body_replace_text_at_bkm("bookmark_en_cup", CUP2) |>
+        body_replace_text_at_bkm("bookmark_en_cig", CIG) |>
+        body_replace_text_at_bkm("bookmark_en_cui", CUI2) |>
+        body_replace_text_at_bkm("bookmark_en_rup", RUP) |>
+        body_replace_text_at_bkm("bookmark_en_offerta", Preventivo.fornitore) |>
+        body_replace_text_at_bkm("bookmark_en_dac", Prot..DaC.en) |>
+        body_replace_text_at_bkm("bookmark_en_rdo1", ordine.trattativa.scelta.ldo1) |>
+        body_replace_text_at_bkm("bookmark_en_rdo2", as.character(ordine.trattativa.scelta.ldo2)) |>
+        body_replace_text_at_bkm("bookmark_en_web", Pagina.web) |>
+        body_replace_text_at_bkm("bookmark_en_fornitore", Fornitore) |>
+        body_replace_text_at_bkm("bookmark_en_sede", Fornitore..Sede) |>
+        body_replace_text_at_bkm("bookmark_en_piva", as.character(Fornitore..P.IVA)) |>
+        body_replace_text_at_bkm("bookmark_en_pec", Fornitore..PEC) |>
+        body_replace_text_at_bkm("bookmark_en_email", Fornitore..E.mail) |>
+        cursor_bookmark("bookmark_en_tabella") |>
         body_add_table(prt.en, style = "Tabella LdO", pos = "on") |>
-        cursor_reach("CAMPO.IMPONIBILE") |>
-        body_replace_all_text("CAMPO.IMPONIBILE", Importo.senza.IVA, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.ALIQUOTA") |>
-        body_replace_all_text("CAMPO.ALIQUOTA", paste0("VAT (", Aliquota.IVA, ")"), only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.IVA") |>
-        body_replace_all_text("CAMPO.IVA", IVA, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.IMPORTO") |>
-        body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.CONSEGNA") |>
-        body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
+        body_replace_text_at_bkm("bookmark_en_imponibile", Importo.senza.IVA) |>
+        body_replace_text_at_bkm("bookmark_en_aliquota", paste0("VAT (", Aliquota.IVA, ")")) |>
+        body_replace_text_at_bkm("bookmark_en_iva", IVA) |>
+        body_replace_text_at_bkm("bookmark_en_importo", Importo.con.IVA) |>
+        body_replace_text_at_bkm("bookmark_en_consegna", Richiedente..Luogo.di.consegna) |>
         body_replace_text_at_bkm("bookmark_cuu_en", CUU) |>
-        cursor_reach("CAMPO.FATTURAZIONE") |>
-        body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.FIRMA.LDO.EN") |>
+        body_replace_text_at_bkm("bookmark_en_fatturazione", fatturazione) |>
+        cursor_bookmark("bookmark_en_firma") |>
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
-        body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
-        body_add_break() |>
-
-        body_add_par("GENERAL PURCHASE CONDITIONS", style = "heading 1") |>
-        body_add_fpar(fpar(ftext("1. Scope of application", fpt.b), ftext(": These general conditions of purchase are intended to uniformly regulate contractual relationships with suppliers from whom CNR purchases goods and/or services in application of the laws and regulations. The supplier's conditions of sale will in no case be applicable to contractual relationships with CNR, even if they were referred to in any document originating from the supplier itself.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("2. Delivery", fpt.b), ftext(": to the destination.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("3. Duration", fpt.b), ftext(": "), ftext(" the order must be delivered within 30 consecutive calendar days from the date of signing this contract at the location indicated on the previous page.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("4. Invoice", fpt.b), ftext(": the invoice, drawn up in accordance with current legislation, must include, under penalty of rejection, the order number (corresponding to the protocol registration number), the CIG and the CUP.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("5. Payment", fpt.b), ftext(": payment will be made within 30 days from the date of the certificate of proper execution.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("6. Penalties", fpt.b), ftext(": for each natural and consecutive day of delay with respect to the terms provided for the execution of the contract referred to in art. 8, a penalty equal to 1‰ (one per thousand) of the contractual amount will be applied, net of VAT and any costs relating to safety in the workplace arising from risks of an interfering nature. For supply contracts only, in the event that the first conformity check of the supply has an unfavorable outcome, the penalties will not apply; however, if the Successful Bidder does not make the supply available again for the conformity check within 20 (twenty) natural and consecutive days following the first unfavorable outcome, or the conformity check is again negative, the penalty referred to above will be applied for each calendar day of delay. In the event that the amount of the applicable penalties exceeds the amount equal to 20% (twenty percent) of the contractual amount, net of VAT and any costs relating to safety in the workplace arising from interference risks, the Entity will terminate the contract to the detriment of the Successful Bidder, without prejudice to the right to compensation for any further damage suffered.")), style = "Riquadro paragrafo") |>
-        body_add_fpar(fpar(ftext("7. Traceability of financial flows", fpt.b), ftext(": the supplier assumes all obligations of traceability of financial flows pursuant to art. 3 of Law 136/2010 and subsequent amendments. Failure to use bank or postal transfers or other collection or payment instruments suitable for allowing full traceability of transactions constitutes grounds for unilateral termination of the contract. The supplier undertakes to allow the Administration to carry out the verification pursuant to paragraph 9 of art. 3 of Law 136/2010 and subsequent amendments and to immediately notify the Administration and the Prefecture-UTG of the province where the Administration is based of the news of the failure of its counterpart (subcontractor/subcontractor) to comply with the obligations of financial traceability.")), style = "Riquadro paragrafo")
-
-      if(Importo.senza.IVA.num<40000){
-        doc <- doc |>
-          body_add_fpar(fpar(ftext("8. Express termination clause", fpt.b), ftext(": the order is issued in application of the provisions contained in art. 52, paragraphs 1 and 2 of Legislative Decree 36/2023. The CNR has the right to terminate the contract/order in the event of a lack of participation requirements being ascertained. For the termination of the contract, art. 122 of Legislative Decree 36/2023, as well as articles 1453 et seq. of the Civil Code, apply. The CNR will formally communicate the termination to the supplier, with a ban on proceeding with the payment of the fees, except within the limits of the services already performed.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("9. Competent court", fpt.b), ftext(": the Court of Rome will have exclusive jurisdiction over any dispute.")), style = "Riquadro paragrafo")
-      }else{
-        doc <- doc |>
-          body_add_fpar(fpar(ftext("8. Competent court", fpt.b), ftext(": the Court of Rome will have exclusive jurisdiction over any dispute.")), style = "Riquadro paragrafo")
-      }
-
-      doc <- doc |>
-        body_add_par("") |>
-        body_add_fpar(fpar(ftext("This order letter, perfected through the exchange of commercial correspondence, is signed by each Party, also by overwriting, with a digital signature valid on the date of affixing thereof and in accordance with the law, and is subsequently exchanged between the parties via PEC. Therefore, the registration tax will be due in case of use pursuant to Presidential Decree 131/1986.")), style = "Normal") |>
-        body_add_par("") |>
-        body_add_fpar(fpar("Signature for acceptance", run_footnote(x=block_list(fpar(ftext(" The declarant must sign with a qualified digital signature or attach a photocopy of a valid identity document (art. 38 of Presidential Decree no. 445/2000 and subsequent amendments).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
+        body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     }
-
     print(doc, target = paste0(pre.nome.file, "8 Lettera ordine.docx"))
 
     cat("
