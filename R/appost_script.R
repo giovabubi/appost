@@ -4752,6 +4752,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_replace_all_text("CAMPO.IVA", IVA.ldo.txt, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.IMPORTO") |>
       body_replace_all_text("CAMPO.IMPORTO", Importo.ldo.txt, only_at_cursor = TRUE) |>
+      body_replace_text_at_bkm("bookmark_cuu", CUU) |>
       cursor_reach("CAMPO.CONSEGNA") |>
       body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FATTURAZIONE") |>
@@ -4860,6 +4861,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_replace_all_text("CAMPO.IVA", IVA, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.IMPORTO") |>
         body_replace_all_text("CAMPO.IMPORTO", Importo.con.IVA, only_at_cursor = TRUE) |>
+        body_replace_text_at_bkm("bookmark_cuu_en", CUU) |>
         cursor_reach("CAMPO.CONSEGNA") |>
         body_replace_all_text("CAMPO.CONSEGNA", Richiedente..Luogo.di.consegna, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.FATTURAZIONE") |>
