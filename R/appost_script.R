@@ -19,8 +19,8 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 4
-  ordine <- readline()
+  ordine <- "8_2024"
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -2494,7 +2494,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         Documento '", pre.nome.file, "5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
         }
     }
-  }
+  
   # Genera Comunicazione CIG ----
   com_cig <- function(){
     doc <- doc.com.cig |>
@@ -5280,3 +5280,4 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   cat("\014")
   if(interactive()) answ()
 }
+
