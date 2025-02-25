@@ -5253,7 +5253,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     if(inpt==2){docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
     
     # if(inpt==3){ras.pnrr();rup.pnrr();pag()}
-    # if(inpt==4){docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
+    if(inpt==4){docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
     # if(inpt==5){doppio_fin.pnrr();fun_bene.pnrr()}
     # if(inpt==6){provv_liq();chklst.pnrr()}
     # if(inpt==5){
