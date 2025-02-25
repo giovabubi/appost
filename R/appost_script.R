@@ -200,7 +200,7 @@ appost <- function(){
     nomina.RAMM <- "146220 del 2/5/2024 di nomina della sig.ra Francesca Pesciolini quale Responsabile Amministrativo della Sede Secondaria di Sesto Fiorentino dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "Il sottoscritto "
-    nato.rss <- " nato a Firenze il 17/12/1975, codice fiscale LCHNCL75T27D612B,"
+    nato.rss <- " nato a Firenze il 27/12/1975, codice fiscale LCHNCL75T27D612B,"
     RSS.dich <- " responsabile della sede secondaria di Sesto Fiorentino dell'IPSP "
     CUU <- "KWH4FD"
   }else if(sede=='PD'){
@@ -1446,7 +1446,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di"),
                          ftext(RSS.dich, fpt.b),
-                         ftext(" e in relazione all'affidamento diretto "),
+                         ftext("e in relazione all'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
                          ftext("”, ordine "),
