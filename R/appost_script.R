@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- "8_2024"
+  #ordine <- 194
   ordine <- readline()
 
   if(ordine==0){
@@ -4521,8 +4521,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_remove() |>
       cursor_backward() |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento prot. n. "),
-                         ftext(Prot..provv..impegno),
-                         ftext(", con il quale è stato nominato "),
+                         ftext(tolower(Prot..provv..impegno)),
+                         ftext(", con il quale è "),
+                         ftext(nominato),
+                         ftext(" "),
                          ftext(il.dott.rup),
                          ftext(" "),
                          ftext(RUP),
@@ -4547,9 +4549,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.DISPONIBILITA") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del già richiamato progetto, allocati al GAE "),
-                         ftext(GAE),
-                         ftext(", voce COAN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal")
+      body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del progetto "),
+                         ftext(Progetto),
+                         ftext(", voce di costo CO.AN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal")
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
         cursor_bookmark("bookmark_procedere") |>
@@ -4596,33 +4598,30 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" oltre IVA;")), style = "Elenco numero")
     }
     doc <- doc |>
-      cursor_reach("CAMPO.DI.IMPEGNARE") |>
+      cursor_bookmark("bookmark_confermare") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar(ftext("anticipata n. "),
-                         ftext(N..impegno.di.spesa),
+      body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b),
+                         ftext(" la registrazione sul sistema contabile della seguente scrittura di vincolo n. "),
+                         ftext(Anticipata),
                          ftext(" di "),
                          ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa sui fondi del progetto "),
+                         ftext(" IVA inclusa sul progetto "),
                          ftext(Progetto.cup),
-                         ftext(", voce COAN "),
+                         ftext(", voce di costo CO.AN "),
                          ftext(Voce.di.spesa),
-                         ftext(", sul GAE "),
-                         ftext(GAE),
-                         ftext(";")), style = "Elenco punto liv2")
+                         ftext(";")), style = "Elenco numero")
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("€ 35,00, Voce COAN 13096 “Pubblicazione bandi di gara” sul GAE [completare] per la quota stazione appaltante della contribuzione ANAC;")), style = "Elenco punto liv2")
+        body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b),
+                           ftext(" la registrazione sul sistema contabile della seguente scrittura di vincolo n. _________ di € 35,00, sul progetto "),
+                           ftext(Progetto.cup), 
+                           ftext(", voce di costo 13096 per la contribuzione ANAC;")), style = "Elenco punto liv2")
     } 
-    if(Importo.senza.IVA.num>=40000){
-      doc <- doc |>
-        cursor_reach("DI STABILIRE altresì che, trattandosi di affidamento d’importo inferiore a") |>
-        body_remove()
-    }
     doc <- doc |>
       cursor_reach("CAMPO.FIRMA") |>
       body_remove() |>
-      body_add_par("Visto di regolarità contabile.", style = "Firma 1") |>
+      body_add_par("Controllo regolarità contabile", style = "Firma 1") |>
       #body_add_par(resp.segr, style = "Firma 1") |>
       #body_add_fpar(fpar(ftext("("), ftext(RAMM), ftext(")")), style = "Firma 1") |>
       body_add_par("La segretaria amministrativa", style = "Firma 1") |>
