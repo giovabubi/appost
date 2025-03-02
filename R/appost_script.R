@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 194
+  #ordine <- 1
   ordine <- readline()
 
   if(ordine==0){
@@ -3103,8 +3103,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     prt <- pr[,-5]
     colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
     
-    # download.file(paste(lnk, "RAS.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    # doc <- read_docx("tmp.docx")
+    download.file(paste(lnk, "RAS.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
     # if(PNRR!="No"){
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
