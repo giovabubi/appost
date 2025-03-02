@@ -3424,7 +3424,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_remove() |>
       cursor_backward() |>
       body_add_fpar(fpar(ftext("OGGETTO", fpt.b),
-                         ftext(": NOMINA DEL RESPONSABILE UNICO DEL PROGETTO AI SENSI DELL’ART. 15 E DELL’ALLEGATO I.2 DEL DECRETO LEGISLATIVO 31 MARZO 2023 N. 36 E IMPEGNO PROVVISORIO DELLE SOMME NECESSARIE PER L’AFFIDAMENTO DIRETTO "),
+                         ftext(": NOMINA DEL RESPONSABILE UNICO DEL PROGETTO AI SENSI DELL’ART. 15 E DELL’ALLEGATO I.2 DEL DECRETO LEGISLATIVO 31 MARZO 2023 N. 36 PER L’AFFIDAMENTO DIRETTO "),
                          ftext(toupper(della.fornitura)),
                          ftext(" DI “"),
                          ftext(toupper(Prodotto), fpt.b),
@@ -3434,9 +3434,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(toupper(Pagina.web)),
-                         ftext("), NELL'AMBITO DEL "),
+                         ftext(", NELL'AMBITO DEL "),
                          ftext(toupper(Progetto.int)),
                          ftext(".")), style = "Normal") |>
       body_add_par(firma.RSS, style = "heading 2") |>
