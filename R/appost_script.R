@@ -3103,24 +3103,24 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     prt <- pr[,-5]
     colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
     
-    download.file(paste(lnk, "RAS.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    doc <- read_docx("tmp.docx")
-    if(PNRR!="No"){
+    # download.file(paste(lnk, "RAS.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    # doc <- read_docx("tmp.docx")
+    # if(PNRR!="No"){
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
         footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
         headers_replace_text_at_bkm(bookmark = "bookmark_headers", toupper(Progetto.int))
       file.remove("tmp.docx")
       file.remove(logo)
-    }else{
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers", sede1)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-      file.remove("tmp.docx")
-    }
+    # }else{
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers", sede1)
+    #   if(sede=="TOsi"){
+    #     doc <- doc |>
+    #       headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+    #   }
+    #   file.remove("tmp.docx")
+    # }
     
     doc <- doc |>
       cursor_reach("CAMPO.DEST.RAS.SEDE") |>
@@ -3198,7 +3198,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
     
     ## Dich. Ass. RICH ----
-    if(PNRR!="No"){
+    # if(PNRR!="No"){
       download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3206,15 +3206,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
       file.remove("tmp.docx")
       file.remove(logo)
-    }else{
-      doc <- doc.ras |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-      file.remove("tmp.docx")
-    }
+    # }else{
+    #   doc <- doc.ras |>
+    #     headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+    #   if(sede=="TOsi"){
+    #     doc <- doc |>
+    #       headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+    #   }
+    #   file.remove("tmp.docx")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -3285,7 +3285,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     ## Dich. Ass. RESP ----
     if(Richiedente!=Responsabile.progetto){
-      if(PNRR!="No"){
+      # if(PNRR!="No"){
         download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3293,15 +3293,15 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
         file.remove("tmp.docx")
         file.remove(logo)
-      }else{
-        doc <- doc.ras |>
-          headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-        if(sede=="TOsi"){
-          doc <- doc |>
-            headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-        }
-        file.remove("tmp.docx")
-      }
+      # }else{
+      #   doc <- doc.ras |>
+      #     headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+      #   if(sede=="TOsi"){
+      #     doc <- doc |>
+      #       headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+      #   }
+      #   file.remove("tmp.docx")
+      # }
       
       doc <- doc |>
         cursor_begin() |>
