@@ -1332,7 +1332,7 @@ appost <- function(){
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(", NELL'AMBITO DEL "),
+                         ftext(", NELL'AMBITO DEL PROGETTO "),
                          ftext(toupper(Progetto.int)),
                          ftext(".")), style = "Normal") |>
       body_add_par(firma.RSS, style = "heading 2") |>
@@ -1439,7 +1439,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sottoscritto.rss), ftext(RSS, fpt.b), ftext(","), ftext(nato.rss)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di"),
+                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
                          ftext(RSS.dich, fpt.b),
                          ftext("e in relazione all'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
