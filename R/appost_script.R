@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 211
+  #ordine <- 12
   ordine <- readline()
 
   if(ordine==0){
@@ -1333,7 +1333,7 @@ appost <- function(){
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
                          ftext(", NELL'AMBITO DEL PROGETTO "),
-                         ftext(toupper(Progetto.int)),
+                         ftext(Progetto.cup),
                          ftext(".")), style = "Normal") |>
       body_add_par(firma.RSS, style = "heading 2") |>
       cursor_reach("CAMPO.NOMINE") |>
@@ -1360,7 +1360,7 @@ appost <- function(){
                          ftext(" relativa alla necessità di procedere all’acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("”, nell’ambito del "),
+                         ftext("”, nell’ambito del progetto "),
                          ftext(Progetto.cup),
                          ftext(", mediante affidamento diretto all'operatore economico "),
                          ftext(Fornitore),
