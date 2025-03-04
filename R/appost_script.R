@@ -990,7 +990,8 @@ appost <- function(){
                          ftext(", nell'ambito del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
-                         ftext(CUP1)), style = "Normal") |>
+                         ftext(CUP1),
+                         ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
@@ -1066,7 +1067,8 @@ appost <- function(){
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
                            ftext(" "),
-                           ftext(all.OE, fpt.b)), style = "Normal") |>
+                           ftext(all.OE, fpt.b),
+                           ftext(";")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
@@ -1453,8 +1455,8 @@ appost <- function(){
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del "),
-                         ftext(Progetto.int),
+                         ftext("), nell'ambito del progetto "),
+                         ftext(Progetto.cup),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
@@ -1535,7 +1537,8 @@ appost <- function(){
                          ftext(", nell'ambito del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
-                         ftext(CUP1)), style = "Normal") |>
+                         ftext(CUP1),
+                         ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
@@ -1618,8 +1621,8 @@ appost <- function(){
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
                            ftext(Fornitore..P.IVA),
-                           ftext("), nell'ambito del "),
-                           ftext(Progetto.int),
+                           ftext("), nell'ambito del progetto "),
+                           ftext(Progetto.cup),
                            ftext(";")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
