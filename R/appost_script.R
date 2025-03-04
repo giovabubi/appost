@@ -1700,12 +1700,16 @@ appost <- function(){
       readline()
     }
 
-    doc <- doc.dac |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+    download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
     
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
     }
     
     doc <- doc |>
@@ -1732,9 +1736,11 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 31 dicembre 2009 n. 213, recante “Riordino del Consiglio Nazionale delle Ricerche in attuazione dell’articolo 1 della Legge 27 settembre 2007, n. 165“;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 25 novembre 2016 n. 218, recante “Semplificazione delle attività degli enti pubblici di ricerca ai sensi dell'articolo 13 della legge 7 agosto 2015, n. 124”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 7 agosto 1990, n. 241 recante “Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi” pubblicata sulla Gazzetta Ufficiale n. 192 del 18/08/1990 e s.m.i.;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" lo Statuto del Consiglio Nazionale delle Ricerche, emanato con provvedimento del Presidente n. 93, prot. n. 0051080 del 19 luglio 2018, entrato in vigore in data 1° agosto 2018;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 1° agosto 2024;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di amministrazione contabilità e finanza, emanato con Provvedimento della Presidente n. 201 prot. n. 0507722 del 23 dicembre 2024, entrato in vigore dal 1° gennaio 2025 ed, in particolare, l’art.32 rubricato “Decisione di contrattare”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l'art. 32 'Decisione di contrattare' del Regolamento di Amministrazione Contabilità e Finanza (RACF) del Consiglio Nazionale delle Ricerche, emanato con provvedimento della Presidente CNR n. 201 del 23 dicembre 2024, in vigore dal 1° gennaio 2025;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 dicembre 2024, n. 209 rubricato “Disposizioni integrative e correttive al codice dei contratti pubblici, di cui al decreto legislativo 31 marzo 2023, n. 36”, pubblicato sul Supplemento Ordinario n.45/L della GU n. 305 del 31 dicembre 2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. AMMCNT-CNR 140496 del 29/4/2024, con cui al dott. Francesco Di Serio è stato attribuito l’incarico di Direttore dell’IPSP del Consiglio Nazionale delle Ricerche a decorrere dal giorno 1/5/2024 per quattro anni;")), style = "Normal")
 
     if(sede!="TOsi"){
@@ -1753,7 +1759,7 @@ appost <- function(){
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 6 novembre 2012, n. 190 recante “Disposizioni per la prevenzione e la repressione della corruzione e dell’illegalità nella pubblica amministrazione” pubblicata sulla G.U.R.I. n. 265 del 13/11/2012;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 14 marzo 2013, n. 33 recante “Riordino della disciplina riguardante il diritto di accesso civico e gli obblighi di pubblicità, trasparenza e diffusione di informazioni da parte delle pubbliche amministrazioni” pubblicato sulla Gazzetta Ufficiale n. 80 del 05/04/2013 e successive modifiche introdotte dal d.lgs. 25 maggio 2016 n. 97;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche approvato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il vigente Piano triennale per la prevenzione della corruzione e della trasparenza (PTPCT), adottato con delibera del Consiglio di Amministrazione del Consiglio Nazionale delle Ricerche ai sensi della legge 6 novembre 2012 n. 190;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il vigente Piano triennale per la prevenzione della corruzione e della trasparenza (PTPCT) contenuto nel Piano Integrato di Attività e Organizzazione (PIAO), adottato con delibera del Consiglio di Amministrazione del Consiglio Nazionale delle Ricerche ai sensi dell’articolo 6 del decreto-legge n. 80/2021;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 23 dicembre 1999 n 488 e s.m.i., recante “Disposizioni per la formazione del bilancio annuale e pluriennale dello Stato (Legge finanziaria 2000)”, ed in particolare l'articolo 26;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 27 dicembre 2006 n. 296, recante “Disposizioni per la formazione del bilancio annuale e pluriennale dello Stato (Legge finanziaria 2007)”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 24 dicembre 2007 n. 244 e s.m.i., recante “Disposizioni per la formazione del bilancio annuale e pluriennale dello Stato (Legge finanziaria 2008)”;")), style = "Normal") |>
@@ -1805,10 +1811,19 @@ appost <- function(){
                              ftext(preventivo.individuato)), style = "Normal")
       }
     doc <- doc |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento di nomina del Responsabile Unico del Progetto "),
+                         ftext(dott.rup), ftext(" "), ftext(RUP),
+                         ftext(", ai sensi dell’art. 15 del Codice;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l'atto istruttorio prot. n. "),
+                         ftext(Prot..atto.istruttorio), ftext(" con il quale il RUP ha dichiarato la conformità alle disposizioni di legge e ai regolamenti vigenti in materia del procedimento di selezione dell’affidatario proponendo, contestualmente, la formalizzazione dell’affidamento diretto in argomento all’OE "),
+                         ftext(Fornitore),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext(") per un importo pari a "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" mediante atto immediatamente efficace;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 50, comma 1, lettera b) del Codice, il quale consente, per affidamenti di contratti di servizi e forniture, ivi compresi i servizi di ingegneria e architettura e l'attività di progettazione di importo inferiore ad euro 140.000,00, di procedere ad affidamento diretto, anche senza consultazione di più operatori economici;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(", altresì, che la scelta dell’Operatore Economico deve essere effettuata assicurando che i soggetti individuati siano in possesso di documentate esperienze pregresse idonee all’esecuzione delle prestazioni contrattuali, anche individuati tra gli iscritti in elenchi o albi istituiti dalla stazione appaltante;")), style = "Normal") |>
-      #body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Comunicato del Presidente ANAC del 10 gennaio 2024 con cui sono state diramate indicazioni di carattere transitorio sull’applicazione delle disposizioni del codice dei contratti pubblici in materia di digitalizzazione degli affidamenti di importo inferiore a euro 5.000,00"),
-      #                   ftext(" [valido fino al 30.09.2024];", fpt.i)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATA", fpt.b), ftext(" l’opportunità, in ottemperanza alla suddetta normativa, di procedere ad affidamento diretto all’operatore economico "),
                          ftext(Fornitore),
                          ftext(" (P.IVA "),
@@ -1817,7 +1832,8 @@ appost <- function(){
       body_add_fpar(fpar(ftext("CONSIDERATO ", fpt.b),
                          ftext(rotazione.individuata)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che dal 1° gennaio 2024 è fatto obbligo di utilizzare piattaforme di approvvigionamento digitale certificate (e-procurement) per svolgere le procedure di affidamento e di esecuzione dei contratti pubblici, a norma degli artt. 25 e 26 del Codice;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la stazione appaltante ai sensi dell’art. 48 comma 2 del Codice, ha accertato che il presente appalto non presenta un interesse transfrontaliero certo per cui non segue le procedure ordinarie di cui alla parte IV del Libro II;")), style = "Normal")
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la stazione appaltante ai sensi dell’art. 48 comma 2 del Codice, ha accertato che il presente appalto non presenta un interesse transfrontaliero certo per cui non segue le procedure ordinarie di cui alla parte IV del Libro II;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" il comunicato del Presidente dell’ANAC del 18 dicembre 2024 di adozione del provvedimento di prolungamento fino al 30 giugno 2025 della proroga di alcuni adempimenti previsti con la Delibera n. 582 del 13 dicembre 2023 e con il Comunicato del Presidente del 10 gennaio 2024, tra cui la possibilità di utilizzare l’interfaccia web messa a disposizione dalla Piattaforma PCP dell’Autorità per gli affidamenti diretti di importo inferiore a 5.000 euro in caso di impossibilità o difficoltà di ricorso alle PAD al fine di consentire l’assolvimento delle funzioni ad essa demandate, ivi compresi gli obblighi in materia di trasparenza;")), style = "Normal")
 
     if(Motivo.fuori.MePA!="No"){
       doc <- doc |>
@@ -1826,15 +1842,13 @@ appost <- function(){
 
     doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il bilancio di previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione in data 17 dicembre 2024 con deliberazione n° 420/2024 – Verb. 511;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n° 420/2024 del 17/12/2024")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", allocati sulla voce COAN "),
+                         ftext(", voce di costo CO.AN "),
                          ftext(Voce.di.spesa),
-                         ftext(", scrittura anticipata n. "),
-                         ftext(Anticipata),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che vi sono i presupposti normativi e di fatto per acquisire "), ftext(la.fornitura), ftext(" in oggetto, nel rispetto dei principi generali enunciati nel Codice;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
@@ -1846,80 +1860,47 @@ appost <- function(){
                          ftext(Fornitore..P.IVA),
                          ftext(", per un importo complessivo pari a euro "),
                          ftext(Importo.senza.IVA),
-                         ftext(", al netto dell’IVA e di altre imposte e contributi di legge, ritenuto congruo in relazione alle condizioni di mercato;")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("DI NOMINARE ", fpt.b),
-                         ftext(il.dott.rup),
-                         ftext(" "),
-                         ftext(RUP),
-                         ftext(" Responsabile Unico del Progetto il quale, ai sensi dell’art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("svolgere tutte le attività indicate nell’allegato I.2 del Codice, o che siano comunque necessarie ove non di competenza di altri organi;")), style = "Elenco liv2") |>
-      body_add_fpar(fpar(ftext("vigilare sullo svolgimento delle fasi di affidamento ed esecuzione "), ftext(della.fornitura), ftext(" in parola, provvedendo a creare le condizioni affinché il processo di acquisto risulti condotto in modo unitario rispetto alle esigenze ed ai costi indicati nel presente atto, in conformità a qualsiasi altra disposizione di legge e di regolamento in materia ivi incluso l’accertamento dei requisiti di carattere generale e tecnico-professionali, ove richiesti, in capo all’operatore economico individuato; ")), style = "Elenco liv2")
-
-    if(Tipo.ordine=="Trattativa diretta MePA" | Tipo.ordine=="RDO MePA" | Tipo.ordine=="Ordine diretto MePA"){
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("procedere alla prenotazione del Codice Identificativo Gara (CIG) tramite la piattaforma di approvvigionamento digitale certificata e a tutti gli altri adempimenti previsti dalla normativa vigente;")), style = "Elenco liv2")
-    }else{
-      doc <- doc |>
-      body_add_fpar(fpar(ftext("procedere alla prenotazione del Codice Identificativo Gara (CIG) tramite la piattaforma contratti pubblici (PCP) dell’ANAC e a tutti gli altri adempimenti previsti dalla normativa vigente;")), style = "Elenco liv2")
-    }
-
-    doc <- doc |>
-      body_add_fpar(fpar(ftext("rilasciare apposita dichiarazione, rispetto al ruolo ricoperto ed alle funzioni svolte, nella quale attesti di non trovarsi in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023;")), style = "Elenco liv2")
-      
-    if(Supporto.RUP!=trattini){
-        doc <- doc |>
-          body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell’art. 15, comma 6 del Codice, "),
-                             ftext(il.dott.sup), ftext(" "),
-                             ftext(Supporto.RUP),
-                             ftext(" in qualità di supporto al RUP;")), style = "Elenco liv1")
-      }
-    doc <- doc |>
+                         ftext(", oltre IVA e di altre imposte e contributi di legge;")), style = "Elenco liv1") |>
+      # body_add_fpar(fpar(ftext("DI NOMINARE ", fpt.b),
+      #                    ftext(il.dott.rup),
+      #                    ftext(" "),
+      #                    ftext(RUP),
+      #                    ftext(" Responsabile Unico del Progetto il quale, ai sensi dell’art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che, ai sensi dell'art. 53 del Codice l'affidatario sia esonerato dalla costituzione della garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
-      # body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" l’anticipata n. "),
-      #                    ftext(N..impegno.di.spesa),
-      #                    ftext(" per un importo pari a euro "),
-      #                    ftext(Importo.con.IVA),
-      #                    ftext(" comprensivo di IVA sui fondi del progetto “"),
-      #                    ftext(Progetto),
-      #                    ftext("”"),
-      #                    ftext(CUP1),
-      #                    ftext(", allocati sul GAE "),
-      #                    ftext(GAE),
-      #                    ftext(", voce COAN "),
-      #                    ftext(Voce.di.spesa),
-      #                    ftext(", a favore del soggetto registrato in U-Gov con il n. "),
-      #                    ftext(Fornitore..Codice.terzo.SIGLA),
-      #                    ftext(";")), style = "Elenco liv1")
-    body_add_fpar(fpar(ftext("DI RIPORTARE", fpt.b), ftext(" all'esercizio 2025 la scrittura anticipata n. "),
-                       ftext(Anticipata),
-                       ftext(" (da migrazione impegno in SIGLA n. "),
-                       ftext(N..impegno.di.spesa),
-                       ftext(") per un importo pari a euro "),
-                       ftext(Importo.con.IVA),
-                       ftext(" comprensivo di IVA sui fondi del progetto “"),
-                       ftext(Progetto),
-                       ftext("”"),
-                       ftext(CUP1),
-                       ftext(", allocati sulla voce COAN "),
-                       ftext(Voce.di.spesa),
-                       ftext(", a favore del soggetto registrato in U-Gov con il n. "),
-                       ftext(Fornitore..Codice.terzo.SIGLA),
-                       ftext(";")), style = "Elenco liv1")
+      body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" in conformità a quanto disposto dall’art. 53, comma 4, del Codice, che l’affidatario non sarà tenuto a presentare la garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
+      body_add_fpar(fpar(ftext("DI SOTTOPORRE", fpt.b), ftext(" la lettera d’ordine alla condizione risolutiva in caso di accertamento della carenza dei requisiti di ordine generale;")), style = "Elenco liv1") |>
+      body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b), ftext(" la registrazione sul sistema contabile della seguente scrittura di vincolo n. "),
+                         ftext(Anticipata),
+                         # ftext(" (da migrazione impegno in SIGLA n. "),
+                         # ftext(N..impegno.di.spesa),
+                         # ftext(")"),
+                         ftext(" di "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" oltre IVA sul progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
+                         ftext(", voce di costo CO.AN "),
+                         ftext(Voce.di.spesa),
+                         ftext(", in favore dell'OE "),
+                         ftext(Fornitore),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext(", soggetto registrato in U-Gov con il n. "),
+                         ftext(Fornitore..Codice.terzo.SIGLA),
+                         ftext(");")), style = "Elenco liv1") |>
 
-    if(Importo.senza.IVA.num>=40000){
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'avvio dell'esecuzione del contratto o la sottoscrizione dello stesso/l’invio della lettera d’ordine siano subordinati all'esito della verifica dei requisiti di ordine generale, e speciale se previsti, senza rilevare cause ostative;")), style = "Elenco liv1") |>
-        body_add_fpar(fpar(ftext("DI IMPEGNARE", fpt.b), ftext(" la spesa per un importo pari a € 35,00 sui fondi del già citato progetto, allocati sul GAE P___, voce COAN 13096 “Pubblicazione bandi di gara” per la contribuzione ANAC;")), style = "Elenco liv1")
-    }else{
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("DI SOTTOPORRE", fpt.b), ftext(" la lettera d’ordine alla condizione risolutiva in caso di accertamento della carenza dei requisiti di ordine generale;")), style = "Elenco liv1")
-    }
+    # if(Importo.senza.IVA.num>=40000){
+    #   doc <- doc |>
+    #     body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'avvio dell'esecuzione del contratto o la sottoscrizione dello stesso/l’invio della lettera d’ordine siano subordinati all'esito della verifica dei requisiti di ordine generale, e speciale se previsti, senza rilevare cause ostative;")), style = "Elenco liv1") |>
+    #     body_add_fpar(fpar(ftext("DI IMPEGNARE", fpt.b), ftext(" la spesa per un importo pari a € 35,00 sui fondi del già citato progetto, allocati sul GAE P___, voce COAN 13096 “Pubblicazione bandi di gara” per la contribuzione ANAC;")), style = "Elenco liv1")
+    # }else{
+    #   doc <- doc |>
+    #     body_add_fpar(fpar(ftext("DI SOTTOPORRE", fpt.b), ftext(" la lettera d’ordine alla condizione risolutiva in caso di accertamento della carenza dei requisiti di ordine generale;")), style = "Elenco liv1")
+    # }
 
-    doc <- doc |>
+    #doc <- doc |>
       body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" alla pubblicazione del presente provvedimento ai sensi del combinato disposto dell’Art. 37 del d.lgs. 14 marzo 2013, n. 33 e dell’art. 20 del Codice;")), style = "Elenco liv1") |>
-      body_add_par("DICHIARA", style = "heading 2") |>
-      body_add_par("l’insussistenza a proprio carico di situazioni di conflitto di interesse di cui all’art. 16 del Codice.", style = "Normal") |>
       body_add_par("", style = "Normal") |>
       body_add_par("Visto di regolarità contabile", style = "Firma 1") |>
       #body_add_par("Il Responsabile Amministrativo", style = "Firma 1") |>
@@ -1928,16 +1909,8 @@ appost <- function(){
       body_add_fpar(fpar(ftext("(sig.ra Concetta Mottura)")), style = "Firma 1") |>
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
-      body_end_section_continuous()
-
-    b <- doc$officer_cursor$which +1
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc$officer_cursor$which <- b
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
+      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
+      
     print(doc, target = paste0(pre.nome.file, "7 Decisione a contrattare.docx"))
     
     #cat("\014")
