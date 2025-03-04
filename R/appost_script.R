@@ -1375,11 +1375,7 @@ appost <- function(){
                          ftext("”;")), style = "Normal") |>
       cursor_reach("CAMPO.NOMINA.RUP") |>
       body_replace_all_text("CAMPO.NOMINA.RUP", paste(il.dott.rup, RUP), only_at_cursor = TRUE)
-      # 4. (eventuale, solo nel caso di servizi diversi da quelli di natura intellettuale e di forniture con posa in opera) DI DARE ATTO che:
-      # •	ai sensi dell’art.11 del D.Lgs. 36/2023, ai dipendenti dell’O.E. affidatario dovrà essere applicato il CCNL [completare] ovvero un diverso CCNL avente le medesime tutele;
-      # •	i costi della manodopera indicati nel quadro economico sopra riportato sono stati calcolati sulla base delle tariffe orarie previste per il CCNL [completare]; 
-      # 5. (eventuale) DI DEROGARE alla quota del 30% delle assunzioni necessarie di occupazione femminile e giovanile di cui all’art. 47 del decreto 77/2021 in quanto [completare indicando le motivazioni dell’eventuale deroga];
-      
+     
     if(Supporto.RUP!=trattini){
       doc <- doc |>
         cursor_bookmark("bookmark_supporto_rup") |>
