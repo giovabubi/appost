@@ -3070,6 +3070,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Voce.di.spesa),
                          ftext(", associata alla scrittura anticipata n. "),
                          ftext(Anticipata),
+                         ftext(" [solo nel caso di importo fattura superiore all'anticipata] per l’importo di ", fpt.i),
+                         ftext(Importo.con.IVA, fpt.i),
+                         ftext(" e mediante utilizzo delle risorse iscritte a bilancio per il maggior costo pari a € _____", fpt.i),
                          ftext(", a mezzo bonifico bancario sull’IBAN "),
                          ftext(Fornitore..IBAN),
                          ftext(".")), style = "Normal") |>
