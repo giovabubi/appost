@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 3
+  #ordine <- 207
   ordine <- readline()
 
   if(ordine==0){
@@ -2825,15 +2825,19 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
 
-
-    doc <- doc.dic.pres |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-
+    
+    download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale", only_at_cursor = TRUE)
     }
-
+    
     doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
@@ -2865,7 +2869,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          #ftext(Prot..lettera.ordine),
                          ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext("; soggetto U-Gov "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(");")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il documento di trasporto;")), style = "Elenco punto") |>
+                         ftext(" il documento di trasporto "),
+                         ftext(DDT),
+                         ftext(";")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("di aver svolto la procedura secondo la normativa vigente;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext(materiale.conforme)), style = "Elenco punto") |>
@@ -2873,16 +2879,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       # body_add_fpar(fpar(ftext(sede1), ftext(", __/__"), ftext(y)), style = "Normal") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto (RUP)")), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("), ftext(dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2") |>
-      body_end_section_continuous()
-
-    b <- doc$officer_cursor$which +1
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc$officer_cursor$which <- b
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
+      body_add_fpar(fpar(ftext("("), ftext(dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2")
+    
     print(doc, target = paste0(pre.nome.file, "10 Dichiarazione prestazione resa.docx"))
     #cat("\014")
     cat("
@@ -3029,7 +3027,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
       
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il DDT n. _____ del _____;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il DDT "),
+                                                    ftext(DDT),
+                                                    ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" il riscontro positivo sulla regolarità dell’esecuzione della prestazione e sulla rispondenza della stessa ai requisiti quantitativi e qualitativi, ai termini ed alle condizioni pattuite, come da certificato di regolare esecuzione (prot. n. "),
                          ftext(Prot..prestazione.resa),
                          ftext(") emesso dal Responsabile Unico del Progetto "),
