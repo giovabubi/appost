@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 207
+  #ordine <- 211
   ordine <- readline()
 
   if(ordine==0){
@@ -2932,12 +2932,18 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
+    if(PNRR!="No"){
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale", only_at_cursor = TRUE)
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      file.remove(logo)
+    }else{
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      }
     }
 
     doc <- doc |>
