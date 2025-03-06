@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 12
+  #ordine <- 116
   ordine <- readline()
 
   if(ordine==0){
@@ -1406,7 +1406,7 @@ appost <- function(){
 
     Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
     
-    ## Dich. Ass. RSS ----
+    2## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
@@ -3286,9 +3286,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext(") all'operatore economico "),
+                         ftext(" all'operatore economico "),
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
@@ -3371,8 +3369,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" "),
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
-                           ftext(" ("),
-                           ftext(Pagina.web),
                            ftext(") all'operatore economico "),
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
@@ -3595,7 +3591,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "2 Nomina RUP.docx"))
     
-    cat("\014")
+    #cat("\014")
     cat("
 
     Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
@@ -3626,8 +3622,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
                          ftext("), all'operatore economico "),
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
@@ -3692,8 +3686,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" "),
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
-                           ftext(" ("),
-                           ftext(Pagina.web),
                            ftext(") all'operatore economico "),
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
@@ -3829,75 +3821,107 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     print(doc, target = paste0(pre.nome.file, "3.10 Documentazione rispetto CAM.docx"))
     
     ## DNSH ----
-    download.file(paste(lnk, "DNSH_gen.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    doc <- read_docx("tmp.docx")
-    doc <- doc |>
-      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
-      cursor_bookmark("bookmark_body") |>
-      body_remove() |>
-      cursor_backward() |>
-      body_add_fpar(fpar(ftext("in relazione all'affidamento diretto "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(sede, fpt.b),
-                         ftext(" "),
-                         ftext(ordine, fpt.b),
-                         ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext(")"),
-                         ftext(", nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(";")), style = "Elenco punto")
-    print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH generica.docx"))
+    if(Inventariabile=='Non inventariabile'){
+      download.file(paste(lnk, "DNSH_gen.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        cursor_bookmark("bookmark_body") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("in relazione all'affidamento diretto "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" ("),
+                           ftext(Pagina.web),
+                           ftext(")"),
+                           ftext(", nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(";")), style = "Elenco punto")
+      print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH generica.docx"))
+    }
     
-    download.file(paste(lnk, "DNSH_app.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    doc <- read_docx("tmp.docx")
-    doc <- doc |>
-      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
-      cursor_bookmark("bookmark_body") |>
-      body_remove() |>
-      cursor_backward() |>
-      body_add_fpar(fpar(ftext("in relazione all'affidamento "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(sede, fpt.b),
-                         ftext(" "),
-                         ftext(ordine, fpt.b),
-                         ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext(")"),
-                         ftext(", nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(";")), style = "Elenco punto")
-    print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH apparecchiature.docx"))
+    if(Inventariabile=='Non inventariabile'){
+      download.file(paste(lnk, "DNSH_app.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        cursor_bookmark("bookmark_body") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("in relazione all'affidamento "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" ("),
+                           ftext(Pagina.web),
+                           ftext(")"),
+                           ftext(", nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(";")), style = "Elenco punto")
+      print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH apparecchiature.docx"))
+    }
     
-    download.file(paste(lnk, "DNSH_chi.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    doc <- read_docx("tmp.docx")
-    doc <- doc |>
-      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(Progetto.int)) |>
-      cursor_bookmark("bookmark_body") |>
-      body_remove() |>
-      cursor_backward() |>
-      body_add_fpar(fpar(ftext("in relazione all'affidamento "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(sede, fpt.b),
-                         ftext(" "),
-                         ftext(ordine, fpt.b),
-                         ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext(")"),
-                         ftext(", nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(";")), style = "Elenco punto")
-    print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH chimici.docx"))
+    if(Tipo.acquisizione=='Beni' & Inventariabile=='Non inventariabile'){
+      download.file(paste(lnk, "DNSH_chi.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(Progetto.int)) |>
+        cursor_bookmark("bookmark_body") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("in relazione all'affidamento "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" ("),
+                           ftext(Pagina.web),
+                           ftext(")"),
+                           ftext(", nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(";")), style = "Elenco punto")
+      print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH chimici.docx"))
+    }
+    
+    if(Tipo.acquisizione=='Servizi'){
+      download.file(paste(lnk, "DNSH_26.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(Progetto.int)) |>
+        cursor_bookmark("bookmark_body") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("in relazione all'affidamento "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" ("),
+                           ftext(Pagina.web),
+                           ftext(")"),
+                           ftext(", nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(";")), style = "Elenco punto")
+      print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH servizi di ricerca.docx"))
+    }
     
     ## Dich.Ass. TIT ----
     download.file(paste(lnk, "Dich_conf_tit.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
