@@ -723,10 +723,11 @@ appost <- function(){
     intervento <- paste0(finanziamento, ": “", titolo, "” (", PNRR, "). Codice progetto: ", codice.progetto)
   }
   Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
-  Progetto.int.no.cup <- sub(" - CUP .*", "", Progetto.cup)
   if(PNRR=="No"){
     Progetto.int <- paste("progetto", Progetto.cup)
     Progetto.int.no.cup <- sub(" .CUP.*", "", Progetto.cup)
+  }else{
+    Progetto.int.no.cup <- sub(" - CUP .*", "", Progetto.int)
   }
   
   # Ultimi DocOE ----
