@@ -19,8 +19,8 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 116
-  ordine <- readline()
+  ordine <- 211
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -723,8 +723,10 @@ appost <- function(){
     intervento <- paste0(finanziamento, ": “", titolo, "” (", PNRR, "). Codice progetto: ", codice.progetto)
   }
   Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
+  Progetto.int.no.cup <- sub(" - CUP .*", "", Progetto.int)
   if(PNRR=="No"){
     Progetto.int <- paste("progetto", Progetto.cup)
+    Progetto.int.no.cup <- sub(" .CUP.*", "", Progetto.cup)
   }
   
   # Ultimi DocOE ----
@@ -2948,7 +2950,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_par("") |>
       body_add_fpar(fpar(ftext("OGGETTO:", fpt.b)), style = "Normal") |>
       body_add_fpar(fpar(ftext("Fattura n. _____ del _____ - Importo "), ftext(Importo.con.IVA)), style = "Normal") |>
-      body_add_fpar(fpar(ftext("Progetto: "), ftext(Progetto)), style = "Normal") |>
+      body_add_fpar(fpar(ftext("Progetto: "), ftext(Progetto.int.no.cup)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CIG "), ftext(CIG), ftext(" - CUP "), ftext(CUP)), style = "Normal") |>
       body_add_fpar(fpar(ftext("Soggetto: "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(" - "),
                          ftext(Fornitore),
