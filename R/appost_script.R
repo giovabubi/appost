@@ -353,6 +353,17 @@ appost <- function(){
     sottoscritto.rup <- 'La sottoscritta'
     nominato <- "stata nominata"
   }
+  if(RUP=="Maurizio Meoni" | RUP=="Giovanni Torraca"){
+    Dott.rup <- 'Sig.'
+    dott.rup <- 'sig.'
+    il.dott.rup <- 'il sig.'
+    al.rup <- 'al'
+    dal.rup <- 'dal sig.'
+    Nato.rup <- 'Nato a'
+    nato.rup <- 'nato a'
+    sottoscritto.rup <- 'Il sottoscritto'
+    nominato <- "stato nominato"
+  }
   if(Supporto.RUP..Sesso=='M'){
     Dott.sup <- 'Dott.'
     dott.sup <- 'dott.'
