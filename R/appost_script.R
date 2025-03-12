@@ -1400,7 +1400,7 @@ appost <- function(){
         cursor_backward() |>
         body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell’art. 15, comma 6 del Codice, "),
                            ftext(il.dott.sup), ftext(" "),
-                           ftext(Supporto.RUP),
+                           ftext(Supporto.RUP, fpt.b),
                            ftext(" in qualità di supporto al RUP, fermo restando i compiti e le mansioni a cui gli stessi sono già assegnati;")), style = "Elenco liv1")
     }else{
       doc <- doc |>
