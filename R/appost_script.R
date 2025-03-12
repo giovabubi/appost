@@ -19,7 +19,7 @@ appost <- function(){
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 211
+  #ordine <- 19
   ordine <- readline()
 
   if(ordine==0){
@@ -1363,8 +1363,8 @@ appost <- function(){
     }
     
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
       #                   ftext(nomina.RAMM)), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
@@ -1420,7 +1420,7 @@ appost <- function(){
 
     Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
     
-    2## Dich. Ass. RSS ----
+    ## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
@@ -3507,14 +3507,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
       #                   ftext(nomina.RAMM)), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
       #                   ftext(sede2), ftext(" dell’IPSP prot. 153859 dell’8/5/2024 per il periodo dall’8/5/2024 al 31/12/2024 ad effettuare il controllo interno di regolarità amministrativa e copertura finanziaria per gli affidamenti diretti ed apporre il visto sulla “Decisione di contrattare” prevista dall’art. 32 del Regolamento di Amministrazione Contabilità e Finanza (RACF) del Consiglio Nazionale delle Ricerche, emanato con provvedimento della Presidente CNR n. 201 del 23 dicembre 2024, in vigore dal 1° gennaio 2025;")), style = "Normal") |>
       cursor_reach("CAMPO.DECRETO") |>
-      body_remove() |>
+      #body_remove() |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(avviso.pnrr)), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(decreto.pnrr)), style = "Normal")
       if(PNRR=="onFoods Spoke 4"){
@@ -3549,18 +3549,46 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext("), "),
                          ftext(preventivo.individuato)), style = "Normal") |>
       cursor_reach("CAMPO.DISPONIBILITA") |>
-      body_remove() |>
-      body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del già richiamato progetto, allocati al GAE "),
-                         ftext(GAE),
-                         ftext(", voce COAN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(", pertanto, la necessità di procedere:")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(" - alla nomina del responsabile unico del progetto (RUP) per la programmazione, progettazione, affidamento e l’esecuzione dell’affidamento "),
-      ftext(della.fornitura), ftext(" di “"),
-      ftext(Prodotto), ftext("”;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(" - all’anticipata delle somme necessarie indicate nella richiesta d’acquisto prot. n. "),
+      #body_remove() |>
+      body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità economico-finanziaria per la copertura degli oneri derivanti dall'acqsuisizione "),
+                         ftext(della.fornitura),ftext(" di “"),
+                         ftext(Prodotto),
+                         ftext("” sui fondi del progetto "),
+                         ftext(Progetto.cup),
+                         ftext(", voce di costo CO.AN "),
+                         ftext(Voce.di.spesa), ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(", pertanto, la necessità di procedere:")), style = "Normal")
+
+    if(Supporto.RUP!=trattini){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext(" - alla nomina del responsabile unico del progetto (RUP) per la programmazione, progettazione, affidamento e l’esecuzione dell’affidamento "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto), ftext("”;")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext(" - alla nomina del responsabile unico del progetto (RUP) per la programmazione, progettazione, affidamento e l’esecuzione dell’affidamento "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto), ftext("”, nonché alla nomina del supporto al RUP;")), style = "Normal")
+    }
+    
+    doc <- doc |>
+      body_add_fpar(fpar(ftext(" - alla scrittura anticipata CO.AN inerente le somme necessarie indicate nella richiesta d’acquisto prot. n. "),
                          ftext(Prot..RAS), ftext(";")), style = "Normal") |>
       cursor_reach("CAMPO.NOMINA.RUP") |>
       body_replace_all_text("CAMPO.NOMINA.RUP", paste(il.dott.rup, RUP), only_at_cursor = TRUE) |>
+      cursor_bookmark("bookmark_supporto_rup")
+    
+      if(Supporto.RUP!=trattini){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell'art. 15, comma 6, del Codice, il "),
+          ftext(dott.sup), ftext(" "), ftext(Supporto.RUP),
+                             ftext(" in qualità di supporto al RUP, fermo restando i compiti e le mansioni a cui gli stessi sono già assegnati;")), style = "Normal")
+      }else{
+        doc <- doc |>
+          body_remove()
+      }
+      
+    doc <- doc |>
       body_replace_text_at_bkm(bookmark = "bookmark_A1", Importo.senza.IVA2) |>
       body_replace_text_at_bkm(bookmark = "bookmark_A4", Importo.senza.IVA2) |>
       body_replace_text_at_bkm(bookmark = "bookmark_A", Importo.senza.IVA2) |>
@@ -3571,36 +3599,48 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       doc <- doc |>
         body_replace_text_at_bkm(bookmark = "bookmark_B1", "35")
     }
+    
     doc <- doc |>
-      cursor_reach("CAMPO.DI.IMPEGNARE") |>
+      cursor_bookmark("bookmark_confermare") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar(ftext(Importo.con.IVA),
-      ftext(" IVA inclusa sui fondi del progetto "),
-      ftext(Progetto.cup),
-      ftext(", voce COAN "),
-      ftext(Voce.di.spesa),
-      ftext(", sul GAE "),
-      ftext(GAE),
-      ftext(";")), style = "Elenco punto liv2")
+      body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b), ftext("la registrazione sul sistema contabile della seguente scrittura di vincolo "),
+                         ftext(Anticipata),
+                         ftext(" di "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" oltre iva sul progetto "),
+                         ftext(Progetto.cup),
+                         ftext(", voce di costo CO.AN "),
+                         ftext(Voce.di.spesa),                   
+                         ftext(";")), style = "Normal")
+    
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("€ 35,00, Voce COAN 13096 “Pubblicazione bandi di gara” sul GAE [completare] per la quota stazione appaltante della contribuzione ANAC;")), style = "Elenco punto liv2")
+        body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b), ftext(" la registrazione sul sistema contabile della seguente scrittura di vincolo _____ del _____ di 35,00 € sul progetto"),
+                           ftext(Progetto.cup),
+                           ftext(", voce di costo CO.AN 13096 per la contribuzione ANAC;")), style = "Normal")
     }
         #   4.	(eventuale, solo nel caso di servizi diversi da quelli di natura intellettuale e di forniture con posa in opera) DI DARE ATTO che:
     #   •	ai sensi dell’art.11 del D.Lgs. 36/2023, ai dipendenti dell’O.E. affidatario dovrà essere applicato il CCNL [completare] ovvero un diverso CCNL avente le medesime tutele;
     # •	i costi della manodopera indicati nel quadro economico sopra riportato sono stati calcolati sulla base delle tariffe orarie previste per il CCNL [completare]; 
     # 5.	(eventuale) DI DEROGARE alla quota del 30% delle assunzioni necessarie di occupazione femminile e giovanile di cui all’art. 47 del decreto 77/2021 in quanto [completare indicando le motivazioni dell’eventuale deroga];
+    
     doc <- doc |>
-      body_replace_text_at_bkm(bookmark = "bookmark_prot_ras", Prot..RAS) |>
+      body_add_fpar(fpar(ftext("DI RENDERE", fpt.b), ftext(" consultabile il presente atto sulla piattaforma telematica di negoziazione da parte dell’O.E. invitato a presentare offerta, unitamente:")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(" - alla richiesta d’acquisto prot. n. "),
+                         ftext(Prot..RAS), ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(" - alle condizioni generali d'acquisto da sottoscrivere successivamente;")), style = "Normal") |>
       cursor_reach("CAMPO.FIRMA") |>
       body_remove() |>
-      body_add_par("Visto di regolarità contabile", style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
+      #body_add_par("Visto di regolarità contabile", style = "Firma 1") |>
       #body_add_par(resp.segr, style = "Firma 1") |>
       #body_add_fpar(fpar(ftext("("), ftext(RAMM), ftext(")")), style = "Firma 1") |>
-      body_add_par("La segretaria amministrativa", style = "Firma 1") |>
-      body_add_fpar(fpar(ftext("(sig.ra Concetta Mottura)")), style = "Firma 1") |>
-      body_add_par("", style = "Normal") |>
+      #body_add_par("La segretaria amministrativa", style = "Firma 1") |>
+      #body_add_fpar(fpar(ftext("(sig.ra Concetta Mottura)")), style = "Firma 1") |>
+      b#ody_add_par("", style = "Normal") |>
       body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "2 Nomina RUP.docx"))
