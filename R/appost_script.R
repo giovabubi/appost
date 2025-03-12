@@ -4022,7 +4022,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # AI PNRR ----
   ai.pnrr <- function(){
-    cat("\014")
+    #cat("\014")
  
     if(PNRR!="No"){
       download.file(paste(lnk, "Istruttoria.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -4082,8 +4082,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Fornitore..P.IVA),
                          ftext("), "),
                          ftext(preventivo.individuato)), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il "), ftext("provvedimento prot. n. ", fpt.b),
-                         ftext(Prot..provv..impegno, fpt.b),
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento prot. n. "),
+                         ftext(Prot..nomina.RUP),
                          ftext(", con il quale è stato nominato "),
                          ftext(il.dott.rup),
                          ftext(" "),
@@ -4098,9 +4098,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(") ha presentato, attraverso la piattaforma telematica di negoziazione ("),
                          ftext("RDO ", fpt.b),
                          ftext(as.character(RDO), fpt.b),
-                         ftext("), un’offerta ritenuta congrua, corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti dalla stazione appaltante, d’importo uguale o inferiore rispetto a quello stimato dalla stazione appaltante, pari a "),
-                         ftext(Importo.senza.IVA, fpt.b),
-                         ftext(" oltre IVA;")), style = "Normal")
+                         ftext("), un’offerta ritenuta congrua, corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti dalla stazione appaltante, corrispondente al preventivo precedentemente acquisito e agli atti;")), style = "Normal")
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art. 47 del decreto legge n. 77/2021, mediante acquisizione dei seguenti documenti:")), style = "Normal")
