@@ -5372,7 +5372,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
          Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
 
-    [in aggiornamento] Solo per PNRR e PRIN:
+    Solo per PNRR e PRIN:   [l'opzione 4 è in aggiornamento]
       3: RAS, Nomina RUP, Richiesta pagina web, 
       4: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
          Comunicazione CIG, Lettera d'ordine, Prestazione resa
