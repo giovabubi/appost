@@ -1763,8 +1763,9 @@ appost <- function(){
     }
 
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento n. 31 del Direttore Generale del CNR prot. n. 54747 del 25/5/2025 di attribuzione dell'incarico di Responsabile della Gestione e Compliance amministrativo-contabile (RGC) dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) alla sig.ra Concetta Mottura per il periodo dall’1/3/2025 al 29/2/2028;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
       #                   ftext(nomina.RAMM)), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
@@ -1996,8 +1997,9 @@ appost <- function(){
     }
 
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento n. 31 del Direttore Generale del CNR prot. n. 54747 del 25/5/2025 di attribuzione dell'incarico di Responsabile della Gestione e Compliance amministrativo-contabile (RGC) dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) alla sig.ra Concetta Mottura per il periodo dall’1/3/2025 al 29/2/2028;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
       #                   ftext(nomina.RAMM)), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
@@ -3001,10 +3003,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     doc <- doc |>
-    body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                       ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, UO 121.000) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b),
-                         ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), 
+                         #ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, UO 121.000) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+                         ftext(" il provvedimento n. 31 del Direttore Generale del CNR prot. n. 54747 del 25/5/2025 di attribuzione dell'incarico di Responsabile della Gestione e Compliance amministrativo-contabile (RGC) dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) alla sig.ra Concetta Mottura per il periodo dall’1/3/2025 al 29/2/2028;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b),
+      #                    ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n° 420/2024 – Verbale 511 del 17/12/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
@@ -3031,7 +3034,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prot..lettera.ordine),
                          ftext(", CIG "),
                          ftext(CIG),
-                         ftext(", registrazione U-GOV anticipata n. "),
+                         ftext(", registrazione U-Gov anticipata n. "),
                          ftext(Anticipata),
                          ftext(";")), style = "Normal")
     if(Fornitore..Nazione=="Italiana"){
@@ -4614,8 +4617,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento n. 31 del Direttore Generale del CNR prot. n. 54747 del 25/5/2025 di attribuzione dell'incarico di Responsabile della Gestione e Compliance amministrativo-contabile (RGC) dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) alla sig.ra Concetta Mottura per il periodo dall’1/3/2025 al 29/2/2028;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
       #                   ftext(nomina.RAMM)), style = "Normal") |>
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
