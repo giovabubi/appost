@@ -4924,7 +4924,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("Clausola risolutiva espressa", fpt.b), ftext(": il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Elenco punto")
     }
     
-    if(Fornitore..Nazione!="Italiana"){
+    if(Fornitore..Nazione=="Italiana"){
       b <- cursor_reach(doc, "CAMPO.INIZIO.LDO.EN")
       b <- doc$officer_cursor$which
       e <- cursor_end(doc)
