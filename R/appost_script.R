@@ -2276,6 +2276,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               cat("
     Documento '", pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
             }
+        
         ## Condizioni d'acquisto ----
         download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
@@ -2332,6 +2333,33 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         print(doc, target = paste0(pre.nome.file, "5.8 Condizioni acquisto.docx"))
         cat("
     Documento '", pre.nome.file, "5.8 Condizioni acquisto.docx' generato e salvato in ", pat)
+        
+        ## Privacy ----
+        download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        
+        if(sede=="TOsi"){
+          doc <- doc |>
+            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        }
+        
+        doc <- doc |>
+          cursor_bookmark("bookmark_oggetto") |>
+          body_remove() |>
+          cursor_backward() |>
+          body_add_fpar(fpar(ftext("La presente informativa descrive le misure di tutela riguardo al trattamento dei dati personali destinata ai fornitori di beni e/o servizi, nell’ambito dell’affidamento diretto "),
+                             ftext(della.fornitura),
+                             ftext(" di “"),
+                             ftext(Prodotto, fpt.b),
+                             ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal") |>
+          body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
+        print(doc, target = paste0(pre.nome.file, "5.9 Informativa privacy.docx"))
+        cat("
+    Documento '", pre.nome.file, "5.9 Informativa privacy.docx' generato e salvato in ", pat)
         
       }else{
         ## Declaration on honour ----
@@ -3985,6 +4013,113 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(";")), style = "Elenco punto")
       print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH servizi di ricerca.docx"))
     }
+    
+    ## Condizioni d'acquisto ----
+    download.file(paste(lnk, "Condizioni.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+      headers_replace_text_at_bkm(bookmark = "bookmark_headers", toupper(Progetto.int))
+    
+    if(Inventariabile=="Inventariabile"){
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_durata", "la fornitura dovrà essere consegnata e installata entro 6 mesi")
+    }
+    if(Tipo.acquisizione=="Servizi"){
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_durata", "il servizio dovrà essere svolto entro 6 mesi")
+    }
+    
+    doc <- doc |>
+      body_replace_text_at_bkm("bookmark_dicitura_fattura", dicitura.fattura)
+    
+    if(Tipo.acquisizione=='Beni'){
+      doc <- doc |>
+        cursor_bookmark("bookmark_conformita") |>
+        body_remove() |>
+        cursor_backward() |>
+        #body_replace_all_text("CAMPO.CONFORMITA", "", only_at_cursor = TRUE) |>
+        body_add_fpar(fpar(ftext("Verifica di conformità", fpt.b), ftext(": la presente fornitura è soggetta a verifica di conformità da effettuarsi, secondo quanto previsto dall’art. 116 e nell’Allegato II.14 del codice dei contratti entro 2 mesi. A seguito della verifica di conformità si procede al pagamento della rata di saldo e, se prevista, allo svincolo della cauzione.")), style = "Elenco punto")
+    }else{
+      doc <- doc |>
+        cursor_bookmark("bookmark_conformita") |>
+        body_remove() |>
+        cursor_backward() |>
+        #body_replace_all_text("CAMPO.CONFORMITA", "", only_at_cursor = TRUE) |>
+        body_add_fpar(fpar(ftext("Verifica di regolare esecuzione", fpt.b), ftext(": la stazione appaltante, per il tramite del RUP, emette il certificato di regolare esecuzione, secondo le modalità indicate nell'Allegato II.14 al codice dei contratti pubblici, entro 6 mesi. A seguito dell’emissione del certificato di regolare esecuzione si procede al pagamento della rata di saldo e, se prevista, allo svincolo della cauzione.")), style = "Elenco punto")
+    } 
+    
+    if(Importo.senza.IVA.num<40000){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("Clausola risolutiva espressa", fpt.b), ftext(": il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Elenco punto")
+    }
+    
+    if(Fornitore..Nazione=="Italiana"){
+      b <- cursor_reach(doc, "GENERAL PURCHASE CONDITIONS")
+      b <- doc$officer_cursor$which
+      e <- cursor_end(doc)
+      e <- e$officer_cursor$which -5
+      doc <- cursor_reach(doc, "GENERAL PURCHASE CONDITIONS")
+      for(i in 1:(e-b)){
+        doc <- body_remove(doc)
+      }
+    }else{
+      if(Inventariabile=="Inventariabile"){
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_durata_eng", "the supply must be delivered and installed within 6 months")
+      }
+      if(Tipo.acquisizione=="Servizi"){
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_durata_eng", "the service must be carried out within 6 months")
+      }
+      
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_dicitura_fattura_eng", dicitura.fattura)
+      
+      if(Tipo.acquisizione=='Beni'){
+        doc <- doc |>
+          cursor_bookmark("bookmark_conformita_eng") |>
+          body_remove() |>
+          cursor_backward() |>
+          body_add_fpar(fpar(ftext("Compliance check", fpt.b), ftext(": this supply is subject to a conformity check to be carried out, as per art. 116 and Annex II.14 of the contracts code within 2 months. Following the conformity check, the balance instalment will be paid and, if applicable, the deposit will be released.")), style = "Elenco punto 2")      }else{
+        doc <- doc |>
+          cursor_bookmark("bookmark_conformita_eng") |>
+          body_remove() |>
+          cursor_backward() |>
+          body_add_fpar(fpar(ftext("Verification of proper execution", fpt.b), ftext(": the contracting authority, through the RUP, issues the certificate of proper execution, according to the methods indicated in Annex II.14 to the public contracts code, within 6 months. Following the issuance of the certificate of proper execution, the payment of the balance instalment and, if applicable, the release of the security deposit shall take place.")), style = "Elenco punto 2")
+      } 
+      
+      if(Importo.senza.IVA.num<40000){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("Express termination clause", fpt.b), ftext(": CNR has the right to terminate the contract/order in the event of a lack of participation requirements being ascertained. For the termination of the contract, art. 122 of Legislative Decree 36/2023, as well as articles 1453 et seq. of the Civil Code, apply. CNR will formally communicate the termination to the supplier, with a ban on proceeding with the payment of the fees, except within the limits of the services already performed.")), style = "Elenco punto 2")
+      }
+    }
+    
+    print(doc, target = paste0(pre.nome.file, "Condizioni generali di acquisto.docx"))
+    
+    cat("
+
+    Documento '", pre.nome.file, "Condizioni generali di acquisto.docx' generato e salvato in ", pat)
+    
+    ## Privacy ----
+    download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+      cursor_bookmark("bookmark_oggetto") |>
+      body_remove() |>
+      cursor_backward() |>
+      body_add_fpar(fpar(ftext("La presente informativa descrive le misure di tutela riguardo al trattamento dei dati personali destinata ai fornitori di beni e/o servizi, nell’ambito dell’affidamento diretto "),
+                         ftext(della.fornitura),
+                         ftext(" di “"),
+                         ftext(Prodotto, fpt.b),
+                         ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal") |>
+      body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
+    print(doc, target = paste0(pre.nome.file, "5.9 Informativa privacy.docx"))
+    cat("
+    Documento '", pre.nome.file, "5.9 Informativa privacy.docx' generato e salvato in ", pat)
     
     ## Dich.Ass. TIT ----
     download.file(paste(lnk, "Dich_conf_tit.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
