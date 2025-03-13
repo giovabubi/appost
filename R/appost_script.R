@@ -2428,6 +2428,26 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         print(doc, target = paste0(pre.nome.file, "5.8 Purchase conditions.docx"))
         cat("
     Documento '", pre.nome.file, "5.8 Purchase conditions.docx' generato e salvato in ", pat)
+        
+        ## Privacy ----
+        download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        
+        if(sede=="TOsi"){
+          doc <- doc |>
+            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        }
+        
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
+        
+        print(doc, target = paste0(pre.nome.file, "5.9 Privacy policy.docx"))
+        cat("
+    Documento '", pre.nome.file, "5.9 Privacy policy.docx' generato e salvato in ", pat)
       }
     }
 
@@ -4015,6 +4035,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     ## Condizioni d'acquisto ----
+    if(Fornitore..Nazione=="Italiana"){
     download.file(paste(lnk, "Condizioni.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     doc <- doc |>
@@ -4054,16 +4075,18 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("Clausola risolutiva espressa", fpt.b), ftext(": il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Elenco punto")
     }
     
-    if(Fornitore..Nazione=="Italiana"){
-      b <- cursor_reach(doc, "GENERAL PURCHASE CONDITIONS")
-      b <- doc$officer_cursor$which
-      e <- cursor_end(doc)
-      e <- e$officer_cursor$which -5
-      doc <- cursor_reach(doc, "GENERAL PURCHASE CONDITIONS")
-      for(i in 1:(e-b)){
-        doc <- body_remove(doc)
-      }
+    print(doc, target = paste0(pre.nome.file, "3.11 Condizioni generali di acquisto.docx"))
+    cat("
+
+    Documento '", pre.nome.file, "3.11 Condizioni generali di acquisto.docx' generato e salvato in ", pat)
+    
     }else{
+      download.file(paste(lnk, "Condizioni_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        headers_replace_text_at_bkm(bookmark = "bookmark_headers", toupper(Progetto.int))
+      
       if(Inventariabile=="Inventariabile"){
         doc <- doc |>
           body_replace_text_at_bkm("bookmark_durata_eng", "the supply must be delivered and installed within 6 months")
@@ -4095,13 +4118,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       }
     }
     
-    print(doc, target = paste0(pre.nome.file, "Condizioni generali di acquisto.docx"))
-    
+    print(doc, target = paste0(pre.nome.file, "3.11 Condizioni generali di acquisto.docx"))
     cat("
 
-    Documento '", pre.nome.file, "Condizioni generali di acquisto.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3.11 Condizioni generali di acquisto.docx' generato e salvato in ", pat)
     
     ## Privacy ----
+    if(Fornitore..Nazione=="Italiana"){
     download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
@@ -4115,11 +4138,23 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(della.fornitura),
                          ftext(" di “"),
                          ftext(Prodotto, fpt.b),
-                         ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal") |>
-      body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
-    print(doc, target = paste0(pre.nome.file, "5.9 Informativa privacy.docx"))
+                         ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal")
+      
+    print(doc, target = paste0(pre.nome.file, "3.12 Informativa privacy.docx"))
     cat("
-    Documento '", pre.nome.file, "5.9 Informativa privacy.docx' generato e salvato in ", pat)
+    Documento '", pre.nome.file, "3.12 Informativa privacy.docx' generato e salvato in ", pat)
+    
+    }else{
+      download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
+      print(doc, target = paste0(pre.nome.file, "3.12 Privacy policy.docx"))
+      cat("
+    Documento '", pre.nome.file, "3.12 Privacy policy.docx' generato e salvato in ", pat)
+    }
     
     ## Dich.Ass. TIT ----
     download.file(paste(lnk, "Dich_conf_tit.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
