@@ -254,12 +254,12 @@ appost <- function(){
 
   if(Rotazione.fornitore=="Importo <5.000€"){
     rotazione.individuata <- "che, in relazione a quanto indicato all'art. 49, comma 6, del Codice è possibile derogare dall'applicazione del principio di rotazione in caso di affidamenti di importo inferiore a euro 5.000,00;"
-  }else if(Rotazione.fornitore=="Avviso pubblico"){
-    rotazione.individuata <- "che non si applica il principio di rotazione in quanto è stata espletata un'indagine di mercato aperta alla partecipazione di tutti gli operatori economici in possesso di tutti i requisiti richiesti;"
   }else if(Rotazione.fornitore=="Non è il contraente uscente"){
-    rotazione.individuata <- "che in applicazione del principio di rotazione l'operatore economico individuato non è il contraente uscente;"
-  }else{
-    rotazione.individuata <- "che è possibile procedere all’affidamento al contraente uscente poiché non trova applicazione il principio di rotazione in conseguenza della particolare struttura del mercato e dell'effettiva assenza di alternative e che l'affidatario medesimo ha svolto;"
+    rotazione.individuata <- "che in applicazione del principio di rotazione di cui all’art. 49, comma 2 del Codice, l’operatore economico individuato non è il contraente uscente;"
+  }else if(Rotazione.fornitore=="Importo di fascia differente"){
+    rotazione.individuata <- "che è possibile procedere all’affidamento al contraente uscente poiché non trova applicazione il principio di rotazione in quanto l’affidamento, pur riguardando l’operatore uscente, ha un importo appartenente ad una fascia diversa rispetto al precedente affidamento, in accordo con le linee guida per l’applicazione del principio di rotazione di affidamento dei contratti pubblici ai sensi del d.lgs. 36/2023 approvate dal CdA del CNR con delibera n. 412 del 19 dicembre 2023;"
+  }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+    rotazione.individuata <- "che, ai sensi dell’art. 49, comma 4, del Codice, è possibile procedere all’affidamento al contraente uscente in deroga al principio di rotazione in conseguenza della particolare struttura del mercato e dell'effettiva assenza di alternative e accertato che l'affidatario medesimo ha svolto accuratamente il precedente contratto garantendo altresì la qualità della prestazione resa;"
   }
 
   if(Motivo.fuori.MePA==">5.000€ beni ICT"){
@@ -1916,11 +1916,9 @@ appost <- function(){
     #doc <- doc |>
       body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" alla pubblicazione del presente provvedimento ai sensi del combinato disposto dell’Art. 37 del d.lgs. 14 marzo 2013, n. 33 e dell’art. 20 del Codice;")), style = "Elenco liv1") |>
       body_add_par("", style = "Normal") |>
-      body_add_par("Visto di regolarità contabile", style = "Firma 1") |>
-      #body_add_par("Il Responsabile Amministrativo", style = "Firma 1") |>
-      #body_add_fpar(fpar(ftext("("), ftext(RAMM), ftext(")")), style = "Firma 1") |>
-      body_add_par("La segretaria amministrativa", style = "Firma 1") |>
-      body_add_fpar(fpar(ftext("(sig.ra Concetta Mottura)")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
@@ -4643,7 +4641,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" relativa alla necessità di procedere all’acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("”, nell’ambito delle attività previste dal "),
+                         ftext("”, nell’ambito delle attività previste dal progetto "),
                          ftext(Progetto.cup),
                          ftext(", corredata dal preventivo d'importo pari a "),
                          ftext(Importo.senza.IVA),
@@ -4657,7 +4655,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_remove() |>
       cursor_backward() |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento prot. n. "),
-                         ftext(tolower(Prot..provv..impegno)),
+                         ftext(tolower(Prot..nomina.RUP)),
                          ftext(", con il quale è "),
                          ftext(nominato),
                          ftext(" "),
@@ -4667,9 +4665,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" quale Responsabile Unico del Progetto (RUP) ai sensi dell’art. 15 del Codice;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato "),
                          ftext(paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ")")),
-                         ftext(" ha presentato, attraverso la piattaforma telematica di negoziazione, un’offerta ritenuta congrua, corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti dalla S.A., d’importo uguale o inferiore rispetto a quello stimato dalla stazione appaltante, pari a "),
-                         ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA;")), style = "Normal") |>
+                         ftext(" ha presentato, attraverso la piattaforma telematica di negoziazione, un’offerta ritenuta congrua, corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti dalla S.A., d'importo corrispondente al preventivo precedentemente acquisito e agli atti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" l’"), ftext("istruttoria del RUP prot. n. ", fpt.b),
                          ftext(Prot..atto.istruttorio, fpt.b),
                          ftext(", contenente l’esito positivo relativo alla verifica dei requisiti dichiarati in sede di affidamento dall’operatore economico "),
@@ -4686,8 +4682,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_remove() |>
       cursor_backward() |>
       body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del progetto "),
-                         ftext(Progetto),
-                         ftext(", voce di costo CO.AN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal")
+                         ftext(Progetto.cup),
+                         ftext(", voce di costo CO.AN "), ftext(Voce.di.spesa), ftext(";")), style = "Normal") |>
+    body_add_fpar(fpar(ftext("VALUTATA", fpt.b), ftext(" l’opportunità, in ottemperanza alla suddetta normativa, di procedere ad affidamento diretto all’operatore economico "),
+                       ftext(Fornitore),
+                       ftext(" (P.IVA "),
+                       ftext(Fornitore..P.IVA),
+                       ftext("), mediante provvedimento contenente gli elementi essenziali descritti nell'art. 17, comma 2, del Codice, tenuto conto che il medesimo è in possesso di documentate esperienze pregresse idonee all'esecuzione della prestazione contrattuale;")), style = "Normal")
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
         cursor_bookmark("bookmark_procedere") |>
@@ -4729,7 +4730,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(Fornitore..Codice.terzo.SIGLA),
                            ftext("), con sede legale in "),
                            ftext(Fornitore..Sede),
-                           ftext(", che ha presentato il proprio preventivo ammontante a "),
+                           ftext(", individuato mediante indagine informale di mercato, che ha presentato il proprio preventivo ammontante a "),
                            ftext(Importo.senza.IVA, fpt.b),
                            ftext(" oltre IVA;")), style = "Elenco numero")
     }
@@ -4741,8 +4742,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" la registrazione sul sistema contabile della seguente scrittura anticipata n. "),
                          ftext(Anticipata),
                          ftext(" di "),
-                         ftext(Importo.con.IVA),
-                         ftext(" IVA inclusa sul progetto "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" oltre IVA sul progetto "),
                          ftext(Progetto.cup),
                          ftext(", voce di costo CO.AN "),
                          ftext(Voce.di.spesa),
@@ -4752,16 +4753,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b),
                            ftext(" la registrazione sul sistema contabile della seguente scrittura anticipata n. _________ di € 35,00, sul progetto "),
                            ftext(Progetto.cup), 
-                           ftext(", voce di costo 13096 per la contribuzione ANAC;")), style = "Elenco punto liv2")
+                           ftext(", voce di costo 13096 per la contribuzione ANAC;")), style = "Elenco numero")
     } 
     doc <- doc |>
       cursor_reach("CAMPO.FIRMA") |>
       body_remove() |>
-      body_add_par("Controllo regolarità contabile", style = "Firma 1") |>
-      #body_add_par(resp.segr, style = "Firma 1") |>
-      #body_add_fpar(fpar(ftext("("), ftext(RAMM), ftext(")")), style = "Firma 1") |>
-      body_add_par("La segretaria amministrativa", style = "Firma 1") |>
-      body_add_fpar(fpar(ftext("(sig.ra Concetta Mottura)")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
@@ -4830,22 +4829,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     download.file(paste(lnk, "LdO.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    if(PNRR!="No"){
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
-        headers_replace_text_at_bkm(bookmark = "bookmark_headers", toupper(Progetto.int))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers", sede1)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-    }
-    
+    download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+      headers_replace_text_at_bkm(bookmark = "bookmark_headers", toupper(Progetto.int))
+    file.remove("tmp.docx")
+    file.remove(logo)
+
     doc <- doc |>
       cursor_begin() |>
       body_add_fpar(fpar(ftext("LETTERA D’ORDINE "), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
@@ -4859,13 +4849,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.OFFERTA.LDO") |>
       body_replace_all_text("CAMPO.OFFERTA.LDO", Preventivo.fornitore, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.DAC.LDO") |>
-      body_replace_all_text("CAMPO.DAC.LDO", Prot..DaC, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.DAC.LDO", paste0(Prot..DaC, " (", Pagina.web, ")"), only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RDO1") |>
       body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RDO2") |>
       body_replace_all_text("CAMPO.RDO2", as.character(ordine.trattativa.scelta.ldo2), only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.WEB") |>
-      body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FORNITORE") |>
       body_replace_all_text("CAMPO.FORNITORE", Fornitore, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.SEDE") |>
@@ -4893,34 +4881,31 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_reach("CAMPO.FATTURAZIONE") |>
       body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
       body_replace_text_at_bkm("bookmark_fatturazione2", dicitura.fatturazione) |>
-      cursor_reach("CAMPO.FIRMA.LDO.IT")
+      cursor_reach("CAMPO.FIRMA.LDO.IT") 
+    
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |>
         body_add_fpar(fpar(ftext("Il contraente, a garanzia dell’adempimento di tutte le obbligazioni del presente atto, ha costituito la garanzia definitiva ____________________ di € __________ (euro __________), mediante cauzione/fideiussione agli atti.")), style = "Normal", pos = "on")
     }
+    
     doc <- doc |>
       body_add_fpar(fpar(""), style = "Normal", pos = "on") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     
-    if(PNRR!='No'){
+    if(Inventariabile=="Inventariabile"){
       doc <- doc |>
-        cursor_reach("CAMPO.FATTURAZIONE.2") |>
-        body_remove() |>
-        cursor_backward() |>
-        body_add_fpar(fpar(ftext("Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine, il numero di protocollo (si veda in alto nella pagina della lettera d'ordine), il CIG, il CUP e la seguente dicitura: '"),
-                           ftext(dicitura.fattura, fpt.b),
-                           ftext("'.")), style = "Elenco punto")
-    }else{
+        body_replace_text_at_bkm("bookmark_durata", "la fornitura dovrà essere consegnata e installata entro 6 mesi")
+    }
+    if(Tipo.acquisizione=="Servizi"){
       doc <- doc |>
-        cursor_reach("CAMPO.FATTURAZIONE.2") |>
-        body_remove() |>
-        cursor_backward() |>
-        body_add_fpar(fpar(ftext("Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine, il numero di protocollo (si veda in alto nella pagina della lettera d'ordine), il CIG e il CUP.")), style = "Elenco punto")
+        body_replace_text_at_bkm("bookmark_durata", "il servizio dovrà essere svolto entro 6 mesi")
     }
     
-    if(PNRR!='No'){
-      if(Tipo.acquisizione=='Beni'){
+    doc <- doc |>
+      body_replace_text_at_bkm("bookmark_dicitura_fattura", dicitura.fattura)
+    
+    if(Tipo.acquisizione=='Beni'){
         doc <- doc |>
           cursor_bookmark("bookmark_conformita") |>
           body_remove() |>
@@ -4931,24 +4916,19 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           cursor_bookmark("bookmark_conformita") |>
           body_remove() |>
           cursor_backward() |>
-          body_add_fpar(fpar(ftext("Verifica di regolare esecuzione", fpt.b), ftext(": La stazione appaltante, per il tramite del RUP, emette il certificato di regolare esecuzione, secondo le modalità indicate nell'Allegato II.14 al codice dei contratti pubblici, entro _____ mesi. A seguito dell’emissione del certificato di regolare esecuzione si procede al pagamento della rata di saldo e, se prevista, allo svincolo della cauzione.")), style = "Elenco punto")
+          body_add_fpar(fpar(ftext("Verifica di regolare esecuzione", fpt.b), ftext(": la stazione appaltante, per il tramite del RUP, emette il certificato di regolare esecuzione, secondo le modalità indicate nell'Allegato II.14 al codice dei contratti pubblici, entro 6 mesi. A seguito dell’emissione del certificato di regolare esecuzione si procede al pagamento della rata di saldo e, se prevista, allo svincolo della cauzione.")), style = "Elenco punto")
       } 
-    }else{
-      doc <- doc |>
-        cursor_bookmark("bookmark_conformita") |>
-        body_remove() |>
-        cursor_backward()
-    }
+    
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute nell’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Elenco punto")
+        body_add_fpar(fpar(ftext("Clausola risolutiva espressa", fpt.b), ftext(": il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Elenco punto")
     }
     
-    if(Fornitore..Nazione=="Italiana"){
+    if(Fornitore..Nazione!="Italiana"){
       b <- cursor_reach(doc, "CAMPO.INIZIO.LDO.EN")
       b <- doc$officer_cursor$which
       e <- cursor_end(doc)
-      e <- e$officer_cursor$which -5
+      e <- e$officer_cursor$which -6
       doc <- cursor_reach(doc, "CAMPO.FIRMA.LDO.EN")
       for(i in 1:(e-b)){
         doc <- body_remove(doc)
@@ -4968,13 +4948,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cursor_reach("CAMPO.QUOTATION") |>
         body_replace_all_text("CAMPO.QUOTATION", Preventivo.fornitore, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.DAC.LDO") |>
-        body_replace_all_text("CAMPO.DAC.LDO", Prot..DaC.en, only_at_cursor = TRUE) |>
+        body_replace_all_text("CAMPO.DAC.LDO", paste0(Prot..DaC.en, " (", Pagina.web, ")"), only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.RDO1") |>
         body_replace_all_text("CAMPO.RDO1", ordine.trattativa.scelta.ldo1, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.RDO2") |>
         body_replace_all_text("CAMPO.RDO2", as.character(ordine.trattativa.scelta.ldo2), only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.WEB") |>
-        body_replace_all_text("CAMPO.WEB", Pagina.web, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.FORNITORE") |>
         body_replace_all_text("CAMPO.FORNITORE", Fornitore, only_at_cursor = TRUE) |>
         cursor_reach("CAMPO.SEDE") |>
@@ -5003,6 +4981,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_replace_all_text("CAMPO.FATTURAZIONE", fatturazione, only_at_cursor = TRUE) |>
         body_replace_text_at_bkm("bookmark_fatturazione2_eng", dicitura.fatturazione.eng) |>
         cursor_reach("CAMPO.FIRMA.LDO.EN")
+      
       if(Importo.senza.IVA.num>=40000){
         doc <- doc |>
           body_add_fpar(fpar(ftext("The contractor, as a guarantee of the fulfillment of all the obligations of this deed, has constituted the definitive guarantee ____________________ of € __________ (euro __________), by means of a security/guarantee of the documents.")), style = "Normal", pos = "on")
@@ -5012,45 +4991,35 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
       
-      if(PNRR!="No"){
+      if(Inventariabile=="Inventariabile"){
         doc <- doc |>
-          cursor_reach("CAMPO.FATTURAZIONE.2") |>
-          body_remove() |>
-          cursor_backward() |>
-          body_add_fpar(fpar(ftext("Invoice", fpt.b), ftext(": the invoice, drawn up in accordance with current legislation, must include, under penalty of rejection, the purchase order number, the number of the registration protocol (see on the top of the purchase order page), the CIG, the CUP and the following phrase: '"),
-                             ftext(dicitura.fattura, fpt.b),
-                             ftext("'.")), style = "Elenco punto 2")
-      }else{
+          body_replace_text_at_bkm("bookmark_durata_eng", "the supply must be delivered and installed within 6 months")
+      }
+      if(Tipo.acquisizione=="Servizi"){
         doc <- doc |>
-          cursor_reach("CAMPO.FATTURAZIONE.2") |>
-          body_remove() |>
-          cursor_backward() |>
-          body_add_fpar(fpar(ftext("Invoice", fpt.b), ftext(": the invoice, drawn up in accordance with current legislation, must include, under penalty of rejection, the purchase order number, the number of the registration protocol (see on the top of the purchase order page), the CIG and the CUP.")), style = "Elenco punto 2")
+          body_replace_text_at_bkm("bookmark_durata_eng", "the service must be carried out within 6 months")
       }
       
-      if(PNRR!='No'){
-        if(Tipo.acquisizione=='Beni'){
-          doc <- doc |>
-            cursor_reach("CAMPO.VERIFICA.CONFORMITA") |>
-            body_remove() |>
-            cursor_backward() |>
-            body_add_fpar(fpar(ftext("Verification of conformity", fpt.b), ftext(": this supply is subject to verification of conformity to be carried out, in accordance with the provisions of art. 116 and in Annex II.14 of the Public Contracts Code within 2 months. Following the verification of conformity, the balance instalment is paid and, if constituted, the security deposit is released.")), style = "Elenco punto 2")
-        }else{
-          doc <- doc |>
-            cursor_reach("CAMPO.VERIFICA.CONFORMITA") |>
-            body_remove() |>
-            cursor_backward() |>
-            body_add_fpar(fpar(ftext("Verification of regular execution", fpt.b), ftext(": the contracting authority, through the RUP, issues the certificate of regular execution, in accordance with the methods indicated in Annex II.14 of the Public Contracts Code, within ___ months. Following the issuance of the certificate of regular execution, the balance instalment is paid and, if constituted, the security deposit is released.")), style = "Elenco punto 2")
-        }
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_dicitura_fattura_eng", dicitura.fattura)
+
+      if(Tipo.acquisizione=='Beni'){
+        doc <- doc |>
+          cursor_bookmark("bookmark_conformita_eng") |>
+          body_remove() |>
+          cursor_backward() |>
+          body_add_fpar(fpar(ftext("Verifica di conformità", fpt.b), ftext(": this supply is subject to a conformity check to be carried out, as per art. 116 and Annex II.14 of the contracts code within 2 months. Following the conformity check, the balance instalment will be paid and, if applicable, the deposit will be released.")), style = "Elenco punto")
       }else{
         doc <- doc |>
-          cursor_reach("CAMPO.VERIFICA.CONFORMITA") |>
+          cursor_bookmark("bookmark_conformita_eng") |>
           body_remove() |>
-          cursor_backward()
-      }
+          cursor_backward() |>
+          body_add_fpar(fpar(ftext("Verifica di regolare esecuzione", fpt.b), ftext(": the contracting authority, through the RUP, issues the certificate of proper execution, according to the methods indicated in Annex II.14 to the public contracts code, within 6 months. Following the issuance of the certificate of proper execution, the payment of the balance instalment and, if applicable, the release of the security deposit shall take place.")), style = "Elenco punto")
+      } 
+      
       if(Importo.senza.IVA.num<40000){
         doc <- doc |>
-          body_add_fpar(fpar(ftext("Express termination clause", fpt.b), ftext(": the order is issued in application of the provisions contained in art. 52, paragraphs 1 and 2 of Legislative Decree 36/2023. The CNR has the right to terminate the contract/order in the event of a lack of participation requirements being ascertained. For the termination of the contract, art. 122 of Legislative Decree 36/2023, as well as articles 1453 et seq. of the Civil Code, apply. The CNR will formally communicate the termination to the supplier, with a ban on proceeding with the payment of the fees, except within the limits of the services already performed.")), style = "Elenco punto 2")
+          body_add_fpar(fpar(ftext("Express termination clause", fpt.b), ftext(": CNR has the right to terminate the contract/order in the event of a lack of participation requirements being ascertained. For the termination of the contract, art. 122 of Legislative Decree 36/2023, as well as articles 1453 et seq. of the Civil Code, apply. CNR will formally communicate the termination to the supplier, with a ban on proceeding with the payment of the fees, except within the limits of the services already performed.")), style = "Elenco punto 2")
       }
     }
     print(doc, target = paste0(pre.nome.file, "7 Lettera ordine.docx"))
