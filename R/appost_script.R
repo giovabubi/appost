@@ -1789,9 +1789,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                              ftext(" relativa alla necessità di procedere all’acquisizione "),
                              ftext(della.fornitura), ftext(" di “"),
                              ftext(Prodotto),
-                             ftext("” (pagina web dedicata al ciclo di vita del contratto pubblico "),
+                             ftext("” ("),
                              ftext(Pagina.web),
-                             ftext("), nell’ambito delle attività previste dal progetto “"),
+                             ftext("), nell’ambito del progetto “"),
                              ftext(Progetto),
                              ftext("”"),
                              ftext(CUP1),
@@ -1801,8 +1801,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                              ftext(Fornitore..P.IVA),
                              ftext(") per un importo stimato di "),
                              ftext(Importo.senza.IVA),
-                             ftext(" oltre IVA, il cui preventivo è "),
-                             ftext(preventivo.individuato)), style = "Normal")
+                             ftext(" oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
       }else{
         doc <- doc |>
           body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
@@ -1849,17 +1848,20 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("CONSIDERATO ", fpt.b),
                          ftext(rotazione.individuata)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che dal 1° gennaio 2024 è fatto obbligo di utilizzare piattaforme di approvvigionamento digitale certificate (e-procurement) per svolgere le procedure di affidamento e di esecuzione dei contratti pubblici, a norma degli artt. 25 e 26 del Codice;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la stazione appaltante ai sensi dell’art. 48 comma 2 del Codice, ha accertato che il presente appalto non presenta un interesse transfrontaliero certo per cui non segue le procedure ordinarie di cui alla parte IV del Libro II;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" il comunicato del Presidente dell’ANAC del 18 dicembre 2024 di adozione del provvedimento di prolungamento fino al 30 giugno 2025 della proroga di alcuni adempimenti previsti con la Delibera n. 582 del 13 dicembre 2023 e con il Comunicato del Presidente del 10 gennaio 2024, tra cui la possibilità di utilizzare l’interfaccia web messa a disposizione dalla Piattaforma PCP dell’Autorità per gli affidamenti diretti di importo inferiore a 5.000 euro in caso di impossibilità o difficoltà di ricorso alle PAD al fine di consentire l’assolvimento delle funzioni ad essa demandate, ivi compresi gli obblighi in materia di trasparenza;")), style = "Normal")
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la stazione appaltante ai sensi dell’art. 48 comma 2 del Codice, ha accertato che il presente appalto non presenta un interesse transfrontaliero certo per cui non segue le procedure ordinarie di cui alla parte IV del Libro II;")), style = "Normal")
 
     if(Motivo.fuori.MePA!="No"){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(ICT.testo)), style = "Normal")
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" il comunicato del Presidente dell’ANAC del 18 dicembre 2024 di adozione del provvedimento di prolungamento fino al 30 giugno 2025 della proroga di alcuni adempimenti previsti con la Delibera n. 582 del 13 dicembre 2023 e con il Comunicato del Presidente del 10 gennaio 2024, tra cui la possibilità di utilizzare l’interfaccia web messa a disposizione dalla Piattaforma PCP dell’Autorità per gli affidamenti diretti di importo inferiore a 5.000 euro in caso di impossibilità o difficoltà di ricorso alle PAD al fine di consentire l’assolvimento delle funzioni ad essa demandate, ivi compresi gli obblighi in materia di trasparenza;")), style = "Normal")
     }
+    # if(Motivo.fuori.MePA!="No"){
+    #   doc <- doc |>
+    #     body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(ICT.testo)), style = "Normal")
+    # }
 
     doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n° 420/2024 del 17/12/2024")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n° 420/2024 del 17/12/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
@@ -5500,12 +5502,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("\014")
     cat("
         
-        Ordine N° ", ordine, " '", Prodotto, "'", sep="")
+        | Ordine N° ", ordine, " '", Prodotto, "'", sep="")
     cat("
-        Fornitore: ", Fornitore, sep="")
+        | Fornitore: ", Fornitore, sep="")
     cat("
-        Progetto: ", Progetto, sep="")
-    
+        | Progetto: ", Progetto, sep="")
+    cat("
+        ___________________________")
     if(PNRR=="No"){
     cat("
 
