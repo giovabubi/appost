@@ -5513,12 +5513,19 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
          Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
 
-    Solo per PNRR e PRIN:   [l'opzione 4 è in aggiornamento]
+    Solo per PNRR e PRIN:
       3: RAS, Nomina RUP, Richiesta pagina web, 
       4: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
          Comunicazione CIG, Lettera d'ordine, Prestazione resa
       5: Assenza doppio finanziamento, Funzionalità del bene
       6: Provvedimento di liquidazione, Checklist
+
+N.B.: AppOst è ottimizzata per affidamenti diretti di forniture e servizi <40.000 €.
+Invece, per i seguenti ordini sono necessari adattamenti:
+- ordini >40.000 €
+- servizi di natura non intellettuale
+- forniture con posa in opera
+- procedure aperte o negoziate
 
 ")
       
