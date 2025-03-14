@@ -4,18 +4,24 @@ appost <- function(){
 
   # Carica dati ordine ----
   cat("\014")
-  #cat(rep("\n", 20))
-  cat("
+  cat(paste0("
 
       ***************************
       *** BENVENUTI in AppOst ***
       ***************************
+      ultimo aggiornamento: ", format(Sys.Date(), "%d %B %Y"), "
+
+      AppOst è ottimizzata per affidamenti diretti di forniture e servizi <40.000 €.
+      Invece, per i seguenti ordini sono necessari adattamenti:
+      - ordini >40.000 €
+      - servizi di natura non intellettuale
+      - forniture con posa in opera
+      - procedure aperte o negoziate
+
+Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaricato da Teams
 
 
-      Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaricato da Teams
-
-
-      ")
+      "))
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
@@ -5502,6 +5508,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     # Input ----
   answ <- function(){
     cat("\014")
+    if(PNRR!="No"){
     cat("
 
       ***************************
@@ -5520,23 +5527,17 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       5: Assenza doppio finanziamento, Funzionalità del bene
       6: Provvedimento di liquidazione, Checklist
 
-N.B.: AppOst è ottimizzata per affidamenti diretti di forniture e servizi <40.000 €.
-Invece, per i seguenti ordini sono necessari adattamenti:
-- ordini >40.000 €
-- servizi di natura non intellettuale
-- forniture con posa in opera
-- procedure aperte o negoziate
-
 ")
       
-    inpt <- readline()
-    if(inpt==1){ras();rup();pag()}
-    if(inpt==2){docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
-    
-    if(inpt==3){ras.pnrr();rup.pnrr();pag()}
-    if(inpt==4){docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
-    if(inpt==5){doppio_fin.pnrr();fun_bene.pnrr()}
-    if(inpt==6){provv_liq();chklst.pnrr()}
+      inpt <- readline()
+      if(inpt==1){ras();rup();pag()}
+      if(inpt==2){docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
+    }else{
+      if(inpt==3){ras.pnrr();rup.pnrr();pag()}
+      if(inpt==4){docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
+      if(inpt==5){doppio_fin.pnrr();fun_bene.pnrr()}
+      if(inpt==6){provv_liq();chklst.pnrr()}
+    }
     # if(inpt==5){
     #   # drive_deauth()
     #   # drive_user()
