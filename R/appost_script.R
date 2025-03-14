@@ -954,11 +954,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_replace_all_text("CAMPO.DELLA.FORNITURA", della.fornitura, only_at_cursor = TRUE)
     
     print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
-    
-    cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
+    Documento generato: '1 RAS'")
 
     ## Dich. Ass. Rich. ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -1036,7 +1034,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     cat("
 
-    Documento '", pre.nome.file, "9.1 Dichiarazione assenza conflitto RICH.docx' generato e salvato in ", pat)
+    Documento generato: '9.1 Dichiarazione assenza conflitto RICH'")
 
     ## Dich. Ass. Resp. ----
     if(Richiedente!=Responsabile.progetto){
@@ -1113,7 +1111,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       
       cat("
 
-    Documento '", pre.nome.file, "9.2 Dichiarazione assenza conflitto RESP.docx' generato e salvato in ", pat)
+    Documento generato: '9.2 Dichiarazione assenza conflitto RESP'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
@@ -1280,7 +1278,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       print(doc, target = paste0(pre.nome.file, "Allegato.docx"))
       cat("
 
-    Documenti '", pre.nome.file, "2 Avviso pubblico.docx' e '", pre.nome.file, "2.1 Allegato.docx' generati e salvati in ", pat)
+    Documenti generati: '2 Avviso pubblico' e '2.1 Allegato'")
 
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
@@ -1422,10 +1420,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     print(doc, target = paste0(pre.nome.file, "2 Nomina RUP.docx"))
     
-    #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
+    Documento generato: '2 Nomina RUP'")
     
     ## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -1503,7 +1500,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     cat("
 
-    Documento '", pre.nome.file, "9.3 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
+    Documento generato: '9.3 Dichiarazione assenza conflitto RSS'")
     
     ## Dich. Ass. RUP ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -1587,7 +1584,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "9.4 Dichiarazione assenza conflitto RUP.docx"))
     cat("
 
-    Documento '", pre.nome.file, "9.4 Dichiarazione assenza conflitto RUP.docx' generato e salvato in ", pat)
+    Documento generato: '9.4 Dichiarazione assenza conflitto RUP'")
     
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
@@ -1671,7 +1668,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       
       cat("
 
-    Documento '", pre.nome.file, "9.5 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
+    Documento generato: '9.5 Dichiarazione assenza conflitto SUP'")
       
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS, RUP)
@@ -1930,11 +1927,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
       
     print(doc, target = paste0(pre.nome.file, "7 Decisione a contrattare.docx"))
-    
-    #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "7 Decisione a contrattare.docx' generato e salvato in ", pat)
+    Documento generato: '7 Decisione a contrattare'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
@@ -2083,7 +2078,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "3 Provv. impegno.docx"))
     cat("
 
-    Documento '", pre.nome.file, "3 Provv. impegno.docx' generato e salvato in ", pat)
+    Documento generato: '3 Provv. impegno'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, Richiedente)
@@ -2151,7 +2146,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "3 Richiesta pagina web.docx"))
     cat("
 
-    Documento '", pre.nome.file, "3 Richiesta pagina web.docx' generato e salvato in ", pat)
+    Documento generato: '3 Richiesta pagina web'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP)
@@ -2252,7 +2247,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
 
             cat("
-    Documento '", pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx' generato e salvato in ", pat)
+    Documento generato: '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione'")
           }
 
             if(Importo.senza.IVA.num>=40000){
@@ -2267,7 +2262,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx"))
 
               cat("
-    Documento '", pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx' generato e salvato in ", pat)
+    Documento generato: '5.4 Dichiarazione possesso requisiti di qualificazione'")
 
               ## AUS ----
               download.file(paste(lnk, "Dich_aus.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2280,7 +2275,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
               print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
 
               cat("
-    Documento '", pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx' generato e salvato in ", pat)
+    Documento generato: '5.5 Dichiarazione del soggetto ausiliario'")
             }
         
         ## Condizioni d'acquisto ----
@@ -2338,7 +2333,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         
         print(doc, target = paste0(pre.nome.file, "5.8 Condizioni acquisto.docx"))
         cat("
-    Documento '", pre.nome.file, "5.8 Condizioni acquisto.docx' generato e salvato in ", pat)
+    Documento generato: '5.8 Condizioni acquisto'")
         
         ## Privacy ----
         download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2365,7 +2360,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
         print(doc, target = paste0(pre.nome.file, "5.9 Informativa privacy.docx"))
         cat("
-    Documento '", pre.nome.file, "5.9 Informativa privacy.docx' generato e salvato in ", pat)
+    Documento generato: '5.9 Informativa privacy'")
         
       }else{
         ## Declaration on honour ----
@@ -2374,10 +2369,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         file.remove("tmp.docx")
         
         print(doc, target = paste0(pre.nome.file, "5.7 Declaration on honour.docx"))
-        #cat("\014")
         cat("
 
-    Documento '", pre.nome.file, "5.7 Declaration on honour.docx' generato e salvato in ", pat)
+    Documento generato: '5.7 Declaration on honour'")
         
         ## Purchase conditions ----
         download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2433,7 +2427,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         
         print(doc, target = paste0(pre.nome.file, "5.8 Purchase conditions.docx"))
         cat("
-    Documento '", pre.nome.file, "5.8 Purchase conditions.docx' generato e salvato in ", pat)
+    Documento generato: '5.8 Purchase conditions'")
         
         ## Privacy ----
         download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2453,7 +2447,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         
         print(doc, target = paste0(pre.nome.file, "5.9 Privacy policy.docx"))
         cat("
-    Documento '", pre.nome.file, "5.9 Privacy policy.docx' generato e salvato in ", pat)
+    Documento generato: '5.9 Privacy policy'")
       }
     }
 
@@ -2531,7 +2525,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           print(doc, target = paste0(pre.nome.file, "5.6 Comprova imposta di bollo.docx"))
 
           cat("
-        Documento '", pre.nome.file, "5.6 Comprova imposta di bollo.docx' generato e salvato in ", pat)
+        Documento generato: '5.6 Comprova imposta di bollo'")
         }
     }
   
@@ -2581,7 +2575,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     print(doc, target = paste0(pre.nome.file, "6 Comunicazione CIG.docx"))
     cat("
 
-    Documento '", pre.nome.file, "6 Comunicazione CIG.docx' generato e salvato in ", pat)
+    Documento generato: '6 Comunicazione CIG'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, RUP, Pagina.web, CIG)
@@ -2700,10 +2694,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(RUP),
                          ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "5 Atto istruttorio.docx"))
-    cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "5 Atto istruttorio.docx' generato e salvato in ", pat)
+    Documento generato: '5 Atto istruttorio'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP, RUP..Luogo.di.nascita, RUP..Data.di.nascita, RUP..Codice.fiscale, Pagina.web)
@@ -2848,7 +2841,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     cat("
 
-    Documento '", pre.nome.file, "8 Lettera ordine.docx' generato e salvato in ", pat)
+    Documento generato: '8 Lettera ordine'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente..Luogo.di.consegna, Pagina.web)
@@ -2948,10 +2941,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("("), ftext(dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2")
     
     print(doc, target = paste0(pre.nome.file, "10 Dichiarazione prestazione resa.docx"))
-    #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "10 Dichiarazione prestazione resa.docx' generato e salvato in ", pat)
+    Documento generato: '10 Dichiarazione prestazione resa'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
@@ -3153,7 +3145,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     print(doc, target = paste0(pre.nome.file, "11 Provv. liquidazione.docx"))
     cat("
 
-    Documento '", pre.nome.file, "11 Provv. liquidazione.docx' generato e salvato in ", pat)
+    Documento generato: '11 Provv. liquidazione'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
@@ -3310,10 +3302,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
     
-    cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "1 RAS.docx' generato e salvato in ", pat)
+    Documento generato: '1 RAS'")
     
     ## Dich. Ass. RICH ----
     # if(PNRR!="No"){
@@ -3708,10 +3699,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "2 Nomina RUP.docx"))
     
-    #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "2 Nomina RUP.docx' generato e salvato in ", pat)
+    Documento generato: '2 Nomina RUP'")
     
     ## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3771,7 +3761,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     cat("
 
-    Documento '", pre.nome.file, "4.3 Dichiarazione assenza conflitto RSS.docx' generato e salvato in ", pat)
+    Documento generato: '4.3 Dichiarazione assenza conflitto RSS'")
     
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
@@ -3837,7 +3827,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     cat("
 
-    Documento '", pre.nome.file, "4.5 Dichiarazione assenza conflitto SUP.docx' generato e salvato in ", pat)
+    Documento generato: '4.5 Dichiarazione assenza conflitto SUP'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web, RUP)
@@ -4084,7 +4074,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     print(doc, target = paste0(pre.nome.file, "3.11 Condizioni generali di acquisto.docx"))
     cat("
 
-    Documento '", pre.nome.file, "3.11 Condizioni generali di acquisto.docx' generato e salvato in ", pat)
+    Documento generato: '3.11 Condizioni generali di acquisto'")
     
     }else{
       download.file(paste(lnk, "Condizioni_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -4127,7 +4117,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     print(doc, target = paste0(pre.nome.file, "3.11 Condizioni generali di acquisto.docx"))
     cat("
 
-    Documento '", pre.nome.file, "3.11 Condizioni generali di acquisto.docx' generato e salvato in ", pat)
+    Documento generato: '3.11 Condizioni generali di acquisto'")
     
     ## Privacy ----
     if(Fornitore..Nazione=="Italiana"){
@@ -4148,7 +4138,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       
     print(doc, target = paste0(pre.nome.file, "3.12 Informativa privacy.docx"))
     cat("
-    Documento '", pre.nome.file, "3.12 Informativa privacy.docx' generato e salvato in ", pat)
+    Documento generato: '3.12 Informativa privacy'")
     
     }else{
       download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -4159,7 +4149,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
       print(doc, target = paste0(pre.nome.file, "3.12 Privacy policy.docx"))
       cat("
-    Documento '", pre.nome.file, "3.12 Privacy policy.docx' generato e salvato in ", pat)
+    Documento generato: '3.12 Privacy policy'")
     }
     
     ## Dich.Ass. TIT ----
@@ -4319,7 +4309,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "5 Atto istruttorio.docx' generato e salvato in ", pat)
+    Documento generato: '5 Atto istruttorio'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, RUP,Prot..RAS, Prot..provv..impegno, Pagina.web)
@@ -4946,7 +4936,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "6 Decisione a contrattare.docx' generato e salvato in ", pat)
+    Documento generato: '6 Decisione a contrattare'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..atto.istruttorio, Pagina.web)
@@ -5203,7 +5193,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "7 Lettera ordine.docx' generato e salvato in ", pat)
+    Documento generato: '7 Lettera ordine'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente..Luogo.di.consegna, Pagina.web, Prot..DaC)
@@ -5304,7 +5294,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     cat("
 
-    Documento '", pre.nome.file, "8 Prestazione resa.docx' generato e salvato in ", pat)
+    Documento generato: '8 Prestazione resa'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
@@ -5378,7 +5368,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     #cat("\014")
     cat("
 
-    Documento '", pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx' generato e salvato in ", pat)
+    Documento generato: '9 Dichiarazione assenza doppio finanziamento'")
   }
   
   # Funzionalità bene ----
@@ -5431,7 +5421,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       
       cat("
 
-    Documento '", pre.nome.file, "10 Dichiarazione funzionalità bene.docx' generato e salvato in ", pat)
+    Documento generato: '10 Dichiarazione funzionalità bene'")
     }
   }
  
@@ -5482,7 +5472,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     cat("
 
-    Documento '", pre.nome.file, "11 Checklist.docx' generato e salvato in ", pat)
+    Documento generato: '11 Checklist'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prot..DaC, Prot..atto.istruttorio, Prot..lettera.ordine, Prot..provv..impegno, Pagina.web)
@@ -5530,13 +5520,32 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 ")
       
       inpt <- readline()
-      if(inpt==1){ras();rup();pag()}
-      if(inpt==2){docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
+      if(inpt==1){cat("\014");ras();rup();pag()}
+      if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
     }else{
-      if(inpt==3){ras.pnrr();rup.pnrr();pag()}
-      if(inpt==4){docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
-      if(inpt==5){doppio_fin.pnrr();fun_bene.pnrr()}
-      if(inpt==6){provv_liq();chklst.pnrr()}
+      cat("
+
+      ***************************
+      *** BENVENUTI in AppOst ***
+      ***************************
+
+    Che documento vuoi generare?
+      1: RAS, Nomina RUP, Richiesta pagina web
+      2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
+         Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
+
+    Solo per PNRR e PRIN:
+      1: RAS, Nomina RUP, Richiesta pagina web, 
+      2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
+         Comunicazione CIG, Lettera d'ordine, Prestazione resa
+      3: Assenza doppio finanziamento, Funzionalità del bene
+      4: Provvedimento di liquidazione, Checklist
+
+")
+      if(inpt==1){cat("\014");ras.pnrr();rup.pnrr();pag()}
+      if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
+      if(inpt==3){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
+      if(inpt==4){cat("\014");provv_liq();chklst.pnrr()}
     }
     # if(inpt==5){
     #   # drive_deauth()
