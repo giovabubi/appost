@@ -5510,13 +5510,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
          Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
 
-    Solo per PNRR e PRIN:
-      3: RAS, Nomina RUP, Richiesta pagina web, 
-      4: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
-         Comunicazione CIG, Lettera d'ordine, Prestazione resa
-      5: Assenza doppio finanziamento, Funzionalità del bene
-      6: Provvedimento di liquidazione, Checklist
-
 ")
       
       inpt <- readline()
@@ -5530,11 +5523,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       ***************************
 
     Che documento vuoi generare?
-      1: RAS, Nomina RUP, Richiesta pagina web
-      2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
-         Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
-
-    Solo per PNRR e PRIN:
       1: RAS, Nomina RUP, Richiesta pagina web, 
       2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
          Comunicazione CIG, Lettera d'ordine, Prestazione resa
