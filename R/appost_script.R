@@ -5498,12 +5498,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     # Input ----
   answ <- function(){
     cat("\014")
+    cat("")
+    cat("Ordine N° ", ordine, " '", Prodotto, "'", sep="")
+    cat("Fornitore: ", Fornitore, sep="")
+    cat("Progetto: ", Progetto, sep="")
+    
     if(PNRR=="No"){
     cat("
-
-      ***************************
-      *** BENVENUTI in AppOst ***
-      ***************************
 
     Che documento vuoi generare?
       1: RAS, Nomina RUP, Richiesta pagina web
@@ -5517,10 +5518,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
     }else{
       cat("
-
-      ***************************
-      *** BENVENUTI in AppOst ***
-      ***************************
 
     Che documento vuoi generare?
       1: RAS, Nomina RUP, Richiesta pagina web, 
