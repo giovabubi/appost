@@ -5501,14 +5501,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   answ <- function(){
     cat("\014")
     cat("
-        
+         ___________________________
         | Ordine N° ", ordine, " '", Prodotto, "'", sep="")
     cat("
         | Fornitore: ", Fornitore, sep="")
     cat("
         | Progetto: ", Progetto, sep="")
     cat("
-        ___________________________")
+         ___________________________")
     if(PNRR=="No"){
     cat("
 
