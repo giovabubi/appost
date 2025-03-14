@@ -5530,6 +5530,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       4: Provvedimento di liquidazione, Checklist
 
 ")
+      inpt <- readline()
       if(inpt==1){cat("\014");ras.pnrr();rup.pnrr();pag()}
       if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
       if(inpt==3){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
