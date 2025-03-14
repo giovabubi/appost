@@ -5498,10 +5498,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     # Input ----
   answ <- function(){
     cat("\014")
-    cat("")
-    cat("Ordine N° ", ordine, " '", Prodotto, "'", sep="")
-    cat("Fornitore: ", Fornitore, sep="")
-    cat("Progetto: ", Progetto, sep="")
+    cat("
+        
+        Ordine N° ", ordine, " '", Prodotto, "'", sep="")
+    cat("
+        Fornitore: ", Fornitore, sep="")
+    cat("
+        Progetto: ", Progetto, sep="")
     
     if(PNRR=="No"){
     cat("
