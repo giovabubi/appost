@@ -5498,7 +5498,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     # Input ----
   answ <- function(){
     cat("\014")
-    if(PNRR!="No"){
+    if(PNRR=="No"){
     cat("
 
       ***************************
