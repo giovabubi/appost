@@ -508,7 +508,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     dicitura.fattura <- trattini
     finanziamento <- "No"
   }
-  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4"){
+  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
   }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall"){
     finanziamento <- "PRIN 2022"
@@ -571,6 +571,23 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "115.303.750,00 €"
     costo.ammesso <- "114.500.000,00 €"
     logo <- "logo_onfoods.jpg"
+  }
+  if(PNRR=="SUS-MIRRI.IT"){
+    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 3.1 “fondo per la realizzazione di un sistema integrato di infrastrutture di ricerca e innovazione”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 3264 del 28/12/2021 - progetto “Strengthening the MIRRI Italian Research Infrastructure for Sustainable Bioscience and Bioeconomy” (SUS-MIRRI.iT), codice identificativo IR0000005 - CUP D13C22001390001'
+    codice.progetto <- "IR0000005"
+    CUP2 <- "D13C22001390001"
+    decreto.concessione <- "114 del 21/6/2022"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 3264 del 28/12/2021 di emanazione di un “Avviso pubblico per la presentazione di proposte progettuali per “Rafforzamento e creazione di Infrastrutture di Ricerca” da finanziare nell’ambito del Piano Nazionale di Ripresa e Resilienza, missione 4, componente 2, investimento 3.1 “fondo per la realizzazione di un sistema integrato di infrastrutture di ricerca e innovazione”, finanziato dall’Unione europea – NextGenerationEU;"
+    decreto.pnrr <- " il Decreto Direttoriale MUR n. 114 del 21/6/2022 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione presentata dall'Università di Torino, contrassegnata dal codice identificativo IR0000005, per la realizzazione del Programma di Ricerca dal titolo “Strengthening the MIRRI Italian Research Infrastructure for Sustainable Bioscience and Bioeconomy” (SUS-MIRRI.iT), CUP D13C22001390001;"
+    dicitura.fattura <- "PNRR SUS-MIRRI.IT - Codice progetto MUR: IR0000005"
+    investimento <- "3.1 “fondo per la realizzazione di un sistema integrato di infrastrutture di ricerca e innovazione”"
+    intervento <- "SUS-MIRRI.IT - Codice progetto: IR0000005"
+    mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 3.1 “fondo per la realizzazione di un sistema integrato di infrastrutture di ricerca e innovazione”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 3264 del 28/12/2021"
+    attuatore <- "Università di Torino"
+    avvio <- "Avvio: 1/11/2022; Conclusione: 31/10/2025"
+    costo.totale <- "16.949.360,37 €"
+    costo.ammesso <- "16.949.360,37 €"
+    logo <- "logo_mirri.jpeg"
   }
   if(PNRR=="DIVINGRAFT"){
     titolo <- "dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants"
@@ -740,7 +757,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.ammesso <- "203.387,00 €, di cui a Unità CNR (IPSP-BA) 68.342,00 €"
     logo <- "logo_xywall.tiff"
   }
-  
+
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
   dicitura.fatturazione.eng <- paste0("In the invoice, plese report the following information: purchase order n° ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of the purchase order page), CIG ", CIG, ", CUP ", CUP, ".")
   
