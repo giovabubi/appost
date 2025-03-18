@@ -283,6 +283,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     la.fornitura <- 'la fornitura'
     fornitura.consegnata <- 'la fornitura dovrà essere consegnata'
     materiale.conforme <- "che il materiale è conforme all’ordine e perfettamente funzionante e utilizzabile."
+    fornitura.eseguita <- 'è stata consegnata'
   }else if(Tipo.acquisizione=='Servizi'){
     bene <- 'servizio'
     beni <- 'servizi'
@@ -290,6 +291,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     la.fornitura <- 'il servizio'
     fornitura.consegnata <- 'il servizio dovrà essere prestato'
     materiale.conforme <- "che il servizio è conforme all’ordine e completamente prestato."
+    fornitura.eseguita <- 'è stato eseguito'
   }else if(Tipo.acquisizione=='Lavori'){
     bene <- 'lavoro'
     beni <- 'lavori'
@@ -297,6 +299,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     la.fornitura <- 'il lavoro'
     fornitura.consegnata <- 'il lavoro dovrà essere svolto'
     materiale.conforme <- "che il lavoro è conforme all’ordine e completamente svolto."
+    fornitura.eseguita <- 'è stato eseguito'
   }
 
   if(Richiedente..Sesso=='M'){
@@ -2980,6 +2983,83 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
 
+  # Regolare esecuzione ----
+  reg_es <- function(){
+    if(PNRR!="No"){
+      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      file.remove("tmp.docx")
+      file.remove(logo)
+    }else{
+      download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale", only_at_cursor = TRUE)
+      }
+    }
+    
+    doc <- doc |>
+      cursor_begin() |>
+      cursor_forward() |>
+      body_add_par("CERTIFICATO DI REGOLARE ESECUZIONE DELLE PRESTAZIONI", style = "heading 1", pos = "on") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext("OGGETTO: ", fpt.b), ftext(bene), ftext(" di “"), ftext(Prodotto), ftext("”.")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CIG ", fpt.b), ftext(CIG)), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CUP ", fpt.b), ftext(CUP)), style = "Normal") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext("Importo: ", fpt.b), ftext(Importo.senza.IVA), ftext(" oltre IVA")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("RUP: ", fpt.b), ftext(RUP)), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("Soggetto: "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(" - "),
+      #                    ftext(Fornitore),
+      #                    ftext(" - P.IVA "),
+      #                    ftext(Fornitore..P.IVA)), style = "Normal") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(", in qualità di Responsabile Unico del Progetto nominato con provvedimento del "), ftext(sub("...","",firma.RSS)), 
+                         ftext(" prot. n. "), ftext(Prot..nomina.RUP), ftext(" per "), ftext(la.fornitura), ftext(" in oggetto,")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la RDO MePA n. "), ftext(as.character(RDO)),
+                         ftext(" relativa all'acquisizione "), ftext(della.fornitura), ftext(" di “"), ftext(Prodotto), ftext("”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la lettera d'ordine "), ftext(sede), ftext(" "), ftext(ordine), ftext(y),
+                         ftext(" prot. n. "), ftext(Prot..lettera.ordine), ftext(";")), style = "Normal")
+    if(Tipo.acquisizione=="Beni"){
+      doc <- doc |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il DDT "), ftext(DDT), ftext(" di consegna parziale/totale e relativa fattura;")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la fattura _____ relativa al servizio di “"), ftext(Prodotto), ftext("”;")), style = "Normal")
+    }
+    doc <- doc |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che "), ftext(la.fornitura), ftext(" in argomento "), ftext(fornitura.eseguita), ftext(" entro i termini indicati nella lettera d'ordine;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" che il richiedente l'acquisto "), ftext(dott.ric), ftext(" "), ftext(Richiedente),
+                         ftext(" ha verificato la conformità ed il perfetto funzionamento di quanto richiesto;")), style = "Normal") |>
+      body_add_par("CERTIFICA", style = "heading 2") |>
+      body_add_fpar(fpar(ftext("l’esecuzione a regola d’arte delle prestazioni affidate sotto il profilo tecnico e funzionale, in conformità e nel rispetto delle condizioni, modalità, termini e prescrizioni della lettera d’ordine, nonché nel rispetto delle disposizioni vigenti in materia;")), style = "Elenco punto")
+    if(Tipo.acquisizione=="Beni"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("la conformità al tipo, ai modelli e alle quantità descritte nell’offerta e la rispondenza alle caratteristiche tecniche, economiche e quantitative nel rispetto delle previsioni dedotte nei documenti di affidamento;")), style = "Elenco punto")
+    }
+    doc <- doc |>
+      body_add_fpar(fpar(ftext("la regolare esecuzione della prestazione nonché il rilascio, da parte dell’esecutore, della completa documentazione e di quanto espressamente richiesto come elemento "),
+                         ftext(della.fornitura), ftext(" in oggetto;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("il rilascio di tutte le certificazioni richieste e delle garanzie previste dalle vigenti disposizioni;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("il presente certificato si rilascia in ottemperanza alla normativa vigente ai fini delle consequenziali attività amministrative e contabili.")), style = "Elenco punto") |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto (RUP)")), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext("("), ftext(dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2")
+      
+      print(doc, target = paste0(pre.nome.file, "10 Certificato regolare esecuzione.docx"))
+      cat("
+
+    Documento generato: '10 Certificato regolare esecuzione'")
+  }
+  
+  
   # Genera Provv. Liquidazione ----
   provv_liq <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
@@ -5533,7 +5613,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       
       inpt <- readline()
       if(inpt==1){cat("\014");ras();rup();pag()}
-      if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();dic_pres();provv_liq()}
+      if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();dic_pres();reg_es();provv_liq()}
     }else{
       cat("
 
@@ -5547,7 +5627,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 ")
       inpt <- readline()
       if(inpt==1){cat("\014");ras.pnrr();rup.pnrr();pag()}
-      if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr()}
+      if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr();reg_es()}
       if(inpt==3){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
       if(inpt==4){cat("\014");provv_liq();chklst.pnrr()}
     }
