@@ -872,7 +872,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   doc.prov.liq <- read_docx("Modello.docx")
   file.remove("Modello.docx")
 
-  # Genera RAS ----
+  # RAS ----
   ras <- function(){
     cat("\014")
 
@@ -1057,6 +1057,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(paste0(Dott.ric," ", Richiedente), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
@@ -1107,7 +1108,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Responsabile.progetto..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile.progetto..Codice.fiscale), ftext(",")), style = "Normal") |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
                            ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di titolare dei fondi e "),
-                           ftext("responsabile del progetto di ricerca", fpt.b),
+                           ftext("responsabile del progetto di ricerca ", fpt.b),
                            ftext("“"),
                            ftext(Progetto), ftext("”"), ftext(CUP1),
                            ftext(", in relazione alla fornitura di “"),
@@ -1117,9 +1118,11 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(" "),
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
-                           ftext(" "),
-                           ftext(all.OE, fpt.b),
-                           ftext(";")), style = "Normal") |>
+                           ftext(" all'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(");")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
@@ -1134,7 +1137,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(paste0(Dott.resp," ",Responsabile.progetto), run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("(Responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
@@ -1493,7 +1497,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
                          ftext(RSS.dich, fpt.b),
-                         ftext("e in relazione all'affidamento diretto "),
+                         ftext(" e in relazione all'affidamento diretto "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto, fpt.b),
                          ftext("”, ordine "),
@@ -1505,8 +1509,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del progetto "),
-                         ftext(Progetto.cup),
+                         ftext("), nell'ambito del progetto “"),
+                         ftext(Progetto), ftext("”"), ftext(CUP1),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
@@ -1689,6 +1693,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar("Il supporto al RUP", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("("),
                            ftext(dott.sup),
@@ -1726,7 +1732,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   
   
-  # Genera DaC ----
+  # DaC ----
   dac <- function(){
 
     if(Fornitore==fornitore.uscente){
@@ -1997,7 +2003,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
   }
 
-  # Genera Provv. impegno ----
+  # Provv. impegno ----
   provv_imp <- function(){
     doc <- doc.prov.imp |>
       headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
@@ -2135,7 +2141,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
   }
 
-  # Genera Richiesta pagina web ----
+  # Richiesta pagina web ----
   pag <- function(){
     doc <- doc.pag |>
       headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
@@ -2203,7 +2209,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
   }
 
-  # Genera DocOE ----
+  # DocOE ----
   docoe <- function(){
     inpt.oe <- 1
     if(ultimi.recente>0 & ultimi.recente<180){
@@ -2563,7 +2569,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         }
     }
   
-  # Genera Comunicazione CIG ----
+  # Comunicazione CIG ----
   com_cig <- function(){
     doc <- doc.com.cig |>
       headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
@@ -2632,7 +2638,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
 
-  # Genera AI ----
+  # AI ----
   ## AI ----
   ai <- function(){
     download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -2753,7 +2759,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
 
-  # Genera Lettera d'ordine ----
+  # Lettera d'ordine ----
   ldo <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -2898,7 +2904,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
   }
 
-  # Genera Dich. Prestazione resa ----
+  # Dich. Prestazione resa ----
   dic_pres <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -3070,14 +3076,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("Il Responsabile Unico del Progetto (RUP)")), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(dott.rup), ftext(" "), ftext(RUP), ftext(")")), style = "Firma 2")
       
-      print(doc, target = paste0(pre.nome.file, "10 Certificato regolare esecuzione.docx"))
+      print(doc, target = paste0(pre.nome.file, "8 Certificato regolare esecuzione.docx"))
       cat("
 
-    Documento generato: '10 Certificato regolare esecuzione'")
+    Documento generato: '8 Certificato regolare esecuzione'")
   }
   
   
-  # Genera Provv. Liquidazione ----
+  # Provv. Liquidazione ----
   provv_liq <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -3479,6 +3485,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
       body_add_fpar(fpar(ftext("")), style = "Normal")
     if(Richiedente!=Responsabile.progetto){
       doc <- doc |>
@@ -3564,6 +3572,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar("Il titolare dei fondi e responsabile del progetto", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("("),
@@ -3925,6 +3935,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext(sede1), ftext(", "),ftext(da)), style = "Normal") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar("Il supporto al RUP", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("("),
@@ -5624,27 +5636,27 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Che documento vuoi generare?
       1: RAS, Nomina RUP, Richiesta pagina web
       2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
-         Comunicazione CIG, Lettera d'ordine, Prestazione resa, Provvedimento di liquidazione
+         Comunicazione CIG, Lettera d'ordine, Certificato di regolare esecuzione, Provvedimento di liquidazione
 
 ")
       
       inpt <- readline()
       if(inpt==1){cat("\014");ras();rup();pag()}
-      if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();dic_pres();reg_es();provv_liq()}
+      if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
     }else{
       cat("
 
     Che documento vuoi generare?
       1: RAS, Nomina RUP, Richiesta pagina web, 
       2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
-         Comunicazione CIG, Lettera d'ordine, Prestazione resa
+         Comunicazione CIG, Lettera d'ordine, Certificato di regolare esecuzione
       3: Assenza doppio finanziamento, Funzionalità del bene
       4: Provvedimento di liquidazione, Checklist
 
 ")
       inpt <- readline()
       if(inpt==1){cat("\014");ras.pnrr();rup.pnrr();pag()}
-      if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();dic_pres.pnrr();reg_es()}
+      if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es()}
       if(inpt==3){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
       if(inpt==4){cat("\014");provv_liq();chklst.pnrr()}
     }
