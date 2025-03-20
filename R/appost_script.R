@@ -510,7 +510,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -757,6 +757,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.ammesso <- "203.387,00 €, di cui a Unità CNR (IPSP-BA) 68.342,00 €"
     logo <- "logo_xywall.tiff"
   }
+  if(PNRR=="AlpEcoArchaeology"){
+    titolo <- "West and East: an interdisciplinary approach to the archaeology of Alpine ecosystems"
+    codice.progetto <- "2022T4T3Y8_SH6_PRIN2022"
+    CUP2 <- "B53D23001940006"
+    decreto.concessione <- "SH6 _MUR n. 969 del 30/06/2023"
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ".")
+    attuatore <- "Università degli Studi di Verona, Prof. MIGLIAVACCA Maria Gioia"
+    avvio <- "Avvio: 28/9/2023; Conclusione: 27/9/2025"
+    costo.totale <- "302.236,00 €; quota del CNR-IPSP: 53.342,00 € = 17.940,00 € cofin. + 35.402,00 € contributo MUR"
+    costo.ammesso <- "302.236,00 €"
+    logo <- "logo_alpeco.jpg"
+  }
 
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
   dicitura.fatturazione.eng <- paste0("In the invoice, plese report the following information: purchase order n° ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of the purchase order page), CIG ", CIG, ", CUP ", CUP, ".")
@@ -922,11 +934,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     file.remove("tmp.docx")
     
     doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1) |>
+      headers_replace_text_at_bkm("bookmark_headers_sede2", sede1)
     
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale") |>
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale2", "Istituzionale")
     }
     
     doc <- doc |>
@@ -958,8 +972,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_replace_all_text("CAMPO.VOCE", Voce.di.spesa, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PROGETTO") |>
       body_replace_all_text("CAMPO.PROGETTO", Progetto, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.GAE") |>
-      body_replace_all_text("CAMPO.GAE", GAE, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CUP") |>
       body_replace_all_text("CAMPO.CUP", CUP2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.OE1") |>
@@ -970,12 +982,34 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
+    
+    if(Richiedente!=Responsabile.progetto){
+      doc <- doc |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_fpar(fpar(ftext(Dott.resp), ftext(" "), ftext(Responsabile.progetto)), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
+    }
+
+    doc <- doc |>    
       cursor_reach("CAMPO.DATA") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
+      
+      if(Richiedente!=Responsabile.progetto){
+        doc <- doc |>
+          body_add_par("") |>
+          body_add_par("") |>
+          body_add_par("") |>
+          body_add_fpar(fpar(ftext(Dott.resp), ftext(" "), ftext(Responsabile.progetto)), style = "Firma 2") |>
+          body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
+      }
+        
+      doc <- doc |>
       cursor_reach("CAMPO.LA.FORNITURA") |>
       body_replace_all_text("CAMPO.LA.FORNITURA", la.fornitura, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FORNITORE") |>
@@ -3402,12 +3436,34 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
+    
+        if(Richiedente!=Responsabile.progetto){
+      doc <- doc |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_fpar(fpar(ftext(Dott.resp), ftext(" "), ftext(Responsabile.progetto)), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
+    }
+    
+    doc <- doc |>    
       cursor_reach("CAMPO.DATA") |>
       body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
+    
+    if(Richiedente!=Responsabile.progetto){
+      doc <- doc |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_fpar(fpar(ftext(Dott.resp), ftext(" "), ftext(Responsabile.progetto)), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
+    }
+    
+    doc <- doc |>    
       cursor_reach("CAMPO.LA.FORNITURA") |>
       body_replace_all_text("CAMPO.LA.FORNITURA", la.fornitura, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.FORNITORE") |>
