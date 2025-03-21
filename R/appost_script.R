@@ -3863,9 +3863,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("alle condizioni generali d'acquisto da sottoscrivere successivamente;")), style = "Elenco liv2") |>
       cursor_reach("CAMPO.FIRMA") |>
       body_remove() |>
-      body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
-      body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
-      body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
+      # body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
+      # body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
+      # body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
       #body_add_par("Visto di regolarità contabile", style = "Firma 1") |>
       #body_add_par(resp.segr, style = "Firma 1") |>
       #body_add_fpar(fpar(ftext("("), ftext(RAMM), ftext(")")), style = "Firma 1") |>
