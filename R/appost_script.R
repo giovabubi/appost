@@ -32,9 +32,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # pat <- utils::choose.dir()
     # setwd(pat)
     download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Elenco%20prodotti.xlsx", destfile = "Elenco prodotti.xlsx", method = "curl")
-    cat("\014")
-    #cat(rep("\n", 20))
-    cat("\014")
     cat("
 
     Documento 'Elenco prodotti.xlsx' generato e salvato in ", pat, "
@@ -886,8 +883,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
   # RAS ----
   ras <- function(){
-    cat("\014")
-
     if(Fornitore==fornitore.uscente){
       cat(paste0(
         "***** ATTENZIONE *****\n",
@@ -3321,8 +3316,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # RAS PNRR ----
   ras.pnrr <- function(){
-    cat("\014")
-    
+
     if(Fornitore==fornitore.uscente){
       cat(paste0(
         "***** ATTENZIONE *****\n",
@@ -3669,8 +3663,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # RUP PNRR ----
   rup.pnrr <- function(){
-    #cat("\014")
-    
+
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
 
@@ -4363,8 +4356,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # AI PNRR ----
   ai.pnrr <- function(){
-    #cat("\014")
- 
+
     if(PNRR!="No"){
       download.file(paste(lnk, "Istruttoria.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
@@ -4483,7 +4475,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(")")), style = "Firma 2")
     print(doc, target = paste0(pre.nome.file, "5 Atto istruttorio.docx"))
     
-    cat("\014")
     cat("
 
     Documento generato: '5 Atto istruttorio'")
@@ -4904,7 +4895,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # DaC PNRR ----
   dac.pnrr <- function(){
-    cat("\014")
     
     if(PNRR!="No"){
       download.file(paste(lnk, "DaC.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -5110,7 +5100,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     print(doc, target = paste0(pre.nome.file, "6 Decisione a contrattare.docx"))
     
-    cat("\014")
     cat("
 
     Documento generato: '6 Decisione a contrattare'")
@@ -5367,7 +5356,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     print(doc, target = paste0(pre.nome.file, "7 Lettera ordine.docx"))
     
-    cat("\014")
     cat("
 
     Documento generato: '7 Lettera ordine'")
@@ -5542,7 +5530,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     print(doc, target = paste0(pre.nome.file, "9 Dichiarazione assenza doppio finanziamento.docx"))
     
-    #cat("\014")
     cat("
 
     Documento generato: '9 Dichiarazione assenza doppio finanziamento'")
