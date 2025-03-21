@@ -1351,7 +1351,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documenti generati: '2 Avviso pubblico' e '2.1 Allegato'")
 
       ## Dati mancanti ---
-      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
                              Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
@@ -2006,7 +2006,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '7 Decisione a contrattare'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
                            Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
@@ -2111,7 +2111,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(" IVA inclusa, con imputazione sulla voce COAN "),
                          ftext(Voce.di.spesa),
                          ftext(", GAE "),
-                         ftext(GAE),
+                         #ftext(GAE),
                          ftext(", progetto “"),
                          ftext(Progetto),
                          ftext("”"),
@@ -2155,7 +2155,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '3 Provv. impegno'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, GAE, Richiedente)
+    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, Richiedente)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3299,7 +3299,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento generato: '11 Provv. liquidazione'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, GAE, Voce.di.spesa, Pagina.web)
+    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3646,7 +3646,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Dichiarazioni di assenza conflitto di interesse generate e salvate in ", pat)
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, GAE, Richiedente..Luogo.di.nascita,
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
                            Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
@@ -4007,7 +4007,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento generato: '4.5 Dichiarazione assenza conflitto SUP'")
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..RAS, Pagina.web, RUP)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS, Pagina.web, RUP)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -5116,7 +5116,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento generato: '6 Decisione a contrattare'")
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GAE, RUP, Prot..atto.istruttorio, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GRUP, Prot..atto.istruttorio, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
