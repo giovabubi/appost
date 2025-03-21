@@ -4340,8 +4340,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("
 
     Documenti generati: 'Autocertificazioni dell'operatore economico'
-    Documento generato: 'Condizioni generali di acquisto'
-    Documento generato: 'Informativa privacy'
+    Documento generato: '3.11 Condizioni generali di acquisto'
+    Documento generato: '3.12 Informativa privacy'
         ")
   }
   
