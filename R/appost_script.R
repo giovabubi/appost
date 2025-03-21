@@ -169,7 +169,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Torino dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa della sede secondaria di Torino dell'IPSP"
     sottoscritto.rss <- "Il sottoscritto "
-    nato.rss <- " nato a __________ il __________, codice fiscale __________,"
+    nato.rss <- " nato a Chieri (TO) il 29/5/1972, codice fiscale GHGSFN72E29C627M,"
     RSS.dich <- " responsabile della sede secondaria di Torino "
     CUU <- "_____"
   }else if(sede=='NA'){
@@ -3931,6 +3931,80 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     Documento generato: '4.3 Dichiarazione assenza conflitto RSS'")
     
+    ## Dich. Ass. RUP ----
+    if(PNRR!="No"){
+      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      file.remove("tmp.docx")
+      file.remove(logo)
+    }else{
+      doc <- doc.ras |>
+        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+      }
+      file.remove("tmp.docx")
+    }
+    
+    doc <- doc |>
+      cursor_begin() |>
+      body_add_fpar(fpar(ftext("All’"),
+                         ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
+      body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(dott.rup), ftext(" "), ftext(RUP, fpt.b), ftext(", "),
+                         ftext(nato.rup), ftext(" "), ftext(RUP..Luogo.di.nascita), ftext(" il "),
+                         ftext(RUP..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP..Codice.fiscale), ftext(", ")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all'incarico di responsabile unico del progetto ("),
+                         ftext("RUP", fpt.b),
+                         ftext(") per l'affidamento "),
+                         ftext(della.fornitura), ftext(" di “"),
+                         ftext(Prodotto, fpt.b),
+                         ftext("”, ordine "),
+                         ftext(sede, fpt.b),
+                         ftext(" "),
+                         ftext(ordine, fpt.b),
+                         ftext(y, fpt.b),
+                         ftext(" ("),
+                         ftext(Pagina.web),
+                         ftext(") all'operatore economico "),
+                         ftext(Fornitore, fpt.b),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext("), nell'ambito del "),
+                         ftext(Progetto.int),
+                         ftext(";")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
+                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
+      body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("")), style = "Normal") |>
+      body_add_fpar(fpar("Il responsabile unico del progetto (RUP)", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext("("),
+                         ftext(dott.rup),
+                         ftext(" "),
+                         ftext(RUP),
+                         ftext(")")), style = "Firma 2") |>
+      body_add_break()
+    print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione assenza conflitto RUP.docx"))
+    
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
       
@@ -4489,80 +4563,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
     }
-    
-    ## Dich. Ass. RUP ----
-    if(PNRR!="No"){
-      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.ras |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-      file.remove("tmp.docx")
-    }
-    
-    doc <- doc |>
-      cursor_begin() |>
-      body_add_fpar(fpar(ftext("All’"),
-                         ftext("Istituto per la Protezione Sostenibile delle Piante", fpt.b)), style = "Destinatario", pos = "on") |>
-      body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("DICHIARAZIONE DI ASSENZA DI SITUAZIONI DI CONFLITTO DI INTERESSI AI SENSI DEGLI ARTT. 46 e 47 D.P.R. 445/2000")), style = "heading 1") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext(sottoscritto.rup), ftext(" "), ftext(dott.rup), ftext(" "), ftext(RUP, fpt.b), ftext(", "),
-                         ftext(nato.rup), ftext(" "), ftext(RUP..Luogo.di.nascita), ftext(" il "),
-                         ftext(RUP..Data.di.nascita), ftext(", codice fiscale "), ftext(RUP..Codice.fiscale), ftext(", ")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in relazione all'incarico di responsabile unico del progetto ("),
-                         ftext("RUP", fpt.b),
-                         ftext(") per l'affidamento "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(sede, fpt.b),
-                         ftext(" "),
-                         ftext(ordine, fpt.b),
-                         ftext(y, fpt.b),
-                         ftext(" ("),
-                         ftext(Pagina.web),
-                         ftext(") all'operatore economico "),
-                         ftext(Fornitore, fpt.b),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(";")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
-                         ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("La presente dichiarazione è resa ai sensi e per gli effetti dell’art. 6-bis Legge 241/1990, degli artt. 6 e 7 del D.P.R. 16 aprile 2013, n. 62, dell’art. 53, comma 14, del D. Lgs. n° 165/2001, dell’art. 15, comma 1, lettera c) del D. Lgs. n° 33/2013 e dell’art. 20 del D. Lgs. n° 39/2013.")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("")), style = "Normal") |>
-      body_add_fpar(fpar("Il responsabile unico del progetto (RUP)", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("),
-                         ftext(dott.rup),
-                         ftext(" "),
-                         ftext(RUP),
-                         ftext(")")), style = "Firma 2") |>
-      body_add_break()
-    print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione assenza conflitto RUP.docx"))
     
     ## Dich. Ass. RICH-TIT ----
     if(PNRR!="No"){
