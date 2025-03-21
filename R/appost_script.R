@@ -3424,8 +3424,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_replace_all_text("CAMPO.VOCE", Voce.di.spesa, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PROGETTO") |>
       body_replace_all_text("CAMPO.PROGETTO", Progetto, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.GAE") |>
-      body_replace_all_text("CAMPO.GAE", GAE, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.CUP") |>
       body_replace_all_text("CAMPO.CUP", CUP2, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.OE1") |>
