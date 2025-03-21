@@ -4242,10 +4242,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     print(doc, target = paste0(pre.nome.file, "3.11 Condizioni generali di acquisto.docx"))
-    cat("
-
-    Documento generato: '3.11 Condizioni generali di acquisto'")
-    
     }else{
       download.file(paste(lnk, "Condizioni_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
@@ -4285,9 +4281,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     print(doc, target = paste0(pre.nome.file, "3.11 Condizioni generali di acquisto.docx"))
-    cat("
-
-    Documento generato: '3.11 Condizioni generali di acquisto'")
     
     ## Privacy ----
     if(Fornitore..Nazione=="Italiana"){
@@ -4307,9 +4300,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal")
       
     print(doc, target = paste0(pre.nome.file, "3.12 Informativa privacy.docx"))
-    cat("
-    Documento generato: '3.12 Informativa privacy'")
-    
     }else{
       download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
@@ -4318,8 +4308,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       doc <- doc |>
         body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
       print(doc, target = paste0(pre.nome.file, "3.12 Privacy policy.docx"))
-      cat("
-    Documento generato: '3.12 Privacy policy'")
     }
     
     ## Dich.Ass. TIT ----
@@ -4351,7 +4339,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     cat("
 
-    Autocertificazioni dell'operatore economico generati e salvati in ", pat)
+    Documenti generati: 'Autocertificazioni dell'operatore economico'
+    Documento generato: 'Condizioni generali di acquisto'
+    Documento generato: 'Informativa privacy'
+        ")
   }
   
   # AI PNRR ----
