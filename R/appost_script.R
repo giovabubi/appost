@@ -5116,7 +5116,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento generato: '6 Decisione a contrattare'")
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, GRUP, Prot..atto.istruttorio, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..atto.istruttorio, Pagina.web)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
