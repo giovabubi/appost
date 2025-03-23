@@ -3603,6 +3603,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     doc <- doc |>
       body_add_break()
     print(doc, target = paste0(pre.nome.file, "4.1 Dichiarazione assenza conflitto RICH.docx"))
+    cat("
+
+    Documento generato: '4.1 Dichiarazione assenza conflitto RICH'")
     
     ## Dich. Ass. RESP ----
     if(Richiedente!=Responsabile.progetto){
@@ -3678,13 +3681,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(")")), style = "Firma 2") |>
         body_add_break()
       print(doc, target = paste0(pre.nome.file, "4.2 Dichiarazione assenza conflitto RESP.docx"))
+      cat("
+
+    Documento generato: '4.2 Dichiarazione assenza conflitto RESP'")
     }
     file.remove("tmp.docx")
     file.remove(logo)
-    
-    cat("
-
-    Dichiarazioni di assenza conflitto di interesse generate e salvate in ", pat)
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
