@@ -507,12 +507,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="TUBER"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH"){
+  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj"){
     finanziamento <- "PRIN 2022 PNRR"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -591,7 +591,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "2022BZW9PF"
     CUP2 <- "B53D23017480006"
     decreto.concessione <- "1048 del 14/7/2023"
-    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche (CNR), Istituto per la Protezione Sostenibile delle Piante (IPSP)"
     avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
     costo.totale <- "264.979,00 €, di cui al CNR-IPSP 133.549,00 €"
@@ -711,7 +710,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "P2022NEJ8K_LS9_PRIN2022PNRR"
     CUP2 <- "B53D23032230001"
     decreto.concessione <- "1377 dell'1/9/2023"
-    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 1409/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
     attuatore <- "Consiglio Nazionale delle Ricerche"
     avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
     costo.totale <- "224.324,00 €, di cui a Unità CNR (IPSP-FI) 73.387,00 €"
@@ -723,7 +722,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "P2022MNX4S_LS9_PRIN2022PNRR"
     CUP2 <- "B53D23032230001"
     decreto.concessione <- "1377 dell'1/9/2023"
-    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 1409/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
     attuatore <- "Consiglio Nazionale delle Ricerche"
     avvio <- "Avvio: 1/12/2023; Conclusione: 30/11/2025"
     costo.totale <- "299.541,00 €, di cui a Unità CNR (IPSP-FI) 153.976,00 €"
@@ -735,7 +734,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "P2022CHMFZ_LS9_PRIN2022PNRR"
     CUP2 <- "B53D23032100001"
     decreto.concessione <- "1377 dell'1/9/2023"
-    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alberto SANTINI")
+    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 1409/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alberto SANTINI")
     attuatore <- "Consiglio Nazionale delle Ricerche"
     avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
     costo.totale <- "264.789,00 €, di cui a Unità CNR (IPSP-FI) 119.585,00 €"
@@ -747,7 +746,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "2022F8BZMX"
     CUP2 <- "B53C24007440006"
     decreto.concessione <- "20427 del 6/11/2024"
-    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ".")
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche"
     avvio <- "Avvio: 2/2/2025; Conclusione: 2/2/2027"
     costo.totale <- "284.374,00 €, di cui a Unità CNR (IPSP-BA) 132.429,00 €"
@@ -759,12 +758,60 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "2022T4T3Y8_SH6_PRIN2022"
     CUP2 <- "B53D23001940006"
     decreto.concessione <- "SH6 _MUR n. 969 del 30/06/2023"
-    dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ".")
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Verona, Prof. MIGLIAVACCA Maria Gioia"
     avvio <- "Avvio: 28/9/2023; Conclusione: 27/9/2025"
     costo.totale <- "302.236,00 €; quota del CNR-IPSP: 53.342,00 € = 17.940,00 € cofin. + 35.402,00 € contributo MUR"
     costo.ammesso <- "302.236,00 €"
     logo <- "logo_alpeco.jpg"
+  }
+  if(PNRR=="HEMINT"){
+    titolo <- "RNA interference for the control of hemipteran pests causing direct and indirect damages to crops: a case study to define best practices for sustainable and environment-friendly application of RNAi (HEMipteran INTerference)"
+    codice.progetto <- "2022BPB5A8"
+    CUP2 <- "B53D23017470006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università degli Studi di Torino"
+    avvio <- "Avvio: 11/10/2023; Conclusione: 10/10/2025"
+    costo.totale <- "283.646,00 €, di cui 91.670,00 € al CNR-IPSP"
+    costo.ammesso <- "234.858,00 €, di cui 75.902,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="BIORES"){
+    titolo <- "Natural and BIOtechnological genetic RESistances against Flavescence dorée for vineyard sustainability"
+    codice.progetto <- "2022FW39MT"
+    CUP2 <- "B53D23017600006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 11/10/2023; Conclusione: 10/10/2025"
+    costo.totale <- "311.065,00 €, di cui 166.210,00 € al CNR-IPSP"
+    costo.ammesso <- "257.353,00 €, di cui 133.867,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="RNAi_Pj"){
+    titolo <- "RNA interference to control alien pests by exploring microalgae and cyanobacteria as cost-effective dsRNA producing platforms: the Japanese beetle Popillia japonica as case study"
+    codice.progetto <- "P20227835Y"
+    CUP2 <- "B53D23031970001"
+    decreto.concessione <- "1377 del 01/09/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università degli Studi di Verona"
+    avvio <- "Avvio: 28/11/2023; Conclusione: 27/11/2025"
+    costo.totale <- "299.952,00 €, di cui 135.474,00 € al CNR-IPSP"
+    costo.ammesso <- "224.965,00 €, di cui 99.800,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="TUBER"){
+    titolo <- "Interactions of the white truffle Tuber magnatum with soil microbiome and plant"
+    codice.progetto <- "2022K272X8_LS9_PRIN2022"
+    CUP2 <- "B53D23017740006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università Telematica San Raffaele Roma"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    costo.totale <- "303.444,00 €, di cui 39.734 € al CNR-IPSP"
+    costo.ammesso <- "303.444,00 €, di cui 39.734 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
   }
 
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
