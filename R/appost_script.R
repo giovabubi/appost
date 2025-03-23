@@ -3979,23 +3979,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento generato: '4.3 Dichiarazione assenza conflitto RSS'")
     
     ## Dich. Ass. RUP ----
-    if(PNRR!="No"){
-      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.ras |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
-      file.remove("tmp.docx")
-    }
+    #download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    #download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
     
     doc <- doc |>
       cursor_begin() |>
@@ -4051,6 +4039,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(")")), style = "Firma 2") |>
       body_add_break()
     print(doc, target = paste0(pre.nome.file, "4.4 Dichiarazione assenza conflitto RUP.docx"))
+    cat("
+
+    Documento generato: '4.4 Dichiarazione assenza conflitto RUP'")
     
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
