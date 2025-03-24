@@ -796,7 +796,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     decreto.concessione <- "1377 del 01/09/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Verona"
-    avvio <- "Avvio: 28/11/2023; Conclusione: 27/11/2025"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
     costo.totale <- "299.952,00 €, di cui 135.474,00 € al CNR-IPSP"
     costo.ammesso <- "224.965,00 €, di cui 99.800,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
