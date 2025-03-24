@@ -171,7 +171,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Chieri (TO) il 29/5/1972, codice fiscale GHGSFN72E29C627M,"
     RSS.dich <- " responsabile della sede secondaria di Torino "
-    CUU <- "_____"
+    CUU <- "PE2U6Q"
   }else if(sede=='NA'){
     sede1 <- 'Portici'
     sede2 <- 'Sede Secondaria di Portici'
@@ -186,7 +186,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Ettore Magaldi quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "Il responsabile amministrativo"
     sottoscritto.rss <- "La sottoscritta "
-    nato.rss <- " nata a __________ il __________, codice fiscale __________,"
+    nato.rss <- " nata a Sant'Agnello il 28/05/1969, codice fiscale RCCMHL69E68I208P,"
     RSS.dich <- " responsabile della sede secondaria di Portici dell'IPSP "
     CUU <- "_____"
   }else if(sede=='FI'){
@@ -237,7 +237,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Josè Saporita quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La segretaria amministrativa"
     sottoscritto.rss <- "Il sottoscritto "
-    nato.rss <- " nato a __________ il __________, codice fiscale __________,"
+    nato.rss <- " nato a Cava de' Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R,"
     RSS.dich <- " direttore dell'IPSP "
     CUU <- "_____"
   }
