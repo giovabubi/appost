@@ -140,7 +140,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   if(sede=='BA'){
     sede1 <- 'Bari'
     sede2 <- 'Sede Secondaria di Bari'
-    RSS <- 'dott. Giovanni Nicola Bubici'
+    RSS.nome <- "Giovanni Nicola Bubici"
+    RSS <- paste("dott.", RSS.nome)
     RSS.email <- 'giovanninicola.bubici@cnr.it'
     RAMM <- 'Dott. Nicola Centorame'
     RAMM.email <- 'nicola.centorame@ipsp.cnr.it'
@@ -157,7 +158,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }else if(sede=='TO'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Secondaria di Torino'
-    RSS <- 'dott. Stefano Ghignone'
+    RSS.nome <- 'Stefano Ghignone'
+    RSS <- paste("dott.", RSS.nome)
     RSS.email <- 'stefano.ghignone@cnr.it'
     RAMM <- "Dott.ssa Lucia Allione"
     RAMM.email <- 'lucia.allione@ipsp.cnr.it'
@@ -175,7 +177,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }else if(sede=='NA'){
     sede1 <- 'Portici'
     sede2 <- 'Sede Secondaria di Portici'
-    RSS <- 'dott.ssa Michelina Ruocco'
+    RSS.nome <- 'Michelina Ruocco'
+    RSS <- paste("dott.ssa", RSS.nome)
     RSS.email <- 'michelina.ruocco@cnr.it'
     RAMM <- 'Dott. Ettore Magaldi'
     RAMM.email <- 'ettore.magaldi@ipsp.cnr.it'
@@ -192,7 +195,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }else if(sede=='FI'){
     sede1 <- 'Sesto Fiorentino'
     sede2 <- 'Sede Secondaria di Sesto Fiorentino'
-    RSS <- "dott. Nicola Luchi"
+    RSS.nome <- "Nicola Luchi"
+    RSS <- paste("dott.", RSS.nome)
     RSS.email <- "nicola.luchi@ipsp.cnr.it"
     RAMM <- "Sig.ra Francesca Pesciolini"
     RAMM.email <- 'francesca.pesciolini@ipsp.cnr.it'
@@ -209,7 +213,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }else if(sede=='PD'){
     sede1 <- 'Legnaro'
     sede2 <- 'Sede Secondaria di Legnaro'
-    RSS <- "dott.ssa Laura Scarabel"
+    RSS.nome <- "Laura Scarabel"
+    RSS <- paste("dott.ssa", RSS.nome)
     RSS.email <- "laura.scarabel@ipsp.cnr.it"
     RAMM <- "Dott.ssa Lucia Allione"
     RAMM.email <- 'lucia.allione@ipsp.cnr.it'
@@ -226,7 +231,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }else if(sede=='TOsi'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Istituzionale'
-    RSS <- 'dott. Francesco Di Serio'
+    RSS.nome <- 'Francesco Di Serio'
+    RSS <- paste("dott.", RSS.nome)
     RSS.email <- 'francesco.diserio@cnr.it'
     RAMM <- 'Dott. Josè Saporita'
     RAMM.email <- 'jose.saporita@ipsp.cnr.it'
@@ -360,7 +366,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rup <- 'La sottoscritta'
     nominato <- "stata nominata"
   }
-  if(RUP=="Maurizio Meoni" | RUP=="Giovanni Torraca"){
+  if(RUP=="Maurizio Meoni" | RUP=="Giovanni Torraca" | RUP=="Salvatore Cristadoro"){
     Dott.rup <- 'Sig.'
     dott.rup <- 'sig.'
     il.dott.rup <- 'il sig.'
@@ -1506,8 +1512,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
                          ftext("”;")), style = "Normal") |>
-      cursor_reach("CAMPO.NOMINA.RUP") |>
-      body_replace_all_text("CAMPO.NOMINA.RUP", paste(il.dott.rup, RUP), only_at_cursor = TRUE)
+      cursor_bookmark("bookmark_rup") |>
+      body_remove() |>
+      cursor_backward()
+    
+    if(RUP!=RSS.nome){
+      doc <- doc |>
+      body_add_fpar(fpar(ftext("DI NOMINARE", fpt.b), ftext(" "), ftext(il.dott.rup), ftext(" "), ftext(RUP),
+                         ftext(" Responsabile Unico del Progetto (RUP) che, ai sensi dell'art. 15 del Codice, dovrà:")), style = "Elenco liv1")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" il ruolo di Responsabile Unico del Progetto (RUP) che, ai sensi dell'art. 15 del Codice, dovrà:")), style = "Elenco liv1")
+    }
      
     if(Supporto.RUP!=trattini){
       doc <- doc |>
@@ -3842,9 +3858,17 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       cursor_bookmark("bookmark_nomina_rup") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar(ftext("DI NOMINARE", fpt.b), ftext(" "),
-                         ftext(il.dott.rup), ftext(" "), ftext(RUP, fpt.b),
-                         ftext(" Responsabile Unico del Progetto (RUP), il quale, ai sensi dell'art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
+      
+    if(RUP!=RSS.nome){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI NOMINARE", fpt.b), ftext(" "), ftext(il.dott.rup), ftext(" "), ftext(RUP, fpt.b),
+                           ftext(" Responsabile Unico del Progetto (RUP) che, ai sensi dell'art. 15 del Codice, dovrà:")), style = "Elenco liv1")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" il ruolo di Responsabile Unico del Progetto (RUP) che, ai sensi dell'art. 15 del Codice, dovrà:")), style = "Elenco liv1")
+    }
+
+    doc <- doc |>
       cursor_bookmark("bookmark_supporto_rup")
     
       if(Supporto.RUP!=trattini){
