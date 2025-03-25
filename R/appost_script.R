@@ -5730,31 +5730,35 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("
 
     Che documento vuoi generare?
-      1: RAS, Nomina RUP, Richiesta pagina web
-      2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
+      1: RAS
+      2: Nomina RUP, Richiesta pagina web
+      3: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
          Comunicazione CIG, Lettera d'ordine, Certificato di regolare esecuzione, Provvedimento di liquidazione
 
 ")
       
       inpt <- readline()
-      if(inpt==1){cat("\014");ras();rup();pag()}
-      if(inpt==2){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
+      if(inpt==1){cat("\014");ras()}
+      if(inpt==2){cat("\014");rup();pag()}
+      if(inpt==3){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
     }else{
       cat("
 
     Che documento vuoi generare?
-      1: RAS, Nomina RUP, Richiesta pagina web, 
-      2: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
+      1: RAS
+      2: Nomina RUP, Richiesta pagina web, 
+      3: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
          Comunicazione CIG, Lettera d'ordine, Certificato di regolare esecuzione
-      3: Assenza doppio finanziamento, Funzionalità del bene
-      4: Provvedimento di liquidazione, Checklist
+      4: Assenza doppio finanziamento, Funzionalità del bene
+      5: Provvedimento di liquidazione, Checklist
 
 ")
       inpt <- readline()
-      if(inpt==1){cat("\014");ras.pnrr();rup.pnrr();pag()}
-      if(inpt==2){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es()}
-      if(inpt==3){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
-      if(inpt==4){cat("\014");provv_liq();chklst.pnrr()}
+      if(inpt==1){cat("\014");ras.pnrr()}
+      if(inpt==2){cat("\014");rup.pnrr();pag()}
+      if(inpt==3){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es()}
+      if(inpt==4){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
+      if(inpt==5){cat("\014");provv_liq();chklst.pnrr()}
     }
     # if(inpt==5){
     #   # drive_deauth()
