@@ -3857,7 +3857,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(Prot..RAS), ftext(";")), style = "Elenco liv2") |>
       cursor_bookmark("bookmark_nomina_rup") |>
       body_remove() |>
-      cursor_backward() |>
+      cursor_backward()
       
     if(RUP!=RSS.nome){
       doc <- doc |>
