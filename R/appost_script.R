@@ -513,12 +513,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj"){
+  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj" | PNRR=="RE-VOC"){
     finanziamento <- "PRIN 2022 PNRR"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -831,7 +831,55 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.ammesso <- "203.272,00 €, di cui 122.272,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
   }
-
+  if(PNRR=="MOBeeFO"){
+    titolo <- "Monitoring of honey Bee immunomodulation and resilience to stress factors by Fiber Optic technology"
+    codice.progetto <- "2022YRJAAC"
+    CUP2 <- "B53D23003030006"
+    decreto.concessione <- "960 del 30/6/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università di Napoli Parthenope"
+    avvio <- "Avvio: 1/10/2023; Conclusione: 30/9/2025"
+    costo.totale <- "232.954,00 €, di cui 77.968,00 € al CNR-IPSP"
+    costo.ammesso <- "232.954,00 €, di cui 77.968,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="RE-VOC"){
+    titolo <- "Looking for plant VOC receptors"
+    codice.progetto <- "P20229ZW4A"
+    CUP2 <- "B53D23032030001"
+    decreto.concessione <- "1377 dell'1/9/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
+    costo.totale <- "299.862,00 €, di cui 150.053,00 € al CNR-IPSP"
+    costo.ammesso <- "224.896,00 €, di cui 112.539,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="secrEVome"){
+    titolo <- "The complex role of plant extracellular vesicles: deciphering their secreted molecular messages and bioactivity in plant-microbe"
+    codice.progetto <- "_______"
+    CUP2 <- "B53D23032030001"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università degli Studi di Salerno"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
+    costo.totale <- "291.500,00 €"
+    costo.ammesso <- "241.562,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="SUSHI"){
+    titolo <- "SUccess of Specialist versus generalist parasitoid in Hampering the spread of an Invasive pest"
+    codice.progetto <- "_______"
+    CUP2 <- "___"
+    decreto.concessione <- "739 del 29/5/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 1/10/2023; Conclusione: 30/9/2025"
+    costo.totale <- "264.369,60 €, di cui 82.877,20 € al CNR-IPSP"
+    costo.ammesso <- "205.637,89 €, di cui 63.152,20 € al CNR-IPSP"
+    logo <- "logo_sushi.jpg"
+  }
+  
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
   dicitura.fatturazione.eng <- paste0("In the invoice, plese report the following information: purchase order n° ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of the purchase order page), CIG ", CIG, ", CUP ", CUP, ".")
   
