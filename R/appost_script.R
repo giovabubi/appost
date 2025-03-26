@@ -513,7 +513,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -817,6 +817,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
     costo.totale <- "303.444,00 €, di cui 39.734 € al CNR-IPSP"
     costo.ammesso <- "303.444,00 €, di cui 39.734 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="BACBIO"){
+    titolo <- "Molecular genetics and genomics of fruit fly associated bacteria for implementation of innovative biocontrol strategies"
+    codice.progetto <- "2022LEW75T"
+    CUP2 <- "B53C24007460006"
+    decreto.concessione <- "20427 del 6/11/2024"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 6/2/2025; Conclusione: 5/2/2027"
+    costo.totale <- "248.465,00 €, di cui 167.465,00 € al CNR-IPSP"
+    costo.ammesso <- "203.272,00 €, di cui 122.272,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
   }
 
