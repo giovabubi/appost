@@ -2228,7 +2228,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Importo.con.IVA),
                          ftext(" IVA inclusa, con imputazione sulla voce COAN "),
                          ftext(Voce.di.spesa),
-                         ftext(", GAE "),
+                         #ftext(", GAE "),
                          #ftext(GAE),
                          ftext(", progetto “"),
                          ftext(Progetto),
