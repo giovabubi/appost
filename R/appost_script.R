@@ -2004,50 +2004,51 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 24 dicembre 2007 n. 244 e s.m.i., recante “Disposizioni per la formazione del bilancio annuale e pluriennale dello Stato (Legge finanziaria 2008)”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il decreto-legge 7 maggio 2012 n. 52, convertito dalla legge 6 luglio 2012 n. 94 recante “Disposizioni urgenti per la razionalizzazione della spesa pubblica”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il decreto-legge 6 luglio 2012 n. 95, convertito con modificazioni dalla legge 7 agosto 2012 n. 135, recante “Disposizioni urgenti per la revisione della spesa pubblica con invarianza dei servizi ai cittadini”;")), style = "Normal")
-      if(Oneri.sicurezza==trattini){
-        doc <- doc |>
-          body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
-                             ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
-                             ftext(" relativa alla necessità di procedere all’acquisizione "),
-                             ftext(della.fornitura), ftext(" di “"),
-                             ftext(Prodotto),
-                             ftext("” ("),
-                             ftext(Pagina.web),
-                             ftext("), nell’ambito del progetto “"),
-                             ftext(Progetto),
-                             ftext("”"),
-                             ftext(CUP1),
-                             ftext(", mediante affidamento diretto all’operatore economico "),
-                             ftext(Fornitore),
-                             ftext(" (P.IVA "),
-                             ftext(Fornitore..P.IVA),
-                             ftext(") per un importo stimato di "),
-                             ftext(Importo.senza.IVA),
-                             ftext(" oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
-      }else{
-        doc <- doc |>
-          body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
-                             ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
-                             ftext(" relativa alla necessità di procedere all’acquisizione "),
-                             ftext(della.fornitura), ftext(" di “"),
-                             ftext(Prodotto),
-                             ftext("” (pagina web dedicata al ciclo di vita del contratto pubblico "),
-                             ftext(Pagina.web),
-                             ftext("), nell’ambito delle attività previste dal progetto “"),
-                             ftext(Progetto),
-                             ftext("”"),
-                             ftext(CUP1),
-                             ftext(", mediante affidamento diretto all’operatore economico "),
-                             ftext(Fornitore),
-                             ftext(" (P.IVA "),
-                             ftext(Fornitore..P.IVA),
-                             ftext(") per un importo stimato di "),
-                             ftext(Importo.senza.IVA),
-                             ftext(" oltre IVA, comprensivo di "),
-                             ftext(Oneri.sicurezza),
-                             ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze, il cui preventivo è "),
-                             ftext(preventivo.individuato)), style = "Normal")
-      }
+      
+    if(CCNL=="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
+                           ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                           ftext(" relativa alla necessità di procedere all’acquisizione "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto),
+                           ftext("” ("),
+                           ftext(Pagina.web),
+                           ftext("), nell’ambito del progetto “"),
+                           ftext(Progetto),
+                           ftext("”"),
+                           ftext(CUP1),
+                           ftext(", mediante affidamento diretto all’operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(") per un importo presunto di "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la richiesta di acquisto prot. "),
+                           ftext(Prot..RAS), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                           ftext(" relativa alla necessità di procedere all’acquisizione "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto),
+                           ftext("” (pagina web dedicata al ciclo di vita del contratto pubblico "),
+                           ftext(Pagina.web),
+                           ftext("), nell’ambito delle attività previste dal progetto “"),
+                           ftext(Progetto),
+                           ftext("”"),
+                           ftext(CUP1),
+                           ftext(", mediante affidamento diretto all’operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(") per un importo presunto di "),
+                           ftext(Importo.senza.IVA),
+                           ftext(", comprensivo di "),
+                           ftext(Oneri.sicurezza),
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze, oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
+    }
+    
     doc <- doc |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento di nomina del Responsabile Unico del Progetto "),
                          ftext(dott.rup), ftext(" "), ftext(RUP),
@@ -2059,7 +2060,23 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore..P.IVA),
                          ftext(") per un importo pari a "),
                          ftext(Importo.senza.IVA),
-                         ftext(" mediante atto immediatamente efficace;")), style = "Normal") |>
+                         ftext(" mediante atto immediatamente efficace;")), style = "Normal")
+    
+    if(CCNL!="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico ha confermato di applicare al personale dipendente impiegato nell’attività oggetto dell’appalto il contratto collettivo nazionale e territoriale di lavoro individuato dal RUP, ai sensi dell’art. 11, co. 2 del Codice, a seguito di autodichiarazione, individuato dai seguenti codice alfanumerico e codice Ateco "),
+                           ftext(CCNL),
+                           ftext(", stimando in "),
+                           ftext(Manodopera),
+                           ftext(" oltre IVA e altre imposte e contributi di legge i costi della manodopera;",
+                                 run_footnote(x=block_list(fpar(ftext(" Ai sensi dell’art. 2 dell’Allegato I.01 del Codice, è a cura del RUP l’individuazione del CCNL territoriale da applicare all’appalto secondo le procedure illustrate nell’Allegato I.01.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")
+                                 ))), style = "Normal") |>
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che sono stati ritenuti congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A., i costi della manodopera indicati dal già menzionato operatore economico a corredo dell’offerta, sulla base delle tariffe orarie previste per il CCNL codice alfanumerico e codice ATECO "),
+                           ftext(CCNL),
+                           ftext(";")), style = "Normal")
+    }
+    
+    doc <- doc |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 50, comma 1, lettera b) del Codice, il quale consente, per affidamenti di contratti di servizi e forniture, ivi compresi i servizi di ingegneria e architettura e l'attività di progettazione di importo inferiore ad euro 140.000,00, di procedere ad affidamento diretto, anche senza consultazione di più operatori economici;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(", altresì, che la scelta dell’Operatore Economico deve essere effettuata assicurando che i soggetti individuati siano in possesso di documentate esperienze pregresse idonee all’esecuzione delle prestazioni contrattuali, anche individuati tra gli iscritti in elenchi o albi istituiti dalla stazione appaltante;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATA", fpt.b), ftext(" l’opportunità, in ottemperanza alla suddetta normativa, di procedere ad affidamento diretto all’operatore economico "),
@@ -2108,7 +2125,16 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       #                    ftext(RUP),
       #                    ftext(" Responsabile Unico del Progetto il quale, ai sensi dell’art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" in conformità a quanto disposto dall’art. 53, comma 4, del Codice, che l’affidatario non sarà tenuto a presentare la garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1") |>
+      body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" in conformità a quanto disposto dall’art. 53, comma 4, del Codice, che l’affidatario non sarà tenuto a presentare la garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1")
+    
+    if(CCNL!="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" altresì che l’affidatario, ai sensi dell’art. 11 del Codice, sarà tenuto ad applicare il contratto collettivo nazionale e territoriale individuato dalla Stazione Appaltante e identificato dai seguenti codici alfanumerico e codice ATECO "),
+                           ftext(CCNL),
+                           ftext(";")), style = "Elenco liv1")
+    }      
+      
+    doc <- doc |>
       body_add_fpar(fpar(ftext("DI SOTTOPORRE", fpt.b), ftext(" la lettera d’ordine alla condizione risolutiva in caso di accertamento della carenza dei requisiti di ordine generale;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b), ftext(" la registrazione sul sistema contabile della seguente scrittura anticipata n. "),
                          ftext(Anticipata),
