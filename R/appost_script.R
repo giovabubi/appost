@@ -1612,7 +1612,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     doc <- doc |>
       body_add_fpar(fpar(ftext("svolgere tutte le attività indicate nell’allegato I.2 del Codice, o che siano comunque necessarie ove non di competenza di altri organi;")), style = "Elenco liv2")
       
-    if(CCNL=="Non applicabile"){
+    if(CCNL!="Non applicabile"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("individuare il CCNL, in base all’attività oggetto dell’appalto svolta dall’impresa, in conformità al comma 1 dell’art. 11 e allegato 1.01 del Codice, nonché ai sensi del comma 2-bis dell’art. 11 del Codice;")), style = "Elenco liv2")
     }
