@@ -2823,7 +2823,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   }
 
   # AI ----
-  ## AI ----
   ai <- function(){
     download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
@@ -2866,7 +2865,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 50, comma 1, lettera b) del Codice, il quale consente, per affidamenti di contratti di servizi e forniture, ivi compresi i servizi di ingegneria e architettura e l'attività di progettazione di importo inferiore a euro 140.000,00, di procedere ad affidamento diretto, anche senza consultazione di più operatori economici;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento con il quale è stato nominato "),
                          ftext(il.dott.rup), ftext(" "), ftext(RUP),
-                         ftext(" quale Responsabile Unico del Progetto ai sensi dell’art. 15 del Codice per l’affidamento di cui all’oggetto;")), style = "Normal") |>
+                         ftext(" quale Responsabile Unico del Progetto ai sensi dell’art. 15 del Codice per l’affidamento di cui all’oggetto;")), style = "Normal")
+    
+    if(CCNL=="Non applicabile"){
+      doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato "),
                          ftext(Fornitore),
                          ftext(" (C.F./P.IVA "),
@@ -2875,7 +2877,31 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(as.character(RDO)),
                          ftext("), un’offerta ritenuta congrua corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti d’importo corrispondente al preventivo precedentemente acquisito e agli atti d’importo pari a "),
                          ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA;")), style = "Normal") |>
+                         ftext(" oltre IVA;")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato "),
+                           ftext(Fornitore),
+                           ftext(" (C.F./P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(") ha presentato, attraverso la piattaforma telematica di negoziazione (RDO "),
+                           ftext(as.character(RDO)),
+                           ftext("), un’offerta ritenuta congrua corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti d’importo corrispondente al preventivo precedentemente acquisito e agli atti d’importo pari a "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" oltre IVA, comprensivo di "),
+                           ftext(Oneri.sicurezza),
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze;")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico "),
+                           ftext(Fornitore),
+        ftext(" ha dichiarato che applicherà ai propri dipendenti il contratto collettivo nazionale e territoriale applicabile indentificato dai seguenti codice alfanumerico e codice Ateco "),
+        ftext(CCNL),
+        ftect(" indicato dalla Stazione Appaltante, ai sensi dell’art.11 del d.lgs.36/2023 e s.m.i.;")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che i costi della manodopera indicati dal già menzionato operatore economico a corredo dell’offerta, sulla base delle tariffe orarie previste per il CCNL identificato dai codici alfanumerico e ATECO "),
+                           ftext(CCNL),
+                           ftect(" sono da ritenersi congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A.;")), style = "Normal")
+    }
+
+    doc <- doc |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 52, comma 1 del Codice, il quale dispone che, nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro, gli operatori economici attestano con dichiarazione sostitutiva di atto di notorietà il possesso dei requisiti di partecipazione e di qualificazione richiesti e che le stazioni appaltanti procedono alla risoluzione del contratto qualora a seguito delle verifiche non sia confermato il possesso dei requisiti generali dichiarati;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che, l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva di atto di notorietà resa ai sensi del D.P.R. n. 445/2000 attestante l’insussistenza di motivi di esclusione e il possesso dei requisiti di qualificazione richiesti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la Stazione appaltante, secondo il proprio regolamento interno, verificherà, previo sorteggio di un campione individuato con modalità predeterminata, le dichiarazioni degli operatori economici affidatari nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro;")), style = "Normal") |>
