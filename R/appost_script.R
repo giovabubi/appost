@@ -1553,7 +1553,10 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
       #                   ftext(sede2), ftext(" dell’IPSP prot. 153859 dell’8/5/2024 per il periodo dall’8/5/2024 al 31/12/2024 ad effettuare il controllo interno di regolarità amministrativa e copertura finanziaria per gli affidamenti diretti ed apporre il visto sulla “Decisione di contrattare” prevista dall’art. 32 del Regolamento di Amministrazione Contabilità e Finanza (RACF) del Consiglio Nazionale delle Ricerche, emanato con provvedimento della Presidente CNR n. 201 del 23 dicembre 2024, in vigore dal 1° gennaio 2025;")), style = "Normal") |>
       cursor_reach("CAMPO.RAS") |>
-      body_remove() |>
+      body_remove()
+    
+    if(CCNL=="Non applicabile"){
+      doc <- doc |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
                          ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
                          ftext(" relativa alla necessità di procedere all’acquisizione "),
@@ -1567,7 +1570,28 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore..P.IVA),
                          ftext("), per un importo presunto di "),
                          ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA e di altre imposte e contributi di legge;")), style = "Normal") |>
+                         ftext(" oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                           ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                           ftext(" relativa alla necessità di procedere all’acquisizione "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto),
+                           ftext("”, nell’ambito del progetto "),
+                           ftext(Progetto.cup),
+                           ftext(", mediante affidamento diretto all'operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), per un importo presunto di "),
+                           ftext(Importo.senza.IVA),
+                           ftext(", comprensivo di "),
+                           ftext(Oneri.sicurezza),
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze, oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
+    }
+    
+    doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(", pertanto, la necessità di procedere alla nomina del Responsabile Unico del Progetto per la progettazione, affidamento e esecuzione di una procedura di affidamento "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
@@ -1585,6 +1609,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("DI ASSUMERE", fpt.b), ftext(" il ruolo di Responsabile Unico del Progetto (RUP) che, ai sensi dell'art. 15 del Codice, dovrà:")), style = "Elenco liv1")
     }
      
+    doc <- doc |>
+      body_add_fpar(fpar(ftext("svolgere tutte le attività indicate nell’allegato I.2 del Codice, o che siano comunque necessarie ove non di competenza di altri organi;")), style = "Elenco liv2")
+      
+    if(CCNL=="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("individuare il CCNL, in base all’attività oggetto dell’appalto svolta dall’impresa, in conformità al comma 1 dell’art. 11 e allegato 1.01 del Codice, nonché ai sensi del comma 2-bis dell’art. 11 del Codice;")), style = "Elenco liv2")
+    }
+    
     if(Supporto.RUP!=trattini){
       doc <- doc |>
         cursor_bookmark("bookmark_supporto_rup") |>
