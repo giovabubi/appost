@@ -2919,9 +2919,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico "),
                            ftext(Fornitore),
-        ftext(" ha dichiarato che applicherà ai propri dipendenti il contratto collettivo nazionale e territoriale applicabile indentificato dai seguenti codice alfanumerico e codice Ateco "),
-        ftext(CCNL),
-        ftect(" indicato dalla Stazione Appaltante, ai sensi dell’art.11 del d.lgs.36/2023 e s.m.i.;")), style = "Normal") |>
+                           ftext(" ha dichiarato che applicherà ai propri dipendenti il contratto collettivo nazionale e territoriale applicabile indentificato dai seguenti codice alfanumerico e codice Ateco "),
+                           ftext(CCNL),
+                           ftext(" indicato dalla Stazione Appaltante, ai sensi dell’art.11 del d.lgs.36/2023 e s.m.i.;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che i costi della manodopera indicati dal già menzionato operatore economico a corredo dell’offerta, sulla base delle tariffe orarie previste per il CCNL identificato dai codici alfanumerico e ATECO "),
                            ftext(CCNL),
                            ftect(" sono da ritenersi congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A.;")), style = "Normal")
