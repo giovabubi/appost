@@ -14,8 +14,8 @@ appost <- function(){
       AppOst è ottimizzata per affidamenti diretti di forniture e servizi <40.000 €.
       Invece, per i seguenti ordini sono necessari adattamenti:
       - ordini >40.000 €
-      - servizi di natura non intellettuale
-      - forniture con posa in opera
+      - servizi di natura non intellettuale (in corso di implementazione)
+      - forniture con posa in opera (in corso di implementazione)
       - procedure aperte o negoziate
 
 Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaricato da Teams
