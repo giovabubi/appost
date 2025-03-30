@@ -25,7 +25,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 19
+  #ordine <- 29
   ordine <- readline()
 
   if(ordine==0){
@@ -2064,13 +2064,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     if(CCNL!="Non applicabile"){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico ha confermato di applicare al personale dipendente impiegato nell’attività oggetto dell’appalto il contratto collettivo nazionale e territoriale di lavoro individuato dal RUP, ai sensi dell’art. 11, co. 2 del Codice, a seguito di autodichiarazione, individuato dai seguenti codice alfanumerico e codice Ateco "),
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico ha confermato di applicare al personale dipendente impiegato nell’attività oggetto dell’appalto il contratto collettivo nazionale e territoriale di lavoro individuato dal RUP, ai sensi dell’art. 11, co. 2 del Codice, a seguito di autodichiarazione, individuato dai seguenti codice alfanumerico e codice ATECO "),
                            ftext(CCNL),
                            ftext(", stimando in "),
                            ftext(Manodopera),
-                           ftext(" oltre IVA e altre imposte e contributi di legge i costi della manodopera;",
-                                 run_footnote(x=block_list(fpar(ftext(" Ai sensi dell’art. 2 dell’Allegato I.01 del Codice, è a cura del RUP l’individuazione del CCNL territoriale da applicare all’appalto secondo le procedure illustrate nell’Allegato I.01.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")
-                                 ))), style = "Normal") |>
+                           ftext(" oltre IVA e altre imposte e contributi di legge i costi della manodopera"),
+                           run_footnote(x=block_list(fpar(ftext(" Ai sensi dell’art. 2 dell’Allegato I.01 del Codice, è a cura del RUP l’individuazione del CCNL territoriale da applicare all’appalto secondo le procedure illustrate nell’Allegato I.01.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")),
+                                        ftext(";")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che sono stati ritenuti congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A., i costi della manodopera indicati dal già menzionato operatore economico a corredo dell’offerta, sulla base delle tariffe orarie previste per il CCNL codice alfanumerico e codice ATECO "),
                            ftext(CCNL),
                            ftext(";")), style = "Normal")
@@ -2465,7 +2465,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         
         cat("
 
-    Documenti '", pre.nome.file, "5.1 Patto di integrità.docx', '5.2 Comunicazione cc dedicato.docx' e '5.3 Dichiarazione DPCM 187.docx' generati e salvati in ", pat)
+    Documenti generati: '5.1 Patto di integrità', '5.2 Comunicazione cc dedicato', '5.3 Dichiarazione DPCM 187' e '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione'")
 
         ## Dati mancanti ---
         manca <- dplyr::select(sc, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Prodotto, Progetto, Pagina.web)
@@ -2495,9 +2495,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
             doc <- doc |>
               body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
             print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
-
-            cat("
-    Documento generato: '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione'")
           }
 
             if(Importo.senza.IVA.num>=40000){
@@ -2919,7 +2916,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico "),
                            ftext(Fornitore),
-                           ftext(" ha dichiarato che applicherà ai propri dipendenti il contratto collettivo nazionale e territoriale applicabile indentificato dai seguenti codice alfanumerico e codice Ateco "),
+                           ftext(" ha dichiarato che applicherà ai propri dipendenti il contratto collettivo nazionale e territoriale applicabile indentificato dai seguenti codice alfanumerico e codice ATECO "),
                            ftext(CCNL),
                            ftext(" indicato dalla Stazione Appaltante, ai sensi dell’art.11 del d.lgs.36/2023 e s.m.i.;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che i costi della manodopera indicati dal già menzionato operatore economico a corredo dell’offerta, sulla base delle tariffe orarie previste per il CCNL identificato dai codici alfanumerico e ATECO "),
