@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 29
+  #ordine <- 4
   ordine <- readline()
 
   if(ordine==0){
@@ -2048,7 +2048,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Importo.senza.IVA),
                            ftext(", comprensivo di "),
                            ftext(Oneri.sicurezza),
-                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze, oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze ed "),
+                           ftext(Manodopera),
+                           ftext(" quali costi del personale, oltre IVA e di altre imposte e contributi di legge;")), style = "Normal")
     }
     
     doc <- doc |>
@@ -2062,7 +2064,24 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore..P.IVA),
                          ftext(") per un importo pari a "),
                          ftext(Importo.senza.IVA),
-                         ftext(" mediante atto immediatamente efficace;")), style = "Normal")
+                         ftext(" mediante atto immediatamente efficace;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che:")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("si intendono perseguire le finalità del progetto "),
+                         ftext(Progetto.cup),
+                         ftext(" nell’ambito del quale è necessario acquisire la fornitura di cui trattasi, identificabile con il codice CPV "),
+                         ftext(CPV),
+                         ftext(";")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("alla data odierna non sono stati individuati, tra quelli messi a disposizione da CONSIP (Convenzioni, Accordi Quadro o Bandi del Sistema dinamico di acquisizione), strumenti idonei a soddisfare le già menzionate esigenze di approvvigionamento e che il bene/servizio oggetto della fornitura non è presente sulla Piattaforma regionale di riferimento;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("i "), ftext(beni), ftext(" di cui trattasi non sono presenti nel MePA;")), style = "Elenco punto")
+    
+    if(Tipo.ordine!="Fuori MePA" & Importo.senza.IVA.num>=5000){  
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("trattandosi di beni funzionalmente destinati all’attività di ricerca d’importo pari o superiore a 5.000,00 euro trovano applicazioni le deroghe ai sensi dell’art. 4 comma 1 del D.L. 126/2019 convertito in L. 159/2019;")), style = "Elenco punto")
+      }
+    
+    doc <- doc |>
+      body_add_fpar(fpar(ftext("alla data odierna il "), ftext(bene), ftext(" oggetto della fornitura non è presente sulla Piattaforma regionale di riferimento;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("le prestazioni richieste non rientrano nell'elenco dei lavori, beni e servizi assoggettati a centralizzazione degli acquisti ai sensi dell'art.1 del Decreto del Presidente del Consiglio dei ministri del 16 agosto 2018;")), style = "Elenco punto")
     
     if(CCNL!="Non applicabile"){
       doc <- doc |>
@@ -2111,8 +2130,11 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Voce.di.spesa),
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che vi sono i presupposti normativi e di fatto per acquisire "), ftext(la.fornitura), ftext(" in oggetto, nel rispetto dei principi generali enunciati nel Codice;")), style = "Normal") |>
-      body_add_par("DISPONE", style = "heading 2") |>
-      body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" all’acquisizione "), ftext(della.fornitura), ftext(", mediante affidamento diretto ai sensi dell’art. 50, comma 1, lett. b) del Codice, all’operatore economico "),
+      body_add_par("DISPONE", style = "heading 2")
+    
+    if(CCNL=="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" all’acquisizione "), ftext(della.fornitura), ftext(", mediante affidamento diretto ai sensi dell’art. 50, comma 1, lett. b) del Codice, all’operatore economico "),
                          ftext(Fornitore),
                          ftext(" con sede legale in "),
                          ftext(Fornitore..Sede),
@@ -2120,12 +2142,29 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore..P.IVA),
                          ftext(", per un importo complessivo pari a euro "),
                          ftext(Importo.senza.IVA),
-                         ftext(", oltre IVA e di altre imposte e contributi di legge;")), style = "Elenco liv1") |>
+                         ftext(", oltre IVA e di altre imposte e contributi di legge;")), style = "Elenco liv1")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" all’acquisizione "), ftext(della.fornitura), ftext(", mediante affidamento diretto ai sensi dell’art. 50, comma 1, lett. b) del Codice, all’operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" con sede legale in "),
+                           ftext(Fornitore..Sede),
+                           ftext(", C.F. e P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(", per un importo complessivo pari a euro "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" oltre IVA e di altre imposte e contributi di legge, comprensivo di "),
+                           ftext(Oneri.sicurezza),
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze e "),
+                           ftext(Manodopera),
+                           ftext(" quali costi del personale;")), style = "Elenco liv1")
+    }
       # body_add_fpar(fpar(ftext("DI NOMINARE ", fpt.b),
       #                    ftext(il.dott.rup),
       #                    ftext(" "),
       #                    ftext(RUP),
       #                    ftext(" Responsabile Unico del Progetto il quale, ai sensi dell’art. 15 del Codice, dovrà:")), style = "Elenco liv1") |>
+    doc <- doc |>  
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" che l'affidamento di cui al presente provvedimento sia soggetto all’applicazione delle norme contenute nella legge n. 136/2010 e s.m.i. e che il pagamento venga disposto entro 30 giorni dall’emissione certificato di regolare esecuzione;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("DI STABILIRE", fpt.b), ftext(" in conformità a quanto disposto dall’art. 53, comma 4, del Codice, che l’affidatario non sarà tenuto a presentare la garanzia definitiva in quanto l'ammontare garantito sarebbe di importo così esiguo da non costituire reale garanzia per la stazione appaltante, determinando esclusivamente un appesantimento del procedimento;")), style = "Elenco liv1")
     
@@ -2138,7 +2177,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       
     doc <- doc |>
       body_add_fpar(fpar(ftext("DI SOTTOPORRE", fpt.b), ftext(" la lettera d’ordine alla condizione risolutiva in caso di accertamento della carenza dei requisiti di ordine generale;")), style = "Elenco liv1") |>
-      body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b), ftext(" la registrazione sul sistema contabile della seguente scrittura anticipata n. "),
+      body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" con la registrazione sul sistema contabile della scrittura anticipata n. "),
                          ftext(Anticipata),
                          # ftext(" (da migrazione impegno in SIGLA n. "),
                          # ftext(N..impegno.di.spesa),
