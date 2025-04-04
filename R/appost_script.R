@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 4
+  #ordine <- 42
   ordine <- readline()
 
   if(ordine==0){
@@ -174,7 +174,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     resp.segr <- "La responsabile amministrativa della sede secondaria di Torino dell'IPSP"
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Chieri (TO) il 29/5/1972, codice fiscale GHGSFN72E29C627M,"
-    RSS.dich <- " responsabile della sede secondaria di Torino "
+    RSS.dich <- "responsabile della sede secondaria di Torino dell'IPSP"
     CUU <- "PE2U6Q"
   }else if(sede=='NA'){
     sede1 <- 'Portici'
@@ -192,7 +192,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     resp.segr <- "Il responsabile amministrativo"
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Sant'Agnello il 28/05/1969, codice fiscale RCCMHL69E68I208P,"
-    RSS.dich <- " responsabile della sede secondaria di Portici dell'IPSP "
+    RSS.dich <- "responsabile della sede secondaria di Portici dell'IPSP"
     CUU <- "_____"
   }else if(sede=='FI'){
     sede1 <- 'Sesto Fiorentino'
@@ -210,7 +210,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Firenze il 27/12/1975, codice fiscale LCHNCL75T27D612B,"
-    RSS.dich <- " responsabile della sede secondaria di Sesto Fiorentino dell'IPSP "
+    RSS.dich <- "responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
     CUU <- "KWH4FD"
   }else if(sede=='PD'){
     sede1 <- 'Legnaro'
@@ -246,8 +246,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     resp.segr <- "La segretaria amministrativa"
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Cava de' Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R,"
-    RSS.dich <- " direttore dell'IPSP "
-    CUU <- "_____"
+    RSS.dich <- "direttore dell'IPSP"
+    CUU <- "7K0RCK"
   }
 
   if(Scelta.fornitore=='Avviso pubblico'){
@@ -520,7 +520,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj" | PNRR=="RE-VOC"){
+  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj" | PNRR=="RE-VOC" | PNRR=="TOMRESAMED"){
     finanziamento <- "PRIN 2022 PNRR"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -880,6 +880,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "264.369,60 €, di cui 82.877,20 € al CNR-IPSP"
     costo.ammesso <- "205.637,89 €, di cui 63.152,20 € al CNR-IPSP"
     logo <- "logo_sushi.jpg"
+  }
+  if(PNRR=="TOMRESAMED"){
+    titolo <- "Tomato genetic diversity for enhancing Resilience of Agro-systems in Mediterranean environment"
+    codice.progetto <- "P2022LP2YW"
+    CUP2 <- "B53D23023640001"
+    decreto.concessione <- "1409 del 14/9/2022"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università degli Studi di Bari Aldo Moro"
+    avvio <- "Avvio: 9/11/2023; Conclusione: 8/11/2025"
+    costo.totale <- "300.000,00 €, di cui 60.000,00 € al CNR-IPSP"
+    costo.ammesso <- "237.300,00 €, di cui 47.460,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
@@ -2481,6 +2493,11 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
         
+        if(sede!="TOsi"){
+          doc <- doc |>
+            body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+        }
+        
         doc <- doc |>
           body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
           body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
@@ -2588,13 +2605,22 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
           body_add_fpar(fpar(ftext("4. Subappalto", fpt.b), ftext(": in caso di subappalto trovano applicazione le disposizioni di cui all'art. 119 del codice dei contratti.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("5. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("6. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("7. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto di cui all’art.8, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia l’Aggiudicatario non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 20% (venti per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno all’Aggiudicatario, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("7. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto di cui all’art.8, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia l’Aggiudicatario non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 10% (dieci per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno all’Aggiudicatario, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("8. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("9. Osservanza leggi, regolamenti, contratti collettivi nazionali di lavoro, norme per la prevenzione infortuni ed igiene sul lavoro", fpt.b), ftext(": al personale impiegato nei servizi/forniture oggetto del presente appalto è applicato il contratto collettivo nazionale e territoriale in vigore per il settore e la zona nella quale si eseguono le prestazioni, stipulato dalle associazioni dei datori e dei prestatori di lavoro comparativamente più rappresentative sul piano nazionale e quello il cui ambito di applicazione sia strettamente connesso con l’attività oggetto dell’appalto svolta dall’impresa anche in maniera prevalente.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("L’obbligo permane anche dopo la scadenza dei suindicati contratti collettivi e fino alla loro sostituzione. L’affidatario che applica un differente contratto collettivo deve garantire le stesse tutele economiche e normative rispetto a quello indicato dalla Stazione Appaltante e come evidenziato nella dichiarazione di equivalenza presentata. I sopraccitati obblighi vincolano l’affidatario, anche nel caso che non sia aderente alle associazioni stipulanti o receda da esse ed indipendentemente dalla natura artigiana o industriale della struttura o dimensione della Società stessa e da ogni altra sua qualificazione giuridica, economica o sindacale, ivi compresa la forma cooperativa. L’affidatario è tenuto, inoltre, all’osservanza ed all’applicazione di tutte le norme relative alle assicurazioni obbligatorie ed antinfortunistiche, previdenziali ed assistenziali, nei confronti del proprio personale dipendente e dei soci lavoratori nel caso di cooperative. A richiesta della stazione appaltante, l’affidatario deve certificare l’applicazione del trattamento retributivo previsto dal CCNL delle imprese di settore e dagli accordi integrativi territoriali, ai lavoratori, compresi i soci lavoratori qualora si tratti di cooperativa, impiegati nell’appalto. La stazione appaltante si riserva di verificare, in qualsiasi momento, la regolarità dell’assolvimento degli obblighi inerenti al versamento dei contributi obbligatori ai sensi di legge. La stazione appaltante verifica, ai fini del pagamento della rata del corrispettivo, l’ottemperanza a tali obblighi, da parte dell’affidatario. La stazione appaltante si riserva di verificare, anche direttamente, il rispetto delle disposizioni in materia di assicurazioni obbligatorie per legge.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("Per inadempimenti contributivi o retributivi si applica il comma 6 dell’art. 11 del Codice.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("10. Modifiche contrattuali", fpt.b), ftext(": la stazione appaltante, fermo quanto previsto dall’articolo sulla revisione dei prezzi [se presente], può modificare il contratto d’appalto conformemente a quanto disposto all'art.120 del codice dei contratti pubblici.")), style = "Riquadro paragrafo")
+          body_add_fpar(fpar(ftext("Per inadempimenti contributivi o retributivi si applica il comma 6 dell’art. 11 del Codice.")), style = "Riquadro paragrafo")
         
+        if(CCNL!="Non applicabile"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("Il contratto collettivo nazionale e territoriale applicato è il seguente, identificato con codice alfanumerico e codice ATECO "),
+                               ftext(CCNL),
+                               ftext(".")), style = "Riquadro paragrafo")
+        }
+        
+          doc <- doc |>
+          body_add_fpar(fpar(ftext("10. Modifiche contrattuali", fpt.b), ftext(": la stazione appaltante, fermo quanto previsto dall’articolo sulla revisione dei prezzi [se presente], può modificare il contratto d’appalto conformemente a quanto disposto all'art.120 del codice dei contratti pubblici.")), style = "Riquadro paragrafo")
+      
         if(Inventariabile=='Inventariabile'){
           doc <- doc |>
             body_add_fpar(fpar(ftext("11. Verifica di conformità", fpt.b), ftext(": la presente fornitura è soggetta a verifica di conformità da effettuarsi, secondo quanto previsto all'art. 116 e nell'allegato II.14 del codice dei contratti entro 1 mese. A seguito della verifica di conformità si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
@@ -2941,7 +2967,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(as.character(RDO)),
                          ftext("), un’offerta ritenuta congrua corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti d’importo corrispondente al preventivo precedentemente acquisito e agli atti d’importo pari a "),
                          ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA;")), style = "Normal")
+                         ftext(" oltre IVA e altre imposte e contributi di legge;")), style = "Normal")
     }else{
       doc <- doc |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico individuato "),
@@ -2952,7 +2978,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(as.character(RDO)),
                            ftext("), un’offerta ritenuta congrua corredata dalle dichiarazioni sostitutive richieste, in merito al possesso dei requisiti prescritti d’importo corrispondente al preventivo precedentemente acquisito e agli atti d’importo pari a "),
                            ftext(Importo.senza.IVA),
-                           ftext(" oltre IVA, comprensivo di "),
+                           ftext(" oltre IVA e altre imposte e contributi di legge, comprensivo di "),
                            ftext(Oneri.sicurezza),
                            ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che l’operatore economico "),
@@ -2962,7 +2988,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                            ftext(" indicato dalla Stazione Appaltante, ai sensi dell’art.11 del d.lgs.36/2023 e s.m.i.;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che i costi della manodopera indicati dal già menzionato operatore economico a corredo dell’offerta, sulla base delle tariffe orarie previste per il CCNL identificato dai codici alfanumerico e ATECO "),
                            ftext(CCNL),
-                           ftext(" sono da ritenersi congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A.;")), style = "Normal")
+                           ftext(" sono da ritenersi congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A.;")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" altresì i principi previsti dall’art. 57 del d.lgs. 36/2023 tra i quali le clausole sociali volte a garantire le pari opportunità generazionali, di genere e di inclusione lavorativa per le persone con disabilità o svantaggiate, la stabilità occupazionale del personale impiegato;")), style = "Normal")
     }
 
     doc <- doc |>
@@ -4387,6 +4414,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     ## Patto d'integrità ----
     download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
+    
+    if(sede!="TOsi"){
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+    }
+    
     doc <- doc |>
       footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
       body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(paste0(della.fornitura, " DI “", Prodotto, "”, ordine ",
