@@ -513,9 +513,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     dicitura.fattura <- trattini
     finanziamento <- "No"
   }
-  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
+  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -550,7 +550,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Progetto.int <- sub("spoke 3", "spoke 8", Progetto.int)
     dicitura.fattura <- "Finanziamento Unione Europea NextGenerationEU progetto PNRR AGRITECH Spoke8 M4.C2.I1.4 - Codice progetto MUR: CN00000022"
   }
-  if(PNRR=="onFoods Spoke 4"){
+  if(PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 4"){
     Progetto <- "onFoods Spoke 4"
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1550 dell’11/10/2022 - progetto “Research and innovation network on food and nutrition sustainability, safety and security - working on foods” (ON Foods), spoke 4, codice identificativo PE00000003, CUP B83C22004790001'
     codice.progetto <- "PE00000003"    
@@ -576,6 +576,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "115.303.750,00 €"
     costo.ammesso <- "114.500.000,00 €"
     logo <- "logo_onfoods.jpg"
+  }
+  if(PNRR=="onFoods Spoke 2"){
+    Progetto.int <- sub("spoke 4", "spoke 2", Progetto.int)
   }
   if(PNRR=="SUS-MIRRI.IT"){
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 3.1 “fondo per la realizzazione di un sistema integrato di infrastrutture di ricerca e innovazione”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 3264 del 28/12/2021 - progetto “Strengthening the MIRRI Italian Research Infrastructure for Sustainable Bioscience and Bioeconomy” (SUS-MIRRI.iT), codice identificativo IR0000005 - CUP D13C22001390001'
@@ -885,12 +888,24 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     titolo <- "Tomato genetic diversity for enhancing Resilience of Agro-systems in Mediterranean environment"
     codice.progetto <- "P2022LP2YW"
     CUP2 <- "B53D23023640001"
-    decreto.concessione <- "1409 del 14/9/2022"
+    decreto.concessione <- "1180 del 27/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Bari Aldo Moro"
     avvio <- "Avvio: 9/11/2023; Conclusione: 8/11/2025"
     costo.totale <- "300.000,00 €, di cui 60.000,00 € al CNR-IPSP"
     costo.ammesso <- "237.300,00 €, di cui 47.460,00 € al CNR-IPSP"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="TRSH52"){
+    titolo <- "A supplementary diet as therapeutic vaccine for pancreatic cancer"
+    codice.progetto <- "2022TRSH52_LS6"
+    CUP2 <- "B53D23003580006"
+    decreto.concessione <- "972 del 30/6/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Università di Torino"
+    avvio <- "Avvio: 1/11/2023; Conclusione: 30/10/2025"
+    costo.totale <- "284.024,00 €, di cui 112.824,00 € al CNR-IPSP"
+    costo.ammesso <- "211.209,00 €, di cui 105.604,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
   }
   
