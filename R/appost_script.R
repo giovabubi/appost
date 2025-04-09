@@ -229,7 +229,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Bruxelles il 20/3/1963, codice fiscale SCRLRA63C60Z103Z,"
     RSS.dich <- " responsabile della sede secondaria di Legnaro dell'IPSP "
-    CUU <- "_____"
+    CUU <- "8INQPI"
   }else if(sede=='TOsi'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Istituzionale'
