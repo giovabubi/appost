@@ -513,7 +513,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     dicitura.fattura <- trattini
     finanziamento <- "No"
   }
-  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
+  if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
   }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52"){
     finanziamento <- "PRIN 2022"
@@ -527,7 +527,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
   }
   
-  if(PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4"){
+  if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4"){
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 3, codice identificativo CN00000022 - CUP B83C22002840001'
     codice.progetto <- "CN00000022"
     CUP2 <- "B83C22002840001"
@@ -542,6 +542,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "346.342.467,00 €"
     costo.ammesso <- "320.070.095,50 €"
     logo <- "logo_agritech.png"
+  }
+  if(PNRR=="Agritech Spoke 1"){
+    Progetto.int <- sub("spoke 3", "spoke 1", Progetto.int)
   }
   if(PNRR=="Agritech Spoke 4"){
     Progetto.int <- sub("spoke 3", "spoke 4", Progetto.int)
@@ -5958,10 +5961,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("
 
     Che documento vuoi generare?
+    (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
       1: RAS
       2: Nomina RUP, Richiesta pagina web
-      3: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare, 
-         Comunicazione CIG, Lettera d'ordine, Certificato di regolare esecuzione, Provvedimento di liquidazione
+      3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
+         Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
+         Provvedimento di liquidazione (.6)
 
 ")
       
@@ -5969,15 +5974,23 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       if(inpt==1){cat("\014");ras()}
       if(inpt==2){cat("\014");rup();pag()}
       if(inpt==3){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
+      if(inpt==3.1){cat("\014");docoe()}
+      if(inpt==3.2){cat("\014");ai();com_cig()}
+      if(inpt==3.3){cat("\014");dac()}
+      if(inpt==3.4){cat("\014");ldo()}
+      if(inpt==3.5){cat("\014");reg_es()}
+      if(inpt==3.6){cat("\014");provv_liq()}
     }else{
       cat("
 
     Che documento vuoi generare?
+    (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
       1: RAS
       2: Nomina RUP, Richiesta pagina web, 
-      3: Autocertificazioni operatore economico, Atto istruttorio, Decisione a contrattare,
-         Comunicazione CIG, Lettera d'ordine, Certificato di regolare esecuzione, Provvedimento di liquidazione
-      4: Assenza doppio finanziamento, Funzionalità del bene, Checklist
+      3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
+         Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
+         Provvedimento di liquidazione (.6)
+      4: Assenza doppio finanziamento e Funzionalità del bene (.1), Checklist (.2)
 
 ")
       inpt <- readline()
@@ -5985,6 +5998,14 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       if(inpt==2){cat("\014");rup.pnrr();pag()}
       if(inpt==3){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es();provv_liq()}
       if(inpt==4){cat("\014");doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
+      if(inpt==3.1){cat("\014");docoe()}
+      if(inpt==3.2){cat("\014");ai();com_cig()}
+      if(inpt==3.3){cat("\014");dac()}
+      if(inpt==3.4){cat("\014");ldo()}
+      if(inpt==3.5){cat("\014");reg_es()}
+      if(inpt==3.6){cat("\014");provv_liq()}
+      if(inpt==4.1){cat("\014");doppio_fin.pnrr();fun_bene.pnrr()}
+      if(inpt==4.2){cat("\014");chklst.pnrr()}
     }
     # if(inpt==5){
     #   # drive_deauth()
