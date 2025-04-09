@@ -227,7 +227,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Legnaro dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "La sottoscritta "
-    nato.rss <- " nata a __________ il __________, codice fiscale __________,"
+    nato.rss <- " nata a Bruxelles il 20/3/1963, codice fiscale SCRLRA63C60Z103Z,"
     RSS.dich <- " responsabile della sede secondaria di Legnaro dell'IPSP "
     CUU <- "_____"
   }else if(sede=='TOsi'){
