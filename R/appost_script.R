@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 19
-  ordine <- readline()
+  ordine <- 10
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -6016,7 +6016,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       if(inpt==2){cat("\014");rup.pnrr();pag();provv_imp()}
       if(inpt==3){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es();provv_liq()}
       if(inpt==4){cat("\014");doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
-      if(inpt==3.1){cat("\014");docoe()}
+      if(inpt==3.1){cat("\014");docoe.pnrr()}
       if(inpt==3.2){cat("\014");ai.pnrr();com_cig()}
       if(inpt==3.3){cat("\014");dac.pnrr()}
       if(inpt==3.4){cat("\014");ldo.pnrr()}
