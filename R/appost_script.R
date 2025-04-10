@@ -157,6 +157,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nato.rss <- " nato a Foggia il giorno 11/11/1977, codice fiscale BBCGNN77S11D643H,"
     RSS.dich <- "responsabile della sede secondaria di Bari dell'IPSP"
     CUU <- "4S488Q"
+    cdr <- paste("CdR 121.001.000 IPSP", sede2)
   }else if(sede=='TO'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Secondaria di Torino'
@@ -176,6 +177,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nato.rss <- " nato a Chieri (TO) il 29/5/1972, codice fiscale GHGSFN72E29C627M,"
     RSS.dich <- "responsabile della sede secondaria di Torino dell'IPSP"
     CUU <- "PE2U6Q"
+    cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='NA'){
     sede1 <- 'Portici'
     sede2 <- 'Sede Secondaria di Portici'
@@ -193,6 +195,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Sant'Agnello il 28/05/1969, codice fiscale RCCMHL69E68I208P,"
     RSS.dich <- "responsabile della sede secondaria di Portici dell'IPSP"
+    cdr <- paste("CdR 121.00_.000 IPSP", sede2)
     CUU <- "_____"
   }else if(sede=='FI'){
     sede1 <- 'Sesto Fiorentino'
@@ -212,6 +215,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nato.rss <- " nato a Firenze il 27/12/1975, codice fiscale LCHNCL75T27D612B,"
     RSS.dich <- "responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
     CUU <- "KWH4FD"
+    cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='PD'){
     sede1 <- 'Legnaro'
     sede2 <- 'Sede Secondaria di Legnaro'
@@ -230,6 +234,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nato.rss <- " nata a Bruxelles il 20/3/1963, codice fiscale SCRLRA63C60Z103Z,"
     RSS.dich <- " responsabile della sede secondaria di Legnaro dell'IPSP "
     CUU <- "8INQPI"
+    cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='TOsi'){
     sede1 <- 'Torino'
     sede2 <- 'Sede Istituzionale'
@@ -248,6 +253,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nato.rss <- " nato a Cava de' Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R,"
     RSS.dich <- "direttore dell'IPSP"
     CUU <- "7K0RCK"
+    cdr <- paste("CdR 121.000.000 IPSP", sede2)
   }
 
   if(Scelta.fornitore=='Avviso pubblico'){
@@ -2289,21 +2295,28 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
   # Provv. impegno ----
   provv_imp <- function(){
-    doc <- doc.prov.imp |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
     
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
     }
     
     doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
-      body_add_fpar(fpar(ftext("CdR 121.001.000 IPSP ", fpt.b), ftext(sede2, fpt.b)), style = "Normal") |>
-      body_add_fpar(fpar(ftext("PROVVEDIMENTO DI IMPEGNO DELLA")), style = "heading 1") |>
-      body_add_fpar(fpar(ftext("LETTERA D'ORDINE "), ftext(sede), ftext(" "), ftext(ordine), ftext(y)), style = "heading 1") |>
+      body_add_fpar(fpar(ftext(cdr, fpt.b)), style = "Normal") |>
+      body_add_fpar(fpar(ftext("PROVVEDIMENTO DI ASSUNZIONE ANTICIPATA")), style = "heading 1") |>
       body_add_fpar(fpar(firma.RSS), style = "heading 2") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il d.lgs. 31 dicembre 2009 n. 213, recante “Riordino del Consiglio Nazionale delle Ricerche in attuazione dell’articolo 1 della Legge 27 settembre 2007, n. 165”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il d.lgs. 25 novembre 2016 n. 218, recante “Semplificazione delle attività degli enti pubblici di ricerca ai sensi dell'articolo 13 della legge 7 agosto 2015, n. 124”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
                          ftext(" il Regolamento di Organizzazione e Funzionamento del CNR emanato con Provvedimento del Presidente nr. 119 Prot. n. 241776 del 10/07/2024, in vigore dal 01/08/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
@@ -2332,77 +2345,75 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(" relativa alla necessità di procedere all’acquisizione "),
                          ftext(della.fornitura), ftext(" di “"),
                          ftext(Prodotto),
-                         ftext("” (pagina web dedicata al ciclo di vita del contratto pubblico "),
-                         ftext(Pagina.web),
-                         ftext("), nell’ambito delle attività previste dal progetto “"),
+                         ftext("”, nell’ambito delle attività previste dal progetto “"),
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", mediante affidamento diretto all’operatore economico "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext(", soggetto U-Gov "),
-                         ftext(Fornitore..Codice.terzo.SIGLA),
-                         ftext(") per un importo stimato di "),
-                         ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA;")), style = "Normal") |>
+                         #ftext(", mediante affidamento diretto all’operatore economico "),
+                         #ftext(Fornitore),
+                         #ftext(" (P.IVA "),
+                         #ftext(Fornitore..P.IVA),
+                         #ftext(", soggetto U-Gov "),
+                         #ftext(Fornitore..Codice.terzo.SIGLA),
+                         #ftext(") per un importo stimato di "),
+                         #ftext(Importo.senza.IVA),
+                         #ftext(" oltre IVA;")), style = "Normal") |>
+                         ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la verifica effettuata dal Responsabile Amministrativo della copertura finanziaria (art. 28, comma 2 Regolamento di contabilità);")), style = "Normal") |>
+                         ftext(" la verifica effettuata dall’RGC della copertura finanziaria;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                         ftext(" la verifica del possesso da parte della Ditta aggiudicataria dei requisiti stabiliti dall’art. 94 D.Lgs. 36/2023;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
-                         ftext(" che la fornitura in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
+                         ftext(" che l'acquisizione in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("SENTITO", fpt.b),
+                         ftext(" il parere del RUP che ha espletato un’adeguata indagine di mercato con la quale ha individuato la Ditta fornitrice alla quale affidare tramite affidamento diretto ai sensi dell’ dell’art. 50, comma 1, lett. b) del D.lgs. n. 36/2023;")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
+      body_add_fpar(fpar(ftext("l’affidamento "), ftext(della.fornitura), ftext(" alla Ditta che sarà aggiudicataria:")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("operatore economico: "), ftext(Fornitore), ftext(" (P.IVA "), ftext(Fornitore..P.IVA), ftext(");")), style = "Elenco punto liv2") |>
+      body_add_fpar(fpar(ftext("soggetto U-Gov: "), ftext(Fornitore..Codice.terzo.SIGLA), ftext(";")), style = "Elenco punto liv2") |>
+      #body_add_fpar(fpar(ftext("CUP: "), ftext(CUP2), ftext(";")), style = "Elenco punto liv2") |>
       body_add_fpar(fpar(ftext("l’assunzione della scrittura anticipata n. "),
                          ftext(Anticipata),
-                         ftext(" (da migrazione impegno di spesa in SIGLA n. "),
-                         ftext(N..impegno.di.spesa),
-                         ftext(") di "),
+                         ftext(", di "),
                          ftext(Importo.con.IVA),
                          ftext(" IVA inclusa, con imputazione sulla voce COAN "),
                          ftext(Voce.di.spesa),
-                         #ftext(", GAE "),
-                         #ftext(GAE),
                          ftext(", progetto “"),
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(";")), style = "Elenco punto")
+                         ftext(", natura _________ per __________ €;")), style = "Elenco punto")
 
       # if(CUI!=trattini){
       # doc <- doc |>
       #   body_add_fpar(fpar(ftext("CUI: "), ftext(CUI), ftext(";")), style = "Elenco punto liv2")
       # }
 
-      if(Tipo.acquisizione=='Beni'){
+    if(Tipo.acquisizione=='Beni'){
       if(Inventariabile=='Inventariabile'){
         doc <- doc |>
           body_add_fpar(fpar(ftext("di inventariare il bene e nominare "),
                              ftext(assegna),
                              ftext(" "),
                              ftext(il.dott.ric), ftext(" "), ftext(Richiedente), ftext(".")), style = "Elenco punto")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("di non inventariare il bene in quanto trattasi di materiale di consumo.")), style = "Elenco punto")
       }
-    }else{
+    }else if(Tipo.acquisizione=='Servizi'){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("di non inventariare il bene in quanto trattasi di materiale di consumo.")), style = "Elenco punto")
+        body_add_fpar(fpar(ftext("di non inventariare il bene in quanto trattasi di servizio.")), style = "Elenco punto")
     }
 
     doc <- doc |>
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
-      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
-      body_end_section_continuous()
+      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
 
-    b <- doc$officer_cursor$which +1
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc$officer_cursor$which <- b
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
-    print(doc, target = paste0(pre.nome.file, "3 Provv. impegno.docx"))
+    print(doc, target = paste0(pre.nome.file, "3 Provv. anticipata.docx"))
     cat("
 
-    Documento generato: '3 Provv. impegno'")
+    Documento generato: '3 Provv. anticipata'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, Richiedente)
@@ -2427,14 +2438,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
   # Richiesta pagina web ----
   pag <- function(){
-    doc <- doc.pag |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
     }
-
+    
     doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
@@ -2457,16 +2472,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(dott.rup),
                          ftext(" "),
                          ftext(RUP),
-                         ftext(")")), style = "Firma 2") |>
-      body_end_section_continuous()
+                         ftext(")")), style = "Firma 2")
 
-    b <- doc$officer_cursor$which +1
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc$officer_cursor$which <- b
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
     print(doc, target = paste0(pre.nome.file, "3 Richiesta pagina web.docx"))
     cat("
 
@@ -2866,14 +2873,18 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # Comunicazione CIG ----
   com_cig <- function(){
-    doc <- doc.com.cig |>
-      headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    
     if(sede=="TOsi"){
       doc <- doc |>
-        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
     }
-
+    
     doc <- doc |>
       cursor_begin() |>
       cursor_forward() |>
@@ -2897,16 +2908,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(dott.rup),
                          ftext(" "),
                          ftext(RUP),
-                         ftext(")")), style = "Firma 2") |>
-      body_end_section_continuous()
-
-    b <- doc$officer_cursor$which +1
-    e <- cursor_end(doc)
-    e <- e$officer_cursor$which
-    doc$officer_cursor$which <- b
-    for(i in 1:(e-b)){
-      doc <- body_remove(doc)
-    }
+                         ftext(")")), style = "Firma 2")
+      
     print(doc, target = paste0(pre.nome.file, "6 Comunicazione CIG.docx"))
     cat("
 
@@ -5966,7 +5969,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Che documento vuoi generare?
     (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
       1: RAS
-      2: Nomina RUP, Richiesta pagina web
+      2: Nomina RUP, Richiesta pagina web, Provvedimento assunzione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
          Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
          Provvedimento di liquidazione (.6)
@@ -5975,7 +5978,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       
       inpt <- readline()
       if(inpt==1){cat("\014");ras()}
-      if(inpt==2){cat("\014");rup();pag()}
+      if(inpt==2){cat("\014");rup();pag();provv_imp()}
       if(inpt==3){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
       if(inpt==3.1){cat("\014");docoe()}
       if(inpt==3.2){cat("\014");ai();com_cig()}
@@ -5989,7 +5992,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Che documento vuoi generare?
     (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
       1: RAS
-      2: Nomina RUP, Richiesta pagina web, 
+      2: Nomina RUP, Richiesta pagina web, Provvedimento assunzione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
          Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
          Provvedimento di liquidazione (.6)
@@ -5998,7 +6001,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 ")
       inpt <- readline()
       if(inpt==1){cat("\014");ras.pnrr()}
-      if(inpt==2){cat("\014");rup.pnrr();pag()}
+      if(inpt==2){cat("\014");rup.pnrr();pag();provv_imp()}
       if(inpt==3){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es();provv_liq()}
       if(inpt==4){cat("\014");doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
       if(inpt==3.1){cat("\014");docoe()}
