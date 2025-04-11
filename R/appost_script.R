@@ -2394,7 +2394,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
-                         ftext(", natura _________ per __________ €;")), style = "Elenco punto")
+                         ftext(", natura istituzionale per "),
+                         ftext(Importo.con.IVA),
+                         ftext(" ;")), style = "Elenco punto")
 
       # if(CUI!=trattini){
       # doc <- doc |>
@@ -5967,8 +5969,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     Che documento vuoi generare?
     (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
-      1: RAS
-      2: Nomina RUP, Richiesta pagina web, Provvedimento assunzione anticipata
+      1: RAS, Richiesta pagina web
+      2: Nomina RUP, Provvedimento assunzione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
          Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
          Provvedimento di liquidazione (.6)
@@ -5976,8 +5978,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 ")
       
       inpt <- readline()
-      if(inpt==1){cat("\014");ras()}
-      if(inpt==2){cat("\014");rup();pag();provv_imp()}
+      if(inpt==1){cat("\014");ras();pag()}
+      if(inpt==2){cat("\014");rup();provv_imp()}
       if(inpt==3){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
       if(inpt==3.1){cat("\014");docoe()}
       if(inpt==3.2){cat("\014");ai();com_cig()}
@@ -5990,8 +5992,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     Che documento vuoi generare?
     (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
-      1: RAS
-      2: Nomina RUP, Richiesta pagina web, Provvedimento assunzione anticipata
+      1: RAS, Richiesta pagina web
+      2: Nomina RUP, Provvedimento assunzione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
          Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
          Provvedimento di liquidazione (.6)
@@ -5999,8 +6001,8 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
 ")
       inpt <- readline()
-      if(inpt==1){cat("\014");ras.pnrr()}
-      if(inpt==2){cat("\014");rup.pnrr();pag();provv_imp()}
+      if(inpt==1){cat("\014");ras.pnrr();pag()}
+      if(inpt==2){cat("\014");rup.pnrr();provv_imp()}
       if(inpt==3){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es();provv_liq()}
       if(inpt==4){cat("\014");doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
       if(inpt==3.1){cat("\014");docoe.pnrr()}
