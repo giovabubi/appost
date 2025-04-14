@@ -3467,10 +3467,10 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("Fattura n. _____ del _____ - Importo totale del documento "), ftext(Importo.con.IVA)), style = "Normal") |>
       body_add_fpar(fpar(ftext("Progetto: "), ftext(Progetto.int.no.cup)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CIG "), ftext(CIG), ftext(" - CUP "), ftext(CUP)), style = "Normal") |>
-      body_add_fpar(fpar(ftext("Soggetto: " ,fpt.b), ftext(Fornitore..Codice.terzo.SIGLA, fpt.b), ftext(" - "),
-                         ftext(Fornitore),
-                         ftext(" - P.IVA/C.F. "),
-                         ftext(Fornitore..P.IVA)), style = "Normal") |>
+      body_add_fpar(fpar(ftext("Soggetto: " ,fpt.b), ftext(Fornitore..Codice.terzo.SIGLA, fpt.b), ftext(" - ", fpt.b),
+                         ftext(Fornitore, fpt.b),
+                         ftext(" - P.IVA/C.F. ", fpt.b),
+                         ftext(Fornitore..P.IVA, fpt.b)), style = "Normal") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "heading 1") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
@@ -3503,9 +3503,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     }
     
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), 
+      #body_add_fpar(fpar(ftext("VISTO", fpt.b), 
                          #ftext(" il provvedimento del Direttore dell’IPSP prot. 146189 del 2/5/2024 di nomina della sig.ra Concetta Mottura quale Segretario Amministrativo dell’IPSP (con sede istituzionale a Torino, UO 121.000) per il periodo dall’1/5/2024 fino al 31/12/2024;")), style = "Normal") |>
-                         ftext(" il provvedimento n. 31 del Direttore Generale del CNR prot. n. 54747 del 25/2/2025 di attribuzione dell'incarico di Responsabile della Gestione e Compliance amministrativo-contabile (RGC) dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) alla sig.ra Concetta Mottura per il periodo dall’1/3/2025 al 29/2/2028;")), style = "Normal") |>
+                         #ftext(" il provvedimento n. 31 del Direttore Generale del CNR prot. n. 54747 del 25/2/2025 di attribuzione dell'incarico di Responsabile della Gestione e Compliance amministrativo-contabile (RGC) dell’IPSP (con sede istituzionale a Torino, centro di spesa 121) alla sig.ra Concetta Mottura per il periodo dall’1/3/2025 al 29/2/2028;")), style = "Normal") |>
       # body_add_fpar(fpar(ftext("VISTO", fpt.b),
       #                    ftext(" il provvedimento del Direttore Generale (prot. 502457 del 18/12/2024) di proroga operativa delle funzioni di Segretario Amministrativo abilitato alla firma degli ordinativi finanziari e del controllo interno di regolarità amministrativo-contabile delle strutture dell’Ente nelle more del conferimento delle nomine a Responsabili della Gestione e della Compliance amministrativo contabile (RGC);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b),
@@ -3562,12 +3562,12 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" il diritto del creditore in relazione alla documentazione acquisita;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("[scegliere una delle seguenti opzioni e cancellare l'altra]", fpt.i)), style = "Normal") |>
-      body_add_fpar(fpar(ftext("a liquidazione e il pagamento della fattura in oggetto per l’importo di "),
+      body_add_fpar(fpar(ftext("la liquidazione e il pagamento della fattura in oggetto per l’importo di "),
                          ftext(Importo.con.IVA),
                          ftext(" pari o inferiore all’importo dell’anticipata citata in premessa, a mezzo bonifico bancario sull’IBAN "),
                          ftext(Fornitore..IBAN),
                          ftext(".")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("La liquidazione e il pagamento della fattura in oggetto per l’importo di "),
+      body_add_fpar(fpar(ftext("la liquidazione e il pagamento della fattura in oggetto per l’importo di "),
                          ftext(Importo.con.IVA),
                          ftext(" associata/e alla/e scrittura/e citata/e in premessa per l’importo di "),
                          ftext(Importo.con.IVA),
@@ -3583,6 +3583,9 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     
     if(Importo.senza.IVA.num>=5000){
       doc <- doc |>
+        body_add_par("") |>
+        body_add_par("") |>
+        body_add_par("") |>
         body_add_fpar(fpar(ftext("VISTO RGC", fpt.b), ftext(" in seguito alla verifica della posizione dell’Operatore Economico presso l’Agenzia Riscossione Entrate mediante liberatoria di non inadempienza per l’importo della fattura, ai sensi dell’art. 48-bis del DPR n. 602/73;")), style = "Firma 1") |>
         body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1")
     }
