@@ -3525,13 +3525,13 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(" di “"),
                          ftext(Prodotto),
                          ftext("”;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la RDO MePA n. "),
-                         ftext(as.character(RDO)), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la lettera d’ordine "), ftext(sede),
                          ftext(" "), ftext(ordine), ftext(y),
                          ftext(", prot. n. "),
                          ftext(Prot..lettera.ordine),
+                         ftext(", RDO MePA "),
+                         ftext(as.character(RDO)),
                          ftext(", CIG "),
                          ftext(CIG),
                          ftext(", registrazione U-Gov anticipata n. "),
@@ -3557,7 +3557,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
                          ftext(dott.rup), ftext(" "), ftext(RUP), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(" la dichiarazione resa dall'operatore economico ai sensi della L. 136/2010 in merito alla tracciabilità dei flussi finanziari (c/c dedicato alle commesse pubbliche);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" che l'IBAN n. "),
-                         ftext(Fornitore..IBAN), ftext(" associato all'Operatore Economico in argomento censito nel sistema informativo/contabile dell’Ente corrisponde a quanto dichiarato dall’Operatore Economico con la dichiarazione resa di cui al punto precedente;")), style = "Normal") |>
+                         ftext(Fornitore..IBAN), ftext(" associato all’Operatore Economico in argomento censito nel sistema informativo/contabile dell’Ente, corrisponde a quanto dichiarato dall’Operatore Economico con la dichiarazione resa di cui al punto precedente;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Documento Unico di Regolarità Contributiva (DURC) che accerta la regolarità alla data odierna;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" il diritto del creditore in relazione alla documentazione acquisita;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
