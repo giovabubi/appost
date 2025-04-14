@@ -3593,7 +3593,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     Documento generato: '11 Provv. liquidazione'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prot..DaC, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, CUP, Importo.con.IVA, Prot..RAS, Anticipata, Voce.di.spesa, Prot..lettera.ordine, Fornitore..IBAN)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -5463,7 +5463,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
 
     doc <- doc |>
       cursor_begin() |>
-      body_add_fpar(fpar(ftext("LETTERA D’ORDINE "), ftext(sede), ftext(" N° "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
+      body_add_fpar(fpar(ftext("LETTERA D’ORDINE "), ftext(sede), ftext(" "), ftext(ordine), ftext(y)), style = "heading 1", pos = "on") |>
       body_replace_text_at_bkm(bookmark = "bookmark_cup_it", CUP2) |>
       cursor_reach("CAMPO.CIG") |>
       body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = TRUE) |>
