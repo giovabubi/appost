@@ -3558,7 +3558,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(" la dichiarazione resa dall'operatore economico ai sensi della L. 136/2010 in merito alla tracciabilità dei flussi finanziari (c/c dedicato alle commesse pubbliche);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" che l'IBAN n. "),
                          ftext(Fornitore..IBAN), ftext(" associato all’Operatore Economico in argomento censito nel sistema informativo/contabile dell’Ente, corrisponde a quanto dichiarato dall’Operatore Economico con la dichiarazione resa di cui al punto precedente;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Documento Unico di Regolarità Contributiva (DURC) che accerta la regolarità alla data odierna;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Documento Unico di Regolarità Contributiva (DURC) che accerta la regolarità della posizione dell’Operatore Economico nei confronti degli Enti individuati dalla normativa vigente alla data odierna;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" il diritto del creditore in relazione alla documentazione acquisita;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("[scegliere una delle seguenti opzioni e cancellare l'altra]", fpt.i)), style = "Normal") |>
