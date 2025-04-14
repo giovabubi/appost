@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 48
+  #ordine <- 32
   ordine <- readline()
 
   if(ordine==0){
@@ -3833,9 +3833,110 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
     }
     
-    doc <- doc |>    
-      cursor_reach("CAMPO.DATA") |>
-      body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da)), pos = "on") |>
+    doc <- doc |>
+      cursor_bookmark("bookmark_relazione") |>
+      body_remove() |>
+      cursor_backward()
+    
+    if(CPV..CPV=="22120000-7"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("Una ricerca condotta nell’ambito delle attività del progetto "),
+                           ftext(Progetto),
+                           ftext(" è stata completata e convogliata in un articolo scientifico scritto da __________ e intitolato “__________”.")), style = "Relazione") |>
+        body_add_fpar(fpar(ftext("Indagine di mercato")), style = "heading 2") |>
+        body_add_fpar(fpar(ftext("Un’indagine delle riviste scientifiche più adatte a questo articolo per i temi trattati e che abbiamo elevato impact factor, rientrino nel primo quartile (Q1) nel settore "),
+                           ftext("Plant Sciences", fpt.i),
+                           ftext(" e abbiano prezzi competitivi per pubblicazioni Open Access CC-BY ha portato all’individuazione della rivista __________ pubblicata da "),
+                           ftext(Fornitore),
+                           ftext(".")), style = "Relazione") |>
+        body_add_fpar(fpar(ftext("Dopo peer review, l’articolo è stato ora accettato per la pubblicazione.")), style = "Relazione") |>
+        body_add_fpar(fpar(ftext("L’operatore economico è, quindi, "),
+                           ftext(Fornitore),
+                           ftext(", che offre il servizio di pubblicazione Open Access al costo di "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" IVA esclusa. Tale fornitore risulta, inoltre, in possesso di esperienze pregresse con altre pubbliche amministrazioni italiane ed è iscritto al MePA.")), style = "Relazione")
+      
+      if(Rotazione.fornitore!="Non è il contraente uscente"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("L’operatore economico individuato risulta essere contraente uscente. Tuttavia, si chiede l’affidamento all’operatore economico individuato in deroga al principio di rotazione per le seguenti motivazioni, ai sensi dell'art. 49, comma 4 del Codice:")), style = "Relazione") |>
+          body_add_fpar(fpar(ftext("struttura del mercato, poichè __________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("effettiva assenza di alternative, poichè __________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("accurata esecuzione del precedente contratto, quale __________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("trattasi di beni specifici prodotti esclusivamente dal fornitore individuato e funzionali all’attività di ricerca, che richiede continuità e ripetibilità di protocolli operativi specifici;")), style = "Elenco punto")
+        if(Importo.senza.IVA.num<5000){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("l’importo dell’affidamento è inferiore a euro 5.000,00 (ai sensi dell’art. 49, comma 6, del Codice).")), style = "Elenco punto")
+        }
+      }
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("Conclusioni")), style = "heading 2") |>
+        body_add_fpar(fpar(ftext("In seguito all’accettazione dell’articolo per la pubblicazione, sul sito della rivista viene mostrato il costo, che è pari a "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" oltre IVA. Si richiede, pertanto, l’attivazione dell’idoneo procedimento finalizzato all’acquisizione del servizio in oggetto.")), style = "Relazione")
+    }else{
+      if(Tipo.acquisizione=="Beni"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("Per le attività di ricerca previste nel progetto "),
+                             ftext(Progetto),
+                             ftext(" è necessaria l'acquisizione "),
+                             ftext(della.fornitura),
+                             ftext(" di “"),
+                             ftext(Prodotto),
+                             ftext("”, come dettagliato nella richiesta d'acquisto.")), style = "Relazione")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("Per le attività di ricerca previste nel progetto "),
+                             ftext(Progetto),
+                             ftext(" è necessaria l'acquisizione "),
+                             ftext(della.fornitura),
+                             ftext(" di “"),
+                             ftext(Prodotto),
+                             ftext("” con le seguenti caratteristiche:")), style = "Relazione") |>
+          body_add_fpar(fpar(ftext("__________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("__________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("__________;")), style = "Elenco punto")
+      }
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("Indagine di mercato")), style = "heading 2")
+      
+      if(Scelta.fornitore=="Singolo preventivo"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("In seguito ad un’accurata valutazione del mercato è stato acquisito un singolo preventivo, allegato alla presente, per la seguente motivazione: ___________.")), style = "Relazione")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("In seguito ad un’accurata indagine informale di mercato, con la quale sono stati acquisiti n° ___ preventivi, allegati alla presente, è stato individuato l’operatore economico "),
+                             ftext(Fornitore),
+                             ftext(" quale potenziale affidatario "),
+                             ftext(della.fornitura),
+                             ftext(" per le seguenti motivazioni: ___________.")), style = "Relazione")
+      }
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("L’operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" ci ha inviato un preventivo rispondente esattamente alle nostre richieste ed esigenze sia dal punto di vista delle caratteristiche tecniche che dei tempi di consegna, che dal punto di vista del prezzo rispondente agli standard di mercato e con tutte le garanzie richieste sui prodotti. Tale fornitore risulta inoltre in possesso delle esperienze pregresse idonee all’esecuzione della prestazione contrattuale, quali altre forniture simili a pubbliche amministrazioni compreso il CNR.")), style = "Relazione")
+      if(Rotazione.fornitore!="Non è il contraente uscente"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("L’operatore economico individuato risulta essere contraente uscente. Tuttavia, si chiede l’affidamento all’operatore economico individuato in deroga al principio di rotazione per le seguenti motivazioni, ai sensi dell'art. 49, comma 4 del Codice:")), style = "Relazione") |>
+          body_add_fpar(fpar(ftext("struttura del mercato, poichè __________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("effettiva assenza di alternative, poichè __________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("accurata esecuzione del precedente contratto, quale __________;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("trattasi di beni specifici prodotti esclusivamente dal fornitore individuato e funzionali all’attività di ricerca, che richiede continuità e ripetibilità di protocolli operativi specifici;")), style = "Elenco punto")
+        if(Importo.senza.IVA.num<5000){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("l’importo dell’affidamento è inferiore a euro 5.000,00 (ai sensi dell’art. 49, comma 6, del Codice).")), style = "Elenco punto")
+        }
+      }
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("Conclusioni")), style = "heading 2") |>
+        body_add_fpar(fpar(ftext("Da contatti informali, cui è seguita una quotazione budgetaria, il costo massimo omnicomprensivo atteso per l’acquisizione è pari a "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" oltre IVA. Si richiede, pertanto, l’attivazione dell’idoneo procedimento finalizzato all’acquisizione "),
+                           ftext(della.fornitura),
+                           ftext(" in oggetto.")), style = "Relazione")
+    }
+    doc <- doc |>
+      body_add_par("") |>
+      body_add_fpar(fpar(ftext(sede1), ftext(", "), ftext(da))) |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext(Dott.ric), ftext(" "), ftext(Richiedente)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext(firma.RAS)), style = "Firma 2")
@@ -3848,16 +3949,6 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         body_add_fpar(fpar(ftext(Dott.resp), ftext(" "), ftext(Responsabile.progetto)), style = "Firma 2") |>
         body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
     }
-    
-    doc <- doc |>    
-      cursor_reach("CAMPO.LA.FORNITURA") |>
-      body_replace_all_text("CAMPO.LA.FORNITURA", la.fornitura, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.FORNITORE") |>
-      body_replace_all_text("CAMPO.FORNITORE", Fornitore, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.IMPORTO") |>
-      body_replace_all_text("CAMPO.IMPORTO", Importo.senza.IVA, only_at_cursor = TRUE) |>
-      cursor_reach("CAMPO.DELLA.FORNITURA") |>
-      body_replace_all_text("CAMPO.DELLA.FORNITURA", della.fornitura, only_at_cursor = TRUE)
     
     print(doc, target = paste0(pre.nome.file, "1 RAS.docx"))
     
