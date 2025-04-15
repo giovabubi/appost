@@ -196,7 +196,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     nato.rss <- " nata a Sant'Agnello il 28/05/1969, codice fiscale RCCMHL69E68I208P,"
     RSS.dich <- "responsabile della sede secondaria di Portici dell'IPSP"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
-    CUU <- "_____"
+    CUU <- "YOBWQ2"
   }else if(sede=='FI'){
     sede1 <- 'Sesto Fiorentino'
     sede2 <- 'Sede Secondaria di Sesto Fiorentino'
