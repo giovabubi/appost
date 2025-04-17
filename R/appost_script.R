@@ -1792,7 +1792,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     ## Dich. Ass. RSS ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    file.remove("tmp.docx")
+    #file.remove("tmp.docx")
     
     doc <- doc |>
       headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1870,7 +1870,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     ## Dich. Ass. RUP ----
     download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
-    file.remove("tmp.docx")
+    #file.remove("tmp.docx")
     
     doc <- doc |>
       headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
@@ -1955,7 +1955,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     if(Supporto.RUP!=trattini){
       download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
-      file.remove("tmp.docx")
+      #file.remove("tmp.docx")
       
       doc <- doc |>
         headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
