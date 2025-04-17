@@ -2038,7 +2038,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '9.5 Dichiarazione assenza conflitto SUP'")
       
       ## Dati mancanti ---
-      manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS, RUP)
+      manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
@@ -2522,7 +2522,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '3 Provv. anticipata'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, N..impegno.di.spesa, Importo.con.IVA, Voce.di.spesa, Richiedente)
+    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Anticipata, Importo.con.IVA, Voce.di.spesa, Richiedente)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
