@@ -2464,9 +2464,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          #ftext(" oltre IVA;")), style = "Normal") |>
                          ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la verifica effettuata dall’RGC della copertura finanziaria;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la verifica del possesso da parte della Ditta aggiudicataria dei requisiti stabiliti dall’art. 94 D.Lgs. 36/2023;")), style = "Normal") |>
+                         ftext(" la verifica effettuata della copertura finanziaria;")), style = "Normal") |>
+      # body_add_fpar(fpar(ftext("VISTA", fpt.b),
+      #                    ftext(" la verifica del possesso da parte della Ditta aggiudicataria dei requisiti stabiliti dall’art. 94 D.Lgs. 36/2023;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b),
                          ftext(" che l'acquisizione in oggetto è funzionalmente destinata all’attività di ricerca;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("SENTITO", fpt.b),
