@@ -521,7 +521,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT" | PNRR=="REMIND"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -931,6 +931,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "249.879,77 €, di cui 83.302,77 € al CNR-IPSP"
     costo.ammesso <- "224.732,00 €, di cui 69.864,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="REMIND"){
+    titolo <- "Do crop plants remember stress? Effect of water stress memory on crop resilience in response to recurrent drought and recovery events"
+    codice.progetto <- "2022RBHRJR"
+    CUP2 <- "B53D23018020006"
+    decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 28/2/2026 (come da proroga DD MUR n. 509 del 16/4/2025"
+    costo.totale <- "276.104,00 €, di cui 110.386,00 € al CNR-IPSP"
+    costo.ammesso <- "206.191,00 €, di cui 87.303,00 € al CNR-IPSP"
+    logo <- "logo_remind.tif"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
