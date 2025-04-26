@@ -986,11 +986,11 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   if(lng.doc==0){ultimi.recente <- 999}
 
   # Rotazione fornitore ----
-  if(sc$Importo.senza.IVA.num<=5000){
-    ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<=5000)
-    }else if(sc$Importo.senza.IVA.num>5000 & sc$Importo.senza.IVA.num<=40000){
-      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>5000 & ordini$Importo.senza.IVA.num<=40000)
-    }else if(sc$Importo.senza.IVA.num>40000){
+  if(sc$Importo.senza.IVA.num<5000){
+    ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<5000)
+    }else if(sc$Importo.senza.IVA.num>=5000 & sc$Importo.senza.IVA.num<40000){
+      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=5000 & ordini$Importo.senza.IVA.num<40000)
+    }else if(sc$Importo.senza.IVA.num>=40000){
       ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<=5000)
     }
 
@@ -1639,6 +1639,25 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   
   # RUP ----
   rup <- function(){
+    if(Fornitore==fornitore.uscente){
+      cat(paste0(
+        "***** ATTENZIONE *****\n",
+        Fornitore, " è il fornitore uscente.\n",
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
+      if(Rotazione.fornitore=="Non è il contraente uscente"){
+        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
+      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
+        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
+        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+      }
+      cat("*********************\n",
+          " Premere INVIO per proseguire")
+      readline()
+    }
+    
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
 
@@ -2889,7 +2908,7 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
         cat("
     Documento generato: '5.8 Purchase conditions'")
         
-        ## Privacy ----
+        ## Privacy eng ----
         download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
@@ -4162,6 +4181,24 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
   
   # RUP PNRR ----
   rup.pnrr <- function(){
+    if(Fornitore==fornitore.uscente){
+      cat(paste0(
+        "***** ATTENZIONE *****\n",
+        Fornitore, " è il fornitore uscente.\n",
+        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
+      if(Rotazione.fornitore=="Non è il contraente uscente"){
+        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
+      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
+        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
+      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
+        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+      }
+      cat("*********************\n",
+          " Premere INVIO per proseguire")
+      readline()
+    }
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
