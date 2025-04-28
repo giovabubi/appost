@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 31
-  ordine <- readline()
+  ordine <- 67
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -90,6 +90,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   ordini$Importo.senza.IVA.num <- gsub("\\.", "", ordini$Importo.senza.IVA.num)
   ordini$Importo.senza.IVA.num <- gsub("_", ".", ordini$Importo.senza.IVA.num)
   ordini$Importo.senza.IVA.num <- as.numeric(ordini$Importo.senza.IVA.num)
+  ordini$Manodopera.num <- sub(",(..)..$", "_\\1", ordini$Manodopera)
+  ordini$Manodopera.num <- gsub("\\.", "", ordini$Manodopera.num)
+  ordini$Manodopera.num <- gsub("_", ".", ordini$Manodopera.num)
+  ordini$Manodopera.num <- as.numeric(ordini$Manodopera.num)
+  ordini$Oneri.sicurezza.num <- sub(",(..)..$", "_\\1", ordini$Oneri.sicurezza)
+  ordini$Oneri.sicurezza.num <- gsub("\\.", "", ordini$Oneri.sicurezza.num)
+  ordini$Oneri.sicurezza.num <- gsub("_", ".", ordini$Oneri.sicurezza.num)
+  ordini$Oneri.sicurezza.num <- as.numeric(ordini$Oneri.sicurezza.num)
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
   
@@ -4355,15 +4363,22 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       }
       
     doc <- doc |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A1", Importo.senza.IVA2) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A4", Importo.senza.IVA2) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A", Importo.senza.IVA2) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_B3", IVA2) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_B", IVA2) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_TOT", Importo.con.IVA2)
-    if(Importo.senza.IVA.num>=40000){
+      body_replace_text_at_bkm(bookmark = "bookmark_A1_fornitura", della.fornitura) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A1", formatC(Importo.senza.IVA.num - Manodopera.num - Oneri.sicurezza.num, digits=2, format="f", decimal.mark=",")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A2", formatC(Manodopera.num, digits=2, format="f", decimal.mark=",")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A3", formatC(Oneri.sicurezza.num, digits=2, format="f", decimal.mark=",")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A", formatC(Importo.senza.IVA.num, digits=2, format="f", decimal.mark=",")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_AB", formatC(Importo.senza.IVA.num, digits=2, format="f", decimal.mark=",")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_C4", formatC(IVA, digits=2, format="f", decimal.mark=","))
+    if(Importo.senza.IVA.num<40000){
       doc <- doc |>
-        body_replace_text_at_bkm(bookmark = "bookmark_B1", "35")
+      body_replace_text_at_bkm(bookmark = "bookmark_C", formatC(IVA, digits=2, format="f", decimal.mark=",")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_ABC", formatC(Importo.senza.IVA.num + IVA, digits=2, format="f", decimal.mark=","))
+    }else{
+      doc <- doc |>
+        body_replace_text_at_bkm(bookmark = "bookmark_C2", "35") |>
+        body_replace_text_at_bkm(bookmark = "bookmark_C", formatC(35 + IVA, digits=2, format="f", decimal.mark=",")) |>
+        body_replace_text_at_bkm(bookmark = "bookmark_ABC", formatC(35 + Importo.senza.IVA.num + IVA, digits=2, format="f", decimal.mark=","))
     }
     
     doc <- doc |>
