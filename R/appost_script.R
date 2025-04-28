@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  ordine <- 67
-  #ordine <- readline()
+  #ordine <- 67
+  ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -116,6 +116,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                                            ifelse(sc$Aliquota.IVA=='10%', 0.1,
                                                   ifelse(sc$Aliquota.IVA=='4%', 0.04, 0))))
   sc$IVA <- sc$Importo.senza.IVA.num * sc$Aliquota.IVA.num
+  sc$IVA.num <- sc$IVA
   sc$Importo.con.IVA <- sc$Importo.senza.IVA.num + sc$IVA
   sc$Importo.senza.IVA <- paste("€", format(sc$Importo.senza.IVA.num, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
   sc$IVA <- paste("€", format(sc$IVA, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -4364,21 +4365,21 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
       
     doc <- doc |>
       body_replace_text_at_bkm(bookmark = "bookmark_A1_fornitura", della.fornitura) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A1", formatC(Importo.senza.IVA.num - Manodopera.num - Oneri.sicurezza.num, digits=2, format="f", decimal.mark=",")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A2", formatC(Manodopera.num, digits=2, format="f", decimal.mark=",")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A3", formatC(Oneri.sicurezza.num, digits=2, format="f", decimal.mark=",")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_A", formatC(Importo.senza.IVA.num, digits=2, format="f", decimal.mark=",")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_AB", formatC(Importo.senza.IVA.num, digits=2, format="f", decimal.mark=",")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_C4", formatC(IVA, digits=2, format="f", decimal.mark=","))
+      body_replace_text_at_bkm(bookmark = "bookmark_A1", formatC(Importo.senza.IVA.num - Manodopera.num - Oneri.sicurezza.num, digits=2, format="f", decimal.mark=",", big.mark = ".")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A2", formatC(Manodopera.num, digits=2, format="f", decimal.mark=",", big.mark = ".")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A3", formatC(Oneri.sicurezza.num, digits=2, format="f", decimal.mark=",", big.mark = ".")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_A", formatC(Importo.senza.IVA.num, digits=2, format="f", decimal.mark=",", big.mark = ".")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_AB", formatC(Importo.senza.IVA.num, digits=2, format="f", decimal.mark=",", big.mark = ".")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_C4", formatC(IVA.num, digits=2, format="f", decimal.mark=",", big.mark = "."))
     if(Importo.senza.IVA.num<40000){
       doc <- doc |>
-      body_replace_text_at_bkm(bookmark = "bookmark_C", formatC(IVA, digits=2, format="f", decimal.mark=",")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_ABC", formatC(Importo.senza.IVA.num + IVA, digits=2, format="f", decimal.mark=","))
+      body_replace_text_at_bkm(bookmark = "bookmark_C", formatC(IVA.num, digits=2, format="f", decimal.mark=",", big.mark = ".")) |>
+      body_replace_text_at_bkm(bookmark = "bookmark_ABC", formatC(Importo.senza.IVA.num + IVA.num, digits=2, format="f", decimal.mark=",", big.mark = "."))
     }else{
       doc <- doc |>
         body_replace_text_at_bkm(bookmark = "bookmark_C2", "35") |>
-        body_replace_text_at_bkm(bookmark = "bookmark_C", formatC(35 + IVA, digits=2, format="f", decimal.mark=",")) |>
-        body_replace_text_at_bkm(bookmark = "bookmark_ABC", formatC(35 + Importo.senza.IVA.num + IVA, digits=2, format="f", decimal.mark=","))
+        body_replace_text_at_bkm(bookmark = "bookmark_C", formatC(35 + IVA.num, digits=2, format="f", decimal.mark=",")) |>
+        body_replace_text_at_bkm(bookmark = "bookmark_ABC", formatC(35 + Importo.senza.IVA.num + IVA.num, digits=2, format="f", decimal.mark=","))
     }
     
     doc <- doc |>
