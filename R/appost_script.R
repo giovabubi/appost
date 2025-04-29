@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 67
-  ordine <- readline()
+  ordine <- 67
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -2077,6 +2077,25 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
     Documento generato: '9.5 Dichiarazione assenza conflitto SUP'")
       
+      # Patto integrità ----
+      if(Fornitore..Nazione=="Italiana" & Fornitore..Rappresentante.legale!=trattini){
+      download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      if(sede!="TOsi"){
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+      }
+      
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
+        body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
+        body_replace_text_at_bkm("bookmark_firma", firma.RSS)
+      
+      print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
+    }
+    
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS)
       manca <- as.data.frame(t(manca))
@@ -2649,15 +2668,15 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   # DocOE ----
   docoe <- function(){
     inpt.oe <- 1
-    if(ultimi.recente>0 & ultimi.recente<180){
-      cat(paste0("
-
-      I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
-Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
-  1: Sì
-  2: No"))
-      inpt.oe <- readline()
-    }
+#     if(ultimi.recente>0 & ultimi.recente<180){
+#       cat(paste0("
+# 
+#       I documenti dell'operatore economico ", Fornitore, " sono già stati richiesti meno di 6 mesi fa (prot. ", ultimi.prot, ") in occasione dell'ordine n° ", ultimi.ordine, y,".
+# Si vuole generare ugualmente i documenti dell'operatore economico per richiederli nuovamente?
+#   1: Sì
+#   2: No"))
+#       inpt.oe <- readline()
+#     }
 
     if(inpt.oe==1){
       if(Fornitore..Nazione=="Italiana"){
@@ -4621,6 +4640,42 @@ Si vuole generare ugualmente i documenti dell'operatore economico per richiederl
     cat("
 
     Documento generato: '4.5 Dichiarazione assenza conflitto SUP'")
+    
+    ## Patto integrità ----
+    if(Fornitore..Nazione=="Italiana" & Fornitore..Rappresentante.legale!=trattini){
+      download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      
+      if(sede!="TOsi"){
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+      }
+      
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(paste0(della.fornitura, " DI “", Prodotto, "”, ordine ",
+                                                                            sede, " N° ", ordine, y, " (", Pagina.web, ") NELL'AMBITO DEL ",  Progetto.int))) |>
+        cursor_bookmark("bookmark_OE") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("L'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (di seguito Operatore Economico) con sede legale in "),
+                           ftext(Fornitore..Sede),
+                           ftext(", C.F./P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(", rappresentato da "),
+                           ftext(Fornitore..Rappresentante.legale),
+                           ftext(" in qualità di "),
+                           ftext(tolower(Fornitore..Ruolo.rappresentante)),
+                           ftext(",")), style = "Normal") |>
+        body_replace_text_at_bkm(bookmark = "bookmark_firma", firma.RSS)
+      
+      file.remove("tmp.docx")
+      file.remove(logo)
+      print(doc, target = paste0(pre.nome.file, "3.3 Patto di integrità.docx"))
+      }
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS, Pagina.web, RUP)
