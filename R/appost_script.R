@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  ordine <- 67
-  #ordine <- readline()
+  #ordine <- 67
+  ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -1457,8 +1457,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '9.2 Dichiarazione assenza conflitto RESP'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
-                           Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -1624,8 +1623,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documenti generati: '2 Avviso pubblico' e '2.1 Allegato'")
 
       ## Dati mancanti ---
-      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
-                             Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
+      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
@@ -2097,7 +2095,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
     
       ## Dati mancanti ---
-      manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, RUP, Prot..RAS)
+      manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore, RUP, Prot..RAS)
       manca <- as.data.frame(t(manca))
       colnames(manca) <- "val"
       manca$var <- rownames(manca)
@@ -2425,8 +2423,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '7 Decisione a contrattare'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, Richiedente..Luogo.di.nascita,
-                           Richiedente..Codice.fiscale, Responsabile.progetto, Responsabile.progetto..Luogo.di.nascita, Responsabile.progetto..Codice.fiscale)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore, RUP, Prot..RAS, Pagina.web, Prot..atto.istruttorio, Anticipata)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -2581,7 +2578,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '3 Provv. anticipata'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Anticipata, Importo.con.IVA, Voce.di.spesa, Richiedente)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore, Prot..RAS, Anticipata, Fornitore..Codice.terzo.SIGLA)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -2719,7 +2716,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documenti generati: '5.1 Patto di integrità', '5.2 Comunicazione cc dedicato', '5.3 Dichiarazione DPCM 187' e '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione'")
 
         ## Dati mancanti ---
-        manca <- dplyr::select(sc, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Prodotto, Progetto, Pagina.web)
+        manca <- dplyr::select(sc, Fornitore, Prodotto, Progetto, Pagina.web)
         manca <- as.data.frame(t(manca))
         colnames(manca) <- "val"
         manca$var <- rownames(manca)
@@ -3229,7 +3226,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '5 Atto istruttorio'")
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, CIG, Progetto, Prot..DaC, Fornitore, Fornitore..Sede, Fornitore..P.IVA, RUP, RUP..Luogo.di.nascita, RUP..Data.di.nascita, RUP..Codice.fiscale, Pagina.web)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Fornitore, RUP, Prot..RAS, Pagina.web, Fornitore..Codice.terzo.SIGLA, RDO)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3374,7 +3371,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '8 Lettera ordine'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Fornitore..Sede, Fornitore..P.IVA, Fornitore..PEC, Fornitore..E.mail, Importo.senza.IVA, Aliquota.IVA, Richiedente..Luogo.di.consegna, Pagina.web)
+    manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Importo.senza.IVA, Aliquota.IVA, Pagina.web, Prot..DaC)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3476,7 +3473,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '10 Dichiarazione prestazione resa'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Importo.con.IVA, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, Pagina.web)
+    manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Importo.senza.IVA, Aliquota.IVA, Pagina.web, Prot..DaC, DDT, Fornitore..Codice.terzo.SIGLA)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
@@ -3570,6 +3567,26 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       cat("
 
     Documento generato: '8 Certificato regolare esecuzione'")
+      
+      ## Dati mancanti ---
+      manca <- dplyr::select(sc, Prodotto, Progetto, Fornitore, CIG, CUP, Voce.di.spesa, DDT, Prot..nomina.RUP, Prot..lettera.ordine, RDO)
+      manca <- as.data.frame(t(manca))
+      colnames(manca) <- "val"
+      manca$var <- rownames(manca)
+      rownames(manca) <- NULL
+      manca <- subset(manca, manca$val==trattini)
+      len <- length(manca$val)
+      if(len>0){
+        manca <- manca$var
+        manca <- paste0(manca, ",")
+        manca[len] <- sub(",$", "\\.", manca[len])
+        cat("
+    ***** ATTENZIONE *****
+    Il documento è stato  generato, ma i seguenti dati risultano mancanti:", manca)
+        cat("
+    Si consiglia di leggere e controllare attentamente il documento generato: i dati mancanti sono indicati con '__________'.
+    **********************")
+      }
   }
   
   
@@ -3747,7 +3764,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '11 Provv. liquidazione'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Fornitore, Fornitore..P.IVA, Fornitore..Codice.terzo.SIGLA, CIG, CUP, Importo.con.IVA, Prot..RAS, Anticipata, Voce.di.spesa, Prot..lettera.ordine, Fornitore..IBAN)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Fornitore, Fornitore..Codice.terzo.SIGLA, CIG, CUP, Anticipata, Voce.di.spesa, Fornitore..IBAN, Prot..prestazione.resa)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
