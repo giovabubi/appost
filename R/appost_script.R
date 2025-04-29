@@ -2423,7 +2423,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '7 Decisione a contrattare'")
 
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore, RUP, Prot..RAS, Pagina.web, Prot..atto.istruttorio, Anticipata)
+    manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore, RUP, Prot..RAS, Pagina.web, Prot..atto.istruttorio, Anticipata, CPV)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
