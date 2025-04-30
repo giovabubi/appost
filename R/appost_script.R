@@ -2679,22 +2679,24 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       if(Fornitore..Nazione=="Italiana"){
 
         ## Patto d'integrità ----
-        download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-        doc <- read_docx("tmp.docx")
-        file.remove("tmp.docx")
-        
-        if(sede!="TOsi"){
+        if(Fornitore..Rappresentante.legale==trattini){
+          download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+          doc <- read_docx("tmp.docx")
+          file.remove("tmp.docx")
+          
+          if(sede!="TOsi"){
+            doc <- doc |>
+              body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+          }
+          
           doc <- doc |>
-            body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+            body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
+            body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
+            body_replace_text_at_bkm("bookmark_firma", firma.RSS)
+          
+          print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
         }
         
-        doc <- doc |>
-          body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
-          body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
-          body_replace_text_at_bkm("bookmark_firma", firma.RSS)
-          
-        print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
-
         ## CC dedicato ----
         download.file(paste(lnk, "cc_dedicato.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
@@ -4658,7 +4660,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '4.5 Dichiarazione assenza conflitto SUP'")
     
     ## Patto integrità ----
-    if(Fornitore..Nazione=="Italiana" & Fornitore..Rappresentante.legale!=trattini){
+    if(Fornitore..Rappresentante.legale!=trattini){
       download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -4761,41 +4763,57 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "3.2 Comunicazione conto corrente dedicato.docx"))
     
     ## Patto d'integrità ----
-    download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    doc <- read_docx("tmp.docx")
-    
-    if(sede!="TOsi"){
+    if(Fornitore..Rappresentante.legale==trattini){
+      download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      
+      if(sede!="TOsi"){
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+      }
+      
       doc <- doc |>
-        body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
+        body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(paste0(della.fornitura, " DI “", Prodotto, "”, ordine ",
+                                                                            sede, " N° ", ordine, y, " (", Pagina.web, ") NELL'AMBITO DEL ",  Progetto.int))) |>
+        cursor_bookmark("bookmark_OE") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("L'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (di seguito Operatore Economico) con sede legale in "),
+                           ftext(Fornitore..Sede),
+                           ftext(", C.F./P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext(", rappresentato da "),
+                           ftext(Fornitore..Rappresentante.legale),
+                           ftext(" in qualità di "),
+                           ftext(tolower(Fornitore..Ruolo.rappresentante)),
+                           ftext(",")), style = "Normal") |>
+        body_replace_text_at_bkm(bookmark = "bookmark_firma", firma.RSS)
+      print(doc, target = paste0(pre.nome.file, "3.3 Patto di integrità.docx"))
     }
     
-    doc <- doc |>
-      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm")) |>
-      body_replace_text_at_bkm(bookmark = "bookmark_body", toupper(paste0(della.fornitura, " DI “", Prodotto, "”, ordine ",
-                                                                          sede, " N° ", ordine, y, " (", Pagina.web, ") NELL'AMBITO DEL ",  Progetto.int))) |>
-      cursor_bookmark("bookmark_OE") |>
-      body_remove() |>
-      cursor_backward() |>
-      body_add_fpar(fpar(ftext("L'operatore economico "),
-                         ftext(Fornitore, fpt.b),
-                         ftext(" (di seguito Operatore Economico) con sede legale in "),
-                         ftext(Fornitore..Sede),
-                         ftext(", C.F./P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext(", rappresentato da "),
-                         ftext(Fornitore..Rappresentante.legale),
-                         ftext(" in qualità di "),
-                         ftext(tolower(Fornitore..Ruolo.rappresentante)),
-                         ftext(",")), style = "Normal") |>
-      body_replace_text_at_bkm(bookmark = "bookmark_firma", firma.RSS)
-    print(doc, target = paste0(pre.nome.file, "3.3 Patto di integrità.docx"))
+    ## Declaration on honour ----
+    if(Fornitore..Nazione=="Estera"){
+      download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      print(doc, target = paste0(pre.nome.file, "3.3 Declaration on honour.docx"))
+      cat("
+
+    Documento generato: '3.4 Declaration on honour'")
+    }
     
     ## CAM ----
-    download.file(paste(lnk, "CAM.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    doc <- read_docx("tmp.docx")
-    doc <- doc |>
-      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-    print(doc, target = paste0(pre.nome.file, "3.10 Documentazione rispetto CAM.docx"))
+    if(substr(CPV,1,3)=="301" | substr(CPV,1,3)=="302" | CPV==trattini){
+      download.file(paste(lnk, "CAM.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      doc <- doc |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      print(doc, target = paste0(pre.nome.file, "3.10 Documentazione rispetto CAM.docx"))
+    }
     
     ## DNSH ----
     if(Inventariabile=='Non inventariabile'){
