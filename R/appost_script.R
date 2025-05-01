@@ -160,6 +160,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     firma.RSS <- "Il responsabile della sede secondaria di Bari dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via G. Amendola 122/D, 70126 Bari, Italia."
     nomina.RSS <- "3903 dell'8/1/2025 di nomina del dott. Giovanni Nicola Bubici quale Responsabile della Sede Secondaria di Bari dell’IPSP per il periodo dall’8/1/2025 al 31/12/2025"
+    nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico del dott. Giovanni Nicola Bubici a Responsabile delegato alla gestione della sede secondaria di Bari dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Nicola Centorame quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "Il responsabile amministrativo della sede secondaria di Bari dell'IPSP"
     sottoscritto.rss <- "Il sottoscritto "
@@ -180,6 +181,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     in.qualita.RSS <- "responsabile della sede secondaria di Torino dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale Mattioli, 25, 10125 Torino, Italia."
     nomina.RSS <- "3906 dell'8/1/2025 di nomina del dott. Stefano Ghignone quale Responsabile della Sede Secondaria di Torino dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
+    nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico del dott. Stefano Ghignone a Responsabile delegato alla gestione della sede secondaria di Torino dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Torino dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa della sede secondaria di Torino dell'IPSP"
     sottoscritto.rss <- "Il sottoscritto "
@@ -199,6 +201,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     firma.RSS <- "La responsabile della sede secondaria di Portici dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, piazzale Enrico Fermi, 1, 80055 Portici (NA), Italia."
     nomina.RSS <- "3907 dell'8/1/2025 di nomina della dott.ssa Michelina Ruocco quale Responsabile della Sede Secondaria di Portici dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
+    nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico della dott.ssa Michelina Ruocco a Responsabile delegata alla gestione della sede secondaria di Portici dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Ettore Magaldi quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "Il responsabile amministrativo"
     sottoscritto.rss <- "La sottoscritta "
@@ -218,6 +221,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     firma.RSS <- "Il responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via Madonna del Piano, 10, 50019 Sesto F.no (FI), Italia."
     nomina.RSS <- "3904 dell'8/1/2025 di nomina del dott. Nicola Luchi quale Responsabile della Sede Secondaria di Sesto Fiorentino dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
+    nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico del dott. Nicola Luchi a Responsabile delegato alla gestione della sede secondaria di Sesto Fiorentino dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
     nomina.RAMM <- "146220 del 2/5/2024 di nomina della sig.ra Francesca Pesciolini quale Responsabile Amministrativo della Sede Secondaria di Sesto Fiorentino dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "Il sottoscritto "
@@ -237,6 +241,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     firma.RSS <- "Il responsabile della sede secondaria di Legnaro dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale dell’Università, 16, 35020 Legnaro (PD), Italia."
     nomina.RSS <- "3905 dell'8/1/2025 di nomina della dott.ssa Laura Scarabel quale Responsabile della Sede Secondaria di Legnaro dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
+    nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico della dott.ssa Laura Scarabel a Responsabile delegato alla gestione della sede secondaria di Legnaro dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
     nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Legnaro dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "La sottoscritta "
@@ -2453,6 +2458,130 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
   }
 
+  # Provv. anticipata ----
+  provv_ant <- function(){
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    file.remove("tmp.docx")
+    
+    doc <- doc |>
+      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    
+    if(sede=="TOsi"){
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    }
+    
+    doc <- doc |>
+      cursor_begin() |>
+      body_add_fpar(fpar(ftext("PROVVEDIMENTO")), pos = "on", style = "heading 1") |>
+      body_add_fpar(fpar(ftext("Oggetto", fpt.b),
+                         ftext(": registrazione sul sistema contabile di anticipata per il pagamento degli oneri derivanti dalla Richiesta di Acquisto "),
+                         ftext(della.fornitura),
+                         ftext(" di “"),
+                         ftext(Prodotto),
+                         ftext("”, ordine "),
+                         ftext(sede),
+                         ftext(" "),
+                         ftext(ordine),
+                         ftext(y),
+                         ftext(".")), style = "Normal") |>
+      body_add_fpar(fpar(firma.RSS), style = "heading 2") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Decreto Legislativo n. 127 del 4 giugno 2003, recante “Riordino del Consiglio Nazionale delle Ricerche”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Decreto Legislativo 31 dicembre 2009, n. 213 “Riordino degli Enti di Ricerca in attuazione dell’art. 1 della Legge 27 settembre 2007, n. 165”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Decreto Legislativo 25 novembre 2016, n. 218 “Semplificazione delle attività degli enti pubblici di ricerca ai sensi dell’articolo 13 della legge 7 agosto 2015, n. 124”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" la legge 7 agosto 1990, n. 241 recante “Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi” pubblicata sulla Gazzetta Ufficiale n. 192 del 18/08/1990 e s.m.i.;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Decreto Legislativo 30 luglio 1999, n. 286 concernente “Riordino e potenziamento dei meccanismi e strumenti di monitoraggio e valutazione dei costi, dei rendimenti e dei risultati dell'attività svolta dalle amministrazioni pubbliche, a norma dell'articolo 11 della legge 15 marzo 1997, n. 59”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" lo Statuto del Consiglio Nazionale delle Ricerche, emanato con provvedimento del Presidente n. 93, prot. n. 0051080 del 19 luglio 2018, entrato in vigore in data 1° agosto 2018;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche - DPCNR n. 119 prot. n. 241776 del 10 luglio 2024, entrato in vigore dal 1° agosto 2024;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Regolamento di amministrazione contabilità e finanza, emanato con Provvedimento della Presidente n. 201 prot. n. 0507722 del 23 dicembre 2024, entrato in vigore dal 1° gennaio 2025;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" la deliberazione del Consiglio di Amministrazione n. 201 del 28 giugno 2022 di approvazione del Piano di riorganizzazione e rilancio del Consiglio Nazionale delle Ricerche (CNR) che prevede il passaggio dalla contabilità finanziaria a quella economico-patrimoniale;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Provvedimento CNR n. 000114 del 30/10/2013 (prot. n. 0065484) relativo alla costituzione dell’Istituto per la Protezione Sostenibile delle Piante con successivi Provvedimento del Presidente n. 120 del 07/10/2014 (prot. n. 0072102) e Provvedimento. n. 26 del 29.03.22 di modifica e sostituzione del precedente atto costitutivo;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il provvedimento del Direttore Generale del Consiglio Nazionale delle Ricerche n. 69 prot. 140496 del 29/4/2024, con cui al dott. Francesco Di Serio è stato attribuito l’incarico di Direttore dell’IPSP del Consiglio Nazionale delle Ricerche a decorrere dal giorno 1/5/2024 per quattro anni;")), style = "Normal")
+    
+    if(sede!="TOsi"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento del Direttore dell’IPSP prot. "),
+                           ftext(nomina.RSS2)), style = "Normal")
+    }
+    
+    doc <- doc |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b),
+                         ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n. 420/2024 – Verbale 511 del 17/12/2024;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la Richiesta di Acquisto prot. "),
+                         ftext(Prot..RAS), ftext(" "),
+                         ftext(della.fornitura), ftext(" di “"),
+                         ftext(Prodotto),
+                         ftext("”;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("ACCERTATA", fpt.b),
+                         ftext(" la disponibilità economico-finanziaria per la copertura degli oneri derivanti dall’acquisizione "),
+                         ftext(della.fornitura),
+                         ftext(" sui fondi del Progetto "),
+                         ftext(Progetto.cup),
+                         ftext(", voce di costo COAN "),
+                         ftext(Voce.di.spesa),
+                         ftext(";")), style = "Normal") |>
+      body_add_par("DISPONE", style = "heading 2") |>
+      body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b),
+                         ftext(" la registrazione sul sistema contabile della seguente anticipata n. "),
+                         ftext(Anticipata),
+                         ftext(" di "),
+                         ftext(Importo.senza.IVA),
+                         ftext(" oltre IVA sul progetto "),
+                         ftext(Progetto.cup),
+                         ftext(", voce di costo COAN "),
+                         ftext(Voce.di.spesa),
+                         ftext(", in favore dell'OE "),
+                         ftext(Fornitore),
+                         ftext(" (P.IVA "),
+                         ftext(Fornitore..P.IVA),
+                         ftext(", soggetto U-Gov: "),
+                         ftext(Fornitore..Codice.terzo.SIGLA), 
+                         ftext(").")), style = "Elenco punto") |>
+      body_add_par("", style = "Normal") |>
+      body_add_fpar(fpar(ftext("Controllo di regolarità amministrativa e contabile")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
+      body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
+      body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
+    
+    print(doc, target = paste0(pre.nome.file, "3 Provv. anticipata.docx"))
+    cat("
+
+    Documento generato: '3 Provv. anticipata'")
+    
+    ## Dati mancanti ---
+    manca <- dplyr::select(sc, Prodotto, Progetto, Importo.senza.IVA, Voce.di.spesa, Fornitore, Prot..RAS, Anticipata, Fornitore..Codice.terzo.SIGLA)
+    manca <- as.data.frame(t(manca))
+    colnames(manca) <- "val"
+    manca$var <- rownames(manca)
+    rownames(manca) <- NULL
+    manca <- subset(manca, manca$val==trattini)
+    len <- length(manca$val)
+    if(len>0){
+      manca <- manca$var
+      manca <- paste0(manca, ",")
+      manca[len] <- sub(",$", "\\.", manca[len])
+      cat("
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
+      cat("
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
+    **********************")
+    }
+  }
+  
   # Provv. impegno ----
   provv_imp <- function(){
     download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -6330,7 +6459,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Che documento vuoi generare?
     (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
       1: RAS, Richiesta pagina web
-      2: Nomina RUP, Provvedimento assunzione anticipata
+      2: Nomina RUP, Provvedimento registrazione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
          Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
          Provvedimento di liquidazione (.6)
@@ -6339,7 +6468,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       
       inpt <- readline()
       if(inpt==1){cat("\014");ras();pag()}
-      if(inpt==2){cat("\014");rup();provv_imp()}
+      if(inpt==2){cat("\014");rup();provv_ant()}
       if(inpt==3){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
       if(inpt==3.1){cat("\014");docoe()}
       if(inpt==3.2){cat("\014");ai();com_cig()}
@@ -6353,7 +6482,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Che documento vuoi generare?
     (per singoli documenti digitare la cifra in parentesi, ad es. 3.1 per Autocertificazioni operatore economico)
       1: RAS, Richiesta pagina web
-      2: Nomina RUP, Provvedimento assunzione anticipata
+      2: Nomina RUP, Provvedimento registrazione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
          Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
          Provvedimento di liquidazione (.6)
@@ -6362,7 +6491,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 ")
       inpt <- readline()
       if(inpt==1){cat("\014");ras.pnrr();pag()}
-      if(inpt==2){cat("\014");rup.pnrr();provv_imp()}
+      if(inpt==2){cat("\014");rup.pnrr();provv_ant()}
       if(inpt==3){cat("\014");docoe.pnrr();ai.pnrr();dac.pnrr();com_cig();ldo.pnrr();reg_es();provv_liq()}
       if(inpt==4){cat("\014");doppio_fin.pnrr();fun_bene.pnrr();chklst.pnrr()}
       if(inpt==3.1){cat("\014");docoe.pnrr()}
