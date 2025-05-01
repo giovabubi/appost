@@ -2533,11 +2533,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(";")), style = "Normal") |>
       body_add_par("DISPONE", style = "heading 2") |>
       body_add_fpar(fpar(ftext("DI CONFERMARE", fpt.b),
-                         ftext(" la registrazione sul sistema contabile della seguente anticipata n. "),
+                         ftext(" la registrazione sul sistema contabile dell'anticipata n. "),
                          ftext(Anticipata),
                          ftext(" di "),
+                         ftext(Importo.con.IVA),
+                         ftext(" IVA inclusa ("),
                          ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA sul progetto "),
+                         ftext(" IVA esclusa) sul progetto "),
                          ftext(Progetto.cup),
                          ftext(", voce di costo COAN "),
                          ftext(Voce.di.spesa),
@@ -2545,7 +2547,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
-                         ftext(", soggetto U-Gov: "),
+                         ftext(", soggetto U-Gov "),
                          ftext(Fornitore..Codice.terzo.SIGLA), 
                          ftext(").")), style = "Elenco punto") |>
       body_add_par("", style = "Normal") |>
