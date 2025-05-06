@@ -890,8 +890,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="secrEVome"){
     titolo <- "The complex role of plant extracellular vesicles: deciphering their secreted molecular messages and bioactivity in plant-microbe"
-    codice.progetto <- "_______"
-    CUP2 <- "B53D23032030001"
+    codice.progetto <- "202224M943"
+    CUP2 <- "B53D23017030006"
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Salerno"
