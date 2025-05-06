@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 70
-  ordine <- readline()
+  ordine <- 8
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -90,12 +90,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   ordini$Importo.senza.IVA.num <- gsub("\\.", "", ordini$Importo.senza.IVA.num)
   ordini$Importo.senza.IVA.num <- gsub("_", ".", ordini$Importo.senza.IVA.num)
   ordini$Importo.senza.IVA.num <- as.numeric(ordini$Importo.senza.IVA.num)
-  if(is.na(ordini$Manodopera)){ordini$Manodopera <- "0,00 €"}
+  ordini$Manodopera <- ifelse(is.na(ordini$Manodopera), "0,00 €", ordini$Manodopera)
   ordini$Manodopera.num <- sub(",(..)..$", "_\\1", ordini$Manodopera)
   ordini$Manodopera.num <- gsub("\\.", "", ordini$Manodopera.num)
   ordini$Manodopera.num <- gsub("_", ".", ordini$Manodopera.num)
   ordini$Manodopera.num <- as.numeric(ordini$Manodopera.num)
-  if(is.na(ordini$Oneri.sicurezza)){ordini$Oneri.sicurezza <- "0,00 €"}
+  ordini$Oneri.sicurezza <- ifelse(is.na(ordini$Oneri.sicurezza), "0,00 €", ordini$Oneri.sicurezza)
   ordini$Oneri.sicurezza.num <- sub(",(..)..$", "_\\1", ordini$Oneri.sicurezza)
   ordini$Oneri.sicurezza.num <- gsub("\\.", "", ordini$Oneri.sicurezza.num)
   ordini$Oneri.sicurezza.num <- gsub("_", ".", ordini$Oneri.sicurezza.num)
