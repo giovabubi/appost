@@ -90,10 +90,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   ordini$Importo.senza.IVA.num <- gsub("\\.", "", ordini$Importo.senza.IVA.num)
   ordini$Importo.senza.IVA.num <- gsub("_", ".", ordini$Importo.senza.IVA.num)
   ordini$Importo.senza.IVA.num <- as.numeric(ordini$Importo.senza.IVA.num)
+  if(is.na(ordini$Manodopera)){ordini$Manodopera <- "0,00 €"}
   ordini$Manodopera.num <- sub(",(..)..$", "_\\1", ordini$Manodopera)
   ordini$Manodopera.num <- gsub("\\.", "", ordini$Manodopera.num)
   ordini$Manodopera.num <- gsub("_", ".", ordini$Manodopera.num)
   ordini$Manodopera.num <- as.numeric(ordini$Manodopera.num)
+  if(is.na(ordini$Oneri.sicurezza)){ordini$Oneri.sicurezza <- "0,00 €"}
   ordini$Oneri.sicurezza.num <- sub(",(..)..$", "_\\1", ordini$Oneri.sicurezza)
   ordini$Oneri.sicurezza.num <- gsub("\\.", "", ordini$Oneri.sicurezza.num)
   ordini$Oneri.sicurezza.num <- gsub("_", ".", ordini$Oneri.sicurezza.num)
@@ -1005,7 +1007,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }else if(sc$Importo.senza.IVA.num>=5000 & sc$Importo.senza.IVA.num<40000){
       ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=5000 & ordini$Importo.senza.IVA.num<40000)
     }else if(sc$Importo.senza.IVA.num>=40000){
-      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<=5000)
+      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=40000)
     }
 
   rota <- subset(ordini.fascia, ordini.fascia$CPV==sc$CPV)
