@@ -1807,6 +1807,10 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("individuare il CCNL, in base all’attività oggetto dell’appalto svolta dall’impresa, in conformità al comma 1 dell’art. 11 e allegato 1.01 del Codice, nonché ai sensi del comma 2-bis dell’art. 11 del Codice;")), style = "Elenco liv2")
     }
     
+    if(Tipo.ordine=="Fuori MePA"){
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_pcp", "Piattaforma Contratti Pubblici (PCP)")
+    }
     if(Supporto.RUP!=trattini){
       doc <- doc |>
         cursor_bookmark("bookmark_supporto_rup") |>
