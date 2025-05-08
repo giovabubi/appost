@@ -3840,9 +3840,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(as.character(RDO)),
                          ftext(", CIG "),
                          ftext(CIG),
-                         ftext(", registrazione U-Gov anticipata n. "),
-                         ftext(Anticipata),
-                         ftext(";")), style = "Normal")
+                         ftext(", registrazione U-Gov anticipata n. __________;")), style = "Normal")
     if(Fornitore..Nazione=="Italiana"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
