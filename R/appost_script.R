@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 8
-  ordine <- readline()
+  ordine <- 41
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -1002,32 +1002,101 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   if(lng.doc==0){ultimi.recente <- 999}
 
   # Rotazione fornitore ----
-  if(sc$Importo.senza.IVA.num<5000){
-    ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<5000)
-    }else if(sc$Importo.senza.IVA.num>=5000 & sc$Importo.senza.IVA.num<40000){
-      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=5000 & ordini$Importo.senza.IVA.num<40000)
-    }else if(sc$Importo.senza.IVA.num>=40000){
-      ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=40000)
-    }
-
-  rota <- subset(ordini.fascia, ordini.fascia$CPV==sc$CPV)
-  rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA)
+  rota <- subset(ordini, substr(ordini$CPV, 1, 3)==substr(sc$CPV, 1, 3))
   rota$Data <- as.POSIXct(rota$Data, tz="CET", format = "%d/%m/%Y")
-  data.ordine <- subset(rota, rota$Ordine.N.==ordine)
-  data.ordine <- data.ordine$Data
-  rota <- subset(rota, rota$Data<=data.ordine)
-  rota$CPV.iniz <- sub("(...).*", "\\1", rota$CPV)
-  rota <- subset(rota, rota$Ordine.N.!=ordine)
-  rota <- rota[order(rota$Data),]
-  lng <- length(rota$Ordine.N.)
-  rota <- rota[lng,]
-  rota.display <- dplyr::select(rota, Ordine.N., Fornitore, CPV, Prodotto, Importo.senza.IVA)
-  ordine.uscente <- rota$Ordine.N.
-  fornitore.uscente <- rota$Fornitore
-  cpv.usente <- rota$CPV.iniz
-  prodotto.uscente <- rota$Prodotto
-  importo.uscente <- rota$Importo.senza.IVA
-  if(lng==0){fornitore.uscente <- "nessuno"}
+  rota$Fascia <- ifelse(rota$Importo.senza.IVA.num<5000, "< 5.000 €", 
+                        ifelse(rota$Importo.senza.IVA.num>=40000, "> 40.000 €", "5.000 - 40.000 €" )                        )
+  rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
+  n <- grep(ordine, rota$Ordine.N.) 
+  rota <- rota[-1:-(n-1),]
+  if(rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}else{fornitore.uscente <- "falso"}
+  if(rota$Fascia[1] == rota$Fascia[2]){fascia <- "stessa"}else{fascia <- "diversa"}
+  frase1 <- frase2 <- frase3 <- ""
+  frase3.1 <- "   E' possibile derogare alla rotazione dei fornitori e, quindi, affidare a questo fornitore "
+  frase3.3 <- " nella colonna 'Rotazione fornitore' di FluOr"
+  frase3.4 <- ". Assicurarsi che questa scelta sia descritta nella relazione della Richiesta d'Acquisto.\n"
+  frase4 <- "*********************\n\n"
+  blocco.rota <- "falso"
+  
+  if(fornitore.uscente=="vero"){
+    frase1 <- paste0("\n***** ATTENZIONE *****\n   ", Fornitore, " è il fornitore uscente.\n",
+                     "   L'ultimo ordine (n° ", rota$Ordine.N.[2], ") per questa categoria merceologica (prime tre cifre del CPV: ", substr(sc$CPV, 1, 3), ") è stato affidato a questo operatore economico per l'acquisto di '", rota$Prodotto[2], "' e un importo di € ", rota$Importo.senza.IVA[2], ".\n")
+    if(fascia=="stessa"){
+      frase2 <- paste0("   L'ordine in oggetto (n° ", ordine, ") e l'ordine n° ", rota$Ordine.N.[2], " hanno la stessa fascia d'importo (", rota$Fascia[1], ").\n")
+      if(Importo.senza.IVA.num<5000){
+        if(Rotazione.fornitore=="Importo <5.000€"){
+          frase3.2 <- "poichè si è indicato 'Importo <5.000€'"
+        }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+          frase3.2 <- "poichè si è indicato 'Particolare struttura del mercato'"
+        }else{
+          frase3.2 <- "impostando 'Importo <5.000€' oppure 'Particolare struttura del mercato'"
+          frase3.4 <- " e motivando questa scelta nella relazione della Richiesta d'Acquisto.\n"
+          blocco.rota <- "vero"
+        }
+      }else{
+        if(Rotazione.fornitore=="Particolare struttura del mercato"){
+          frase3.2 <- "poiché si è indicato 'Particolare struttura del mercato'"
+        }else{
+          frase3.2 <- "impostando 'Particolare struttura del mercato'"
+          frase3.4 <- " e motivando questa scelta nella relazione della Richiesta d'Acquisto.\n"
+          blocco.rota <- "vero"
+        }
+      }
+    }else if(fascia=="diversa"){
+      frase2 <- paste0("   L'ordine in oggetto (n° ", ordine, "; ", rota$Fascia[1], ") e l'ordine n° ", rota$Ordine.N.[2], " (", rota$Fascia[2], ") hanno fascia d'importo differente.\n")
+      if(Importo.senza.IVA.num<5000){
+        if(Rotazione.fornitore=="Importo <5.000€"){
+          frase3.2 <- " poichè si è indicato 'Importo <5.000€'"
+        }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+          frase3.2 <- "poichè si è indicato 'Particolare struttura del mercato'"
+        }else if(Rotazione.fornitore=="Importo di fascia differente"){
+          frase3.2 <- "poichè si è indicato 'Importo di fascia differente'"
+        }else{
+          frase3.2 <- "impostando 'Importo di fascia differente', 'Importo <5.000€' oppure 'Particolare struttura del mercato'"
+          frase3.4 <- " e motivando questa scelta nella relazione della Richiesta d'Acquisto.\n"
+          blocco.rota <- "vero"
+        }
+      }else if(Importo.senza.IVA.num>=5000){
+        if(Rotazione.fornitore=="Particolare struttura del mercato"){
+          frase3.2 <- "poiché si è indicato 'Particolare struttura del mercato'"
+        }else if(Rotazione.fornitore=="Importo di fascia differente"){
+          frase3.2 <- "poichè si è indicato 'Importo di fascia differente'"
+        }else{
+          frase3.2 <- "impostando 'Importo di fascia differente' oppure 'Particolare struttura del mercato'"
+          frase3.4 <- " e motivando questa scelta nella relazione della Richiesta d'Acquisto.\n"
+          blocco.rota <- "vero"
+        }
+      }
+    }
+  }
+
+  # vecchia Rotazione fornitore ----
+  # if(sc$Importo.senza.IVA.num<5000){
+  #   ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num<5000)
+  #   }else if(sc$Importo.senza.IVA.num>=5000 & sc$Importo.senza.IVA.num<40000){
+  #     ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=5000 & ordini$Importo.senza.IVA.num<40000)
+  #   }else if(sc$Importo.senza.IVA.num>=40000){
+  #     ordini.fascia <- subset(ordini, ordini$Importo.senza.IVA.num>=40000)
+  #   }
+  # 
+  # rota <- subset(ordini.fascia, ordini.fascia$CPV==sc$CPV)
+  # rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA)
+  # rota$Data <- as.POSIXct(rota$Data, tz="CET", format = "%d/%m/%Y")
+  # data.ordine <- subset(rota, rota$Ordine.N.==ordine)
+  # data.ordine <- data.ordine$Data
+  # rota <- subset(rota, rota$Data<=data.ordine)
+  # rota$CPV.iniz <- sub("(...).*", "\\1", rota$CPV)
+  # rota <- subset(rota, rota$Ordine.N.!=ordine)
+  # rota <- rota[order(rota$Data),]
+  # lng <- length(rota$Ordine.N.)
+  # rota <- rota[lng,]
+  # rota.display <- dplyr::select(rota, Ordine.N., Fornitore, CPV, Prodotto, Importo.senza.IVA)
+  # ordine.uscente <- rota$Ordine.N.
+  # fornitore.uscente <- rota$Fornitore
+  # cpv.usente <- rota$CPV.iniz
+  # prodotto.uscente <- rota$Prodotto
+  # importo.uscente <- rota$Importo.senza.IVA
+  # if(lng==0){fornitore.uscente <- "nessuno"}
 
   # Scarica Modello.docx da GoogleDrive ---
   # drive_deauth()
@@ -1077,24 +1146,33 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
   # RAS ----
   ras <- function(){
-    if(Fornitore==fornitore.uscente){
-      cat(paste0(
-        "***** ATTENZIONE *****\n",
-        Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
-      if(Rotazione.fornitore=="Non è il contraente uscente"){
-        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
-      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
-        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
-        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
-        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+    if(fornitore.uscente=="vero"){
+      cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
+      if(blocco.rota!="vero"){
+        stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
+      }else{
+        cat("E' possibile continuare. Premere INVIO per proseguire\n")
+        readline()
       }
-        cat("*********************\n",
-        " Premere INVIO per proseguire")
-      readline()
     }
+    # if(Fornitore==fornitore.uscente){
+    #   cat(paste0(
+    #     "***** ATTENZIONE *****\n",
+    #     Fornitore, " è il fornitore uscente.\n",
+    #     "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
+    #   if(Rotazione.fornitore=="Non è il contraente uscente"){
+    #     cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
+    #   }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
+    #     cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
+    #   }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
+    #     cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
+    #   }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
+    #     cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+    #   }
+    #     cat("*********************\n",
+    #     " Premere INVIO per proseguire")
+    #   readline()
+    # }
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
     cat("
@@ -1653,24 +1731,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   
   # RUP ----
   rup <- function(){
-    if(Fornitore==fornitore.uscente){
-      cat(paste0(
-        "***** ATTENZIONE *****\n",
-        Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
-      if(Rotazione.fornitore=="Non è il contraente uscente"){
-        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
-      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
-        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
-        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
-        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+    if(fornitore.uscente=="vero"){
+      cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
+      if(blocco.rota!="vero"){
+        stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
+      }else{
+        cat("E' possibile continuare. Premere INVIO per proseguire\n")
+        readline()
       }
-      cat("*********************\n",
-          " Premere INVIO per proseguire")
-      readline()
-    }
     
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -2131,24 +2199,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   # DaC ----
   dac <- function(){
 
-    if(Fornitore==fornitore.uscente){
-      cat(paste0(
-        "***** ATTENZIONE *****\n",
-        Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
-      if(Rotazione.fornitore=="Non è il contraente uscente"){
-        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
-      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
-        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
-        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
-        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+    if(fornitore.uscente=="vero"){
+      cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
+      if(blocco.rota!="vero"){
+        stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
+      }else{
+        cat("E' possibile continuare. Premere INVIO per proseguire\n")
+        readline()
       }
-      cat("*********************\n",
-          " Premere INVIO per proseguire")
-      readline()
-    }
 
     download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
@@ -3923,24 +3981,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   # RAS PNRR ----
   ras.pnrr <- function(){
 
-    if(Fornitore==fornitore.uscente){
-      cat(paste0(
-        "***** ATTENZIONE *****\n",
-        Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
-      if(Rotazione.fornitore=="Non è il contraente uscente"){
-        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
-      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
-        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
-        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
-        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+    if(fornitore.uscente=="vero"){
+      cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
+      if(blocco.rota!="vero"){
+        stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
+      }else{
+        cat("E' possibile continuare. Premere INVIO per proseguire\n")
+        readline()
       }
-      cat("*********************\n",
-          " Premere INVIO per proseguire")
-      readline()
-    }
     
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -4361,24 +4409,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   
   # RUP PNRR ----
   rup.pnrr <- function(){
-    if(Fornitore==fornitore.uscente){
-      cat(paste0(
-        "***** ATTENZIONE *****\n",
-        Fornitore, " è il fornitore uscente.\n",
-        "L'ultimo ordine (n° ", ordine.uscente, ") per questa categoria merceologica (prime tre cifre del CPV: ", cpv.usente, ") è stato affidato a questo operatore economico per l'acquisto di '", prodotto.uscente, "' e un importo di € ", importo.uscente, ".\n"))
-      if(Rotazione.fornitore=="Non è il contraente uscente"){
-        cat("In FluOr è stato erroneamente indicato 'Non è il contraente uscente'. Si prega di apportare la dovuta correzione.\n")
-      }else if(Rotazione.fornitore=="Particolare struttura del mercato"){
-        cat("L'ordine può procedere poichè è stato indicato 'Particolare struttura del mercato'.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num<5000){
-        cat("L'ordine può procedere poichè è stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €.\n")
-      }else if(Rotazione.fornitore=="Importo <5.000€" & Importo.senza.IVA.num>=5000){
-        cat("E' stata specificata la deroga alla rotazione dei fornitori per ordini <5.000 €, ma l'ordine è superiore a questo importo. Si prega di apportare la dovuta correzione.\n")
+    if(fornitore.uscente=="vero"){
+      cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
+      if(blocco.rota!="vero"){
+        stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
+      }else{
+        cat("E' possibile continuare. Premere INVIO per proseguire\n")
+        readline()
       }
-      cat("*********************\n",
-          " Premere INVIO per proseguire")
-      readline()
-    }
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -5645,24 +5683,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   # DaC PNRR ----
   dac.pnrr <- function(){
     
-    if(PNRR!="No"){
-      download.file(paste(lnk, "DaC.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-      doc <- doc |>
-        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }else{
-      doc <- doc.dac |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+    if(fornitore.uscente=="vero"){
+      cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
+      if(blocco.rota!="vero"){
+        stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
+      }else{
+        cat("E' possibile continuare. Premere INVIO per proseguire\n")
+        readline()
       }
-      file.remove("tmp.docx")
-      file.remove(logo)
-    }
     
     doc <- doc |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
