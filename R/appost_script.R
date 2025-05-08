@@ -1148,7 +1148,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   ras <- function(){
     if(fornitore.uscente=="vero"){
       cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
-      if(blocco.rota!="vero"){
+      if(blocco.rota=="vero"){
         stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
       }else{
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
@@ -1734,7 +1734,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   rup <- function(){
     if(fornitore.uscente=="vero"){
       cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
-      if(blocco.rota!="vero"){
+      if(blocco.rota=="vero"){
         stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
       }else{
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
@@ -2203,7 +2203,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
     if(fornitore.uscente=="vero"){
       cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
-      if(blocco.rota!="vero"){
+      if(blocco.rota=="vero"){
         stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
       }else{
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
@@ -3986,7 +3986,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
     if(fornitore.uscente=="vero"){
       cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
-      if(blocco.rota!="vero"){
+      if(blocco.rota=="vero"){
         stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
       }else{
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
@@ -4415,7 +4415,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   rup.pnrr <- function(){
     if(fornitore.uscente=="vero"){
       cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
-      if(blocco.rota!="vero"){
+      if(blocco.rota=="vero"){
         stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
       }else{
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
@@ -5690,7 +5690,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     if(fornitore.uscente=="vero"){
       cat(paste0(frase1, frase2, frase3.1, frase3.2, frase3.3, frase3.4, frase4))
-      if(blocco.rota!="vero"){
+      if(blocco.rota=="vero"){
         stop("Non è possibile continuare. Apportare le modifiche in FluOr come indicato sopra e, poi, generare nuovamente i documenti dopo aver scaricato Ordini.csv.\n")
       }else{
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
