@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  ordine <- 41
-  #ordine <- readline()
+  #ordine <- 41
+  ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -1155,6 +1155,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         readline()
       }
     }
+    
     # if(Fornitore==fornitore.uscente){
     #   cat(paste0(
     #     "***** ATTENZIONE *****\n",
@@ -1739,6 +1740,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
         readline()
       }
+    }
     
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -2207,6 +2209,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
         readline()
       }
+    }
 
     download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
@@ -3989,6 +3992,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
         readline()
       }
+    }
     
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -4417,6 +4421,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
         readline()
       }
+    }
 
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
@@ -5691,6 +5696,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         cat("E' possibile continuare. Premere INVIO per proseguire\n")
         readline()
       }
+    }
     
     doc <- doc |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
