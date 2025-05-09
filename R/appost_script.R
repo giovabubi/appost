@@ -2343,8 +2343,10 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Importo.senza.IVA),
                          ftext(" mediante atto immediatamente efficace;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che:")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("si intendono perseguire le finalità del progetto "),
-                         ftext(Progetto.cup),
+      body_add_fpar(fpar(ftext("si intendono perseguire le finalità del progetto “"),
+                         ftext(Progetto),
+                         ftext("”"),
+                         ftext(CUP1),
                          ftext(" nell’ambito del quale è necessario acquisire la fornitura di cui trattasi, identificabile con il codice CPV "),
                          ftext(CPV),
                          ftext(";")), style = "Elenco punto") |>
