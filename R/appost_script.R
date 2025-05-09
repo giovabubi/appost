@@ -5698,6 +5698,19 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       }
     }
     
+    download.file(paste(lnk, "DaC.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- read_docx("tmp.docx")
+    download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    doc <- doc |>
+      footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+    file.remove("tmp.docx")
+    file.remove(logo)
+    
+    if(sede=="TOsi"){
+      doc <- doc |>
+        headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+    }
+
     doc <- doc |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
       body_remove() |>
