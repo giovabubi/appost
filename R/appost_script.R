@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 41
-  ordine <- readline()
+  ordine <- 36
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -1009,8 +1009,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
   n <- grep(ordine, rota$Ordine.N.) 
   rota <- rota[-1:-(n-1),]
-  if(rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}else{fornitore.uscente <- "falso"}
-  if(rota$Fascia[1] == rota$Fascia[2]){fascia <- "stessa"}else{fascia <- "diversa"}
+  if(length(rota$Fornitore)>1 & rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}else{fornitore.uscente <- "falso"}
+  if(length(rota$Fornitore)>1 & rota$Fascia[1] == rota$Fascia[2]){fascia <- "stessa"}else{fascia <- "diversa"}
   frase1 <- frase2 <- frase3 <- ""
   frase3.1 <- "   E' possibile derogare alla rotazione dei fornitori e, quindi, affidare a questo fornitore "
   frase3.3 <- " nella colonna 'Rotazione fornitore' di FluOr"
