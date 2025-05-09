@@ -2387,7 +2387,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che dal 1° gennaio 2024 è fatto obbligo di utilizzare piattaforme di approvvigionamento digitale certificate (e-procurement) per svolgere le procedure di affidamento e di esecuzione dei contratti pubblici, a norma degli artt. 25 e 26 del Codice;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la stazione appaltante ai sensi dell’art. 48 comma 2 del Codice, ha accertato che il presente appalto non presenta un interesse transfrontaliero certo per cui non segue le procedure ordinarie di cui alla parte IV del Libro II;")), style = "Normal")
 
-    if(Motivo.fuori.MePA!="No"){
+    if(Tipo.ordine=="Fuori MePA"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" il comunicato del Presidente dell’ANAC del 18 dicembre 2024 di adozione del provvedimento di prolungamento fino al 30 giugno 2025 della proroga di alcuni adempimenti previsti con la Delibera n. 582 del 13 dicembre 2023 e con il Comunicato del Presidente del 10 gennaio 2024, tra cui la possibilità di utilizzare l’interfaccia web messa a disposizione dalla Piattaforma PCP dell’Autorità per gli affidamenti diretti di importo inferiore a 5.000 euro in caso di impossibilità o difficoltà di ricorso alle PAD al fine di consentire l’assolvimento delle funzioni ad essa demandate, ivi compresi gli obblighi in materia di trasparenza;")), style = "Normal")
     }
@@ -2485,7 +2485,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # }
 
     #doc <- doc |>
-      body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" alla pubblicazione del presente provvedimento ai sensi del combinato disposto dell’Art. 37 del d.lgs. 14 marzo 2013, n. 33 e dell’art. 20 del Codice;")), style = "Elenco liv1") |>
+      body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" alla pubblicazione del presente provvedimento ai sensi del combinato disposto dell’art. 37 del d.lgs. 14 marzo 2013, n. 33 e dell’art. 20 del Codice;")), style = "Elenco liv1") |>
       body_add_par("", style = "Normal") |>
       body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
       body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
