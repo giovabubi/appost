@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 36
+  #ordine <- 74
   ordine <- readline()
 
   if(ordine==0){
@@ -1002,21 +1002,27 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   if(lng.doc==0){ultimi.recente <- 999}
 
   # Rotazione fornitore ----
-  rota <- subset(ordini, substr(ordini$CPV, 1, 3)==substr(sc$CPV, 1, 3))
-  rota$Data <- as.POSIXct(rota$Data, tz="CET", format = "%d/%m/%Y")
-  rota$Fascia <- ifelse(rota$Importo.senza.IVA.num<5000, "< 5.000 €", 
-                        ifelse(rota$Importo.senza.IVA.num>=40000, "> 40.000 €", "5.000 - 40.000 €" )                        )
-  rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
-  n <- grep(ordine, rota$Ordine.N.) 
-  rota <- rota[-1:-(n-1),]
-  if(length(rota$Fornitore)>1 & rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}else{fornitore.uscente <- "falso"}
-  if(length(rota$Fornitore)>1 & rota$Fascia[1] == rota$Fascia[2]){fascia <- "stessa"}else{fascia <- "diversa"}
-  frase1 <- frase2 <- frase3 <- ""
-  frase3.1 <- "   E' possibile derogare alla rotazione dei fornitori e, quindi, affidare a questo fornitore "
-  frase3.3 <- " nella colonna 'Rotazione fornitore' di FluOr"
-  frase3.4 <- ". Assicurarsi che questa scelta sia descritta nella relazione della Richiesta d'Acquisto.\n"
-  frase4 <- "*********************\n\n"
+  fornitore.uscente <- "falso"
   blocco.rota <- "falso"
+  
+  if(CPV!=trattini){
+    rota <- subset(ordini, substr(ordini$CPV, 1, 3)==substr(sc$CPV, 1, 3))
+    rota$Data <- as.POSIXct(rota$Data, tz="CET", format = "%d/%m/%Y")
+    rota$Fascia <- ifelse(rota$Importo.senza.IVA.num<5000, "< 5.000 €", 
+                          ifelse(rota$Importo.senza.IVA.num>=40000, "> 40.000 €", "5.000 - 40.000 €" )                        )
+    rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
+    n <- grep(ordine, rota$Ordine.N.) 
+    rota <- rota[-1:-(n-1),]
+    if(length(rota$Fornitore)>1 & rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}
+    if(length(rota$Fornitore)>1 & rota$Fascia[1] == rota$Fascia[2]){fascia <- "stessa"}else{fascia <- "diversa"}
+    frase1 <- frase2 <- ""
+    frase3.1 <- "   E' possibile derogare alla rotazione dei fornitori e, quindi, affidare a questo fornitore "
+    frase3.3 <- " nella colonna 'Rotazione fornitore' di FluOr"
+    frase3.4 <- ". Assicurarsi che questa scelta sia descritta nella relazione della Richiesta d'Acquisto.\n"
+    frase4 <- "*********************\n\n"
+  }else{
+    stop("CPV mancante! Inserire il CPV in FluOr, scaricare nuovamente Ordini.csv e generare i documenti.")
+  }
   
   if(fornitore.uscente=="vero"){
     frase1 <- paste0("\n***** ATTENZIONE *****\n   ", Fornitore, " è il fornitore uscente.\n",
