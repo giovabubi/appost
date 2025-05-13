@@ -6401,9 +6401,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_par("DICHIARAZIONE DI FUNZIONALITÀ DEL BENE", style = "heading 1", pos = "on") |>
         body_add_par("ai sensi degli artt. 46 e 47 del D.P.R. 28 dicembre 2000, n. 445", style = "heading 1") |>
         body_add_par("") |>
-        body_add_fpar(fpar(ftext("Il sottoscritto "), ftext(dott.ric), ftext(" "), ftext(Richiedente), ftext(", "),
-                           ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(" il "),
-                           ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(", in merito allo strumento “"),
+        body_add_fpar(fpar(ftext("Il sottoscritto "), ftext(dott.resp), ftext(" "), ftext(Responsabile.progetto), ftext(", "),
+                           ftext(nato.resp), ftext(" "), ftext(Responsabile.progetto..Luogo.di.nascita), ftext(" il "),
+                           ftext(Responsabile.progetto..Data.di.nascita), ftext(", codice fiscale "), ftext(Responsabile.progetto..Codice.fiscale), ftext(", in merito allo strumento “"),
                            ftext(Prodotto, fpt.b),
                            ftext("”, acquisito con affidamento diretto, ordine "),
                            ftext(ordine, fpt.b),
@@ -6427,8 +6427,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("che l’acquisto è perfettamente allineato con le previsioni di spesa del progetto e con la relativa ripartizione delle disponibilità economiche come previsto in fase di costruzione e redazione del progetto stesso;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("che, tutto questo considerato, le apparecchiature sono funzionali alle attività del progetto e verranno utilizzate esclusivamente per il conseguimento degli obiettivi realizzativi dello stesso.")), style = "Elenco punto") |>
         body_add_par("") |>
-        body_add_fpar(fpar(ftext("Il direttore dell'IPSP")), style = "Firma 2") |>
-        body_add_fpar(fpar(ftext("(dott. Francesco Di Serio)")), style = "Firma 2")
+        body_add_fpar(fpar(ftext(Dott.resp), ftext(" "), ftext(Responsabile.progetto)), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("(responsabile del progetto e titolare dei fondi)")), style = "Firma 2")
       
       print(doc, target = paste0(pre.nome.file, "10 Dichiarazione funzionalità bene.docx"))
       
