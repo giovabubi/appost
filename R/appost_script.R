@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 74
+  #ordine <- 44
   ordine <- readline()
 
   if(ordine==0){
@@ -2941,6 +2941,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
         }
+        
+        if(CCNL!="Non applicabile"){
+          ## Manodopera ----
+          download.file(paste(lnk, "Manodopera.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+          doc <- read_docx("tmp.docx")
+          file.remove("tmp.docx")
+          
+          doc <- doc |>
+            body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
+          print(doc, target = paste0(pre.nome.file, "5.5 Costi manodopera.docx"))
+        }
+        
           if(Importo.senza.IVA.num<40000){
             ## Part.Qual. ----
             download.file(paste(lnk, "Dich_requisiti_infra40.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -4940,6 +4952,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         print(doc, target = paste0(pre.nome.file, paste0(docuOE_ext[j], ".docx")))
         j <- j+1
       }
+    }
+    
+    if(CCNL!="Non applicabile"){
+    ## Manodopera ----
+      download.file(paste(lnk, "Manodopera.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      doc <- doc |>
+        body_replace_text_at_bkm("bookmark_intestazione", int.docoe) |>
+        footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
+      print(doc, target = paste0(pre.nome.file, "3.9 Costi manodopera.docx"))
     }
     
     ## CC dedicato ----
