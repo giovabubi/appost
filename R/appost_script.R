@@ -4927,22 +4927,23 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                   "DPCM",
                   "Dich_tit",
                   "Dich_aus",
-                  "CCNL",
+                  #"CCNL",
                   "bollo")
       docuOE_ext <- c("3.1 Dichiarazione possesso requisiti di partecipazione e di qualificazione infra 40k",
                       "3.1 Dichiarazione possesso requisiti di qualificazione oltre 40k",
                       "3.4 Dichiarazione DPCM 187 1991",
                       "3.6 Dichiarazione titolare effettivo",
                       "3.8 Dichiarazione ausiliaria",
-                      "3.9 Comprova equivalenza tutele CCNL",
+                      #"3.9 Comprova equivalenza tutele CCNL",
                       "3.11 Comprova imposta di bollo")
       if(Importo.senza.IVA.num<40000){
-        docuOE <- docuOE[c(-2,-7)]
-        docuOE_ext <- docuOE_ext[c(-2,-7)]
+        docuOE <- docuOE[c(-2,-6)]
+        docuOE_ext <- docuOE_ext[c(-2,-6)]
       }else{
         docuOE <- docuOE[-1]
         docuOE_ext <- docuOE_ext[-1]
       }
+      
       download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       j <- 1
       for(i in docuOE){
