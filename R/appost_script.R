@@ -4855,12 +4855,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     cat("
 
     Documento generato: '4.5 Dichiarazione assenza conflitto SUP'")
+    }
     
     ## Patto integrità ----
     if(Fornitore..Rappresentante.legale!=trattini){
       download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
-      download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      #download.file(paste(lnk, logo, sep=""), destfile = logo, method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       
       if(sede!="TOsi"){
         doc <- doc |>
@@ -4887,10 +4888,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(",")), style = "Normal") |>
         body_replace_text_at_bkm(bookmark = "bookmark_firma", firma.RSS)
       
-      file.remove("tmp.docx")
-      file.remove(logo)
+      # file.remove("tmp.docx")
+      # file.remove(logo)
       print(doc, target = paste0(pre.nome.file, "3.3 Patto di integrità.docx"))
-      }
+      cat("
+
+    Documento generato: '3.3 Patto di integrità'")
+    }
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore, RUP, Prot..RAS)
@@ -4910,7 +4914,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       cat("
     Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
     **********************")
-    }
     }
     file.remove("tmp.docx")
     file.remove(logo)
