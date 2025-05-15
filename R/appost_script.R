@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 44
+  #ordine <- 67
   ordine <- readline()
 
   if(ordine==0){
@@ -5053,7 +5053,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       print(doc, target = paste0(pre.nome.file, "3.5 Scheda DNSH generica.docx"))
     }
     
-    if(Inventariabile=='Non inventariabile'){
+    if(Inventariabile=='Inventariabile'){
       download.file(paste(lnk, "DNSH_app.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       doc <- doc |>
