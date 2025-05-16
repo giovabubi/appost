@@ -6491,7 +6491,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_replace_all_text("CAMPO.ISTRUTTORIA", Prot..atto.istruttorio, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.LDO", Prot..lettera.ordine, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.RUP", Prot..provv..impegno, only_at_cursor = FALSE) |>
-      body_replace_all_text("CAMPO.DOCOE", Prot..atto.istruttorio, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.DOCOE", Prot..DocOE, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.DOPPIOFIN", Prot..doppio.finanziamento, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.CIG", CIG, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.CUP", CUP, only_at_cursor = FALSE) |>
