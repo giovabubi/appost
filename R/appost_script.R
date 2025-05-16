@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 36
+  #ordine <- 1
   ordine <- readline()
 
   if(ordine==0){
@@ -6513,7 +6513,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '11 Checklist'")
     
     ## Dati mancanti ---
-    manca <- dplyr::select(sc, Importo.senza.IVA, Prodotto, Fornitore, Prot..DaC, Prot..atto.istruttorio, Prot..lettera.ordine, Prot..provv..impegno, Prot..doppio.finanziamento, Pagina.web, CIG, CUP, RDO)
+    manca <- dplyr::select(sc, Importo.senza.IVA, Prodotto, Fornitore, Prot..DaC, Prot..atto.istruttorio, Prot..conflitto.interesse, Prot..lettera.ordine, Prot..doppio.finanziamento, Pagina.web, CIG, CUP, RDO)
     manca <- as.data.frame(t(manca))
     colnames(manca) <- "val"
     manca$var <- rownames(manca)
