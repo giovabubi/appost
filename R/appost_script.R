@@ -3941,9 +3941,16 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(") emesso dal Responsabile Unico del Progetto "),
                          ftext(dott.rup), ftext(" "), ftext(RUP), ftext(";")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATA", fpt.b), ftext(" la dichiarazione resa dall'operatore economico ai sensi della L. 136/2010 in merito alla tracciabilità dei flussi finanziari (c/c dedicato alle commesse pubbliche);")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" che l'IBAN n. "),
+      body_add_fpar(fpar(ftext("VERIFICATO", fpt.b), ftext(" che l'IBAN n. "),
                          ftext(Fornitore..IBAN), ftext(" associato all’Operatore Economico in argomento censito nel sistema informativo/contabile dell’Ente, corrisponde a quanto dichiarato dall’Operatore Economico con la dichiarazione resa di cui al punto precedente;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Documento Unico di Regolarità Contributiva (DURC) che accerta la regolarità della posizione dell’Operatore Economico nei confronti degli Enti individuati dalla normativa vigente alla data odierna;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Documento Unico di Regolarità Contributiva (DURC) che accerta la regolarità della posizione dell’Operatore Economico nei confronti degli Enti individuati dalla normativa vigente alla data odierna;")), style = "Normal")
+    if(Importo.senza.IVA.num>=5000){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la verifica della posizione dell’Operatore Economico presso l’Agenzia Riscossione Entrate mediante liberatoria di non inadempienza per l’importo della fattura, ai sensi dell’art. 48-bis del DPR n. 602/73, effettuata in data "),
+        ftext(format(Sys.Date(), "%d %B %Y")),
+        ftext(";")), style = "Normal")
+    }
+    doc <- doc |>
       body_add_fpar(fpar(ftext("ACCERTATO", fpt.b), ftext(" il diritto del creditore in relazione alla documentazione acquisita;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DISPONE")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("[scegliere una delle seguenti opzioni e cancellare l'altra]", fpt.i)), style = "Normal") |>
@@ -3966,14 +3973,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
     
-    if(Importo.senza.IVA.num>=5000){
-      doc <- doc |>
-        body_add_par("") |>
-        body_add_par("") |>
-        body_add_par("") |>
-        body_add_fpar(fpar(ftext("VISTO RGC", fpt.b), ftext(" in seguito alla verifica della posizione dell’Operatore Economico presso l’Agenzia Riscossione Entrate mediante liberatoria di non inadempienza per l’importo della fattura, ai sensi dell’art. 48-bis del DPR n. 602/73;")), style = "Firma 1") |>
-        body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1")
-    }
+    # if(Importo.senza.IVA.num>=5000){
+    #   doc <- doc |>
+    #     body_add_par("") |>
+    #     body_add_par("") |>
+    #     body_add_par("") |>
+    #     body_add_fpar(fpar(ftext("VISTO RGC", fpt.b), ftext(" in seguito alla verifica della posizione dell’Operatore Economico presso l’Agenzia Riscossione Entrate mediante liberatoria di non inadempienza per l’importo della fattura, ai sensi dell’art. 48-bis del DPR n. 602/73;")), style = "Firma 1") |>
+    #     body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1")
+    # }
 
     print(doc, target = paste0(pre.nome.file, "11 Provv. liquidazione.docx"))
     cat("
