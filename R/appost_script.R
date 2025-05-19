@@ -3730,7 +3730,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
       if(sede=="TOsi"){
         doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale", only_at_cursor = TRUE)
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
       }
     }
     
