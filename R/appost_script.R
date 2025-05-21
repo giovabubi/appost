@@ -970,7 +970,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     avvio <- "Avvio: 4/10/2023; Conclusione: 3/10/2025"
     costo.totale <- "306.638,00 €, di cui 99.194,00 € al CNR-IPSP"
     costo.ammesso <- "252.364,00 €, di cui 81.638,00 € al CNR-IPSP"
-    logo <- "logo_bianco.jpg"
+    logo <- "logo_mycovirole.png"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
