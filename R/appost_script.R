@@ -1023,7 +1023,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     rota$Fascia <- ifelse(rota$Importo.senza.IVA.num<5000, "< 5.000 €", 
                           ifelse(rota$Importo.senza.IVA.num>=40000, "> 40.000 €", "5.000 - 40.000 €" )                        )
     rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
-    rota <- subset(rota, !is.na(rota$Fornitore & !is.na(rota$CPV) & !is.na(rota$Importo.senza.IVA.num)))
+    rota <- subset(rota, !is.na(rota$Fornitore) & !is.na(rota$CPV) & !is.na(rota$Importo.senza.IVA.num))
     n <- grep(ordine, rota$Ordine.N.) 
     rota <- rota[-1:-(n-1),]
     if(length(rota$Fornitore)>1 & rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}
