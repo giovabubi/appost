@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- 81
-  ordine <- readline()
+  ordine <- 81
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -1024,8 +1024,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                           ifelse(rota$Importo.senza.IVA.num>=40000, "> 40.000 €", "5.000 - 40.000 €" )                        )
     rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
     rota <- subset(rota, !is.na(rota$Fornitore) & !is.na(rota$CPV) & !is.na(rota$Importo.senza.IVA.num))
-    #n <- grep(ordine, rota$Ordine.N.) 
-    #rota <- rota[-1:-(n-1),]
+    n <- grep(ordine, rota$Ordine.N.) 
+    if(n>1){rota <- rota[-1:-(n-1),]}
     if(length(rota$Fornitore)>1 & rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}
     if(length(rota$Fornitore)>1 & rota$Fascia[1] == rota$Fascia[2]){fascia <- "stessa"}else{fascia <- "diversa"}
     frase1 <- frase2 <- ""
