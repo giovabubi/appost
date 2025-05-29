@@ -542,7 +542,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
     investimento <- "Investimento 1.1 “progetti di ricerca di rilevante interesse nazionale (PRIN)”"
-  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj" | PNRR=="RE-VOC" | PNRR=="TOMRESAMED"){
+  }else if(PNRR=="CIRCUFUN" | PNRR=="KNOWS" | PNRR=="PEP-HERB" | PNRR=="NEUROPLANT" | PNRR=="SAVEASH" | PNRR=="RNAi_Pj" | PNRR=="RE-VOC" | PNRR=="TOMRESAMED" | PNRR=="PLASMA4SOIL"){
     finanziamento <- "PRIN 2022 PNRR"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 1409 del 14/9/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -971,6 +971,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "306.638,00 €, di cui 99.194,00 € al CNR-IPSP"
     costo.ammesso <- "252.364,00 €, di cui 81.638,00 € al CNR-IPSP"
     logo <- "logo_mycovirole.png"
+  }
+  if(PNRR=="PLASMA4SOIL"){
+    titolo <- "Development of essential oil-based smart formulates by means of plasma processing: effect against pests and impact on soil beneficial communities"
+    codice.progetto <- "P2022MK3AF"
+    CUP2 <- "B53D23032200001"
+    decreto.concessione <- "1289 del 4/8/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche, Nanotec"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
+    costo.totale <- "300.000,00 €"
+    costo.ammesso <- "225.000,00 €"
+    logo <- "logo_plasma4soil.jpg"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
