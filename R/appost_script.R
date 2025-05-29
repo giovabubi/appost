@@ -2897,8 +2897,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       if(Fornitore..Nazione=="Italiana"){
 
         ## Patto d'integrità ----
-        if(Fornitore..Rappresentante.legale==trattini){
-          download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
           doc <- read_docx("tmp.docx")
           file.remove("tmp.docx")
           
@@ -2913,7 +2912,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
             body_replace_text_at_bkm("bookmark_firma", firma.RSS)
           
           print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
-        }
         
         ## CC dedicato ----
         download.file(paste(lnk, "cc_dedicato.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -4999,8 +4997,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "3.2 Comunicazione conto corrente dedicato.docx"))
     
     ## Patto d'integrità ----
-    if(Fornitore..Rappresentante.legale==trattini){
-      download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Patto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       
       if(sede!="TOsi"){
@@ -5028,7 +5025,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(",")), style = "Normal") |>
         body_replace_text_at_bkm(bookmark = "bookmark_firma", firma.RSS)
       print(doc, target = paste0(pre.nome.file, "3.3 Patto di integrità.docx"))
-    }
+    
     
     ## Declaration on honour ----
     if(Fornitore..Nazione=="Estera"){
