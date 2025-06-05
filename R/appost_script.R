@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "AGRITECH-FI 01"
-  #ordine <- "20_2024"
+  #ordine <- 24
   ordine <- readline()
 
   if(ordine==0){
@@ -81,8 +81,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   ordini <- dplyr::rename(ordini,
                           Prodotto=Descrizione.beni.servizi.lavori,
                           RDO=N..RDO.MePA,
-                          sede=Sede)
-  colnames(ordini)[3] <- "Data"
+                          sede=Sede,
+                          Data=Data.ora.creazione)
+  #colnames(ordini)[3] <- "Data"
   ordini$Fornitore..P.IVA <- as.character(ordini$Fornitore..P.IVA)
   ordini$CPV <- NULL
   ordini$CPV <- as.character(ordini$CPV..CPV)
