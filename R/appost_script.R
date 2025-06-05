@@ -26,9 +26,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       "))
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
-  #ordine <- "24_RDA6"
+  ordine <- "20_2024"
   #ordine <- 24
-  ordine <- readline()
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -1037,8 +1037,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                           ifelse(rota$Importo.senza.IVA.num>=40000, "> 40.000 €", "5.000 - 40.000 €" )                        )
     rota <- dplyr::select(rota, Ordine.N., Data, Fornitore, CPV, Prodotto, Importo.senza.IVA, Importo.senza.IVA.num, Fascia, Rotazione.fornitore)
     rota <- subset(rota, !is.na(rota$Fornitore) & !is.na(rota$CPV) & !is.na(rota$Importo.senza.IVA.num))
+    rownames(rota) <- NULL
     s <- subset(rota, rota$Ordine.N.==ordine.orig)
-    n <- rownames(s)
+    n <- as.numeric(rownames(s))
     #n <- grep(ordine.orig, rota$Ordine.N., fixed = TRUE) 
     if(n>1){rota <- rota[-1:-(n-1),]}
     if(length(rota$Fornitore)>1 & rota$Fornitore[1] == rota$Fornitore[2]){fornitore.uscente <- "vero"}
