@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "20_2024"
-  #ordine <- 62
+  #ordine <- 80
   ordine <- readline()
 
   if(ordine==0){
@@ -4623,8 +4623,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         doc <- doc |>
           body_remove() |>
           cursor_backward() |>
-          body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell'art. 15, comma 6, del Codice, il "),
-          ftext(dott.sup), ftext(" "), ftext(Supporto.RUP, fpt.b),
+          body_add_fpar(fpar(ftext("DI INDIVIDUARE", fpt.b), ftext(" ai sensi dell'art. 15, comma 6, del Codice, "),
+                             ftext(il.dott.sup), ftext(" "), ftext(Supporto.RUP, fpt.b),
                              ftext(" in qualità di supporto al RUP, fermo restando i compiti e le mansioni a cui gli stessi sono già assegnati;")), style = "Elenco liv1")
       }else{
         doc <- doc |>
@@ -4670,10 +4670,15 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Progetto.cup),
                            ftext(", voce di costo CO.AN 13096 per la contribuzione ANAC;")), style = "Elenco liv1")
     }
-        #   4.	(eventuale, solo nel caso di servizi diversi da quelli di natura intellettuale e di forniture con posa in opera) DI DARE ATTO che:
-    #   •	ai sensi dell’art.11 del D.Lgs. 36/2023, ai dipendenti dell’O.E. affidatario dovrà essere applicato il CCNL [completare] ovvero un diverso CCNL avente le medesime tutele;
-    # •	i costi della manodopera indicati nel quadro economico sopra riportato sono stati calcolati sulla base delle tariffe orarie previste per il CCNL [completare]; 
-    # 5.	(eventuale) DI DEROGARE alla quota del 30% delle assunzioni necessarie di occupazione femminile e giovanile di cui all’art. 47 del decreto 77/2021 in quanto [completare indicando le motivazioni dell’eventuale deroga];
+    
+    if(CCNL!="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI DARE ATTO che", fpt.b)), style = "Elenco liv1") |>
+        body_add_fpar(fpar(ftext("ai sensi dell’art.11 del Codice l’O.E. affidatario sarà tenuto ad applicare il CCNL territoriale individuato dalla S.A., così identificato: "),
+        ftext(CCNL),
+        ftext(";")), style = "Elenco liv2") |>
+        body_add_fpar(fpar(ftext("i costi della manodopera indicati nel quadro economico sopra riportato sono stati calcolati sulla base delle tariffe orarie previste per il CCNL individuato al punto che precede;")), style = "Elenco liv2")
+    }
     
     doc <- doc |>
       body_add_fpar(fpar(ftext("DI RENDERE", fpt.b), ftext(" consultabile il presente atto sulla piattaforma telematica di negoziazione da parte dell’O.E. invitato a presentare offerta, unitamente:")), style = "Elenco liv1") |>
