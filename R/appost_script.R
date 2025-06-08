@@ -4673,8 +4673,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     if(CCNL!="Non applicabile"){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("DI DARE ATTO che", fpt.b)), style = "Elenco liv1") |>
-        body_add_fpar(fpar(ftext("ai sensi dell’art.11 del Codice l’O.E. affidatario sarà tenuto ad applicare il CCNL territoriale individuato dalla S.A., così identificato: "),
+        body_add_fpar(fpar(ftext("DI DARE ATTO ", fpt.b), ftext("che:")), style = "Elenco liv1") |>
+        body_add_fpar(fpar(ftext("ai sensi dell’art.11 del Codice l’O.E. affidatario sarà tenuto ad applicare il seguente CCNL territoriale individuato dalla S.A.: "),
         ftext(CCNL),
         ftext(";")), style = "Elenco liv2") |>
         body_add_fpar(fpar(ftext("i costi della manodopera indicati nel quadro economico sopra riportato sono stati calcolati sulla base delle tariffe orarie previste per il CCNL individuato al punto che precede;")), style = "Elenco liv2")
@@ -4730,7 +4730,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext("), all'operatore economico "),
+                         ftext(", all'operatore economico "),
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
@@ -4793,7 +4793,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(" "),
                          ftext(ordine, fpt.b),
                          ftext(y, fpt.b),
-                         ftext(" all'operatore economico "),
+                         ftext(", all'operatore economico "),
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
@@ -4857,7 +4857,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(" "),
                            ftext(ordine, fpt.b),
                            ftext(y, fpt.b),
-                           ftext(") all'operatore economico "),
+                           ftext(", all'operatore economico "),
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
                            ftext(Fornitore..P.IVA),
