@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "20_2024"
-  #ordine <- 80
+  #ordine <- 84
   ordine <- readline()
 
   if(ordine==0){
@@ -1600,9 +1600,20 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     
     ## Avviso pubblico ----
     if(Scelta.fornitore=='Avviso pubblico'){
-      doc <- doc.avv |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE) |>
-        cursor_reach("CAMPO.DEST.RAS.SEDE") |>
+      download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      }
+      doc <- doc |>
+        cursor_begin() |>
+        cursor_forward() |>
+        #headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE) |>
+        
         body_add_fpar(fpar(ftext("AVVISO")), style = "heading 1", pos = "on") |>
         body_add_fpar(fpar(ftext("Indagine esplorativa di mercato volta a raccogliere preventivi finalizzati all’affidamento "),
                            ftext(della.fornitura),
@@ -1612,94 +1623,123 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Progetto1),
                            ftext("”.")), style = "Titolo avviso") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Premesse e finalità")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("La Stazione Appaltante ISTITUTO PER LA PROTEZIONE SOSTENIBILE DELLE PIANTE del CNR intende procedere, a mezzo della presente indagine esplorativa, all’individuazione di un operatore economico a cui affidare eventualmente il servizio di cui all’oggetto, ai sensi dell’art. 50, comma 1 del d.lgs. 36/2023.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("Il presente avviso, predisposto nel rispetto dei principi di libera concorrenza, non discriminazione, trasparenza, proporzionalità e pubblicità, non costituisce invito a partecipare a gara pubblica, né un’offerta al pubblico (art. 1336 del Codice civile) o promessa al pubblico (art. 1989 del Codice civile), ma ha lo scopo di esplorare le possibilità offerte dal mercato al fine di affidare direttamente il servizio.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("La Stazione Appaltante ISTITUTO PER LA PROTEZIONE SOSTENIBILE DELLE PIANTE del CNR intende procedere, a mezzo della presente indagine esplorativa, all’individuazione di un operatore economico a cui affidare eventualmente la fornitura/il servizio di cui all’oggetto, ai sensi dell’art. 50, comma 1 del d.lgs. 36/2023.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("Il presente avviso, predisposto nel rispetto dei principi di libera concorrenza, non discriminazione, trasparenza, proporzionalità e pubblicità, non costituisce invito a partecipare a gara pubblica, né un’offerta al pubblico (art. 1336 del Codice civile) o promessa al pubblico (art. 1989 del Codice civile), ma ha lo scopo di esplorare le possibilità offerte dal mercato al fine di affidare direttamente "),
+                           ftext(la.fornitura),
+                           ftext(".")), style = "Normal") |>
         body_add_fpar(fpar(ftext("L’indagine in oggetto non comporta l’instaurazione di posizioni giuridiche ovvero obblighi negoziali. Il presente avviso, pertanto, non vincola in alcun modo questa Stazione Appaltante che si riserva, comunque, la facoltà di sospenderlo, modificarlo o annullarlo e di non dar seguito al successivo affidamento, senza che gli operatori economici possano vantare alcuna pretesa.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("I preventivi ricevuti si intenderanno impegnativi per gli operatori economici per un periodo di massimo di 60 giorni naturali e consecutivi, mentre non saranno in alcun modo impegnativi per la Stazione Appaltante, per la quale resta salva la facoltà di procedere o meno a successive e ulteriori richieste di preventivi volte all’affidamento del servizio di cui all’oggetto.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("I preventivi ricevuti si intenderanno impegnativi per gli operatori economici per un periodo di massimo di 60 giorni naturali e consecutivi, mentre non saranno in alcun modo impegnativi per la Stazione Appaltante, per la quale resta salva la facoltà di procedere o meno a successive e ulteriori richieste di preventivi volte all’affidamento "),
+                           ftext(della.fornitura),
+                           ftext(" di cui all’oggetto.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("L’affidamento sarà espletato attraverso una piattaforma di approvvigionamento digitale certificata.")), style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Oggetto "), ftext(della.fornitura)), style = "heading 3") |>
         body_add_fpar(fpar(ftext("L’oggetto "), ftext(della.fornitura), ftext(" è _____.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("La consegna dovrà avvenire presso _____ entro _____.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("[Specificare tutte le caratteristiche del bene/servizio/lavoro, nonchè modalità e tempi di consegna, così che gli operatori economici possano presentare offerte comparabili e la stazione appaltante possa scegliere il preventivo più adatto in base ai criteri richiesti in fase di avviso pubblico]", fpt.i)), style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Requisiti")), style = "heading 3") |>
         body_add_fpar(fpar(ftext("Possono inviare il proprio preventivo gli operatori economici in possesso di:")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("abilitazione MePA relativa al bando “"),
+                                 ftext(beni),
+                                 ftext("”, categoria “__________”;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("requisiti di ordine generale di cui al Capo II, Titolo IV del D.lgs. 36/2023;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("requisiti d’idoneità professionale come specificato all’art. 100, comma 3 del D.lgs. n. 36/2023: iscrizione nel registro della camera di commercio, industria, artigianato e agricoltura o nel registro delle commissioni provinciali per l’artigianato o presso i competenti ordini professionali per un’attività pertinente anche se non coincidente con l’oggetto dell’appalto. All’operatore economico di altro Stato membro non residente in Italia è richiesto di dichiarare ai sensi del testo unico delle disposizioni legislative e regolamentari in materia di documentazione amministrativa, di cui al decreto del Presidente della Repubblica del 28 dicembre 2000, n. 445;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("pregresse e documentate esperienze analoghe anche se non coincidenti con quelle oggetto dell’appalto.")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("Valore dell'affidamento")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("La Stazione Appaltante ha stimato per l’affidamento di cui all’oggetto un importo massimo pari a "),
-                           ftext(Importo.senza.IVA), ftext(" oltre IVA.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("Modalità di presentazione del preventivo")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("Gli operatori economici in possesso dei requisiti sopra indicati potranno inviare il proprio preventivo, corredato della dichiarazione attestante il possesso dei requisiti predisposta secondo il modello allegato al presente avviso (allegato 1), entro e non oltre 15 giorni dalla pubblicazione del presente avviso a mezzo PEC all’indirizzo protocollo.ipsp@pec.cnr.it e per conoscenza a "),
-                           ftext(Richiedente..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "),
-                           ftext(dott.ric), ftext(" "), ftext(Richiedente),
-                           ftext(": preventivo relativo all’avviso pubblico per "),
-                           ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("La documentazione trasmessa dovrà essere sottoscritta digitalmente con firma qualificata da un legale rappresentante/procuratore in grado di impegnare l’operatore economico.")), style = "Normal")
-
-      if(sede!='TOsi'){
+        body_add_fpar(fpar(ftext("requisiti d’idoneità professionale come specificato all’art. 100, comma 3 del D.lgs. n. 36/2023: iscrizione nel registro della camera di commercio, industria, artigianato e agricoltura o nel registro delle commissioni provinciali per l’artigianato o presso i competenti ordini professionali per un’attività pertinente anche se non coincidente con l’oggetto dell’affidamento. All’operatore economico di altro Stato membro non residente in Italia è richiesto di dichiarare ai sensi del testo unico delle disposizioni legislative e regolamentari in materia di documentazione amministrativa, di cui al decreto del Presidente della Repubblica del 28 dicembre 2000, n. 445;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("documentate esperienze pregresse idonee all’esecuzione delle prestazioni contrattuali oggetto dell’affidamento.")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("[eventuale]", fpt.i), ftext(" requisiti di capacità economico-finanziaria e/o tecnico-professionale.")), style = "Elenco punto") |>
+        
+        body_add_fpar(fpar(ftext("Valore dell'affidamento")), style = "heading 3")
+      if(CCNL=="Non applicabile"){
         doc <- doc |>
-        body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
-                           ftext(RAMM.email), ftext(" e per conoscenza a "),
-                           ftext(Richiedente..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
+          body_add_fpar(fpar(ftext("La Stazione Appaltante ha stimato per l’affidamento di cui all’oggetto un importo massimo pari a "),
+                             ftext(Importo.senza.IVA, fpt.b), ftext(" oltre IVA e/o altre imposte e contributi di legge.")), style = "Normal")
       }else{
         doc <- doc |>
-          body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono spedire il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
-                             ftext(RAMM.email), ftext(" e per conoscenza a "),
-                             ftext(Richiedente..E.mail), ftext(" e jose.saporita@ipsp.cnr.it indicando nell’oggetto “Att.ne "), ftext(dott.ric), ftext(" "), ftext(Richiedente), ftext(": preventivo relativo all’avviso pubblico per "), ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal")
+          body_add_fpar(fpar(ftext("La Stazione Appaltante ha stimato per l’affidamento di cui all’oggetto un importo massimo pari a "),
+                             ftext(Importo.senza.IVA, fpt.b), ftext(" oltre IVA e/o altre imposte e contributi di legge, comprensivo di "),
+                             ftext(Oneri.sicurezza),
+                             ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze e comprensivo di "),
+                             ftext(Manodopera),
+                             ftext(" quale importo totale dei costi della manodopera calcolato considerando il seguente CCNL territoriale: "),
+                             ftext(CCNL),
+                             ftext(".")), style = "Normal")
       }
-
+      
       doc <- doc |>
+        body_add_fpar(fpar(ftext("Modalità di presentazione del preventivo")), style = "heading 3") |>
+        body_add_fpar(fpar(ftext("Gli operatori economici in possesso dei requisiti sopra indicati potranno inviare il proprio preventivo, corredato della dichiarazione attestante il possesso dei requisiti predisposta secondo il modello allegato al presente avviso (allegato 1), entro e non oltre 15 giorni dalla pubblicazione del presente avviso tramite posta elettronica certificata all’indirizzo PEC protocollo.ipsp@pec.cnr.it e per conoscenza a "),
+                           ftext(RUP..E.mail), ftext(", indicando nell’oggetto “Att.ne "),
+                           ftext(dott.rup), ftext(" "), ftext(RUP),
+                           ftext(": preventivo relativo all’avviso pubblico per "),
+                           ftext(la.fornitura), ftext(" di "), ftext(Prodotto), ftext("”.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("La documentazione trasmessa dovrà essere sottoscritta digitalmente con firma qualificata da un legale rappresentante/procuratore in grado di impegnare l’operatore economico.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("Gli operatori economici stranieri non residenti in Italia, sprovvisti di posta elettronica certificata, possono inviare il preventivo e la dichiarazione in lingua italiana all’indirizzo "),
+                         ftext(RUP..E.mail),
+                         ftext(". Qualora l’O.E. straniero fosse sprovvisto di firma digitale dovrà sottoscrivere la dichiarazione con firma autografa e allegare alla dichiarazione un documento d’identità in corso di validità.")), style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Individuazione dell'affidatario")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("L'individuazione dell'affidatario sarà operata discrezionalmente dalla Stazione Appaltante, nel caso in cui intenda procedere all’affidamento, a seguito dell'esame dei preventivi ricevuti entro la scadenza.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("L'individuazione dell'affidatario sarà operata discrezionalmente dalla Stazione Appaltante, nel caso in cui intenda procedere all’affidamento, a seguito dell'esame dei preventivi e delle relazioni tecniche ricevuti entro la scadenza.")), style = "Normal") |>
         body_add_fpar(fpar(ftext("Non saranno presi in considerazione preventivi di importo superiore a quanto stimato dalla Stazione Appaltante.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("L’eventuale affidamento sarà concluso con l’operatore economico selezionato mediante affidamento diretto con trattativa diretta sul Mercato Elettronico della Pubblica Amministrazione (https://www.acquistinretepa.it/). A tal fine, l’operatore economico dovrà essere iscritto ed abilitato al bando “"),
-                           ftext(beni), ftext("” del Mercato Elettronico, categorie “_____” oppure “_____”.")), style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Obblighi dell’affidatario")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("L’operatore economico affidatario, con sede legale in Italia, sarà tenuto, prima dell’invio della lettera d’ordine, a fornire la seguente documentazione:")), style = "Normal")
+        body_add_fpar(fpar(ftext("L’operatore economico affidatario sarà tenuto, prima dell’invio della lettera ordine, a fornire la seguente documentazione:")), style = "Normal")
 
       if(Importo.senza.IVA<40000){
         doc <- doc |>
-          body_add_fpar(fpar(ftext("Dichiarazione sostitutiva senza DGUE ai sensi del D.lgs. 36/2023;")), style = "Elenco punto")
+          body_add_fpar(fpar(ftext("Dichiarazione possesso requisiti di partecipazione e di qualificazione ai sensi del D.lgs. 36/2023;")), style = "Elenco punto")
       }else{
         doc <- doc |>
-          body_add_fpar(fpar(ftext("DGUE ai sensi del D.lgs. 36/2023;")), style = "Elenco punto") |>
-          body_add_fpar(fpar(ftext("Comprovo assolvimento imposta di bollo;")), style = "Elenco punto")
+          body_add_fpar(fpar(ftext("Dichiarazione possesso requisiti di qualificazione ai sensi del D.lgs. 36/2023;")), style = "Elenco punto") |>
+          body_add_fpar(fpar(ftext("Comprova assolvimento imposta di bollo;")), style = "Elenco punto")
       }
 
       doc <- doc |>
         body_add_fpar(fpar(ftext("Patto di integrità ai sensi del D.lgs. 36/2023;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("Comunicazione conto corrente dedicato ai sensi dell’art. 3, comma 7 della Legge 136/2010 e s.m.i.;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("Dichiarazione di cui al DPCM 187/1991.")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("Dichiarazione di cui al DPCM 187/1991;")), style = "Elenco punto")
+        
+      if(CCNL!="Non applicabile"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("Dettaglio del CCNL, stima degli oneri per la sicurezza dovuti a rischi da interferenze e dei costi aziendali della manodopera;")), style = "Elenco punto") |>
+          body_add_fpar(fpar("Comprova dell’equivalenze delle tutele del CCNL utilizzato.", run_footnote(x=block_list(fpar(ftext(" Se l’OE applica un CCNL diverso da quello indicato dalla stazione appaltante.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Elenco punto")
+      }
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("[in caso di servizi e forniture per i quali è vigente un decreto sui CAM]", fpt.i),
+                           ftext(" Documentazione attestante la conformità alle specifiche tecniche e alle clausole contrattuali contenute nei criteri ambientali minimi di cui al Decreto Ministeriale corrispondente")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("Eventuali procure.")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("L'operatore economico straniero non residente in Italia, invece, sarà tenuto a fornire solo la seguente documentazione:")), style = "Normal") |>
         body_add_fpar(fpar(ftext("Declaration on honour.")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("La documentazione trasmessa dovrà essere sottoscritta digitalmente con firma qualificata da un legale rappresentante/procuratore in grado di impegnare l’operatore economico"), run_footnote(x=block_list(fpar(ftext(" Qualora l’operatore economico straniero fosse sprovvisto di firma digitale dovrà sottoscrivere la dichiarazione con firma autografa e allegare alla dichiarazione un documento d’identità in corso di validità.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")), ftext(".")), style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Subappalto")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("Non è consentito il subappalto delle prestazioni oggetto dell’affidamento, fermi restando i limiti e le condizioni di ricorso al subappalto per le prestazioni secondarie ed accessorie.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("Fermi restando i limiti e le condizioni di ricorso al subappalto per le prestazioni secondarie ed accessorie, il subappalto delle prestazioni oggetto dell’affidamento, ai sensi dell’art. 119 co. 2 del Codice, può essere stipulato in misura non inferiore al 20 per cento delle prestazioni subappaltabili, con piccole e medie imprese, come definite dall’articolo 1, comma 1, lettera o) dell’allegato I.1. Gli operatori economici possono indicare una diversa soglia di affidamento delle prestazioni che si intende subappaltare alle piccole medie imprese per ragioni legate all’oggetto o alle caratteristiche delle prestazioni o al mercato di riferimento.")), style = "Normal") |>
+
         body_add_fpar(fpar(ftext("Chiarimenti")), style = "heading 3") |>
         body_add_fpar(fpar(ftext("Per eventuali ri chieste inerenti il servizio e chiarimenti di natura procedurale/amministrativa l’operatore economico dovrà rivolgersi "),
-                           ftext(al.ric),ftext(" referente della Stazione Appaltante, "),
-                           ftext(dott.ric),ftext(" "),ftext(Richiedente),
-                           ftext(", all’indirizzo e-mail "),ftext(Richiedente..E.mail),ftext(".")),style = "Normal") |>
+                           ftext(al.rup),ftext(" referente della Stazione Appaltante, "),
+                           ftext(dott.rup),ftext(" "),ftext(RUP),
+                           ftext(", all’indirizzo e-mail "),ftext(RUP..E.mail),ftext(".")),style = "Normal") |>
+        
         body_add_fpar(fpar(ftext("Trattamento dei dati personali")), style = "heading 3") |>
-        body_add_fpar(fpar(ftext("I dati raccolti sono trattati e conservati ai sensi del Regolamento UE n. 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali, nonché alla libera circolazione di tali dati, del decreto legislativo 30 giugno 2003, n. 196 recante il “Codice in materia di protezione dei dati personali” e s.m.i., del decreto della Presidenza del Consiglio dei ministri n. 148/21 e dei relativi atti di attuazione.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("I dati forniti dai soggetti proponenti come indicato nel documento allegato, saranno trattati ai sensi del Regolamento UE 679/2016 e, per quanto applicabile, ai sensi del D.lgs. 196/2003, come modificato dal D.lgs. 101/2018, esclusivamente per le finalità connesse all’espletamento del presente avviso.")), style = "Normal") |>
+        body_add_par("", style = "Normal") |>
+        body_add_fpar(fpar(ftext("Allegati:", fpt.b)), style = "Normal") |>
+        body_add_fpar(fpar(ftext("1: Dichiarazione sostitutiva possesso requisiti OE per invio preventivo")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("2: Informativa sul trattamento dei dati personali")), style = "Normal") |>
+        
         body_add_par("", style = "Normal") |>
         body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2") |>
-        body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2") |>
-        body_add_par("") |>
-        body_end_section_continuous()
-
-      b <- doc$officer_cursor$which +1
-      e <- cursor_end(doc)
-      e <- e$officer_cursor$which
-      doc <- cursor_forward(doc)
-      for(i in 1:(e-b)){
-        doc <- body_remove(doc)
-      }
-      print(doc, target = paste0(pre.nome.file, "Avviso pubblico.docx"))
+        body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
+        
+      print(doc, target = "Avviso pubblico.docx")
 
       ## Allegato ----
-      doc <- doc.all |>
+      download.file(paste(lnk, "Vuoto.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      doc <- doc |>
         cursor_begin() |>
         body_add_fpar(fpar(ftext("All’Istituto per la Protezione Sostenibile delle Piante")), style = "Destinatario", pos = "on") |>
         body_add_fpar(fpar(ftext("del Consiglio Nazionale delle Ricerche")), style = "Destinatario 2") |>
@@ -1718,30 +1758,62 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("(resa ai sensi D.P.R. 28 dicembre 2000, n. 445)")), style = "heading 2") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         body_add_fpar(fpar(ftext("Il/La sottoscritto/a __________, nato/a a __________ il __________, codice fiscale __________, e residente a __________ in via __________, in qualità di legale rappresentante/procuratore della __________ con sede legale in via __________, CAP città (provincia), partita IVA __________, codice fiscale __________, telefono __________, PEC __________, e-mail __________, "),
-                           ftext(" pienamente consapevole della responsabilità penale cui va incontro, ai sensi e per gli effetti dell’art. 76 D.P.R. 28 dicembre 2000, n. 445, in caso di dichiarazioni mendaci o di formazione, esibizione o uso di atti falsi ovvero di atti contenenti dati non più rispondenti a verità, ")), style = "Normal") |>
+                           ftext("pienamente consapevole della responsabilità penale cui va incontro, ai sensi e per gli effetti dell’art. 76 D.P.R. 28 dicembre 2000, n. 445, in caso di dichiarazioni mendaci o di formazione, esibizione o uso di atti falsi ovvero di atti contenenti dati non più rispondenti a verità,")), style = "Normal") |>
         body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
         body_add_fpar(fpar(ftext("di essere in possesso dei requisiti di cui all’avviso di indagine di mercato, e nello specifico:")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("requisiti di ordine generale di cui al Capo II, Titolo IV del D.lgs. 36/2023;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("requisiti d’idoneità professionale come specificato all’art. 100, comma 3 del D.lgs. n. 36/2023: iscrizione nel registro della camera di commercio, industria, artigianato e agricoltura o nel registro delle commissioni provinciali per l’artigianato o presso i competenti ordini professionali per un’attività pertinente anche se non coincidente con l’oggetto dell’appalto. All’operatore economico di altro Stato membro non residente in Italia è richiesto di dichiarare ai sensi del testo unico delle disposizioni legislative e regolamentari in materia di documentazione amministrativa, di cui al decreto del Presidente della Repubblica del 28 dicembre 2000, n. 445 di essere iscritto in uno dei registri professionali o commerciali di cui all’allegato II.11 del D.lgs. 36/2023;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("[nel caso di operatori economici residenti in Paesi terzi firmatari dell'AAP o di altri accordi internazionali di cui all'art. 69 del D.Lgs 36/2023]", fpt.i), ftext(" di essere iscritto in uno dei registri professionali e commerciali istituiti nel Paese in cui è residente;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("Possesso di pregresse e documentate esperienze idonee all’esecuzione delle prestazioni contrattuali anche se non coincidenti con quelle oggetto dell’appalto.")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("Il sottoscritto dichiara, inoltre, di essere informato che, in conformità alla normativa vigente e in particolare al Regolamento GDPR 2016/679, i dati personali raccolti saranno trattati, anche con strumenti informatici, esclusivamente nell’ambito del procedimento per il quale la presente dichiarazione viene resa.")), style = "Normal") |>
-        body_add_fpar(fpar(ftext("")), style = "Normal") |>
-        body_add_fpar(fpar("Firma digitale del legale rappresentante/procuratore", run_footnote(x=block_list(fpar(ftext("Per gli operatori economici italiani o stranieri residenti in Italia, la dichiarazione deve essere sottoscritta da un legale rappresentante ovvero da un procuratore del legale rappresentante, apponendo la firma digitale. Per gli operatori economici stranieri non residenti in Italia, la dichiarazione può essere sottoscritta dai medesimi soggetti apponendo la firma autografa ed allegando copia di un documento di identità del firmatario in corso di validità oppure con firma elettronica qualificata. Nel caso in cui la dichiarazione sia firmata da un procuratore del legale rappresentante, deve essere allegata copia conforme all’originale della procura oppure, nel solo caso in cui dalla visura camerale dell’operatore economico risulti l’indicazione espressa dei poteri rappresentativi conferiti con la procura, la dichiarazione sostitutiva resa dal procuratore/legale rappresentante sottoscrittore attestante la sussistenza dei poteri rappresentativi risultanti dalla visura.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("abilitazione MePA relativa al Bando ___________, Categoria di abilitazione __________;"), 
+                           run_footnote(x=block_list(fpar(ftext(" Riportare l’indicazione del bando di abilitazione utilizzato (esempio: Bando “Beni”, Bando “Servizi”) nonché la specifica Categoria merceologica. La categoria merceologica viene individuata attraverso la scelta del codice CPV.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")),
+                           ftext(";")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("requisiti di ordine generale di cui al Libro II, Titolo IV, Capo II del D.lgs. 36/2023;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("requisiti d’idoneità professionale come specificato all’art. 100, comma 3 del D.lgs. n. 36/2023:")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("iscrizione nel registro della camera di commercio, industria, artigianato e agricoltura o nel registro delle commissioni provinciali per l’artigianato o presso i competenti ordini professionali per un’attività pertinente anche se non coincidente con l’oggetto dell’appalto. All’operatore economico di altro Stato membro non residente in Italia è richiesto di dichiarare ai sensi del testo unico delle disposizioni legislative e regolamentari in materia di documentazione amministrativa, di cui al decreto del Presidente della Repubblica del 28 dicembre 2000, n. 445 di essere iscritto in uno dei registri professionali o commerciali di cui all’allegato II.11 del D.lgs. 36/2023;")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("(eventuale)", fpt.i), ftext(" requisiti di capacità economico-finanziaria;")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("(eventuale)", fpt.i), ftext(" requisiti di capacità tecnico-organizzativa;")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("di essere iscritto in uno dei registri professionali e commerciali istituiti nel Paese in cui è residente;"), 
+                           run_footnote(x=block_list(fpar(ftext(" Nel caso di operatori economici residenti in Paesi terzi firmatari dell'AAP o di altri accordi internazionali di cui all'art. 69 del D.Lgs 36/2023.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript")),
+                           ftext(";")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("documentate esperienze pregresse idonee all’esecuzione delle prestazioni contrattuali oggetto dell’affidamento.")), style = "Elenco punto") |>
         body_add_par("") |>
-        body_end_section_continuous()
-
-      b <- doc$officer_cursor$which
-      e <- cursor_end(doc)
-      e <- e$officer_cursor$which
-      for(i in 1:(e-b+1)){
-        doc <- body_remove(doc)
+        body_add_fpar(fpar(ftext("Il sottoscritto dichiara, inoltre, di aver preso visione dell’informativa inerente il trattamento dei dati personali in conformità alla normativa vigente e in particolare al Regolamento GDPR 2016/679.")), style = "Normal") |>
+        body_add_par("") |>
+        body_add_fpar(fpar(ftext("Luogo e data ___________")), style = "Normal") |>
+        body_add_par("") |>
+        body_add_fpar(fpar("Firma digitale del legale rappresentante/procuratore", run_footnote(x=block_list(fpar(ftext("Per gli operatori economici italiani o stranieri residenti in Italia, la dichiarazione deve essere sottoscritta da un legale rappresentante ovvero da un procuratore del legale rappresentante, apponendo la firma digitale. Per gli operatori economici stranieri non residenti in Italia, la dichiarazione può essere sottoscritta dai medesimi soggetti apponendo la firma autografa ed allegando copia di un documento di identità del firmatario in corso di validità oppure con firma elettronica qualificata. Nel caso in cui la dichiarazione sia firmata da un procuratore del legale rappresentante, deve essere allegata copia conforme all’originale della procura oppure, nel solo caso in cui dalla visura camerale dell’operatore economico risulti l’indicazione espressa dei poteri rappresentativi conferiti con la procura, la dichiarazione sostitutiva resa dal procuratore/legale rappresentante sottoscrittore attestante la sussistenza dei poteri rappresentativi risultanti dalla visura.", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+       
+      print(doc, target = "Allegato 1 - Dichiarazione sostitutiva possesso requisiti OE per invio preventivo.docx")
+      
+      ## Privacy ----
+      download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
       }
-      doc <- headers_replace_all_text(doc, "*.*", "")
-      print(doc, target = paste0(pre.nome.file, "Allegato.docx"))
+      
+      doc <- doc |>
+        cursor_bookmark("bookmark_oggetto") |>
+        body_remove() |>
+        cursor_backward() |>
+        body_add_fpar(fpar(ftext("La presente informativa descrive le misure di tutela riguardo al trattamento dei dati personali destinata ai fornitori di beni e/o servizi, nell’ambito dell’affidamento diretto "),
+                           ftext(della.fornitura),
+                           ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal") |>
+        body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
+      print(doc, target = "Allegato 2 - Informativa privacy.docx")
+    
       cat("
 
-    Documenti generati: '2 Avviso pubblico' e '2.1 Allegato'")
+    Documenti generati:
+          - Avviso pubblico
+          - Allegato 1 - Dichiarazione sostitutiva possesso requisiti OE per invio preventivo
+          - Allegato 2 - Informativa privacy
+          ")
 
       ## Dati mancanti ---
       manca <- dplyr::select(sc, Prodotto, Progetto, Richiedente, Importo.senza.IVA, Voce.di.spesa, CUP, Responsabile.progetto, Fornitore)
