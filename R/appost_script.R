@@ -3,14 +3,14 @@ appost <- function(){
   # setwd(pat)
 
   # Carica dati ordine ----
+  #ultimo aggiornamento: ", format(Sys.Date(), "%d %B %Y"), "
   cat("\014")
   cat(paste0("
 
       ***************************
       *** BENVENUTI in AppOst ***
       ***************************
-      ultimo aggiornamento: ", format(Sys.Date(), "%d %B %Y"), "
-
+      
       AppOst è ottimizzata per affidamenti diretti di forniture e servizi <40.000 € ...
       e ora anche per:
       - servizi di natura non intellettuale;
