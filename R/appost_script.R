@@ -27,8 +27,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "20_2024"
-  #ordine <- 84
-  ordine <- readline()
+  ordine <- 20
+  #ordine <- readline()
 
   if(ordine==0){
     # pat <- utils::choose.dir()
@@ -103,18 +103,24 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
   
-  anno <- grep("_2024", sc$Ordine.N.)
+  anno24 <- grep("_2024", sc$Ordine.N.)
+  anno25 <- grep("_2025", sc$Ordine.N.)
   ordine.orig <- ordine
-  if(length(anno==1)){
+  if(length(anno24==1)){
     y <- "/2024"
     y2 <- 2024
     sc$Ordine.N. <- sub("_2024", "", sc$Ordine.N.)
     ordine <- sub("_2024", "", ordine)
+  }else if(length(anno25==1)){
+    y <- "/2025"
+    y2 <- 2025
+    sc$Ordine.N. <- sub("_2025", "", sc$Ordine.N.)
+    ordine <- sub("_2025", "", ordine)
   }else{
     y <- "/2025"
     y2 <- 2025
   }
-
+  
   sc$Aliquota.IVA.num <- as.numeric(ifelse(sc$Aliquota.IVA=='22%', 0.22,
                                            ifelse(sc$Aliquota.IVA=='10%', 0.1,
                                                   ifelse(sc$Aliquota.IVA=='4%', 0.04, 0))))
@@ -429,19 +435,19 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   # y2 <- sub("(....)-(..)-(..)",  "\\1", da)
   da <- sub("(....)-(..)-(..)",  "\\3/\\2/\\1", da)
 
-  if(length(anno==1)){
-  }else{
-    anno <- grep("\\/2024$", sc$Prot..RAS)
-  }
-  
-  #if(ordine>40 | ordine<1){
-  if(length(anno==1)){
-    y <- "/2024"
-    y2 <- 2024
-  }else{
-    y <- "/2025"
-    y2 <- 2025
-  }
+  # if(length(anno==1)){
+  # }else{
+  #   anno <- grep("\\/2024$", sc$Prot..RAS)
+  # }
+  # 
+  # #if(ordine>40 | ordine<1){
+  # if(length(anno==1)){
+  #   y <- "/2024"
+  #   y2 <- 2024
+  # }else{
+  #   y <- "/2025"
+  #   y2 <- 2025
+  # }
   
   if(CUP!=trattini){
     CUP1 <- paste0(" (CUP ", CUP, ")")
