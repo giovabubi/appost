@@ -2498,7 +2498,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
     if(Tipo.ordine=="Fuori MePA"){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" il comunicato del Presidente dell’ANAC del 18 dicembre 2024 di adozione del provvedimento di prolungamento fino al 30 giugno 2025 della proroga di alcuni adempimenti previsti con la Delibera n. 582 del 13 dicembre 2023 e con il Comunicato del Presidente del 10 gennaio 2024, tra cui la possibilità di utilizzare l’interfaccia web messa a disposizione dalla Piattaforma PCP dell’Autorità per gli affidamenti diretti di importo inferiore a 5.000 euro in caso di impossibilità o difficoltà di ricorso alle PAD al fine di consentire l’assolvimento delle funzioni ad essa demandate, ivi compresi gli obblighi in materia di trasparenza;")), style = "Normal")
+        body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" il comunicato del Presidente dell’ANAC del 18 giugno 2025 di adozione del provvedimento di prolungamento della proroga di alcuni adempimenti previsti con la Delibera n. 582 del 13/12/2023 e con il Comunicato del Presidente del 18/12/2024, tra cui la  possibilità di utilizzare l’interfaccia web messa a disposizione dalla Piattaforma PCP dell’Autorità per gli affidamenti diretti di importo inferiore a 5.000 euro in caso di impossibilità o difficoltà di ricorso alle PAD al fine di consentire l’assolvimento delle funzioni ad essa demandate, ivi compresi gli obblighi in materia di trasparenza;")), style = "Normal")
     }
     # if(Motivo.fuori.MePA!="No"){
     #   doc <- doc |>
