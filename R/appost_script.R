@@ -542,7 +542,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     dicitura.fattura <- trattini
     finanziamento <- "No"
   }
-  if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 3" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT"){
+  if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 3" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT" | PNRR=="ITINERIS"){
     finanziamento <- "PNRR"
   }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT" | PNRR=="REMIND" | PNRR=="MYCOVIROLE"){
     finanziamento <- "PRIN 2022"
@@ -631,6 +631,22 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "16.949.360,37 €"
     costo.ammesso <- "16.949.360,37 €"
     logo <- "logo_mirri.jpeg"
+  }
+  if(PNRR=="ITINERIS"){
+    Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.4 “potenziamento strutture di ricerca e creazione di campioni nazionali di R&S su alcune key enabling technologies”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1032 del 17/06/2022 - progetto “centro nazionale tecnologie dell’agricoltura” (Agritech), spoke 3, codice identificativo CN00000022 - CUP B83C22002840001'
+    codice.progetto <- "IR0000032"
+    CUP2 <- "B53C22002150006"
+    decreto.concessione <- "1032 del 17/6/2022"
+    avviso.pnrr <- " il Decreto Direttoriale MUR n. 3264 del 28/12/2021 di emanazione di un “Avviso pubblico per la presentazione di Proposte di intervento per la creazione di “Partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base” nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU;"
+    decreto.pnrr <- " il Decreto Direttoriale MUR n. 130 del 21/6/2022, registrato alla Corte dei Conti il 20/7/2022 al n. 1926 (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione presentata dal Consiglio Nazionale delle Ricerche, contrassegnata dal codice IR0000032, per la realizzazione del programma di ricerca dal titolo “Italian integrated environmental research infrastructures system”, CUP B53C22002150006;"
+    dicitura.fattura <- "PNRR ITINERIS - Codice progetto MUR: IR0000032"
+    investimento <- "Investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”"
+    intervento <- "ITINERIS, codice progetto IR0000032"
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 1/11/2022; Conclusione: 30/4/2025 (prorogata al 31/10/2025)"
+    costo.totale <- "____________ €"
+    costo.ammesso <- "____________ €"
+    logo <- "logo_itineris.png"
   }
   if(PNRR=="DIVINGRAFT"){
     titolo <- "dissection of molecular mechanisms underlying tolerance to virus and viroid infection in grafted tomato plants"
