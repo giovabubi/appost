@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   #ordine <- "20_2024"
-  #ordine <- 20
+  #ordine <- 28
   ordine <- readline()
 
   if(ordine==0){
@@ -3646,6 +3646,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_replace_text_at_bkm("bookmark_rdo1", ordine.trattativa.scelta.ldo1) |>
       body_replace_text_at_bkm("bookmark_rdo2", as.character(ordine.trattativa.scelta.ldo2)) |>
       body_replace_text_at_bkm("bookmark_web", Pagina.web) |>
+      body_replace_text_at_bkm("bookmark_progetto", Progetto) |>
       body_replace_text_at_bkm("bookmark_fornitore", Fornitore) |>
       body_replace_text_at_bkm("bookmark_sede", Fornitore..Sede) |>
       body_replace_text_at_bkm("bookmark_piva", as.character(Fornitore..P.IVA)) |>
@@ -3660,6 +3661,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_replace_text_at_bkm("bookmark_consegna", Richiedente..Luogo.di.consegna) |>
       body_replace_text_at_bkm("bookmark_cuu", CUU) |>
       body_replace_text_at_bkm("bookmark_fatturazione", fatturazione) |>
+      body_replace_text_at_bkm("bookmark_note", paste0("CIG ", CIG, ", CUP ", CUP, ", progetto ", Progetto, ".")) |>
       cursor_bookmark("bookmark_firma") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
@@ -3686,6 +3688,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_replace_text_at_bkm("bookmark_en_rdo1", ordine.trattativa.scelta.ldo1) |>
         body_replace_text_at_bkm("bookmark_en_rdo2", as.character(ordine.trattativa.scelta.ldo2)) |>
         body_replace_text_at_bkm("bookmark_en_web", Pagina.web) |>
+        body_replace_text_at_bkm("bookmark_en_progetto", Progetto) |>
         body_replace_text_at_bkm("bookmark_en_fornitore", Fornitore) |>
         body_replace_text_at_bkm("bookmark_en_sede", Fornitore..Sede) |>
         body_replace_text_at_bkm("bookmark_en_piva", as.character(Fornitore..P.IVA)) |>
@@ -3700,6 +3703,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_replace_text_at_bkm("bookmark_en_consegna", Richiedente..Luogo.di.consegna) |>
         body_replace_text_at_bkm("bookmark_cuu_en", CUU) |>
         body_replace_text_at_bkm("bookmark_en_fatturazione", fatturazione) |>
+        body_replace_text_at_bkm("bookmark_en_note", paste0("CIG ", CIG, ", CUP ", CUP, ", project ", Progetto, ".")) |>
         cursor_bookmark("bookmark_en_firma") |>
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
         body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
