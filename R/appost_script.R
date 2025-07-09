@@ -1012,8 +1012,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   dicitura.fatturazione.eng <- paste0("In the invoice, plese report the following information: purchase order n° ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of the purchase order page), CIG ", CIG, ", CUP ", CUP, ".")
   
   if(PNRR!="No"){
-    dicitura.fatturazione <- sub(".$", paste0(" e la seguente dicitura: '", dicitura.fattura, "'."), dicitura.fatturazione)
-    dicitura.fatturazione.eng <- sub(".$", paste0(" and the following phrase: '", dicitura.fattura, "'."), dicitura.fatturazione.eng)
+    dicitura.fatturazione <- sub(".$", paste0(", progetto '", dicitura.fattura, "'."), dicitura.fatturazione)
+    dicitura.fatturazione.eng <- sub(".$", paste0(", project '", dicitura.fattura, "'."), dicitura.fatturazione.eng)
   }
   
   if(finanziamento=="PRIN 2022" | finanziamento=="PRIN 2022 PNRR"){
@@ -3661,7 +3661,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_replace_text_at_bkm("bookmark_consegna", Richiedente..Luogo.di.consegna) |>
       body_replace_text_at_bkm("bookmark_cuu", CUU) |>
       body_replace_text_at_bkm("bookmark_fatturazione", fatturazione) |>
-      body_replace_text_at_bkm("bookmark_note", paste0("CIG ", CIG, ", CUP ", CUP, ", progetto ", Progetto, ".")) |>
+      body_replace_text_at_bkm("bookmark_note", paste0("ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ", progetto ", Progetto, ".")) |>
       cursor_bookmark("bookmark_firma") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
@@ -3703,7 +3703,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_replace_text_at_bkm("bookmark_en_consegna", Richiedente..Luogo.di.consegna) |>
         body_replace_text_at_bkm("bookmark_cuu_en", CUU) |>
         body_replace_text_at_bkm("bookmark_en_fatturazione", fatturazione) |>
-        body_replace_text_at_bkm("bookmark_en_note", paste0("CIG ", CIG, ", CUP ", CUP, ", project ", Progetto, ".")) |>
+        body_replace_text_at_bkm("bookmark_en_note", paste0("purchase order no. ", sede, " ", ordine, y, ", prot. n. _____ (see on the top of this page), CIG ", CIG, ", CUP ", CUP, ", project ", Progetto, ".")) |>
         cursor_bookmark("bookmark_en_firma") |>
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
         body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
