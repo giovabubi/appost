@@ -3015,12 +3015,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           
           if(sede!="TOsi"){
             doc <- doc |>
-              body_replace_text_at_bkm("bookmark_rss", paste0(", che delega alla firma ", paste0(tolower(substr(firma.RSS, 1, 1)),substr(firma.RSS, 2, nchar(firma.RSS))),  " ", RSS))
+              body_replace_text_at_bkm("bookmark_rss", "Responsabile della sede secondaria")
           }
           
           doc <- doc |>
             body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
-            body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
+            #body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
             body_replace_text_at_bkm("bookmark_firma", firma.RSS)
           
           print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
