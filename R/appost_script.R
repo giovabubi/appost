@@ -2398,7 +2398,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       #body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la delega del Segretario Amministrativo dell’IPSP al Responsabile Amministrativo della "),
       #                   ftext(sede2), ftext(" dell’IPSP prot. 153859 dell’8/5/2024 per il periodo dall’8/5/2024 al 31/12/2024 ad effettuare il controllo interno di regolarità amministrativa e copertura finanziaria per gli affidamenti diretti ed apporre il visto sulla “Decisione di contrattare” prevista dall'art. 32 del Regolamento di Amministrazione Contabilità e Finanza (RACF) del Consiglio Nazionale delle Ricerche, emanato con provvedimento della Presidente CNR n. 201 del 23 dicembre 2024, in vigore dal 1° gennaio 2025;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 6 novembre 2012, n. 190 recante “Disposizioni per la prevenzione e la repressione della corruzione e dell’illegalità nella pubblica amministrazione” pubblicata sulla G.U.R.I. n. 265 del 13/11/2012;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 14 marzo 2013, n. 33 recante “Riordino della disciplina riguardante il diritto di accesso civico e gli obblighi di pubblicità, trasparenza e diffusione di informazioni da parte delle pubbliche amministrazioni” pubblicato sulla Gazzetta Ufficiale n. 80 del 05/04/2013 e successive modifiche introdotte dal d.lgs. 25 maggio 2016 n. 97;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 14 marzo 2013, n. 33 recante “Riordino della disciplina riguardante il diritto di accesso civico e gli obblighi di pubblicità, trasparenza e diffusione di informazioni da parte delle pubbliche amministrazioni” pubblicato sulla G.U.R.I. n. 80 del 05/04/2013 e successive modifiche introdotte dal d.lgs. 25 maggio 2016 n. 97;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche approvato con delibera del Consiglio di Amministrazione n° 137/2017;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il vigente Piano triennale per la prevenzione della corruzione e della trasparenza (PTPCT) contenuto nel Piano Integrato di Attività e Organizzazione (PIAO), adottato con delibera del Consiglio di Amministrazione del Consiglio Nazionale delle Ricerche ai sensi dell’articolo 6 del decreto-legge n. 80/2021;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 23 dicembre 1999 n 488 e s.m.i., recante “Disposizioni per la formazione del bilancio annuale e pluriennale dello Stato (Legge finanziaria 2000)”, ed in particolare l'articolo 26;")), style = "Normal") |>
@@ -2416,7 +2416,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Prodotto),
                            ftext("” ("),
                            ftext(Pagina.web),
-                           ftext("), nell’ambito del progetto “"),
+                           ftext("), codice CPV "),
+                           ftext(CPV),
+                           ftext(", nell’ambito del progetto “"),
                            ftext(Progetto),
                            ftext("”"),
                            ftext(CUP1),
@@ -2522,7 +2524,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # }
 
     doc <- doc |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
+      #body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n° 420/2024 del 17/12/2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VERIFICATA", fpt.b), ftext(" la disponibilità economico-finanziaria per la copertura della spesa sul budget del progetto “"),
                          ftext(Progetto),
@@ -3521,7 +3523,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
 
     doc <- doc |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 52, comma 1 del Codice, il quale dispone che, nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro, gli operatori economici attestano con dichiarazione sostitutiva di atto di notorietà il possesso dei requisiti di partecipazione e di qualificazione richiesti e che le stazioni appaltanti procedono alla risoluzione del contratto qualora a seguito delle verifiche non sia confermato il possesso dei requisiti generali dichiarati;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che, l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva di atto di notorietà resa ai sensi del D.P.R. n. 445/2000 attestante l’insussistenza di motivi di esclusione e il possesso dei requisiti di qualificazione richiesti;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che, l’operatore economico individuato ha sottoscritto la dichiarazione sostitutiva di atto di notorietà resa ai sensi del D.P.R. n. 445/2000 attestante l’insussistenza di motivi di esclusione e il possesso dei requisiti di partecipazione e di qualificazione richiesti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che la Stazione appaltante, secondo il proprio regolamento interno, verificherà, previo sorteggio di un campione individuato con modalità predeterminata, le dichiarazioni degli operatori economici affidatari nelle procedure di affidamento di cui all’art. 50, comma 1, lett. b) di importo inferiore a 40.000 euro;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTI", fpt.b), ftext(" gli atti della procedura in argomento ed accertata la regolarità degli stessi in relazione alla normativa ed ai regolamenti vigenti;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VALUTATO", fpt.b), ftext(" il principio del risultato;")), style = "Normal") |>
