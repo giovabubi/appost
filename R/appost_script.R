@@ -315,7 +315,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     beni <- 'beni'
     della.fornitura <- 'della fornitura'
     la.fornitura <- 'la fornitura'
-    fornitura.consegnata <- 'la fornitura dovrà essere consegnata'
     materiale.conforme <- "che il materiale è conforme all’ordine e perfettamente funzionante e utilizzabile."
     fornitura.eseguita <- 'è stata consegnata'
   }else if(Tipo.acquisizione=='Servizi'){
@@ -323,7 +322,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     beni <- 'servizi'
     della.fornitura <- 'del servizio'
     la.fornitura <- 'il servizio'
-    fornitura.consegnata <- 'il servizio dovrà essere prestato'
     materiale.conforme <- "che il servizio è conforme all’ordine e completamente prestato."
     fornitura.eseguita <- 'è stato eseguito'
   }else if(Tipo.acquisizione=='Lavori'){
@@ -331,7 +329,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     beni <- 'lavori'
     della.fornitura <- 'del lavoro'
     la.fornitura <- 'il lavoro'
-    fornitura.consegnata <- 'il lavoro dovrà essere svolto'
     materiale.conforme <- "che il lavoro è conforme all’ordine e completamente svolto."
     fornitura.eseguita <- 'è stato eseguito'
   }
@@ -3132,12 +3129,24 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           cursor_begin() |>
           body_add_par("CONDIZIONI GENERALI D'ACQUISTO", style = "heading 1", pos = "on") |>
           body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": "), ftext(fornitura.consegnata), ftext(" entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione del presente contratto presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo")
+        if(Tipo.acquisizione=="Beni" & Inventariabile=="Non inventariabile"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura dovrà essere consegnata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Beni" & Inventariabile=="Inventariabile"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura deovrà essere consegnata e installata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Servizi" | Tipo.acquisizione=="Lavori"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la durata dell'appalto è di 6 mesi decorrenti dalla data di sottoscrizione della lettera d'ordine.")), style = "Riquadro paragrafo")
+        }
+        doc <- doc |>
           body_add_fpar(fpar(ftext("4. Subappalto", fpt.b), ftext(": in caso di subappalto trovano applicazione le disposizioni di cui all'art. 119 del codice dei contratti.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("5. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, pena il rifiuto della stessa, il numero d'ordine (corrispondente al numero di registrazione al protocollo), il CIG e il CUP.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("5. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, il numero d'ordine (corrispondente al numero di registrazione al protocollo), ovvero il protocollo del provvedimento con cui l’Ente ha disposto l’affidamento del presente appalto di servizi/forniture, il CIG e il CUP.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("6. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
-          body_add_fpar(fpar(ftext("7. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto di cui all’art.8, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia l’Aggiudicatario non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 10% (dieci per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno all’Aggiudicatario, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("7. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto, di cui al precedente punto 3, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia il fornitore non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 10% (dieci per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno al fornitore, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("8. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("9. Osservanza leggi, regolamenti, contratti collettivi nazionali di lavoro, norme per la prevenzione infortuni ed igiene sul lavoro", fpt.b), ftext(": al personale impiegato nei servizi/forniture oggetto del presente appalto è applicato il contratto collettivo nazionale e territoriale in vigore per il settore e la zona nella quale si eseguono le prestazioni, stipulato dalle associazioni dei datori e dei prestatori di lavoro comparativamente più rappresentative sul piano nazionale e quello il cui ambito di applicazione sia strettamente connesso con l’attività oggetto dell’appalto svolta dall’impresa anche in maniera prevalente.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("L’obbligo permane anche dopo la scadenza dei suindicati contratti collettivi e fino alla loro sostituzione. L’affidatario che applica un differente contratto collettivo deve garantire le stesse tutele economiche e normative rispetto a quello indicato dalla Stazione Appaltante e come evidenziato nella dichiarazione di equivalenza presentata. I sopraccitati obblighi vincolano l’affidatario, anche nel caso che non sia aderente alle associazioni stipulanti o receda da esse ed indipendentemente dalla natura artigiana o industriale della struttura o dimensione della Società stessa e da ogni altra sua qualificazione giuridica, economica o sindacale, ivi compresa la forma cooperativa. L’affidatario è tenuto, inoltre, all’osservanza ed all’applicazione di tutte le norme relative alle assicurazioni obbligatorie ed antinfortunistiche, previdenziali ed assistenziali, nei confronti del proprio personale dipendente e dei soci lavoratori nel caso di cooperative. A richiesta della stazione appaltante, l’affidatario deve certificare l’applicazione del trattamento retributivo previsto dal CCNL delle imprese di settore e dagli accordi integrativi territoriali, ai lavoratori, compresi i soci lavoratori qualora si tratti di cooperativa, impiegati nell’appalto. La stazione appaltante si riserva di verificare, in qualsiasi momento, la regolarità dell’assolvimento degli obblighi inerenti al versamento dei contributi obbligatori ai sensi di legge. La stazione appaltante verifica, ai fini del pagamento della rata del corrispettivo, l’ottemperanza a tali obblighi, da parte dell’affidatario. La stazione appaltante si riserva di verificare, anche direttamente, il rispetto delle disposizioni in materia di assicurazioni obbligatorie per legge.")), style = "Riquadro paragrafo") |>
@@ -5287,7 +5296,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
     if(Tipo.acquisizione=="Servizi"){
       doc <- doc |>
-        body_replace_text_at_bkm("bookmark_durata", "il servizio dovrà essere svolto entro 6 mesi")
+        body_replace_text_at_bkm("bookmark_durata", "la durata dell'appalto è di 6 mesi")
     }
     
     doc <- doc |>
