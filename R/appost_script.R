@@ -2524,7 +2524,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2025, approvato dal Consiglio di Amministrazione con deliberazione n° 420/2024 del 17/12/2024;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("ACCERTATA", fpt.b), ftext(" la disponibilità finanziaria per la copertura della spesa sui fondi del progetto “"),
+      body_add_fpar(fpar(ftext("VERIFICATA", fpt.b), ftext(" la disponibilità economico-finanziaria per la copertura della spesa sul budget del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
                          ftext(CUP1),
@@ -2612,7 +2612,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     #doc <- doc |>
       body_add_fpar(fpar(ftext("DI PROCEDERE", fpt.b), ftext(" alla pubblicazione del presente provvedimento ai sensi del combinato disposto dell’art. 37 del d.lgs. 14 marzo 2013, n. 33 e dell’art. 20 del Codice;")), style = "Elenco liv1") |>
       body_add_par("", style = "Normal") |>
-      body_add_fpar(fpar(ftext("Controllo di regolarità contabile")), style = "Firma 1") |>
+      body_add_fpar(fpar(ftext("Controllo di regolarità amministrativa e contabile")), style = "Firma 1") |>
       body_add_fpar(fpar(ftext("Responsabile della Gestione e della Compliance amministrativo contabile (RGC)")), style = "Firma 1") |>
       body_add_fpar(fpar(ftext("(Sig.ra Concetta Mottura)")), style = "Firma 1") |>
       body_add_par("", style = "Normal") |>
@@ -3479,7 +3479,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 dicembre 2024, n. 209 rubricato “Disposizioni integrative e correttive al codice dei contratti pubblici, di cui al decreto legislativo 31 marzo 2023, n. 36”, pubblicato sul Supplemento Ordinario n.45/L della GU n. 305 del 31 dicembre 2024;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" l’art. 50, comma 1, lettera b) del Codice, il quale consente, per affidamenti di contratti di servizi e forniture, ivi compresi i servizi di ingegneria e architettura e l'attività di progettazione di importo inferiore a euro 140.000,00, di procedere ad affidamento diretto, anche senza consultazione di più operatori economici;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento con il quale è stato nominato "),
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento con il quale è "),
+                         ftext(nominato), ftext(" "),
                          ftext(il.dott.rup), ftext(" "), ftext(RUP),
                          ftext(" quale Responsabile Unico del Progetto ai sensi dell’art. 15 del Codice per l’affidamento di cui all’oggetto;")), style = "Normal")
     
