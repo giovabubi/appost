@@ -1008,7 +1008,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     titolo <- "Upcycling strategies for the conversion of food by-products into NExt-GEneration Soil Improvers with plant-biostimulant properties and multifunctional effect on soil chemical-physical properties, microbiota, and crop nematode pests A Fork-to Farm approach"
     codice.progetto <- "2022JY27NZ"
     CUP2 <- "B53D23017700006"
-    decreto.concessione <- "___ del _/_/202_"
+    decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università di Roma “La Sapienza”"
     avvio <- "Avvio: 12/10/2023; Conclusione: 28/02/2026"
