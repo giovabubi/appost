@@ -1010,10 +1010,10 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     CUP2 <- "B53D23017700006"
     decreto.concessione <- "___ del _/_/202_"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
-    attuatore <- "_____"
-    avvio <- "Avvio: ____; Conclusione: ____"
-    costo.totale <- "__.000,00 €"
-    costo.ammesso <- "__.000,00 €"
+    attuatore <- "Università di Roma “La Sapienza”"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 28/02/2026"
+    costo.totale <- "271.660,00 €, di cui 53.972,00 € per il CNR-IPSP"
+    costo.ammesso <- "206.654,00 €, di cui 29.739,50 € per il CNR-IPSP (cofinanziamento 24.232,50 €)"
     logo <- "logo_bianco.jpg"
   }
   
