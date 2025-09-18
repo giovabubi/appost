@@ -541,7 +541,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   }
   if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 3" | PNRR=="onFoods Spoke 4" | PNRR=="SUS-MIRRI.IT" | PNRR=="ITINERIS"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT" | PNRR=="REMIND" | PNRR=="MYCOVIROLE"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT" | PNRR=="REMIND" | PNRR=="MYCOVIROLE" | PNRR=="NEGESI"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -1003,6 +1003,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     costo.totale <- "300.000,00 €"
     costo.ammesso <- "225.000,00 €"
     logo <- "logo_plasma4soil.jpg"
+  }
+  if(PNRR=="NEGESI"){
+    titolo <- "Upcycling strategies for the conversion of food by-products into NExt-GEneration Soil Improvers with plant-biostimulant properties and multifunctional effect on soil chemical-physical properties, microbiota, and crop nematode pests A Fork-to Farm approach"
+    codice.progetto <- "2022JY27NZ"
+    CUP2 <- "B53D23017700006"
+    decreto.concessione <- "___ del _/_/202_"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "_____"
+    avvio <- "Avvio: ____; Conclusione: ____"
+    costo.totale <- "__.000,00 €"
+    costo.ammesso <- "__.000,00 €"
+    logo <- "logo_bianco.jpg"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
