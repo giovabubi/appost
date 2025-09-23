@@ -1266,6 +1266,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     pr <- subset(pr, !is.na(pr$Quantità))
+    prt <- subset(prt, !is.na(prt$Quantità))
     pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
     pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -1912,6 +1913,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     pr <- subset(pr, !is.na(pr$Quantità))
+    prt <- subset(prt, !is.na(prt$Quantità))
     pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
     pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -3664,6 +3666,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     pr <- subset(pr, !is.na(pr$Quantità))
+    prt <- subset(prt, !is.na(prt$Quantità))
     pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
     pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -4224,6 +4227,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     pr <- subset(pr, !is.na(pr$Quantità))
+    prt <- subset(prt, !is.na(prt$Quantità))
     pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
     pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -4660,6 +4664,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     pr <- subset(pr, !is.na(pr$Quantità))
+    prt <- subset(prt, !is.na(prt$Quantità))
     pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
     pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -6201,6 +6206,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     pr <- subset(pr, !is.na(pr$Quantità))
+    prt <- subset(prt, !is.na(prt$Quantità))
     pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
     pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
