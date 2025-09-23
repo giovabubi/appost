@@ -1304,7 +1304,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       cursor_reach("CAMPO.BENI") |>
       body_replace_all_text("CAMPO.BENI", beni, only_at_cursor = FALSE) |>
       body_add_par("") |>
-      body_add_table(prt, style = "Stile1") |>
+      body_add_table(pr, style = "Stile1") |>
       cursor_reach("CAMPO.SEDE") |>
       body_replace_all_text("CAMPO.SEDE", sede1, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.IMPORTO.SENZA.IVA") |>
