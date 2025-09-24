@@ -4033,14 +4033,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
       }
     
-    
-    Imponibile.ldo <- colnames(pr)[7]
-    IVA.ldo <- pr[1,7]
-    Importo.ldo <- pr[2,7]
-    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-
     download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
@@ -4133,15 +4125,21 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(as.character(RDO)),
                          ftext(", CIG "),
                          ftext(CIG),
-                         ftext(", registrazione U-Gov anticipata n. __________;")), style = "Normal")
+                         ftext(", registrazione U-Gov anticipata n. "),
+                         ftext(Anticipata.ordine),
+                         ftext(";")), style = "Normal")
     if(Fornitore..Nazione=="Italiana"){
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                           ftext(" la fattura elettronica identificativo SDI n. _____, registrazione U-GOV scrittura normale n. _____ del _____;")), style = "Normal")
+                           ftext(" la fattura elettronica identificativo SDI n. _____, registrazione U-GOV scrittura normale n. "),
+                           ftext(Scrittura.normale.fattura),
+                           ftext(";")), style = "Normal")
     }else{
       doc <- doc |>
         body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                           ftext(" la fattura estera cartacea prot. n. _____, registrazione U-GOV scrittura normale n. _____ del _____;")), style = "Normal")
+                           ftext(" la fattura estera cartacea prot. n. _____, registrazione U-GOV scrittura normale n. "),
+                           ftext(Scrittura.normale.fattura),
+                           ftext(";")), style = "Normal")
     }
       
     doc <- doc |>
@@ -6746,7 +6744,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       #cursor_begin() |>
       body_replace_all_text("CAMPO.ISTRUTTORIA", Prot..atto.istruttorio, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.LDO", Prot..lettera.ordine, only_at_cursor = FALSE) |>
-      body_replace_all_text("CAMPO.RUP", Prot..provv..impegno, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.RUP", Prot..provv..anticipata, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.DOCOE", Prot..DocOE, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.CONF", Prot..conflitto.interesse, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.DOPPIOFIN", Prot..doppio.finanziamento, only_at_cursor = FALSE) |>
