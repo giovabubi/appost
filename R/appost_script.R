@@ -6213,6 +6213,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     }
     
     if(colnames(pr)[6]=="Imponibile"){
+      Imponibile.ldo <- colnames(pr)[7]
+      IVA.ldo <- pr[1,7]
+      Importo.ldo <- pr[2,7]
+      Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+      IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+      Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+      
       pr <- pr[,1:5]
       colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
       pr <- subset(pr, !is.na(pr$Quantità))
@@ -6222,6 +6229,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       prt <- pr[,-5]
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
     }else{
+      Imponibile.ldo <- colnames(pr)[10]
+      IVA.ldo <- pr[1,10]
+      Importo.ldo <- pr[2,10]
+      Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+      IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+      Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+      
       pr <- pr[,c(1:5,8)]
       colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Aliquota IVA", "Inv./Cons.")
       pr <- subset(pr, !is.na(pr$Quantità))
