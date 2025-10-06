@@ -3284,7 +3284,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           body_replace_text_at_bkm("bookmark_intestazione", int.docoe) |>
           body_replace_text_at_bkm("bookmark_intestazione_en", int.docoe.en)
         
-        print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
+        print(doc, target = paste0(pre.nome.file, "5.4 Self-declaration qualification requirements.docx"))
+        cat("
+    Documento generato: '5.4 Self-declaration qualification requirements'")
       
         ## Integrity pact ----
         download.file(paste(lnk, "Patto_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3302,6 +3304,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           body_replace_text_at_bkm("bookmark_firma_en", firma.RSS.en)
         
         print(doc, target = paste0(pre.nome.file, "5.1 Integrity pact.docx"))
+        cat("
+    Documento generato: '5.1 Integrity pact'")
         
         ## CC dedicated ----
         download.file(paste(lnk, "cc_dedicato_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3309,6 +3313,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         file.remove("tmp.docx")
         
         print(doc, target = paste0(pre.nome.file, "5.2 Dedicated bank account.docx"))
+        cat("
+    Documento generato: '5.2 Dedicated bank account'")
         
         ## Declaration on honour ----
     #     download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
