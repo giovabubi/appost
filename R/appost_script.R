@@ -3279,7 +3279,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           body_replace_text_at_bkm("bookmark_intestazione_en", int.docoe.en)
         
         print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
-      }
       
         ## Integrity pact ----
         download.file(paste(lnk, "Patto_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
