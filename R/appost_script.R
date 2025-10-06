@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   # ordine <- "31_RDA 54"
-  #ordine <- 28
+  # ordine <- 122
   ordine <- readline()
 
   if(ordine==0){
@@ -167,6 +167,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     RAMM.email <- 'nicola.centorame@ipsp.cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Bari"
     firma.RSS <- "Il responsabile della sede secondaria di Bari dell'IPSP"
+    firma.RSS.en <- "The responsible of the Bari Unit of the IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via G. Amendola 122/D, 70126 Bari, Italia."
     nomina.RSS <- "3903 dell'8/1/2025 di nomina del dott. Giovanni Nicola Bubici quale Responsabile della Sede Secondaria di Bari dell’IPSP per il periodo dall’8/1/2025 al 31/12/2025"
     nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico del dott. Giovanni Nicola Bubici a Responsabile delegato alla gestione della sede secondaria di Bari dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
@@ -175,6 +176,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Foggia il giorno 11/11/1977, codice fiscale BBCGNN77S11D643H,"
     RSS.dich <- "responsabile della sede secondaria di Bari dell'IPSP"
+    RSS.dich.en <- "responsible of the Bari Unit"
     CUU <- "4S488Q"
     cdr <- paste("CdR 121.001.000 IPSP", sede2)
   }else if(sede=='TO'){
@@ -187,6 +189,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     RAMM.email <- 'lucia.allione@ipsp.cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Torino"
     firma.RSS <- "Il responsabile della sede secondaria di Torino dell'IPSP"
+    firma.RSS.en <- "The responsible of the Torino Unit of the IPSP"
     in.qualita.RSS <- "responsabile della sede secondaria di Torino dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale Mattioli, 25, 10125 Torino, Italia."
     nomina.RSS <- "3906 dell'8/1/2025 di nomina del dott. Stefano Ghignone quale Responsabile della Sede Secondaria di Torino dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
@@ -196,6 +199,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Chieri (TO) il 29/5/1972, codice fiscale GHGSFN72E29C627M,"
     RSS.dich <- "responsabile della sede secondaria di Torino dell'IPSP"
+    RSS.dich.en <- "responsible of the Torino Unit"
     CUU <- "PE2U6Q"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='NA'){
@@ -208,6 +212,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     RAMM.email <- 'ettore.magaldi@ipsp.cnr.it'
     al.RSS <- "Alla responsabile della sede secondaria di Portici"
     firma.RSS <- "La responsabile della sede secondaria di Portici dell'IPSP"
+    firma.RSS.en <- "The responsible of the Portici Unit of the IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, piazzale Enrico Fermi, 1, 80055 Portici (NA), Italia."
     nomina.RSS <- "3907 dell'8/1/2025 di nomina della dott.ssa Michelina Ruocco quale Responsabile della Sede Secondaria di Portici dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
     nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico della dott.ssa Michelina Ruocco a Responsabile delegata alla gestione della sede secondaria di Portici dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
@@ -216,6 +221,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Sant'Agnello il 28/05/1969, codice fiscale RCCMHL69E68I208P,"
     RSS.dich <- "responsabile della sede secondaria di Portici dell'IPSP"
+    RSS.dich.en <- "responsible of the Portici Unit"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
     CUU <- "YOBWQ2"
   }else if(sede=='FI'){
@@ -228,6 +234,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     RAMM.email <- 'francesca.pesciolini@ipsp.cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Sesto Fiorentino"
     firma.RSS <- "Il responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
+    firma.RSS.en <- "The responsible of the Sesto Fiorentino Unit of the IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, via Madonna del Piano, 10, 50019 Sesto F.no (FI), Italia."
     nomina.RSS <- "3904 dell'8/1/2025 di nomina del dott. Nicola Luchi quale Responsabile della Sede Secondaria di Sesto Fiorentino dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
     nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico del dott. Nicola Luchi a Responsabile delegato alla gestione della sede secondaria di Sesto Fiorentino dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
@@ -236,6 +243,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Firenze il 27/12/1975, codice fiscale LCHNCL75T27D612B,"
     RSS.dich <- "responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
+    RSS.dich.en <- "responsible of the Sesto Fiorentino Unit"
     CUU <- "KWH4FD"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='PD'){
@@ -248,6 +256,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     RAMM.email <- 'lucia.allione@ipsp.cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Legnaro"
     firma.RSS <- "Il responsabile della sede secondaria di Legnaro dell'IPSP"
+    firma.RSS.en <- "The responsible of the Legnaro Unit of the IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale dell’Università, 16, 35020 Legnaro (PD), Italia."
     nomina.RSS <- "3905 dell'8/1/2025 di nomina della dott.ssa Laura Scarabel quale Responsabile della Sede Secondaria di Legnaro dell’IPSP per il periodo dall'8/1/2025 al 31/12/2025"
     nomina.RSS2 <- "3903 dell'8/1/2025 relativo al conferimento dell’incarico della dott.ssa Laura Scarabel a Responsabile delegato alla gestione della sede secondaria di Legnaro dell’IPSP con decorrenza dall'8/1/2025 al 31/12/2025;"
@@ -255,7 +264,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Bruxelles il 20/3/1963, codice fiscale SCRLRA63C60Z103Z,"
-    RSS.dich <- " responsabile della sede secondaria di Legnaro dell'IPSP "
+    RSS.dich <- "responsabile della sede secondaria di Legnaro dell'IPSP"
+    RSS.dich.en <- "responsible of the Legnaro Unit"
     CUU <- "8INQPI"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='TOsi'){
@@ -268,6 +278,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     RAMM.email <- 'jose.saporita@ipsp.cnr.it'
     al.RSS <- "Al direttore dell'IPSP"
     firma.RSS <- "Il direttore dell'IPSP"
+    firma.RSS.en <- "The director of the IPSP"
     in.qualita.RSS <- "direttore dell'IPSP"
     fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, Strada delle Cacce, 73, 10135 Torino, Italia."
     nomina.RAMM <- "146196 del 2/5/2024 di nomina del dott. Josè Saporita quale Responsabile Amministrativo della Sede Secondaria di Bari dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
@@ -275,6 +286,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Cava de' Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R,"
     RSS.dich <- "direttore dell'IPSP"
+    RSS.dich.en <- "Director"
     CUU <- "7K0RCK"
     cdr <- paste("CdR 121.000.000 IPSP", sede2)
   }
@@ -314,6 +326,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     bene <- 'bene'
     beni <- 'beni'
     della.fornitura <- 'della fornitura'
+    della.fornitura.en <- 'supply'
     la.fornitura <- 'la fornitura'
     materiale.conforme <- "che il materiale è conforme all’ordine e perfettamente funzionante e utilizzabile."
     fornitura.eseguita <- 'è stata consegnata'
@@ -321,6 +334,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     bene <- 'servizio'
     beni <- 'servizi'
     della.fornitura <- 'del servizio'
+    della.fornitura.en <- 'service'
     la.fornitura <- 'il servizio'
     materiale.conforme <- "che il servizio è conforme all’ordine e completamente prestato."
     fornitura.eseguita <- 'è stato eseguito'
@@ -519,6 +533,10 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                             della.fornitura, " di “", Prodotto, "” (", Pagina.web, ") ",
                             "nell'ambito del progetto “", Progetto, "”", CUP1,
                             ", ordine ", sede, " ", ordine, y, ".", sep=""))
+  int.docoe.en <- toupper(paste0("DIRECT AWARD, PURSUANT TO ART. 50, PAR. 1 LETT. B OF LEGISLATIVE DECREE NO. 36/2003, FOR THE ",
+                              della.fornitura.en, " of “", Prodotto, "” (", Pagina.web, ") ",
+                              "WITHIN THE FRAMEWORK OF THE PROJECT “", Progetto, "”", CUP1,
+                              ", purchase order ", sede, " ", ordine, y, ".", sep=""))
 
   #pre.nome.file <- paste0("Ordine ", sede, " ", ordine, "_", y2, " - ")
   pre.nome.file <- paste0("Ordine ", ordine, "_", y2, " - ")
@@ -3250,15 +3268,52 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Documento generato: '5.9 Informativa privacy'")
         
       }else{
-        ## Declaration on honour ----
-        download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        ## ENGLISH ----
+        ## Part.Qual. ----
+        download.file(paste(lnk, "Dich_requisiti_infra40_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
         
-        print(doc, target = paste0(pre.nome.file, "5.7 Declaration on honour.docx"))
-        cat("
-
-    Documento generato: '5.7 Declaration on honour'")
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_intestazione", int.docoe) |>
+          body_replace_text_at_bkm("bookmark_intestazione_en", int.docoe.en)
+        
+        print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
+      }
+      
+        ## Integrity pact ----
+        download.file(paste(lnk, "Patto_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_della_fornitura", della.fornitura) |>
+          body_replace_text_at_bkm("bookmark_della_fornitura_en", della.fornitura.en) |>
+          body_replace_text_at_bkm("bookmark_prodotto", Prodotto) |>
+          body_replace_text_at_bkm("bookmark_prodotto_en", Prodotto) |>
+          body_replace_text_at_bkm("bookmark_rss", RSS.dich) |>
+          body_replace_text_at_bkm("bookmark_rss_en", RSS.dich.en) |>
+          body_replace_text_at_bkm("bookmark_firma", firma.RSS) |>
+          body_replace_text_at_bkm("bookmark_firma_en", firma.RSS.en)
+        
+        print(doc, target = paste0(pre.nome.file, "5.1 Integrity pact.docx"))
+        
+        ## CC dedicated ----
+        download.file(paste(lnk, "cc_dedicato_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        print(doc, target = paste0(pre.nome.file, "5.2 Dedicated bank account.docx"))
+        
+        ## Declaration on honour ----
+    #     download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    #     doc <- read_docx("tmp.docx")
+    #     file.remove("tmp.docx")
+    #     
+    #     print(doc, target = paste0(pre.nome.file, "5.7 Declaration on honour.docx"))
+    #     cat("
+    # 
+    # Documento generato: '5.7 Declaration on honour'")
         
         ## Purchase conditions ----
         download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3274,6 +3329,66 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         }
         
         doc <- doc |>
+          cursor_begin() |>
+          body_add_par("CONDIZIONI GENERALI D'ACQUISTO", style = "heading 1", pos = "on") |>
+          body_add_fpar(fpar(ftext("1. Ambito di applicazione", fpt.b), ftext(": le presenti condizioni generali di acquisto hanno la finalità di regolare in modo uniforme i rapporti contrattuali con i fornitori dai quali il CNR acquista beni e/o servizi in applicazione delle norme di legge e di regolamento. Le condizioni di vendita del fornitore non saranno in nessun caso applicabili ai rapporti contrattuali con il CNR, anche se fossero state richiamate in qualsiasi documento proveniente dal fornitore stesso.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo")
+        if(Tipo.acquisizione=="Beni" & Inventariabile=="Non inventariabile"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura dovrà essere consegnata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Beni" & Inventariabile=="Inventariabile"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura deovrà essere consegnata e installata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Servizi" | Tipo.acquisizione=="Lavori"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la durata dell'appalto è di 6 mesi decorrenti dalla data di sottoscrizione della lettera d'ordine.")), style = "Riquadro paragrafo")
+        }
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("4. Subappalto", fpt.b), ftext(": in caso di subappalto trovano applicazione le disposizioni di cui all'art. 119 del codice dei contratti.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("5. Fatturazione", fpt.b), ftext(": la fattura, redatta secondo la normativa vigente, dovrà riportare, il numero d'ordine (corrispondente al numero di registrazione al protocollo), ovvero il protocollo del provvedimento con cui l’Ente ha disposto l’affidamento del presente appalto di servizi/forniture, il CIG e il CUP.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("6. Pagamento", fpt.b), ftext(": il pagamento sarà effettuato entro 30 gg. a partire dalla data del certificato di regolare esecuzione.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("7. Penali", fpt.b), ftext(": per ogni giorno naturale e consecutivo di ritardo rispetto ai termini previsti per l’esecuzione dell’appalto, di cui al precedente punto 3, si applicherà una penale pari all’1‰ (uno per mille) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale. Per i soli contratti di forniture, nel caso in cui la prima verifica di conformità della fornitura abbia esito sfavorevole non si applicano le penali; qualora tuttavia il fornitore non renda nuovamente la fornitura disponibile per la verifica di conformità entro i 20 (venti) giorni naturali e consecutivi successivi al primo esito sfavorevole, ovvero la verifica di conformità risulti nuovamente negativa, si applicherà la penale sopra richiamata per ogni giorno solare di ritardo. Nell’ipotesi in cui l’importo delle penali applicabili superi l’importo pari al 10% (dieci per cento) dell’importo contrattuale, al netto dell’IVA e dell’eventuale costo relativo alla sicurezza sui luoghi di lavoro derivante dai rischi di natura interferenziale, l’Ente risolverà il contratto in danno al fornitore, salvo il diritto al risarcimento dell’eventuale ulteriore danno patito.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("8. Tracciabilità dei flussi finanziari", fpt.b), ftext(": il fornitore assume tutti gli obblighi di tracciabilità dei flussi finanziari di cui all’art. 3 della L. 136/2010 e s.m.i. Il mancato utilizzo del bonifico bancario o postale ovvero degli altri strumenti di incasso o pagamento idonei a consentire la piena tracciabilità delle operazioni costituisce motivo di risoluzione unilaterale del contratto. Il fornitore si impegna a consentire all’Amministrazione la verifica di cui al c. 9 art. 3 della legge 136/2010 e s.m.i. e a dare immediata comunicazione all'Amministrazione ed alla Prefettura-UTG della provincia ove ha sede l'Amministrazione della notizia dell’inadempimento della propria controparte (subappaltatore/subcontraente) agli obblighi di tracciabilità finanziaria.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("9. Osservanza leggi, regolamenti, contratti collettivi nazionali di lavoro, norme per la prevenzione infortuni ed igiene sul lavoro", fpt.b), ftext(": al personale impiegato nei servizi/forniture oggetto del presente appalto è applicato il contratto collettivo nazionale e territoriale in vigore per il settore e la zona nella quale si eseguono le prestazioni, stipulato dalle associazioni dei datori e dei prestatori di lavoro comparativamente più rappresentative sul piano nazionale e quello il cui ambito di applicazione sia strettamente connesso con l’attività oggetto dell’appalto svolta dall’impresa anche in maniera prevalente.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("L’obbligo permane anche dopo la scadenza dei suindicati contratti collettivi e fino alla loro sostituzione. L’affidatario che applica un differente contratto collettivo deve garantire le stesse tutele economiche e normative rispetto a quello indicato dalla Stazione Appaltante e come evidenziato nella dichiarazione di equivalenza presentata. I sopraccitati obblighi vincolano l’affidatario, anche nel caso che non sia aderente alle associazioni stipulanti o receda da esse ed indipendentemente dalla natura artigiana o industriale della struttura o dimensione della Società stessa e da ogni altra sua qualificazione giuridica, economica o sindacale, ivi compresa la forma cooperativa. L’affidatario è tenuto, inoltre, all’osservanza ed all’applicazione di tutte le norme relative alle assicurazioni obbligatorie ed antinfortunistiche, previdenziali ed assistenziali, nei confronti del proprio personale dipendente e dei soci lavoratori nel caso di cooperative. A richiesta della stazione appaltante, l’affidatario deve certificare l’applicazione del trattamento retributivo previsto dal CCNL delle imprese di settore e dagli accordi integrativi territoriali, ai lavoratori, compresi i soci lavoratori qualora si tratti di cooperativa, impiegati nell’appalto. La stazione appaltante si riserva di verificare, in qualsiasi momento, la regolarità dell’assolvimento degli obblighi inerenti al versamento dei contributi obbligatori ai sensi di legge. La stazione appaltante verifica, ai fini del pagamento della rata del corrispettivo, l’ottemperanza a tali obblighi, da parte dell’affidatario. La stazione appaltante si riserva di verificare, anche direttamente, il rispetto delle disposizioni in materia di assicurazioni obbligatorie per legge.")), style = "Riquadro paragrafo") |>
+          body_add_fpar(fpar(ftext("Per inadempimenti contributivi o retributivi si applica il comma 6 dell’art. 11 del Codice.")), style = "Riquadro paragrafo")
+        
+        if(CCNL!="Non applicabile"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("Il contratto collettivo nazionale e territoriale applicato è il seguente, identificato con codice alfanumerico e codice ATECO "),
+                               ftext(CCNL),
+                               ftext(".")), style = "Riquadro paragrafo")
+        }
+        
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("10. Modifiche contrattuali", fpt.b), ftext(": la stazione appaltante, fermo quanto previsto dall’articolo sulla revisione dei prezzi [se presente], può modificare il contratto d’appalto conformemente a quanto disposto all'art.120 del codice dei contratti pubblici.")), style = "Riquadro paragrafo")
+        
+        if(Inventariabile=='Inventariabile'){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("11. Verifica di conformità", fpt.b), ftext(": la presente fornitura è soggetta a verifica di conformità da effettuarsi, secondo quanto previsto all'art. 116 e nell'allegato II.14 del codice dei contratti entro 1 mese. A seguito della verifica di conformità si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
+        }
+        if(Tipo.acquisizione=="Servizi"){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("11. Verifica di regolare esecuzione", fpt.b), ftext(": la stazione appaltante, per il tramite del RUP, emette il certificato di regolare esecuzione, secondo le modalità indicate nell'allegato II.14 al codice dei contratti pubblici, entro 1 mese. A seguito dell’emissione del certificato di regolare esecuzione si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
+        }
+        
+        if(Importo.senza.IVA.num<40000){
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("12. Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
+            body_add_fpar(fpar(ftext("13. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+        }else{
+          doc <- doc |>
+            body_add_fpar(fpar(ftext("12. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+        }
+        
+        doc <- doc |>
+          body_add_par("") |>
+          body_add_fpar(fpar(ftext("Le presenti condizioni generali di acquisto sono accettate mediante sovrascrizione, con firma digitale valida alla data di apposizione della stessa e a norma di legge.")), style = "Normal") |>
+          body_add_par("") |>
+          body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+          body_add_break() |>
           body_add_par("GENERAL PURCHASE CONDITIONS", style = "heading 1", pos = "on") |>
           body_add_fpar(fpar(ftext("1. Scope of application", fpt.b), ftext(": These general conditions of purchase are intended to uniformly regulate contractual relationships with suppliers from whom CNR purchases goods and/or services in application of the laws and regulations. The supplier's conditions of sale will in no case be applicable to contractual relationships with CNR, even if they were referred to in any document originating from the supplier itself.")), style = "Riquadro paragrafo") |>
           body_add_fpar(fpar(ftext("2. Delivery", fpt.b), ftext(": to the destination.")), style = "Riquadro paragrafo") |>
@@ -3330,6 +3445,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         }
         
         doc <- doc |>
+          body_replace_text_at_bkm("bookmark_oggetto", Prodotto) |>
           body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
         
         print(doc, target = paste0(pre.nome.file, "5.9 Privacy policy.docx"))
@@ -6821,21 +6937,21 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       1: RAS, Richiesta pagina web
       2: Nomina RUP, Provvedimento registrazione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
-         Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
-         Provvedimento di liquidazione (.6)
+         Decisione a contrattare (.3), Certificato di regolare esecuzione (.4),
+         Provvedimento di liquidazione (.5)
 
 ")
       
       inpt <- readline()
       if(inpt==1){cat("\014");ras();pag()}
       if(inpt==2){cat("\014");rup();provv_ant()}
-      if(inpt==3){cat("\014");docoe();ai();dac();com_cig();ldo();reg_es();provv_liq()}
+      if(inpt==3){cat("\014");docoe();ai();dac();com_cig();reg_es();provv_liq()}
       if(inpt==3.1){cat("\014");docoe()}
       if(inpt==3.2){cat("\014");ai();com_cig()}
       if(inpt==3.3){cat("\014");dac()}
-      if(inpt==3.4){cat("\014");ldo()}
-      if(inpt==3.5){cat("\014");reg_es()}
-      if(inpt==3.6){cat("\014");provv_liq()}
+      # if(inpt==3.4){cat("\014");ldo()}
+      if(inpt==3.4){cat("\014");reg_es()}
+      if(inpt==3.5){cat("\014");provv_liq()}
     }else{
       cat("
 
