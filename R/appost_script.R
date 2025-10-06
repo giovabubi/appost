@@ -176,7 +176,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Foggia il giorno 11/11/1977, codice fiscale BBCGNN77S11D643H,"
     RSS.dich <- "responsabile della sede secondaria di Bari dell'IPSP"
-    RSS.dich.en <- "responsible of the Bari Unit"
+    RSS.patto <- "dal responsabile della sede secondaria di Bari"
+    RSS.patto.en <- "responsible of the Bari Unit"
     CUU <- "4S488Q"
     cdr <- paste("CdR 121.001.000 IPSP", sede2)
   }else if(sede=='TO'){
@@ -199,7 +200,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Chieri (TO) il 29/5/1972, codice fiscale GHGSFN72E29C627M,"
     RSS.dich <- "responsabile della sede secondaria di Torino dell'IPSP"
-    RSS.dich.en <- "responsible of the Torino Unit"
+    RSS.patto <- "dal responsabile della sede secondaria di Torino"
+    RSS.patto.en <- "responsible of the Torino Unit"
     CUU <- "PE2U6Q"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='NA'){
@@ -221,7 +223,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Sant'Agnello il 28/05/1969, codice fiscale RCCMHL69E68I208P,"
     RSS.dich <- "responsabile della sede secondaria di Portici dell'IPSP"
-    RSS.dich.en <- "responsible of the Portici Unit"
+    RSS.patto <- "dalla responsabile della sede secondaria di Portici"
+    RSS.patto.en <- "responsible of the Portici Unit"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
     CUU <- "YOBWQ2"
   }else if(sede=='FI'){
@@ -243,7 +246,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Firenze il 27/12/1975, codice fiscale LCHNCL75T27D612B,"
     RSS.dich <- "responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
-    RSS.dich.en <- "responsible of the Sesto Fiorentino Unit"
+    RSS.patto <- "dal responsabile della sede secondaria di Sesto Fiorentino"
+    RSS.patto.en <- "responsible of the Sesto Fiorentino Unit"
     CUU <- "KWH4FD"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='PD'){
@@ -265,7 +269,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Bruxelles il 20/3/1963, codice fiscale SCRLRA63C60Z103Z,"
     RSS.dich <- "responsabile della sede secondaria di Legnaro dell'IPSP"
-    RSS.dich.en <- "responsible of the Legnaro Unit"
+    RSS.patto <- "dal responsabile della sede secondaria di Legnaro"
+    RSS.patto.en <- "responsible of the Legnaro Unit"
     CUU <- "8INQPI"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='TOsi'){
@@ -286,7 +291,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     sottoscritto.rss <- "Il sottoscritto "
     nato.rss <- " nato a Cava de' Tirreni (SA) il 29/09/1965, codice fiscale DSRFNC65P29C361R,"
     RSS.dich <- "direttore dell'IPSP"
-    RSS.dich.en <- "Director"
+    RSS.patto <- "direttore"
+    RSS.patto.en <- "Director"
     CUU <- "7K0RCK"
     cdr <- paste("CdR 121.000.000 IPSP", sede2)
   }
@@ -3286,12 +3292,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         file.remove("tmp.docx")
         
         doc <- doc |>
-          body_replace_text_at_bkm("bookmark_della_fornitura", della.fornitura) |>
-          body_replace_text_at_bkm("bookmark_della_fornitura_en", della.fornitura.en) |>
-          body_replace_text_at_bkm("bookmark_prodotto", Prodotto) |>
-          body_replace_text_at_bkm("bookmark_prodotto_en", Prodotto) |>
-          body_replace_text_at_bkm("bookmark_rss", RSS.dich) |>
-          body_replace_text_at_bkm("bookmark_rss_en", RSS.dich.en) |>
+          body_replace_text_at_bkm("bookmark_della_fornitura", toupper(della.fornitura)) |>
+          body_replace_text_at_bkm("bookmark_della_fornitura_en", toupper(della.fornitura.en)) |>
+          body_replace_text_at_bkm("bookmark_prodotto", toupper(Prodotto)) |>
+          body_replace_text_at_bkm("bookmark_prodotto_en", toupper(Prodotto)) |>
+          body_replace_text_at_bkm("bookmark_rss", RSS.patto) |>
+          body_replace_text_at_bkm("bookmark_rss_en", RSS.patto.en) |>
           body_replace_text_at_bkm("bookmark_firma", firma.RSS) |>
           body_replace_text_at_bkm("bookmark_firma_en", firma.RSS.en)
         
