@@ -3928,7 +3928,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         Nella seconda parte della ridetta lettera d’ordine sono richiesti i dati relativi alla tracciabilità dei flussi finanziari
         che devono essere compilati e firmati per accettazione dall’operatore economico.
         
-    E' stato comunque generato il vecchio documento '8 Lettera ordine'")
+    E' stato comunque generato il vecchio documento '8 Lettera ordine'
+        ")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Importo.senza.IVA, Aliquota.IVA, Pagina.web, Prot..DaC)
@@ -6608,7 +6609,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         Nella seconda parte della ridetta lettera d’ordine sono richiesti i dati relativi alla tracciabilità dei flussi finanziari
         che devono essere compilati e firmati per accettazione dall’operatore economico.
         
-    E' stato comunque generato il vecchio documento '7 Lettera ordine'")
+    E' stato comunque generato il vecchio documento '7 Lettera ordine'
+        ")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Importo.senza.IVA, Aliquota.IVA, Pagina.web, Prot..DaC)
