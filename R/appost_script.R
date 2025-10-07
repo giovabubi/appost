@@ -6991,7 +6991,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       if(inpt==3.1){cat("\014");docoe()}
       if(inpt==3.2){cat("\014");ai();com_cig()}
       if(inpt==3.3){cat("\014");dac()}
-      if(inpt==3.4){cat("\014");ldo_note()}
+      if(inpt==3.4){cat("\014");ldo()}
       if(inpt==3.5){cat("\014");reg_es()}
       if(inpt==3.6){cat("\014");provv_liq()}
     }else{
