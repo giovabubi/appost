@@ -3923,8 +3923,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "8 Lettera ordine.docx"))
 
     cat("
-
-    Documento generato: '8 Lettera ordine'")
+        ATTENZIONE !!!
+          La lettera ordine deve essere generata dal sistema contabile U-Gov in sede di creazione dell’ordine dalla scrittura anticipata.
+        Nella seconda parte della ridetta lettera d’ordine sono richiesti i dati relativi alla tracciabilità dei flussi finanziari
+        che devono essere compilati e firmati per accettazione dall’operatore economico.
+        
+    E' stato comunque generato il vecchio documento '8 Lettera ordine'")
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Importo.senza.IVA, Aliquota.IVA, Pagina.web, Prot..DaC)
@@ -6599,8 +6603,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     print(doc, target = paste0(pre.nome.file, "7 Lettera ordine.docx"))
     
     cat("
-
-    Documento generato: '7 Lettera ordine'")
+        ATTENZIONE !!!
+          La lettera ordine deve essere generata dal sistema contabile U-Gov in sede di creazione dell’ordine dalla scrittura anticipata.
+        Nella seconda parte della ridetta lettera d’ordine sono richiesti i dati relativi alla tracciabilità dei flussi finanziari
+        che devono essere compilati e firmati per accettazione dall’operatore economico.
+        
+    E' stato comunque generato il vecchio documento '7 Lettera ordine'")
     
     ## Dati mancanti ---
     manca <- dplyr::select(sc, CIG, RUP, RDO, Fornitore, Importo.senza.IVA, Aliquota.IVA, Pagina.web, Prot..DaC)
@@ -6971,8 +6979,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       1: RAS, Richiesta pagina web
       2: Nomina RUP, Provvedimento registrazione anticipata
       3: Autocertificazioni operatore economico (.1), Atto istruttorio e Comunicazione CIG (.2),
-         Decisione a contrattare (.3), Certificato di regolare esecuzione (.4),
-         Provvedimento di liquidazione (.5)
+         Decisione a contrattare (.3), Lettera d'ordine (.4), Certificato di regolare esecuzione (.5),
+         Provvedimento di liquidazione (.6)
 
 ")
       
@@ -6983,9 +6991,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       if(inpt==3.1){cat("\014");docoe()}
       if(inpt==3.2){cat("\014");ai();com_cig()}
       if(inpt==3.3){cat("\014");dac()}
-      # if(inpt==3.4){cat("\014");ldo()}
-      if(inpt==3.4){cat("\014");reg_es()}
-      if(inpt==3.5){cat("\014");provv_liq()}
+      if(inpt==3.4){cat("\014");ldo_note()}
+      if(inpt==3.5){cat("\014");reg_es()}
+      if(inpt==3.6){cat("\014");provv_liq()}
     }else{
       cat("
 
