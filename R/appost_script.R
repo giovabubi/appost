@@ -3096,39 +3096,14 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         
         cat("
 
-    Documenti generati: '5.1 Patto di integrità', '5.2 Comunicazione cc dedicato', '5.3 Dichiarazione DPCM 187' e '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione'")
+    Documenti generati: 
+            '5.1 Patto di integrità'
+            '5.2 Comunicazione cc dedicato'
+            '5.3 Dichiarazione DPCM 187'
+            '5.5 Dichiarazione del soggetto ausiliario'
+            'Condizioni acquisto'
+            'Informativa privacy'")
 
-        ## Dati mancanti ---
-        manca <- dplyr::select(sc, Fornitore, Prodotto, Progetto, Pagina.web)
-        manca <- as.data.frame(t(manca))
-        colnames(manca) <- "val"
-        manca$var <- rownames(manca)
-        rownames(manca) <- NULL
-        manca <- subset(manca, manca$val==trattini)
-        len <- length(manca$val)
-        if(len>0){
-          manca <- manca$var
-          manca <- paste0(manca, ",")
-          manca[len] <- sub(",$", "\\.", manca[len])
-          cat("
-    ***** ATTENZIONE *****
-    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
-          cat("
-    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
-    **********************")
-        }
-        
-        if(CCNL!="Non applicabile"){
-          ## Manodopera ----
-          download.file(paste(lnk, "Manodopera.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-          doc <- read_docx("tmp.docx")
-          file.remove("tmp.docx")
-          
-          doc <- doc |>
-            body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
-          print(doc, target = paste0(pre.nome.file, "5.5 Costi manodopera.docx"))
-        }
-        
           if(Importo.senza.IVA.num<40000){
             ## Part.Qual. ----
             download.file(paste(lnk, "Dich_requisiti_infra40.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3138,7 +3113,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
             doc <- doc |>
               body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
             print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione.docx"))
-          }
+            cat("
+            '5.4 Dichiarazione possesso requisiti di partecipazione e qualificazione'")
+            }
 
             if(Importo.senza.IVA.num>=40000){
               ## Qual. ----
@@ -3152,21 +3129,33 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
               print(doc, target = paste0(pre.nome.file, "5.4 Dichiarazione possesso requisiti di qualificazione.docx"))
 
               cat("
-    Documento generato: '5.4 Dichiarazione possesso requisiti di qualificazione'")
-
-              ## AUS ----
-              download.file(paste(lnk, "Dich_aus.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-              doc <- read_docx("tmp.docx")
-              file.remove("tmp.docx")
-              
-              doc <- doc |>
-                body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
-
-              print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
-
-              cat("
-    Documento generato: '5.5 Dichiarazione del soggetto ausiliario'")
+              '5.4 Dichiarazione possesso requisiti di qualificazione'")
             }
+        
+        ## AUS ----
+        download.file(paste(lnk, "Dich_aus.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
+        
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
+        
+        print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
+        cat("
+              '5.5 Dichiarazione del soggetto ausiliario'")
+        
+        if(CCNL!="Non applicabile"){
+          ## Manodopera ----
+          download.file(paste(lnk, "Manodopera.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+          doc <- read_docx("tmp.docx")
+          file.remove("tmp.docx")
+          
+          doc <- doc |>
+            body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
+          print(doc, target = paste0(pre.nome.file, "5.6 Costi manodopera.docx"))
+          cat("
+              '5.6 Costi manodopera'")
+        }
         
         ## Condizioni d'acquisto ----
         download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3242,9 +3231,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           body_add_par("") |>
           body_add_fpar(fpar("Per accettazione", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2")
         
-        print(doc, target = paste0(pre.nome.file, "5.8 Condizioni acquisto.docx"))
-        cat("
-    Documento generato: '5.8 Condizioni acquisto'")
+        print(doc, target = "Condizioni acquisto.docx")
         
         ## Privacy ----
         download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3269,25 +3256,33 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                              ftext(Prodotto, fpt.b),
                              ftext("”, ai sensi dell’articolo 13 del Regolamento UE 2016/679 in materia di protezione dei dati personali (di seguito, per brevità, GDPR).")), style = "Normal") |>
           body_replace_text_at_bkm("bookmark_oggetto_eng", Prodotto)
-        print(doc, target = paste0(pre.nome.file, "5.9 Informativa privacy.docx"))
-        cat("
-    Documento generato: '5.9 Informativa privacy'")
+        print(doc, target = "Informativa privacy.docx")
         
+        cat("
+              'Condizioni acquisto'
+              'Informativa privacy'")
+        
+        ## Dati mancanti ---
+        manca <- dplyr::select(sc, Fornitore, Prodotto, Progetto, Pagina.web)
+        manca <- as.data.frame(t(manca))
+        colnames(manca) <- "val"
+        manca$var <- rownames(manca)
+        rownames(manca) <- NULL
+        manca <- subset(manca, manca$val==trattini)
+        len <- length(manca$val)
+        if(len>0){
+          manca <- manca$var
+          manca <- paste0(manca, ",")
+          manca[len] <- sub(",$", "\\.", manca[len])
+          cat("
+    ***** ATTENZIONE *****
+    I documenti sono stati generati, ma i seguenti dati risultano mancanti:", manca)
+          cat("
+    Si consiglia di leggere e controllare attentamente i documenti generati: i dati mancanti sono indicati con '__________'.
+    **********************")
+        }
       }else{
         ## ENGLISH ----
-        ## Part.Qual. ----
-        download.file(paste(lnk, "Dich_requisiti_infra40_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-        doc <- read_docx("tmp.docx")
-        file.remove("tmp.docx")
-        
-        doc <- doc |>
-          body_replace_text_at_bkm("bookmark_intestazione", int.docoe) |>
-          body_replace_text_at_bkm("bookmark_intestazione_en", int.docoe.en)
-        
-        print(doc, target = paste0(pre.nome.file, "5.4 Self-declaration qualification requirements.docx"))
-        cat("
-    Documento generato: '5.4 Self-declaration qualification requirements'")
-      
         ## Integrity pact ----
         download.file(paste(lnk, "Patto_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
@@ -3304,8 +3299,6 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           body_replace_text_at_bkm("bookmark_firma_en", firma.RSS.en)
         
         print(doc, target = paste0(pre.nome.file, "5.1 Integrity pact.docx"))
-        cat("
-    Documento generato: '5.1 Integrity pact'")
         
         ## CC dedicated ----
         download.file(paste(lnk, "cc_dedicato_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3314,18 +3307,23 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         
         print(doc, target = paste0(pre.nome.file, "5.2 Dedicated bank account.docx"))
         cat("
-    Documento generato: '5.2 Dedicated bank account'")
+    Documento generato: 
+            '5.1 Integrity pact'
+            '5.2 Dedicated bank account'")
         
-        ## Declaration on honour ----
-    #     download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-    #     doc <- read_docx("tmp.docx")
-    #     file.remove("tmp.docx")
-    #     
-    #     print(doc, target = paste0(pre.nome.file, "5.7 Declaration on honour.docx"))
-    #     cat("
-    # 
-    # Documento generato: '5.7 Declaration on honour'")
+        ## Part.Qual. ----
+        download.file(paste(lnk, "Dich_requisiti_infra40_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        doc <- read_docx("tmp.docx")
+        file.remove("tmp.docx")
         
+        doc <- doc |>
+          body_replace_text_at_bkm("bookmark_intestazione", int.docoe) |>
+          body_replace_text_at_bkm("bookmark_intestazione_en", int.docoe.en)
+        
+        print(doc, target = paste0(pre.nome.file, "5.4 Self-declaration qualification requirements.docx"))
+        cat("
+            '5.4 Self-declaration qualification requirements'")
+      
         ## Purchase conditions ----
         download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
@@ -3440,7 +3438,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         
         print(doc, target = paste0(pre.nome.file, "5.8 Purchase conditions.docx"))
         cat("
-    Documento generato: '5.8 Purchase conditions'")
+            'Purchase conditions'")
         
         ## Privacy eng ----
         download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
@@ -3461,7 +3459,33 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         
         print(doc, target = paste0(pre.nome.file, "5.9 Privacy policy.docx"))
         cat("
-    Documento generato: '5.9 Privacy policy'")
+            'Purchase conditions'
+            'Privacy policy'")
+        
+        if(CCNL!="Non applicabile"){
+          ## Labour costs ----
+          download.file(paste(lnk, "Manodopera_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+          doc <- read_docx("tmp.docx")
+          file.remove("tmp.docx")
+          
+          doc <- doc |>
+            body_replace_text_at_bkm("bookmark_intestazione", int.docoe) |>
+            body_replace_text_at_bkm("bookmark_intestazione_en", int.docoe.en)
+          print(doc, target = paste0(pre.nome.file, "5.5 Labour costs.docx"))
+          cat("
+            '5.5 Labour costs'
+            'Privacy policy'")
+        }
+        
+        ## Declaration on honour ----
+        #     download.file(paste(lnk, "Honour.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        #     doc <- read_docx("tmp.docx")
+        #     file.remove("tmp.docx")
+        #     
+        #     print(doc, target = paste0(pre.nome.file, "5.7 Declaration on honour.docx"))
+        #     cat("
+        # 
+        # Documento generato: '5.7 Declaration on honour'")
       }
     }
 
