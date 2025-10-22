@@ -631,12 +631,15 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     logo <- "logo_onfoods.jpg"
   }
   if(PNRR=="onFoods Spoke 2"){
+    Progetto <- "onFoods Spoke 2"
     Progetto.int <- sub("spoke 4", "spoke 2", Progetto.int)
   }
   if(PNRR=="onFoods Spoke 3"){
+    Progetto <- "onFoods Spoke 3"
     Progetto.int <- sub("spoke 4", "spoke 3", Progetto.int)
   }
   if(PNRR=="onFoods Spoke 6"){
+    Progetto <- "onFoods Spoke 6"
     Progetto.int <- sub("spoke 4", "spoke 6", Progetto.int)
   }
   if(PNRR=="SUS-MIRRI.IT"){
