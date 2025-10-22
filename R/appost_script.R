@@ -636,6 +636,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
   if(PNRR=="onFoods Spoke 3"){
     Progetto.int <- sub("spoke 4", "spoke 3", Progetto.int)
   }
+  if(PNRR=="onFoods Spoke 6"){
+    Progetto.int <- sub("spoke 4", "spoke 6", Progetto.int)
+  }
   if(PNRR=="SUS-MIRRI.IT"){
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 3.1 “fondo per la realizzazione di un sistema integrato di infrastrutture di ricerca e innovazione”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 3264 del 28/12/2021 - progetto “Strengthening the MIRRI Italian Research Infrastructure for Sustainable Bioscience and Bioeconomy” (SUS-MIRRI.iT), codice identificativo IR0000005 - CUP D13C22001390001'
     codice.progetto <- "IR0000005"
