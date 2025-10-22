@@ -603,7 +603,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     Progetto.int <- sub("spoke 3", "spoke 8", Progetto.int)
     dicitura.fattura <- "Finanziamento Unione Europea NextGenerationEU progetto PNRR AGRITECH Spoke8 M4.C2.I1.4 - Codice progetto MUR: CN00000022"
   }
-  if(PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 3" | PNRR=="onFoods Spoke 4 | PNRR=="onFoods Spoke 6"){
+  if(PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 3" | PNRR=="onFoods Spoke 4" | PNRR=="onFoods Spoke 6"){
     Progetto <- "onFoods Spoke 4"
     Progetto.int <- 'piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.3 “partenariati estesi alle università, ai centri di ricerca, alle aziende per il finanziamento di progetti di ricerca di base”, finanziato dall’Unione europea, NextGenerationEU, decreto direttoriale MUR n. 1550 dell’11/10/2022 - progetto “Research and innovation network on food and nutrition sustainability, safety and security - working on foods” (ON Foods), spoke 4, codice identificativo PE00000003, CUP B83C22004790001'
     codice.progetto <- "PE00000003"    
