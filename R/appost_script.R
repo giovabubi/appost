@@ -446,6 +446,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     assegna <- 'assegnataria'
     sottoscritto.sup <- 'La sottoscritta'
   }
+  if(Supporto.RUP=="Roberta Cosi"){
+    Dott.sup <- 'Ing.'
+    dott.sup <- 'ing.'
+    il.dott.sup <- "l'ing."
+    dal.sup <- "dall'ing."
+  }
 
   da <- as.character(Sys.Date())
   # y <- sub("(....)-(..)-(..)",  "/\\1", da)
