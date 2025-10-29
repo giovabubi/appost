@@ -5820,9 +5820,13 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art. 47 del decreto legge n. 77/2021, nonché in ordine all’assenza delle cause di esclusione di cui agli artt. 94 e 95 del Codice ed eventuale possesso dei requisiti di cui all’art. 100 del codice, richiesti per l’esecuzione del contratto, mediante acquisizione dei seguenti documenti:")), style = "Normal")
     }
     doc <- doc |>
-      body_add_fpar(fpar(ftext("(indicare le certificazioni fornite per il rispetto dei principi DNSH);")), style = "Elenco punto") |> 
-      body_add_fpar(fpar(ftext("(indicare la documentazione acquisita per verificare i dati del/dei Titolare/i effettivo/i;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("(indicare la documentazione presentata per il rispetto di quanto riportato all’art. 47 del decreto legge n. 77/2021 ovvero per dimostrare l’applicabilità di eventuali deroghe allo stesso);")), style = "Elenco punto")
+      body_add_fpar(fpar(ftext("scheda DNSH generica;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("scheda DNSH “sostanze chimiche” e i seguenti documenti probanti: schede di sicurezza dei prodotti chimici;")), style = "Elenco punto") |> 
+      body_add_fpar(fpar(ftext("scheda DNSH n° 3 “acquisto, leasing e noleggio di computer e apparecchiature elettriche ed elettroniche” e i seguenti documenti probanti: iscrizione RAEE, etichetta CE, ______;")), style = "Elenco punto") |> 
+      body_add_fpar(fpar(ftext("scheda DNSH n° 26 “Finanziamenti a impresa e ricerca: ricerca innovazione e lo sviluppo”;")), style = "Elenco punto") |> 
+      body_add_fpar(fpar(ftext("visura camerale per la verifica dei dati ei titolari effettivi;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("essendo una ditta con meno di 15 dipendenti, non è stato verificato il rispetto di quanto riportato all’art. 47 del decreto legge n. 77/2021 ovvero per dimostrare l’applicabilità di eventuali deroghe allo stesso;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("(solo se ≥15 dipendenti) rapporti del personale per la verifica del rispetto di quanto riportato all’art. 47 del decreto legge n. 77/2021 ovvero per dimostrare l’applicabilità di eventuali deroghe allo stesso;")), style = "Elenco punto")
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |> 
         body_add_fpar(fpar(ftext("certificati generali del Casellario Giudiziale dei soggetti di cui all’art. 94, comma 3 e comma 4, del Codice dai quali non risultano a carico degli interessati elementi ostativi a contrattare con la Pubblica Amministrazione (ai sensi del comma 1 dell’art. 94 del Codice);")), style = "Elenco punto") |>
