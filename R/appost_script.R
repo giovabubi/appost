@@ -4930,22 +4930,46 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(decreto.pnrr10)), style = "Normal") |>
           body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(decreto.pnrr11)), style = "Normal") 
       }
+    if(CCNL=="Non applicabile"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                             ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                             ftext(" relativa alla necessità di procedere all’acquisizione "),
+                             ftext(della.fornitura), ftext(" di “"),
+                             ftext(Prodotto),
+                             ftext("”, nell’ambito delle attività previste dal "),
+                             ftext(Progetto.cup),
+                             ftext(", corredata dal preventivo d'importo pari a "),
+                             ftext(Importo.senza.IVA),
+                             ftext(" oltre IVA, formulato dall'operatore economico "),
+                             ftext(Fornitore),
+                             ftext(" (P.IVA "),
+                             ftext(Fornitore..P.IVA),
+                             ftext("), "),
+                             ftext(preventivo.individuato)), style = "Normal")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                             ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                             ftext(" relativa alla necessità di procedere all’acquisizione "),
+                             ftext(della.fornitura), ftext(" di “"),
+                             ftext(Prodotto),
+                             ftext("”, nell’ambito delle attività previste dal "),
+                             ftext(Progetto.cup),
+                             ftext(", corredata dal preventivo d'importo pari a "),
+                             ftext(Importo.senza.IVA),
+                             ftext(", comprensivo di "),
+                             ftext(Oneri.sicurezza),
+                             ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze e "),
+                             ftext(Manodopera),
+                             ftext(" quali costi del personale, formulato dall'operatore economico "),
+                             ftext(Fornitore),
+                             ftext(" (P.IVA "),
+                             ftext(Fornitore..P.IVA),
+                             ftext("), "),
+                             ftext(preventivo.individuato)), style = "Normal")
+        }
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
-                         ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
-                         ftext(" relativa alla necessità di procedere all’acquisizione "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto),
-                         ftext("”, nell’ambito delle attività previste dal "),
-                         ftext(Progetto.cup),
-                         ftext(", corredata dal preventivo d'importo pari a "),
-                         ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA, formulato dall'operatore economico "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), "),
-                         ftext(preventivo.individuato)), style = "Normal") |>
       cursor_reach("CAMPO.DISPONIBILITA") |>
       body_remove() |>
       cursor_backward() |>
