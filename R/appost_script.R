@@ -5754,24 +5754,47 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_par("Il responsabile unico del progetto (RUP)", style = "heading 2") |>
       cursor_reach("CAMPO.PROT.RAS") |>
       body_remove() |>
-      cursor_backward() |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
-                         ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
-                         ftext(" relativa alla necessità di procedere all’acquisizione "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto),
-                         ftext("” ("),
-                         ftext(Pagina.web),
-                         ftext("), nell’ambito delle attività previste dal "),
-                         ftext(Progetto.cup),
-                         ftext(", corredata dal preventivo d'importo pari a "),
-                         ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA, formulato dall'operatore economico "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), "),
-                         ftext(preventivo.individuato)), style = "Normal") |>
+      cursor_backward()
+    if(CCNL=="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                           ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                           ftext(" relativa alla necessità di procedere all’acquisizione "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto),
+                           ftext("”, nell’ambito delle attività previste dal "),
+                           ftext(Progetto.cup),
+                           ftext(", corredata dal preventivo d'importo pari a "),
+                           ftext(Importo.senza.IVA),
+                           ftext(" oltre IVA, formulato dall'operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), "),
+                           ftext(preventivo.individuato)), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                           ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                           ftext(" relativa alla necessità di procedere all’acquisizione "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto),
+                           ftext("”, nell’ambito delle attività previste dal "),
+                           ftext(Progetto.cup),
+                           ftext(", corredata dal preventivo d'importo pari a "),
+                           ftext(Importo.senza.IVA),
+                           ftext(", comprensivo di "),
+                           ftext(Oneri.sicurezza),
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze e "),
+                           ftext(Manodopera),
+                           ftext(" quali costi del personale, formulato dall'operatore economico "),
+                           ftext(Fornitore),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), "),
+                           ftext(preventivo.individuato)), style = "Normal")
+    }
+    doc <- doc |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il provvedimento prot. n. "),
                          ftext(Prot..nomina.RUP),
                          ftext(", con il quale è stato nominato "),
@@ -5810,6 +5833,18 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("esito informativo relativo alla condizione di regolarità fiscale rispetto all’assolvimento degli obblighi relativi al pagamento di imposte e tasse dal quale emerge la posizione regolare dell’operatore economico (ai sensi degli artt. 94, comma 6, e 95, comma 2 del Codice);")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("accertamento della regolarità contributiva rispetto all’assolvimento degli obblighi relativi al versamento dei contributi previdenziali mediante acquisizione del Documento Unico di Regolarità Contributiva dal quale non risultano irregolarità relativamente al versamento dei contributi INPS e INAIL (ai sensi degli artt. 94, comma 6, e 95, comma 2 del Codice);")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("(eventuale) inserire le certificazioni/documenti acquisiti per la dimostrazione del possesso dei requisiti di cui all’art. 100 del D.Lgs. 36/2023 se richiesti;")), style = "Elenco punto")
+    }
+    if(CCNL!="Non applicabile"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("DI DARE ATTO ", fpt.b), ftext("che:")), style = "Elenco liv1") |>
+        body_add_fpar(fpar(ftext("l’O.E. "),
+                           ftext(Fornitore),
+                           ftext(" ha dichiarato in sede di affidamento che applicherà ai propri dipendenti il CCNL e territoriale "),
+                           ftext(CCNL),
+                           ftext(" indicato dall S.A. per la prestazione principale e le eventuali prestazioni secondarie nei documenti inerenti l’affidamento, ai sensi dell’art. 11 del D.Lgs.36/2023;")), style = "Elenco liv2") |>
+        body_add_fpar(fpar(ftext("i costi della manodopera indicati dal predetto O.E. a corredo dell’offerta economica, sulla base delle tariffe orarie previste per il CCNL e territoriale "),
+                           ftext(CCNL),
+                           ftext(" , sono da ritenersi congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A.;")), style = "Elenco liv2")
     }
     doc <- doc |> 
       body_replace_text_at_bkm(bookmark = "bookmark_oe", paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", soggetto U-Gov ", Fornitore..Codice.terzo.SIGLA, ")"))
