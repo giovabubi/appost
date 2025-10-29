@@ -6272,22 +6272,46 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(decreto.pnrr10)), style = "Normal") |>
         body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(decreto.pnrr11)), style = "Normal") 
     }
+    if(CCNL=="Non applicabile"){
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                             ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                             ftext(" relativa alla necessità di procedere all’acquisizione "),
+                             ftext(della.fornitura), ftext(" di “"),
+                             ftext(Prodotto),
+                             ftext("”, nell’ambito delle attività previste dal "),
+                             ftext(Progetto.cup),
+                             ftext(", corredata dal preventivo d'importo pari a "),
+                             ftext(Importo.senza.IVA),
+                             ftext(" oltre IVA, formulato dall'operatore economico "),
+                             ftext(Fornitore),
+                             ftext(" (P.IVA "),
+                             ftext(Fornitore..P.IVA),
+                             ftext("), "),
+                             ftext(preventivo.individuato)), style = "Normal")
+      }else{
+        doc <- doc |>
+          body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
+                             ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
+                             ftext(" relativa alla necessità di procedere all’acquisizione "),
+                             ftext(della.fornitura), ftext(" di “"),
+                             ftext(Prodotto),
+                             ftext("”, nell’ambito delle attività previste dal "),
+                             ftext(Progetto.cup),
+                             ftext(", corredata dal preventivo d'importo pari a "),
+                             ftext(Importo.senza.IVA),
+                             ftext(", comprensivo di "),
+                             ftext(Oneri.sicurezza),
+                             ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze e "),
+                             ftext(Manodopera),
+                             ftext(" quali costi del personale, formulato dall'operatore economico "),
+                             ftext(Fornitore),
+                             ftext(" (P.IVA "),
+                             ftext(Fornitore..P.IVA),
+                             ftext("), "),
+                             ftext(preventivo.individuato)), style = "Normal")
+      }
     doc <- doc |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la "), ftext("richiesta di acquisto prot. ", fpt.b),
-                         ftext(Prot..RAS, fpt.b), ftext(" pervenuta "), ftext(dal.ric), ftext(" "), ftext(Richiedente),
-                         ftext(" relativa alla necessità di procedere all’acquisizione "),
-                         ftext(della.fornitura), ftext(" di “"),
-                         ftext(Prodotto),
-                         ftext("”, nell’ambito delle attività previste dal progetto "),
-                         ftext(Progetto.cup),
-                         ftext(", corredata dal preventivo d'importo pari a "),
-                         ftext(Importo.senza.IVA),
-                         ftext(" oltre IVA, formulato dall'operatore economico "),
-                         ftext(Fornitore),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), "),
-                         ftext(preventivo.individuato)), style = "Normal") |>
       cursor_reach("CAMPO.NOMINA.RUP") |>
       body_remove() |>
       cursor_backward() |>
@@ -6325,12 +6349,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                        ftext(Fornitore),
                        ftext(" (P.IVA "),
                        ftext(Fornitore..P.IVA),
-                       ftext("), mediante provvedimento contenente gli elementi essenziali descritti nell'art. 17, comma 2, del Codice, tenuto conto che il medesimo è in possesso di documentate esperienze pregresse idonee all'esecuzione della prestazione contrattuale;")), style = "Normal")
-    if(Importo.senza.IVA.num<40000){
+                       ftext("), mediante provvedimento contenente gli elementi essenziali descritti nell'art. 17, comma 2, del Codice, tenuto conto che il medesimo è in possesso di documentate esperienze pregresse idonee all'esecuzione della prestazione contrattuale;")), style = "Normal") |>
+      cursor_bookmark("bookmark_procedere") |>
+      body_remove() |>
+      cursor_backward()
+    if(CCNL=="Non applicabile"){
       doc <- doc |>
-        cursor_bookmark("bookmark_procedere") |>
-        body_remove() |>
-        cursor_backward() |>
         body_add_fpar(fpar(ftext("DI PROCEDRE", fpt.b),
                            ftext(" all'acquisizione "),
                            ftext(della.fornitura),
@@ -6344,22 +6368,15 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Fornitore..Sede),
                            ftext(", che ha presentato il proprio preventivo ammontante a "),
                            ftext(Importo.senza.IVA, fpt.b),
-                           ftext(" oltre IVA;")), style = "Elenco numero")
-        # body_replace_text_at_bkm(bookmark = "bookmark_procedere", paste0("all'acquisizione ", della.fornitura, " di cui trattasi, mediante affidamento diretto all'operatore economico ", all.OE, 
-        #                                             ", P.IVA ", Fornitore..P.IVA, ", codice terzo SIGLA ", Fornitore..Codice.terzo.SIGLA, ", con sede legale in ",
-        #                                             Fornitore..Sede,
-        #                                             ", che ha presentato il proprio preventivo, ammontante a ",
-        #                                             Importo.senza.IVA,
-        #                                             " oltre IVA;"))
+                           ftext(" oltre IVA;")), style = "Elenco numero") |>
+        body_add_fpar(fpar(ftext("DI DARE ATTO", fpt.b),
+                           ftext(" che non sussistono oneri di sicurezza dovuti a rischio da interferenze;")), style = "Elenco numero")
     }else{
       doc <- doc |>
-        cursor_bookmark("bookmark_procedere") |>
-        body_remove() |>
-        cursor_backward() |>
         body_add_fpar(fpar(ftext("DI PROCEDRE", fpt.b),
                            ftext(" all'acquisizione "),
                            ftext(della.fornitura),
-                           ftext(" di cui trattasi, mediante affidamento diretto, immediatamente efficace, all'operatore economico "),
+                           ftext(" di cui trattasi, mediante affidamento diretto all'operatore economico "),
                            ftext(Fornitore, fpt.b),
                            ftext(" (P.IVA "),
                            ftext(Fornitore..P.IVA),
@@ -6367,9 +6384,16 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                            ftext(Fornitore..Codice.terzo.SIGLA),
                            ftext("), con sede legale in "),
                            ftext(Fornitore..Sede),
-                           ftext(", individuato mediante indagine informale di mercato, che ha presentato il proprio preventivo ammontante a "),
+                           ftext(", che ha presentato il proprio preventivo ammontante a "),
                            ftext(Importo.senza.IVA, fpt.b),
-                           ftext(" oltre IVA;")), style = "Elenco numero")
+                           ftext(" oltre IVA, comprensivo di "),
+                           ftext(Oneri.sicurezza),
+                           ftext(" quali oneri per la sicurezza dovuti a rischi da interferenze e "),
+                           ftext(Manodopera),
+                           ftext(" quali costi del personale;")), style = "Elenco numero") |>
+        body_add_fpar(fpar(ftext("DI DARE ATTO", fpt.b),
+                           ftext(" che l’Operatore economico selezionato, come dichiarato in sede di affidamento, ai sensi dell’art.11 del Codice applicherà il CCNL e territoriale individuato dalla Stazione appaltante "),
+                           ftext(CCNL), ftext(";")), style = "Elenco numero")
     }
     doc <- doc |>
       cursor_bookmark("bookmark_confermare") |>
