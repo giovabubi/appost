@@ -5822,7 +5822,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     doc <- doc |>
       body_add_fpar(fpar(ftext("scheda DNSH generica;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("scheda DNSH “sostanze chimiche” e i seguenti documenti probanti: schede di sicurezza dei prodotti chimici;")), style = "Elenco punto") |> 
-      body_add_fpar(fpar(ftext("scheda DNSH n° 3 “acquisto, leasing e noleggio di computer e apparecchiature elettriche ed elettroniche” e i seguenti documenti probanti: iscrizione RAEE, etichetta CE, ______;")), style = "Elenco punto") |> 
+      body_add_fpar(fpar(ftext("scheda DNSH n° 3 “acquisto, leasing e noleggio di computer e apparecchiature elettriche ed elettroniche” e i seguenti documenti probanti: iscrizione RAEE, etichetta ambientale di tipo I, etichetta EPA ENERGY STAR, dichiarazione Etec, dichiarazione ecodesign (Regolamento (EU) 2019/424), certificazioni ISO 9001, ISO 14001 e/o EN 50614:2020, dichiarazione del rispetto delle normative REACH e/o RoHS e/o CE, ______;")), style = "Elenco punto") |> 
       body_add_fpar(fpar(ftext("scheda DNSH n° 26 “Finanziamenti a impresa e ricerca: ricerca innovazione e lo sviluppo”;")), style = "Elenco punto") |> 
       body_add_fpar(fpar(ftext("visura camerale per la verifica dei dati ei titolari effettivi;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("essendo una ditta con meno di 15 dipendenti, non è stato verificato il rispetto di quanto riportato all’art. 47 del decreto legge n. 77/2021 ovvero per dimostrare l’applicabilità di eventuali deroghe allo stesso;")), style = "Elenco punto") |>
