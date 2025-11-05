@@ -1530,24 +1530,49 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(dott.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
                          ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(", il "),
-                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(",")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTA", fpt.b),
-                         ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
-                         ftext("richiedente", fpt.b),
-                         ftext(" la fornitura di “"),
-                         ftext(Prodotto, fpt.b),
-                         ftext("”, ordine "),
-                         ftext(sede, fpt.b),
-                         ftext(" "),
-                         ftext(ordine, fpt.b),
-                         ftext(y, fpt.b),
-                         ftext(" "),
-                         ftext(all.OE),
-                         ftext(", nell'ambito del progetto “"),
-                         ftext(Progetto),
-                         ftext("”"),
-                         ftext(CUP1),
-                         ftext(";")), style = "Normal") |>
+                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(",")), style = "Normal")
+    if(Richiedente==Responsabile.progetto){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
+                           ftext("richiedente", fpt.b),
+                           ftext(" la fornitura di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" "),
+                           ftext(all.OE),
+                           ftext(", "),
+                           ftext("titolare dei fondi e responsabile del progetto", fpt.b),
+                           ftext(" “"),
+                           ftext(Progetto),
+                           ftext("”"),
+                           ftext(CUP1),
+                           ftext(";")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
+                           ftext("richiedente", fpt.b),
+                           ftext(" la fornitura di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" "),
+                           ftext(all.OE),
+                           ftext(", nell'ambito del progetto “"),
+                           ftext(Progetto),
+                           ftext("”"),
+                           ftext(CUP1),
+                           ftext(";")), style = "Normal")
+    }
+    doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
@@ -4665,7 +4690,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       body_add_fpar(fpar(ftext("")), style = "Normal") |>
       body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(dott.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
                          ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(" il "),
-                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(", ")), style = "Normal") |>
+                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale), ftext(", ")), style = "Normal")
+    if(Richiedente==Responsabile.progetto){
+      doc <- doc |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b),
                          ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
                          ftext("richiedente", fpt.b),
@@ -4681,9 +4708,32 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
                          ftext(Fornitore, fpt.b),
                          ftext(" (P.IVA "),
                          ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del "),
+                         ftext("), "),
+                         ftext("titolare dei fondi e responsabile del progetto ", fpt.b),
                          ftext(Progetto.int),
-                         ftext(";")), style = "Normal") |>
+                         ftext(";")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("VISTA", fpt.b),
+                           ftext(" la normativa attinente alle situazioni, anche potenziali, di conflitto di interessi, in qualità di "),
+                           ftext("richiedente", fpt.b),
+                           ftext(" l'affidamento diretto "),
+                           ftext(della.fornitura), ftext(" di “"),
+                           ftext(Prodotto, fpt.b),
+                           ftext("”, ordine "),
+                           ftext(sede, fpt.b),
+                           ftext(" "),
+                           ftext(ordine, fpt.b),
+                           ftext(y, fpt.b),
+                           ftext(" all'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(";")), style = "Normal")
+    }
+    doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATE", fpt.b),
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
