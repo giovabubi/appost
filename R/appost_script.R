@@ -3085,7 +3085,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
           
           doc <- doc |>
             body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
-            #body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
+            body_replace_text_at_bkm("bookmark_fornitore", paste0(Fornitore, ", con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA))) |>
             body_replace_text_at_bkm("bookmark_firma", firma.RSS)
           
           print(doc, target = paste0(pre.nome.file, "5.1 Patto di integrità.docx"))
@@ -3303,6 +3303,8 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         doc <- doc |>
           body_replace_text_at_bkm("bookmark_della_fornitura", toupper(della.fornitura)) |>
           body_replace_text_at_bkm("bookmark_della_fornitura_en", toupper(della.fornitura.en)) |>
+          body_replace_text_at_bkm("bookmark_fornitore", paste0(Fornitore, ", con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA))) |>
+          body_replace_text_at_bkm("bookmark_fornitore_en", paste0(Fornitore, ", with registered office in ", Fornitore..Sede, ", fiscal code/VAT number ", as.character(Fornitore..P.IVA))) |>
           body_replace_text_at_bkm("bookmark_prodotto", toupper(Prodotto)) |>
           body_replace_text_at_bkm("bookmark_prodotto_en", toupper(Prodotto)) |>
           body_replace_text_at_bkm("bookmark_rss", RSS.patto) |>
