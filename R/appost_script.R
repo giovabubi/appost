@@ -5884,11 +5884,12 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       doc <- doc |>
         body_add_fpar(fpar(ftext("scheda DNSH elaborata dall’OE e non dalla stazione appaltante;")), style = "Elenco punto") |> 
         body_add_fpar(fpar(ftext("visura camerale, comunicazione dei dati e delle informazioni della titolarità effettiva e documenti di identità dei titolari effettivi;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("copia dell’ultimo rapporto sulla situazione del personale maschile e femminile;;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("copia dell’ultimo rapporto sulla situazione del personale maschile e femminile;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("certificazione di ottemperanza alle norme per il diritto al lavoro dei disabili;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("verifiche tramite FVOE, avendo rilevato che le autocertificazioni dell’operatore economico non sono pienamente conformi alla modulistica fornita dalla stazione appaltante:")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("non sono presenti annotazioni nel certificato dell’anagrafe delle sanzioni amministrative dipendenti da reato (art. 39 D.P.R. 14/11/2002 n. 313);")), style = "Elenco punto liv2") |>
         body_add_fpar(fpar(ftext("risulta una violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024) dall’esito informativo relativo alla condizione di regolarità fiscale (art. 95, comma 2, del d. lgs. n. 36 del 2023), violazioni non definitivamente accertate (artt. 2, 3 e 4 dell'allegato II.10 del d. lgs. n. 36 del 2023);")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("acquisito il bilancio aziendale degli ultimi tre anni, si considera accettabile la solidità dell’O.E. in virtù dell’esiguità della violazione rispetto al volume d’affari;")), style = "Elenco punto liv2") |>
         body_add_fpar(fpar(ftext("non sono presenti annotazioni nel Casellario delle imprese (art. 7 del Decreto Legislativo 12 aprile 2006, n. 163);")), style = "Elenco punto liv2") |>
         body_add_fpar(fpar(ftext("non sono presenti annotazioni nel Certificato del Casellario Giudiziale (art. 39 D.P.R. 14/11/2002 n. 313);")), style = "Elenco punto liv2") |>
         body_add_fpar(fpar(ftext("la posizione risulta regolare per la condizione di regolarità fiscale rispetto ai debiti definitivamente accertati (deliberazione ANAC n. 157/2016 e successivi aggiornamenti; art. 80, comma 4, del d. lgs. n. 50 del 2016);")), style = "Elenco punto liv2")
