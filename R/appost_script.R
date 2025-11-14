@@ -5871,14 +5871,28 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       doc <- doc |>
       body_add_fpar(fpar(ftext("CONSIDERATO altresì", fpt.b), ftext(" che sono state effettuate le verifiche, tramite l’utilizzo del sistema FVOE e degli ulteriori Enti certificatori o delle banche dati disponibili, delle dichiarazioni presentate in sede di affidamento in ordine al rispetto dei principi DNSH, alle generalità del titolare effettivo, agli obblighi assunzionali di cui all’art. 47 del decreto legge n. 77/2021, nonché in ordine all’assenza delle cause di esclusione di cui agli artt. 94 e 95 del Codice ed eventuale possesso dei requisiti di cui all’art. 100 del codice, richiesti per l’esecuzione del contratto, mediante acquisizione dei seguenti documenti:")), style = "Normal")
     }
-    doc <- doc |>
-      body_add_fpar(fpar(ftext("scheda DNSH generica;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("scheda DNSH “sostanze chimiche” e i seguenti documenti probanti: schede di sicurezza dei prodotti chimici;")), style = "Elenco punto") |> 
-      body_add_fpar(fpar(ftext("scheda DNSH n° 3 “acquisto, leasing e noleggio di computer e apparecchiature elettriche ed elettroniche” e i seguenti documenti probanti: iscrizione RAEE, etichetta ambientale di tipo I, etichetta EPA ENERGY STAR, dichiarazione Etec, dichiarazione ecodesign (Regolamento (EU) 2019/424), certificazioni ISO 9001, ISO 14001 e/o EN 50614:2020, dichiarazione del rispetto delle normative REACH e/o RoHS e/o CE, ______;")), style = "Elenco punto") |> 
-      body_add_fpar(fpar(ftext("scheda DNSH n° 26 “Finanziamenti a impresa e ricerca: ricerca innovazione e lo sviluppo”;")), style = "Elenco punto") |> 
-      body_add_fpar(fpar(ftext("comunicazione dei dati e delle informazioni della titolarità effettiva e documenti di identità dei titolari effettivi;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("essendo una ditta con meno di 15 dipendenti, non è stato verificato il rispetto di quanto riportato all’art. 47 del decreto legge n. 77/2021 ovvero per dimostrare l’applicabilità di eventuali deroghe allo stesso;")), style = "Elenco punto") |>
-      body_add_fpar(fpar(ftext("(solo se ≥15 dipendenti) copia dell’ultimo rapporto sulla situazione del personale maschile e femminile e certificazione di ottemperanza alle norme per il diritto al lavoro dei disabili;")), style = "Elenco punto")
+    if(Fornitore!="Life Technologies Italia"){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("scheda DNSH generica;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("scheda DNSH “sostanze chimiche” e i seguenti documenti probanti: schede di sicurezza dei prodotti chimici;")), style = "Elenco punto") |> 
+        body_add_fpar(fpar(ftext("scheda DNSH n° 3 “acquisto, leasing e noleggio di computer e apparecchiature elettriche ed elettroniche” e i seguenti documenti probanti: iscrizione RAEE, etichetta ambientale di tipo I, etichetta EPA ENERGY STAR, dichiarazione Etec, dichiarazione ecodesign (Regolamento (EU) 2019/424), certificazioni ISO 9001, ISO 14001 e/o EN 50614:2020, dichiarazione del rispetto delle normative REACH e/o RoHS e/o CE, ______;")), style = "Elenco punto") |> 
+        body_add_fpar(fpar(ftext("scheda DNSH n° 26 “Finanziamenti a impresa e ricerca: ricerca innovazione e lo sviluppo”;")), style = "Elenco punto") |> 
+        body_add_fpar(fpar(ftext("comunicazione dei dati e delle informazioni della titolarità effettiva e documenti di identità dei titolari effettivi;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("essendo una ditta con meno di 15 dipendenti, non è stato verificato il rispetto di quanto riportato all’art. 47 del decreto legge n. 77/2021 ovvero per dimostrare l’applicabilità di eventuali deroghe allo stesso;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("(solo se ≥15 dipendenti) copia dell’ultimo rapporto sulla situazione del personale maschile e femminile e certificazione di ottemperanza alle norme per il diritto al lavoro dei disabili;")), style = "Elenco punto")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext("scheda DNSH elaborata dall’OE e non dalla stazione appaltante;")), style = "Elenco punto") |> 
+        body_add_fpar(fpar(ftext("visura camerale, comunicazione dei dati e delle informazioni della titolarità effettiva e documenti di identità dei titolari effettivi;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("copia dell’ultimo rapporto sulla situazione del personale maschile e femminile;;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("certificazione di ottemperanza alle norme per il diritto al lavoro dei disabili;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("verifiche tramite FVOE, avendo rilevato che le autocertificazioni dell’operatore economico non sono pienamente conformi alla modulistica fornita dalla stazione appaltante:")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("non sono presenti annotazioni nel certificato dell’anagrafe delle sanzioni amministrative dipendenti da reato (art. 39 D.P.R. 14/11/2002 n. 313);")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("risulta una violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024) dall’esito informativo relativo alla condizione di regolarità fiscale (art. 95, comma 2, del d. lgs. n. 36 del 2023), violazioni non definitivamente accertate (artt. 2, 3 e 4 dell'allegato II.10 del d. lgs. n. 36 del 2023);")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("non sono presenti annotazioni nel Casellario delle imprese (art. 7 del Decreto Legislativo 12 aprile 2006, n. 163);")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("non sono presenti annotazioni nel Certificato del Casellario Giudiziale (art. 39 D.P.R. 14/11/2002 n. 313);")), style = "Elenco punto liv2") |>
+        body_add_fpar(fpar(ftext("la posizione risulta regolare per la condizione di regolarità fiscale rispetto ai debiti definitivamente accertati (deliberazione ANAC n. 157/2016 e successivi aggiornamenti; art. 80, comma 4, del d. lgs. n. 50 del 2016);")), style = "Elenco punto liv2")
+      }
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |> 
         body_add_fpar(fpar(ftext("certificati generali del Casellario Giudiziale dei soggetti di cui all’art. 94, comma 3 e comma 4, del Codice dai quali non risultano a carico degli interessati elementi ostativi a contrattare con la Pubblica Amministrazione (ai sensi del comma 1 dell’art. 94 del Codice);")), style = "Elenco punto") |>
