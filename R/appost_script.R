@@ -5926,7 +5926,9 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
         body_remove() |>
         cursor_backward() |>
         body_add_fpar(fpar(ftext("si considera accettabile la solidità dell’O.E. in virtù dell’esiguità della violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024; imnporto dovuto pari a 1.952.960,66 €) rispetto al volume d’affari che si evince dal bilancio dell'O.E.;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("che la documentazione acquisita è sufficiente a dimostrare il possesso dei requisiti dichiarati in sede di affidamento dall’operatore economico CAMPO.OE e, pertanto,")), style = "Elenco punto")
+        body_add_fpar(fpar(ftext("che la documentazione acquisita è sufficiente a dimostrare il possesso dei requisiti dichiarati in sede di affidamento dall’operatore economico "), 
+                           ftext(paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", soggetto U-Gov ", Fornitore..Codice.terzo.SIGLA, ")")),
+                           ftext(" e, pertanto,")), style = "Elenco punto")
     }
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |> 
