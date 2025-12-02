@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   # ordine <- "31_RDA 54"
-  # ordine <- 122
+  # ordine <- 156
   ordine <- readline()
 
   if(ordine==0){
@@ -7100,7 +7100,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
       #cursor_begin() |>
       body_replace_all_text("CAMPO.ISTRUTTORIA", Prot..atto.istruttorio, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.LDO", Prot..lettera.ordine, only_at_cursor = FALSE) |>
-      body_replace_all_text("CAMPO.RUP", Prot..provv..anticipata, only_at_cursor = FALSE) |>
+      body_replace_all_text("CAMPO.RUP", Prot..nomina.RUP, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.DOCOE", Prot..DocOE, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.CONF", Prot..conflitto.interesse, only_at_cursor = FALSE) |>
       body_replace_all_text("CAMPO.DOPPIOFIN", Prot..doppio.finanziamento, only_at_cursor = FALSE) |>
