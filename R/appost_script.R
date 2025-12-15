@@ -20,14 +20,14 @@ appost <- function(){
       - ordini >40.000 €
       - procedure aperte o negoziate
 
-Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaricato da Teams
+Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' scaricato da Teams
 
 
       "))
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   # ordine <- "31_RDA 54"
-  # ordine <- 156
+  # ordine <- 165
   ordine <- readline()
 
   if(ordine==0){
@@ -686,6 +686,7 @@ Digitare il numero d'ordine e premere INVIO caricare il file 'Ordini.csv' scaric
     codice.progetto <- "2022BZW9PF"
     CUP2 <- "B53D23017480006"
     decreto.concessione <- "1048 del 14/7/2023"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche (CNR), Istituto per la Protezione Sostenibile delle Piante (IPSP)"
     avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
     costo.totale <- "264.979,00 €, di cui al CNR-IPSP 133.549,00 €"
