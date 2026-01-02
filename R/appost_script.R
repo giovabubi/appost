@@ -27,7 +27,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     # oppure digitare '0' (zero) per scaricare il file 'Elenco prodotti.xlsx'
   # (da compilare prima di generare RAS e lettera d'ordine)
   # ordine <- "31_RDA 54"
-  # ordine <- 165
+  # ordine <- 1
   ordine <- readline()
 
   if(ordine==0){
@@ -50,6 +50,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     pat <- getwd()
   }else if(file.exists("Ordini_2025.csv")=="TRUE"){
     ordini <- read.csv("Ordini_2025.csv", na.strings = "")
+    pat <- getwd()
+  }else if(file.exists("Ordini_2026.csv")=="TRUE"){
+    ordini <- read.csv("Ordini_2026.csv", na.strings = "")
     pat <- getwd()
   }else{
     patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
@@ -119,6 +122,10 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   }else{
     y <- "/2025"
     y2 <- 2025
+  }
+  if(file.exists("Ordini_2026.csv")=="TRUE"){
+    y <- "/2026"
+    y2 <- 2026
   }
   
   sc$Aliquota.IVA.num <- as.numeric(ifelse(sc$Aliquota.IVA=='22%', 0.22,
