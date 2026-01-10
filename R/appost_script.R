@@ -6007,23 +6007,46 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     doc <- doc |>
       cursor_reach("CAMPO.NOMINATIVO") |>
       body_remove() |>
-      cursor_backward() |>
-      body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(dott.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
-                         ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(" il "),
-                         ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale),
-                         ftext(", in qualità di "),
-                         ftext("richiedente", fpt.b),
-                         ftext(" l'affidamento diretto all'operatore economico "),
-                         ftext(Fornitore, fpt.b),
-                         ftext(" (P.IVA "),
-                         ftext(Fornitore..P.IVA),
-                         ftext("), nell'ambito del "),
-                         ftext(Progetto.int),
-                         ftext(", consapevole delle conseguenze penali di dichiarazioni mendaci, falsità in atti o uso di atti falsi, ai sensi dell’art. 76 D.P.R. 445/2000,")), style = "Normal") |>
+      cursor_backward()
+    if(Richiedente!=Responsabile.progetto){
+      doc <- doc |>
+        body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(dott.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
+                           ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(" il "),
+                           ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale),
+                           ftext(", in qualità di "),
+                           ftext("richiedente", fpt.b),
+                           ftext(" l'affidamento diretto all'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(", consapevole delle conseguenze penali di dichiarazioni mendaci, falsità in atti o uso di atti falsi, ai sensi dell’art. 76 D.P.R. 445/2000,")), style = "Normal")
+    }else{
+      doc <- doc |>
+        body_add_fpar(fpar(ftext(sottoscritto.ric), ftext(" "), ftext(dott.ric), ftext(" "), ftext(Richiedente, fpt.b), ftext(", "),
+                           ftext(nato.ric), ftext(" "), ftext(Richiedente..Luogo.di.nascita), ftext(" il "),
+                           ftext(Richiedente..Data.di.nascita), ftext(", codice fiscale "), ftext(Richiedente..Codice.fiscale),
+                           ftext(", in qualità di "),
+                           ftext("richiedente", fpt.b),
+                           ftext(" l'affidamento diretto all'operatore economico "),
+                           ftext(Fornitore, fpt.b),
+                           ftext(" (P.IVA "),
+                           ftext(Fornitore..P.IVA),
+                           ftext("), titolare dei fondi e responsabile del progetto nell'ambito del "),
+                           ftext(Progetto.int),
+                           ftext(", consapevole delle conseguenze penali di dichiarazioni mendaci, falsità in atti o uso di atti falsi, ai sensi dell’art. 76 D.P.R. 445/2000,")), style = "Normal")
+    }
+    if(Richiedente!=Responsabile.progetto){
+      firma.dich.ric.resp <- "Il richiedente l'affidamento"
+    }else{
+      firma.dich.ric.resp <- "Il richiedente l'affidamento, titolare dei fondi e responsabile del progetto"
+    }
+    doc <- doc |>
       cursor_reach("CAMPO.DATA") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar("Il richiedente l'affidamento", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+      body_add_fpar(fpar(firma.dich.ric.resp, run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("),
                          ftext(dott.ric),
                          ftext(" "),
@@ -6032,7 +6055,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       cursor_reach("CAMPO.DATA") |>
       body_remove() |>
       cursor_backward() |>
-      body_add_fpar(fpar("Il richiedente l'affidamento", run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
+      body_add_fpar(fpar(firma.dich.ric.resp, run_footnote(x=block_list(fpar(ftext(" Il dichiarante deve firmare con firma digitale qualificata oppure allegando copia fotostatica del documento di identità, in corso di validità (art. 38 del D.P.R. n° 445/2000 e s.m.i.).", fp_text_lite(italic = TRUE, font.size = 7)))), prop=fp_text_lite(vertical.align = "superscript"))), style = "Firma 2") |>
       body_add_fpar(fpar(ftext("("),
                          ftext(dott.ric),
                          ftext(" "),
