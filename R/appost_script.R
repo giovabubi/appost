@@ -97,7 +97,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     if(fluor.anno==3){
       ordini <- site$get_list("Ordini_2026")
     }
-  }
+  
   if(!require(dplyr)) install.packages("dplyr")
   library(dplyr)
   ordini <- ordini$list_items()
