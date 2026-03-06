@@ -651,7 +651,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche (CNR), Istituto per la Protezione Sostenibile delle Piante (IPSP)"
-    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "264.979,00 €, di cui al CNR-IPSP 133.549,00 €"
     costo.ammesso <- "206.154,00 €, di cui al CNR-IPSP 103.900,00 €"
     logo <- "logo_divingraft.jpg"
@@ -675,7 +675,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Bologna, DiSTAL (capofila)"
-    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
     costo.ammesso <- "206.194,00 € (rimodulato, ad intero carico MUR), di cui a Unità CNR (IPSP-BA) 66.897,00 €"
     logo <- "logo_bianco.jpg"
@@ -699,7 +699,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1015 del 7/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Ivan BACCELLI")
     attuatore <- "Università degli Studi di Firenze (capofila)"
-    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
+    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "239.149,00 €, di cui a Unità CNR (IPSP-FI) 60.109,00 €"
     costo.ammesso <- "239.149,00 €, di cui a Unità CNR (IPSP-FI) 60.109,00 €"
     logo <- "logo_minacrop.png"
@@ -711,7 +711,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1015 del 7/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Alessia Lucia PEPORI")
     attuatore <- "CNR, Isttuto per la Protezione Sostenibile delle Piante"
-    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
+    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "234.924,00 €, di cui a Unità CNR (IPSP-FI) 173.305,00 €"
     costo.ammesso <- "185.671,00 €, di cui a Unità CNR (IPSP-FI) 133.251,00 €"
     logo <- "logo_montana.png"
@@ -723,7 +723,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. dott.ssa BARBERINI")
     attuatore <- "Università di Pisa"
-    avvio <- "Avvio: 14/10/2023; Conclusione: 13/10/2025"
+    avvio <- "Avvio: 14/10/2023; Conclusione: 13/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "320.101,00 €, di cui a Unità CNR (IPSP-FI) 103.163,00 €"
     costo.ammesso <- "267.724,00 €, di cui a Unità CNR (IPSP-FI) 85.316,00 €"
     logo <- "logo_specfor.jpg"
@@ -735,7 +735,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "970 del 30/6/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Federico BRILLI")
     attuatore <- "Università degli Studi di Milano"
-    avvio <- "Avvio: 30/9/2023; Conclusione: 29/9/2025"
+    avvio <- "Avvio: 30/9/2023; Conclusione: 29/9/2025 (prorogata al 28/2/2026)"
     costo.totale <- "299.674,00 €, di cui a Unità CNR (IPSP-FI) 154.132,00 €"
     costo.ammesso <- "248.429,00 €, di cui a Unità CNR (IPSP-FI) 100.500,00 €"
     logo <- "logo_bianco.jpg"
@@ -747,7 +747,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Cecilia BRUNETTI")
     attuatore <- "Università di Pisa"
-    avvio <- "Avvio: 18/9/2023; Conclusione: 17/6/2025"
+    avvio <- "Avvio: 18/9/2023; Conclusione: 17/6/2025 (prorogata al 28/2/2026)"
     costo.totale <- "233.000,00 €, di cui a Unità CNR (IPSP-FI) 58.000,00 €"
     costo.ammesso <- "193.024,00 €, di cui a Unità CNR (IPSP-FI) 49.200,00 €"
     logo <- "logo_streetlamp.jpg"
@@ -759,7 +759,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1015 del 7/7/2023"
     dicitura.fattura <- paste0("Finanziamento Unione Europea NextGenerationEU, avviso 104/2022 M4,C2,I1.1, codice ", codice.progetto, " “", PNRR, "”, CUP ", CUP2, ", resp. sci. Susanna POLLASTRI")
     attuatore <- "Università di Napoli"
-    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025"
+    avvio <- "Avvio: 5/10/2023; Conclusione: 4/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "313.279,00 €, di cui a Unità CNR (IPSP-FI) 119.146,00 €"
     costo.ammesso <- "257.828,00 €, di cui a Unità CNR (IPSP-FI) 98.056,00 €"
     logo <- "logo_forevoc.png"
@@ -819,7 +819,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "SH6 _MUR n. 969 del 30/06/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Verona, Prof. MIGLIAVACCA Maria Gioia"
-    avvio <- "Avvio: 28/9/2023; Conclusione: 27/9/2025"
+    avvio <- "Avvio: 28/9/2023; Conclusione: 27/9/2025 (prorogata al 28/2/2026)"
     costo.totale <- "302.236,00 €; quota del CNR-IPSP: 53.342,00 € = 17.940,00 € cofin. + 35.402,00 € contributo MUR"
     costo.ammesso <- "302.236,00 €"
     logo <- "logo_alpeco.jpg"
@@ -831,7 +831,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Torino"
-    avvio <- "Avvio: 11/10/2023; Conclusione: 10/10/2025"
+    avvio <- "Avvio: 11/10/2023; Conclusione: 10/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "283.646,00 €, di cui 91.670,00 € al CNR-IPSP"
     costo.ammesso <- "234.858,00 €, di cui 75.902,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
@@ -843,7 +843,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche"
-    avvio <- "Avvio: 11/10/2023; Conclusione: 10/10/2025"
+    avvio <- "Avvio: 11/10/2023; Conclusione: 10/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "311.065,00 €, di cui 166.210,00 € al CNR-IPSP"
     costo.ammesso <- "257.353,00 €, di cui 133.867,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
@@ -867,7 +867,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università Telematica San Raffaele Roma"
-    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 11/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "303.444,00 €, di cui 39.734 € al CNR-IPSP"
     costo.ammesso <- "303.444,00 €, di cui 39.734 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
@@ -891,7 +891,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "960 del 30/6/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università di Napoli Parthenope"
-    avvio <- "Avvio: 1/10/2023; Conclusione: 30/9/2025"
+    avvio <- "Avvio: 1/10/2023; Conclusione: 30/9/2025 (prorogata al 28/2/2026)"
     costo.totale <- "232.954,00 €, di cui 77.968,00 € al CNR-IPSP"
     costo.ammesso <- "232.954,00 €, di cui 77.968,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
@@ -915,7 +915,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università degli Studi di Salerno"
-    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025"
+    avvio <- "Avvio: 30/11/2023; Conclusione: 29/11/2025 (prorogata al 28/2/2026)"
     costo.totale <- "291.500,00 €"
     costo.ammesso <- "241.562,00 €"
     logo <- "logo_bianco.jpg"
@@ -927,7 +927,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "739 del 29/5/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche"
-    avvio <- "Avvio: 1/10/2023; Conclusione: 30/9/2025"
+    avvio <- "Avvio: 1/10/2023; Conclusione: 30/9/2025 (prorogata al 28/2/2026)"
     costo.totale <- "264.369,60 €, di cui 82.877,20 € al CNR-IPSP"
     costo.ammesso <- "205.637,89 €, di cui 63.152,20 € al CNR-IPSP"
     logo <- "logo_sushi.jpg"
@@ -951,7 +951,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "972 del 30/6/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università di Torino"
-    avvio <- "Avvio: 1/11/2023; Conclusione: 30/10/2025"
+    avvio <- "Avvio: 1/11/2023; Conclusione: 30/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "284.024,00 €, di cui 112.824,00 € al CNR-IPSP"
     costo.ammesso <- "211.209,00 €, di cui 105.604,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
@@ -975,7 +975,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche"
-    avvio <- "Avvio: 12/10/2023; Conclusione: 28/2/2026 (come da proroga DD MUR n. 509 del 16/4/2025"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 28/2/2026 (come da proroga DD MUR n. 509 del 16/4/2025)"
     costo.totale <- "276.104,00 €, di cui 110.386,00 € al CNR-IPSP"
     costo.ammesso <- "206.191,00 €, di cui 87.303,00 € al CNR-IPSP"
     logo <- "logo_remind.tif"
@@ -987,7 +987,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "739 del 29/5/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Consiglio Nazionale delle Ricerche"
-    avvio <- "Avvio: 4/10/2023; Conclusione: 3/10/2025"
+    avvio <- "Avvio: 4/10/2023; Conclusione: 3/10/2025 (prorogata al 28/2/2026)"
     costo.totale <- "306.638,00 €, di cui 99.194,00 € al CNR-IPSP"
     costo.ammesso <- "252.364,00 €, di cui 81.638,00 € al CNR-IPSP"
     logo <- "logo_mycovirole.png"
@@ -1011,7 +1011,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "1048 del 14/7/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università di Roma “La Sapienza”"
-    avvio <- "Avvio: 12/10/2023; Conclusione: 28/02/2026"
+    avvio <- "Avvio: 12/10/2023; Conclusione: 28/02/2026 (prorogata al 28/2/2026)"
     costo.totale <- "271.660,00 €, di cui 53.972,00 € per il CNR-IPSP"
     costo.ammesso <- "206.654,00 €, di cui 29.739,50 € per il CNR-IPSP (cofinanziamento 24.232,50 €)"
     logo <- "logo_bianco.jpg"
