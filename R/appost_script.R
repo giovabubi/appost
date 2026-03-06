@@ -963,7 +963,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.concessione <- "752 dell'1/6/2023"
     dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
     attuatore <- "Università di Torino"
-    avvio <- "Avvio: 28/9/2023; Conclusione: 27/9/2025"
+    avvio <- "Avvio: 28/9/2023; Conclusione: 27/9/2025 (prorogata al 28/2/2026)"
     costo.totale <- "249.879,77 €, di cui 83.302,77 € al CNR-IPSP"
     costo.ammesso <- "224.732,00 €, di cui 69.864,00 € al CNR-IPSP"
     logo <- "logo_bianco.jpg"
