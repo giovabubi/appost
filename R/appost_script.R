@@ -534,7 +534,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   }
   if(PNRR=="Agritech Spoke 1" | PNRR=="Agritech Spoke 3" | PNRR=="Agritech Spoke 8" | PNRR=="Agritech Spoke 4" | PNRR=="onFoods Spoke 2" | PNRR=="onFoods Spoke 3" | PNRR=="onFoods Spoke 4" | PNRR=="onFoods Spoke 6" | PNRR=="SUS-MIRRI.IT" | PNRR=="ITINERIS"){
     finanziamento <- "PNRR"
-  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT" | PNRR=="REMIND" | PNRR=="MYCOVIROLE" | PNRR=="NEGESI" | PNRR=="RiWeCIS"){
+  }else if(PNRR=="DIVINGRAFT" | PNRR=="ARES" | PNRR=="MINACROP" | PNRR=="MONTANA" | PNRR=="SpecFor" | PNRR=="Mimic" | PNRR=="StreeTLAMP" | PNRR=="Fore-VOC" | PNRR=="XyWall" | PNRR=="AlpEcoArchaeology" | PNRR=="HEMINT" | PNRR=="BIORES" | PNRR=="Intertruffle" | PNRR=="BACBIO" | PNRR=="MOBeeFO" | PNRR=="secrEVome" | PNRR=="SUSHI" | PNRR=="TRSH52" | PNRR=="LICAT" | PNRR=="REMIND" | PNRR=="MYCOVIROLE" | PNRR=="NEGESI" | PNRR=="RiWeCIS" | PNRR=="XyWall"){
     finanziamento <- "PRIN 2022"
     avviso.pnrr <- " il Decreto Direttoriale MUR n. 104 del 2/2/2022 di emanazione del bando per i progetti di rilevante interesse nazionale (PRIN) 2022, nell’ambito del piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2, investimento 1.1;"
     mis.com.inv.esteso <- "piano nazionale di ripresa e resilienza (PNRR), missione 4 “istruzione e ricerca”, componente 2 “dalla ricerca all’impresa”, investimento 1.1 “progetti di ricerca di significativo interesse nazionale (PRIN)”, finanziamento dell'Unione europea - NextGeneration EU, decreto direttoriale MUR n. 104 del 2/2/2022"
@@ -1026,6 +1026,18 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     avvio <- "Avvio: 12/10/2023; Conclusione: 28/02/2026"
     costo.totale <- "99.630,59 €"
     costo.ammesso <- "72.236,00 €"
+    logo <- "logo_bianco.jpg"
+  }
+  if(PNRR=="XyWall"){
+    titolo <- "Cell wall determinants in plant resistance to Xylella"
+    codice.progetto <- "2022F8BZMX_LS9"
+    CUP2 <- "B53C24007440006"
+    decreto.concessione <- "20427 del 6/11/2024"
+    dicitura.fattura <- paste0(finanziamento, " ", PNRR, " - Codice progetto MUR: ", codice.progetto)
+    attuatore <- "Consiglio Nazionale delle Ricerche"
+    avvio <- "Avvio: 5/2/2025; Conclusione: 4/2/2027"
+    costo.totale <- "209.214,00 €"
+    costo.ammesso <- "128.287,00 €"
     logo <- "logo_bianco.jpg"
   }
   
