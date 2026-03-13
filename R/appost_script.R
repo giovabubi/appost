@@ -1038,7 +1038,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     avvio <- "Avvio: 5/2/2025; Conclusione: 4/2/2027"
     costo.totale <- "209.214,00 €"
     costo.ammesso <- "128.287,00 €"
-    logo <- "logo_bianco.jpg"
+    logo <- "logo_xywall.tiff"
   }
   
   dicitura.fatturazione <- paste0("Si prega di riportare in fattura le seguenti informazioni: ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ".")
