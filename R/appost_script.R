@@ -2455,7 +2455,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il d.lgs. 25 novembre 2016 n. 218, recante “Semplificazione delle attività degli enti pubblici di ricerca ai sensi dell'articolo 13 della legge 7 agosto 2015, n. 124”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la legge 7 agosto 1990, n. 241 recante “Nuove norme in materia di procedimento amministrativo e di diritto di accesso ai documenti amministrativi” pubblicata sulla Gazzetta Ufficiale n. 192 del 18/08/1990 e s.m.i.;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" lo Statuto del Consiglio Nazionale delle Ricerche, emanato con provvedimento del Presidente n. 93, prot. n. 0051080 del 19 luglio 2018, entrato in vigore in data 1° agosto 2018;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche emanat con DPCNR nr. 144 Prot. n. 531963 del 19 dicembre 2025, entrato in vigore dal 1° febbraio 2026;")), style = "Normal") |>
+      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di Organizzazione e Funzionamento del Consiglio Nazionale delle Ricerche emanato con DPCNR nr. 144 Prot. n. 531963 del 19 dicembre 2025, entrato in vigore dal 1° febbraio 2026;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Regolamento di amministrazione contabilità e finanza, emanato con Provvedimento della Presidente n. 201 prot. n. 0507722 del 23 dicembre 2024, entrato in vigore dal 1° gennaio 2025 ed, in particolare, l’art.32 rubricato “Decisione di contrattare”;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 marzo 2023, n. 36 rubricato “Codice dei Contratti Pubblici in attuazione dell’articolo 1 della legge 21 giugno 2022, n. 78, recante delega al Governo in materia di contratti pubblici”, pubblicato sul Supplemento Ordinario n. 12 della GU n. 77 del 31 marzo 2023 (nel seguito per brevità “Codice”);")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il D.lgs. 31 dicembre 2024, n. 209 rubricato “Disposizioni integrative e correttive al codice dei contratti pubblici, di cui al decreto legislativo 31 marzo 2023, n. 36”, pubblicato sul Supplemento Ordinario n.45/L della GU n. 305 del 31 dicembre 2024;")), style = "Normal") |>
@@ -2604,7 +2604,6 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
     doc <- doc |>
       #body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che ai sensi dell’art. 53 comma 1 del Codice non sussistono particolari ragioni per la richiesta di garanzia provvisoria;")), style = "Normal") |>
-      body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Bilancio Unico di Previsione del Consiglio Nazionale delle Ricerche per l’esercizio finanziario 2026, approvato dal Consiglio di Amministrazione con deliberazione n. 245/2025 – Verbale 527 del 17 dicembre 2025;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("VERIFICATA", fpt.b), ftext(" la disponibilità economico-finanziaria per la copertura della spesa sul budget del progetto “"),
                          ftext(Progetto),
                          ftext("”"),
