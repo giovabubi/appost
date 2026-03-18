@@ -1565,11 +1565,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -1645,11 +1645,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
         body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -2171,11 +2171,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -2252,11 +2252,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -2337,11 +2337,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
         body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -3158,16 +3158,16 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
             }
         
         ## AUS ----
-        download.file(paste(lnk, "Dich_aus.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-        doc <- read_docx("tmp.docx")
-        file.remove("tmp.docx")
-        
-        doc <- doc |>
-          body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
-        
-        print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
-        cat("
-              '5.5 Dichiarazione del soggetto ausiliario'")
+        # download.file(paste(lnk, "Dich_aus.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        # doc <- read_docx("tmp.docx")
+        # file.remove("tmp.docx")
+        # 
+        # doc <- doc |>
+        #   body_replace_text_at_bkm("bookmark_intestazione", int.docoe)
+        # 
+        # print(doc, target = paste0(pre.nome.file, "5.5 Dichiarazione del soggetto ausiliario.docx"))
+        # cat("
+        #       '5.5 Dichiarazione del soggetto ausiliario'")
         
         if(CCNL!="Non applicabile"){
           ## Manodopera ----
@@ -3202,11 +3202,13 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
           body_add_fpar(fpar(ftext("2. Resa", fpt.b), ftext(": franco destino.")), style = "Riquadro paragrafo")
         if(Tipo.acquisizione=="Beni" & Inventariabile=="Non inventariabile"){
           doc <- doc |>
-            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura dovrà essere consegnata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo")
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura dovrà essere consegnata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso: "),
+                               ftext(Richiedente..Luogo.di.consegna), ftext(".")), style = "Riquadro paragrafo")
         }
         if(Tipo.acquisizione=="Beni" & Inventariabile=="Inventariabile"){
           doc <- doc |>
-            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura deovrà essere consegnata e installata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso il luogo indicato nella pagina precedente.")), style = "Riquadro paragrafo")
+            body_add_fpar(fpar(ftext("3. Durata", fpt.b), ftext(": la fornitura deovrà essere consegnata e installata entro 30 giorni naturali e consecutivi decorrenti dalla data di sottoscrizione della lettera d'ordine presso: "),
+                               ftext(Richiedente..Luogo.di.consegna), ftext(".")), style = "Riquadro paragrafo")
         }
         if(Tipo.acquisizione=="Servizi" | Tipo.acquisizione=="Lavori"){
           doc <- doc |>
@@ -3231,23 +3233,26 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         
           doc <- doc |>
           body_add_fpar(fpar(ftext("10. Modifiche contrattuali", fpt.b), ftext(": la stazione appaltante, fermo quanto previsto dall’articolo sulla revisione dei prezzi [se presente], può modificare il contratto d’appalto conformemente a quanto disposto all'art.120 del codice dei contratti pubblici.")), style = "Riquadro paragrafo")
+          n <- 11
       
         if(Inventariabile=='Inventariabile'){
           doc <- doc |>
             body_add_fpar(fpar(ftext("11. Verifica di conformità", fpt.b), ftext(": la presente fornitura è soggetta a verifica di conformità da effettuarsi, secondo quanto previsto all'art. 116 e nell'allegato II.14 del codice dei contratti entro 1 mese. A seguito della verifica di conformità si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
+          n <- n+1 
         }
         if(Tipo.acquisizione=="Servizi"){
           doc <- doc |>
             body_add_fpar(fpar(ftext("11. Verifica di regolare esecuzione", fpt.b), ftext(": la stazione appaltante, per il tramite del RUP, emette il certificato di regolare esecuzione, secondo le modalità indicate nell'allegato II.14 al codice dei contratti pubblici, entro 1 mese. A seguito dell’emissione del certificato di regolare esecuzione si procede al pagamento della rata di saldo e allo svincolo della cauzione.")), style = "Riquadro paragrafo")
+          n <- n+1 
         }
         
         if(Importo.senza.IVA.num<40000){
           doc <- doc |>
-            body_add_fpar(fpar(ftext("12. Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
-            body_add_fpar(fpar(ftext("13. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+            body_add_fpar(fpar(ftext(n), ftext(". Clausola risolutiva espressa", fpt.b), ftext(": l’ordine è emesso in applicazione delle disposizioni contenute all’art. 52, commi 1 e 2 del d.lgs 36/2023. Il CNR ha diritto di risolvere il contratto/ordine in caso di accertamento della carenza dei requisiti di partecipazione. Per la risoluzione del contratto trovano applicazione l’art. 122 del d.lgs. 36/2023, nonché gli articoli 1453 e ss. del Codice Civile. Il CNR darà formale comunicazione della risoluzione al fornitore, con divieto di procedere al pagamento dei corrispettivi, se non nei limiti delle prestazioni già eseguite.")), style = "Riquadro paragrafo") |>
+            body_add_fpar(fpar(ftext(n+1),ftext(". Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
         }else{
           doc <- doc |>
-            body_add_fpar(fpar(ftext("12. Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
+            body_add_fpar(fpar(ftext(n), ftext(". Foro competente", fpt.b), ftext(": per ogni controversia sarà competente in via esclusiva il Tribunale di Roma.")), style = "Riquadro paragrafo")
         }
         
         doc <- doc |>
@@ -4734,11 +4739,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -4824,11 +4829,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
         body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -5183,11 +5188,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -5246,11 +5251,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                          ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
       body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+      body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
       body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
       body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
@@ -5310,11 +5315,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                            ftext(" le disposizioni di cui al decreto legislativo 8 aprile 2013 n. 39 in materia di incompatibilità e inconferibilità di incarichi presso le pubbliche amministrazioni e presso gli enti privati in controllo pubblico;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("consapevole delle responsabilità e delle sanzioni penali stabilite dalla legge per le false attestazioni e le dichiarazioni mendaci (artt. 75 e 76 D.P.R. n° 445/2000 e s.m.i.), sotto la propria responsabilità;")), style = "Normal") |>
         body_add_fpar(fpar(ftext("DICHIARA")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto di interessi, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, né nelle ipotesi previste dall’art. 35-bis, del D.lgs. n. 165/2001, tali da ledere l’imparzialità e l’immagine dell’agire dell’amministrazione;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di non trovarsi, rispetto al ruolo ricoperto ed alle funzioni svolte, in alcuna delle situazioni di conflitto d'interesse, anche potenziale, di cui all’art. 16 del D.lgs. n. 36/2023, nonché della vigente normativa in materia, tale da ledere l’imparzialità e l’immagine dell’agire nell’amministrazione;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi a comunicare qualsiasi conflitto d’interesse che possa insorgere durante il presente affidamento o nella fase esecutiva del contratto;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("di impegnarsi ad astenersi prontamente dalla prosecuzione dell’affidamento diretto nel caso emerga un conflitto d’interesse;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("DICHIARA ALTRESÌ")), style = "heading 2") |>
-        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e aggiornato con delibera n° 177/2025, Verb. 521;")), style = "Elenco punto") |>
+        body_add_fpar(fpar(ftext("di aver preso piena cognizione del D.P.R. 16 aprile 2013, n. 62 e delle norme in esso contenute, nonché del Codice di comportamento dei dipendenti del Consiglio Nazionale delle Ricerche adottato con delibera del Consiglio di Amministrazione n° 137/2017 e successivo aggiornamento intervenuto con delibera n° 177 del 30 settembre 2025;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("SI IMPEGNA")), style = "heading 2") |>
         body_add_fpar(fpar(ftext("a non utilizzare a fini privati le informazioni di cui dispone in ragione del ruolo ricoperto, a non divulgarle al di fuori dei casi consentiti e ad evitare situazioni e comportamenti che possano ostacolare il corretto adempimento della funzione sopra descritta;")), style = "Elenco punto") |>
         body_add_fpar(fpar(ftext("a comunicare tempestivamente eventuali variazioni del contenuto della presente dichiarazione e a rendere, se del caso, una nuova dichiarazione sostitutiva.")), style = "Elenco punto") |>
