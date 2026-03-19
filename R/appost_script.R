@@ -14,8 +14,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
       "))
   # ordine <- "31_RDA 54"
-  # ordine <- 1
-  ordine <- readline()
+  ordine <- 3
+  # ordine <- readline()
 
   if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
@@ -1062,7 +1062,13 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   }else{
     Progetto.int.no.cup <- sub(" - CUP .*", "", Progetto.int)
   }
-  
+
+  #### Europei ----
+  decorrenza.prog.EU <- paste0(Progetto, " cod. _____ con la Comunità Europea, con decorrenza dal _____ al _____")
+  if(Progetto=="DBA.AD001.672 CropSafe"){decorrenza.prog.EU <- "CropSafe cod. 101209410 con la Comunità Europea, con decorrenza dall'1/6/2025 al 31/5/2029"}
+  if(Progetto=="DBA.AD001.522 BEXYL"){decorrenza.prog.EU <- "BEXYL cod. 101060593 con la Comunità Europea, con decorrenza dall'1/9/2022 al 31/08/2026"}
+  if(Progetto=="DBA.AD001.522 ViroiDoc"){decorrenza.prog.EU <- "ViroiDoc cod. 101169421 con la Comunità Europea, con decorrenza dall'1/1/2025 al 31/12/2028"}
+    
   # Ultimi DocOE ----
   ultimi <- subset(ordini, ordini$Fornitore==sc$Fornitore)
   ultimi <- dplyr::select(ultimi, Ordine.N., Fornitore, Prot..DocOE)
@@ -2733,6 +2739,54 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     **********************")
       }
     }
+    ## Esenzione IVA ----
+    if(Aliquota.IVA=="esente" & Importo.senza.IVA.num>300){
+      download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      doc <- read_docx("tmp.docx")
+      file.remove("tmp.docx")
+      
+      doc <- doc |>
+        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      
+      if(sede=="TOsi"){
+        doc <- doc |>
+          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      }
+      
+      doc <- doc |>
+        cursor_begin() |>
+        body_add_fpar(fpar(ftext("Spett.le "),
+                           ftext(Fornitore, fpt.b)), style = "Destinatario", pos = "on") |>
+        body_add_fpar(fpar(ftext(Fornitore..Sede)), style = "Destinatario 2") |>
+        body_add_fpar(fpar(ftext("C.F./P.I. "), ftext(Fornitore..P.IVA)), style = "Destinatario 2") |>
+        body_add_fpar(fpar(ftext("PEC "), ftext(Fornitore..PEC)), style = "Destinatario 2") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("Oggetto:", fpt.b),
+                           ftext(" dichiarazione di non imponibilità ai sensi dell’art. 72 del DPR 633/72 e s.m.i. comma 1 - lettera c).")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("Con la presente si dichiara che gli acquisti effettuati presso il fornitore "),
+                           ftext(Fornitore),
+                           ftext(" con ordine "),
+                           ftext(ordine), ftext(y),
+                           ftext(" prot. n."),
+                           ftext(Prot..lettera.ordine),
+                           ftext(" sono stati effettuati in esecuzione del contratto di ricerca "),
+                           ftext(decorrenza.prog.EU),
+                           ftext(", e che tali acquisti, effettuati dall’Istituto per la Protezione Sostenibile delle Piante per l’intero importo pari a "),
+                           ftext(Importo.senza.IVA),
+                           ftext(", rientrano nel regime di non imponibilità IVA ai sensi dell’art. 72 del DPR 633/72 e s.m.i. comma 1 - lettera c) così come chiarito dalla nota dell’Agenzia delle Entrate prot. n. 2006/19016 del 21 marzo 2006.")), style = "Normal") |>
+        body_add_fpar(fpar(ftext("")), style = "Normal") |>
+        body_add_fpar(fpar(firma.RSS), style = "Firma 2") |>
+        body_add_fpar(fpar(ftext("("),
+                           ftext(RSS),
+                           ftext(")")), style = "Firma 2")
+      
+      print(doc, target = paste0(pre.nome.file, "8.1 Esenzione IVA.docx"))
+      
+      cat("
+
+    Documento generato: '8.1 Esenzione IVA'")
+    }
   }
 
   # Provv. anticipata ----
@@ -3991,8 +4045,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     **********************")
     }
   }
-
-  # Dich. Prestazione resa ----
+  
+    # Dich. Prestazione resa ----
   dic_pres <- function(){
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
       cat("
