@@ -1067,7 +1067,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   decorrenza.prog.EU <- paste0(Progetto, " cod. _____ con la Comunità Europea, con decorrenza dal _____ al _____")
   if(Progetto=="DBA.AD001.672 CropSafe"){decorrenza.prog.EU <- "CropSafe cod. 101209410 con la Comunità Europea, con decorrenza dall'1/6/2025 al 31/5/2029"}
   if(Progetto=="DBA.AD001.522 BEXYL"){decorrenza.prog.EU <- "BEXYL cod. 101060593 con la Comunità Europea, con decorrenza dall'1/9/2022 al 31/08/2026"}
-  if(Progetto=="DBA.AD001.522 ViroiDoc"){decorrenza.prog.EU <- "ViroiDoc cod. 101169421 con la Comunità Europea, con decorrenza dall'1/1/2025 al 31/12/2028"}
+  if(Progetto=="DBA.AD001.674 ViroiDoc"){decorrenza.prog.EU <- "ViroiDoc cod. 101169421 con la Comunità Europea, con decorrenza dall'1/1/2025 al 31/12/2028"}
+  if(Progetto=="DBA.AD005.265 FarmEVs"){decorrenza.prog.EU <- "FarmEVs cod. _____ con la Comunità Europea, con decorrenza dal _____ al _____"}
     
   # Ultimi DocOE ----
   ultimi <- subset(ordini, ordini$Fornitore==sc$Fornitore)
