@@ -14,8 +14,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
       "))
   # ordine <- "31_RDA 54"
-  ordine <- 3
-  # ordine <- readline()
+  # ordine <- 3
+  ordine <- readline()
 
   if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
