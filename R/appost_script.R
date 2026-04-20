@@ -14,8 +14,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
       "))
   # ordine <- "31_RDA 54"
-  # ordine <- 3
-  ordine <- readline()
+  ordine <- "035"
+  # ordine <- readline()
 
   if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
@@ -311,6 +311,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     bene <- 'lavoro'
     beni <- 'lavori'
     della.fornitura <- 'del lavoro'
+    della.fornitura.en <- 'of the work'
     la.fornitura <- 'il lavoro'
     materiale.conforme <- "che il lavoro è conforme all’ordine e completamente svolto."
     fornitura.eseguita <- 'è stato eseguito'
