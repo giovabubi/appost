@@ -3822,12 +3822,14 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     #     body_add_fpar(fpar(ftext("CONSIDERATO", fpt.b), ftext(" che le verifiche effettuate ai sensi dell’art. 94, 95, 96, 97, 98 e 100 del d.lgs. n. 36/2023 non hanno rilevato cause ostative nei confronti dell’operatore economico individuato;")), style = "Normal")
     # }
 
-      body_add_fpar(fpar(ftext("AI FINI DELL’ISTRUTTORIA")), style = "heading 2")
-    if(Fornitore=="Life Technologies Italia"){
-      doc <- doc |>
-        body_add_fpar(fpar(ftext("Dichiara che si considera accettabile la solidità dell’O.E. in virtù dell’esiguità della violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024; importo dovuto pari a 1.952.960,66 €) rispetto al volume d’affari che si evince dal bilancio dell'O.E.;")), style = "Elenco liv1")
-    }
-    doc <- doc |>
+      body_add_fpar(fpar(ftext("AI FINI DELL’ISTRUTTORIA")), style = "heading 2") |>
+  
+      # if(Fornitore=="Life Technologies Italia"){
+      # doc <- doc |>
+      #   body_add_fpar(fpar(ftext("Dichiara che si considera accettabile la solidità dell’O.E. in virtù dell’esiguità della violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024; importo dovuto pari a 1.952.960,66 €) rispetto al volume d’affari che si evince dal bilancio dell'O.E.;")), style = "Elenco liv1")
+      # }
+    
+    # doc <- doc |>
       body_add_fpar(fpar(ftext("Dichiara che il procedimento di selezione dell’affidatario risulta condotto in conformità alle disposizioni di legge e ai regolamenti vigenti in materia;")), style = "Elenco liv1") |>
       body_add_fpar(fpar(ftext("Propone il perfezionamento dell’affidamento diretto nei confronti dell’operatore economico "),
                          ftext(Fornitore), ftext(" (C.F./P.IVA "), ftext(Fornitore..P.IVA),
@@ -5974,19 +5976,19 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                            ftext(CCNL),
                            ftext(" , sono da ritenersi congrui anche in considerazione della stima dei costi della manodopera effettuata dalla S.A.;")), style = "Elenco liv2")
     }
-    if(Fornitore!="Life Technologies Italia"){
-    doc <- doc |> 
+    # if(Fornitore!="Life Technologies Italia"){
+    doc <- doc |>
       body_replace_text_at_bkm(bookmark = "bookmark_oe", paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", soggetto U-Gov ", Fornitore..Codice.terzo.SIGLA, ")"))
-    }else{
-      doc <- doc |> 
-        cursor_bookmark("bookmark_oe") |>
-        body_remove() |>
-        cursor_backward() |>
-        body_add_fpar(fpar(ftext("che si considera accettabile la solidità dell’O.E. in virtù dell’esiguità della violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024; importo dovuto pari a 1.952.960,66 €) rispetto al volume d’affari che si evince dal bilancio dell'O.E.;")), style = "Elenco punto") |>
-        body_add_fpar(fpar(ftext("che la documentazione acquisita è sufficiente a dimostrare il possesso dei requisiti dichiarati in sede di affidamento dall’operatore economico "), 
-                           ftext(paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", soggetto U-Gov ", Fornitore..Codice.terzo.SIGLA, ")")),
-                           ftext(" e, pertanto,")), style = "Elenco punto")
-    }
+    # }else{
+    #   doc <- doc |> 
+    #     cursor_bookmark("bookmark_oe") |>
+    #     body_remove() |>
+    #     cursor_backward() |>
+    #     body_add_fpar(fpar(ftext("che si considera accettabile la solidità dell’O.E. in virtù dell’esiguità della violazione non definitivamente accertata per l’anno 2018 (identificativo atto: T9D031B04014/2024; importo dovuto pari a 1.952.960,66 €) rispetto al volume d’affari che si evince dal bilancio dell'O.E.;")), style = "Elenco punto") |>
+    #     body_add_fpar(fpar(ftext("che la documentazione acquisita è sufficiente a dimostrare il possesso dei requisiti dichiarati in sede di affidamento dall’operatore economico "), 
+    #                        ftext(paste0(Fornitore, " (P.IVA ", Fornitore..P.IVA, ", soggetto U-Gov ", Fornitore..Codice.terzo.SIGLA, ")")),
+    #                        ftext(" e, pertanto,")), style = "Elenco punto")
+    # }
     if(Importo.senza.IVA.num>=40000){
       doc <- doc |> 
       cursor_reach("CAMPO.PROPONE") |>
