@@ -1220,27 +1220,27 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   # file.remove(modello$name)
 
   # Scarica Modello.docx da Github ----
-  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-  doc.ras <- read_docx("Modello.docx")
-  doc.avv <- read_docx("Modello.docx")
-  doc.all <- read_docx("Modello.docx")
-  doc.dac <- read_docx("Modello.docx")
-  doc.prov.imp <- read_docx("Modello.docx")
-  doc.pag <- read_docx("Modello.docx")
-  doc.pi <- read_docx("Modello.docx")
-  doc.cc <- read_docx("Modello.docx")
-  doc.part.qual <- read_docx("Modello.docx")
-  doc.qual <- read_docx("Modello.docx")
-  doc.aus <- read_docx("Modello.docx")
-  doc.dpcm <- read_docx("Modello.docx")
-  doc.doh <- read_docx("Modello.docx")
-  doc.bollo <- read_docx("Modello.docx")
-  doc.com.cig <- read_docx("Modello.docx")
-  doc.ai <- read_docx("Modello.docx")
-  doc.dic.pres <- read_docx("Modello.docx")
-  download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello_intestata.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
-  doc.prov.liq <- read_docx("Modello.docx")
-  file.remove("Modello.docx")
+  # download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+  # doc.ras <- read_docx("Modello.docx")
+  # doc.avv <- read_docx("Modello.docx")
+  # doc.all <- read_docx("Modello.docx")
+  # doc.dac <- read_docx("Modello.docx")
+  # doc.prov.imp <- read_docx("Modello.docx")
+  # doc.pag <- read_docx("Modello.docx")
+  # doc.pi <- read_docx("Modello.docx")
+  # doc.cc <- read_docx("Modello.docx")
+  # doc.part.qual <- read_docx("Modello.docx")
+  # doc.qual <- read_docx("Modello.docx")
+  # doc.aus <- read_docx("Modello.docx")
+  # doc.dpcm <- read_docx("Modello.docx")
+  # doc.doh <- read_docx("Modello.docx")
+  # doc.bollo <- read_docx("Modello.docx")
+  # doc.com.cig <- read_docx("Modello.docx")
+  # doc.ai <- read_docx("Modello.docx")
+  # doc.dic.pres <- read_docx("Modello.docx")
+  # download.file("https://raw.githubusercontent.com/giovabubi/appost/main/models/Modello_intestata.docx", destfile = "Modello.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+  # doc.prov.liq <- read_docx("Modello.docx")
+  # file.remove("Modello.docx")
 
   # RAS ----
   ras <- function(){
@@ -1305,19 +1305,19 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     
-    download.file(paste(lnk, "RAS.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "RAS_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1) |>
-      headers_replace_text_at_bkm("bookmark_headers_sede2", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale") |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale2", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1) |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede2", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale") |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale2", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_reach("CAMPO.DEST.RAS.SEDE") |>
@@ -1492,17 +1492,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     Documento generato: '1 RAS'")
 
     ## Dich. Ass. Rich. ----
-    download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Dich_conf_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -1597,17 +1597,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
     ## Dich. Ass. Resp. ----
     if(Richiedente!=Responsabile.progetto){
-      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Dich_conf_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
       
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # 
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
       
       doc <- doc |>
         cursor_begin() |>
@@ -1698,20 +1698,20 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     
     ## Avviso pubblico ----
     if(Scelta.fornitore=='Avviso pubblico'){
-      download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
+      
       doc <- doc |>
         cursor_begin() |>
         cursor_forward() |>
-        #headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE) |>
-        
         body_add_fpar(fpar(ftext("AVVISO")), style = "heading 1", pos = "on") |>
         body_add_fpar(fpar(ftext("Indagine esplorativa di mercato volta a raccogliere preventivi finalizzati all’affidamento "),
                            ftext(della.fornitura),
@@ -1881,17 +1881,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       print(doc, target = "Allegato 1 - Dichiarazione sostitutiva possesso requisiti OE per invio preventivo.docx")
       
       ## Privacy ----
-      download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Privacy_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
       
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # 
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
       
       doc <- doc |>
         cursor_bookmark("bookmark_oggetto") |>
@@ -1979,18 +1979,18 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
     }
     
-    download.file(paste(lnk, "RUP.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "RUP_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     #file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
-    
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
+    # 
     doc <- doc |>
       cursor_reach("CAMPO.DELLA.FORNITURA") |>
       body_remove() |>
@@ -2124,17 +2124,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     Documento generato: '2 Nomina RUP'")
     
     ## Dich. Ass. RSS ----
-    download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Dich_conf_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     #file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -2202,17 +2202,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     Documento generato: '9.3 Dichiarazione assenza conflitto RSS'")
     
     ## Dich. Ass. RUP ----
-    download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Dich_conf_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -2287,17 +2287,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     
     ## Dich. Ass. SUP ----
     if(Supporto.RUP!=trattini){
-      download.file(paste(lnk, "Dich_conf.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Dich_conf_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
       
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # 
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
       
       doc <- doc |>
         cursor_begin() |>
@@ -2426,17 +2426,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
 
-    download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -2743,17 +2743,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     }
     ## Esenzione IVA ----
     if(Aliquota.IVA=="esente" & Importo.senza.IVA.num>300){
-      download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
       
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # 
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
       
       doc <- doc |>
         cursor_begin() |>
@@ -2793,17 +2793,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
   # Provv. anticipata ----
   provv_ant <- function(){
-    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -2919,17 +2919,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
   # Provv. impegno ----
   provv_imp <- function(){
-    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -3064,17 +3064,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
   # Richiesta pagina web ----
   pag <- function(){
-    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -3239,17 +3239,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         }
         
         ## Condizioni d'acquisto ----
-        download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
         
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-        
-        if(sede=="TOsi"){
-          doc <- doc |>
-            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-        }
+        # doc <- doc |>
+        #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        # 
+        # if(sede=="TOsi"){
+        #   doc <- doc |>
+        #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        # }
         
         doc <- doc |>
           cursor_begin() |>
@@ -3320,17 +3320,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         print(doc, target = "Condizioni acquisto.docx")
         
         ## Privacy ----
-        download.file(paste(lnk, "Privacy.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        download.file(paste(lnk, "Privacy_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
         
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-        
-        if(sede=="TOsi"){
-          doc <- doc |>
-            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-        }
+        # doc <- doc |>
+        #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        # 
+        # if(sede=="TOsi"){
+        #   doc <- doc |>
+        #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        # }
         
         doc <- doc |>
           cursor_bookmark("bookmark_oggetto") |>
@@ -3413,17 +3413,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
             '5.4 Self-declaration qualification requirements'")
       
         ## Purchase conditions ----
-        download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
         
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-        
-        if(sede=="TOsi"){
-          doc <- doc |>
-            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-        }
+        # doc <- doc |>
+        #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        # 
+        # if(sede=="TOsi"){
+        #   doc <- doc |>
+        #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        # }
         
         doc <- doc |>
           cursor_begin() |>
@@ -3528,17 +3528,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         print(doc, target = paste0(pre.nome.file, "5.8 Purchase conditions.docx"))
         
         ## Privacy eng ----
-        download.file(paste(lnk, "Privacy_eng.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+        download.file(paste(lnk, "Privacy_eng_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
         doc <- read_docx("tmp.docx")
         file.remove("tmp.docx")
         
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-        
-        if(sede=="TOsi"){
-          doc <- doc |>
-            headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-        }
+        # doc <- doc |>
+        #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+        # 
+        # if(sede=="TOsi"){
+        #   doc <- doc |>
+        #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+        # }
         
         doc <- doc |>
           body_replace_text_at_bkm("bookmark_oggetto", Prodotto) |>
@@ -3656,17 +3656,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
   # Comunicazione CIG ----
   com_cig <- function(){
-    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste("https://raw.githubusercontent.com/giovabubi/appost/main/models/", "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -3721,17 +3721,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
   # AI ----
   ai <- function(){
-    download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -4079,17 +4079,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     }
 
-    download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-    
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale", only_at_cursor = TRUE)
-    }
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+    # 
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale", only_at_cursor = TRUE)
+    # }
     
     doc <- doc |>
       cursor_begin() |>
@@ -4171,15 +4171,15 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       file.remove("tmp.docx")
       file.remove(logo)
     }else{
-      download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+      download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
       doc <- read_docx("tmp.docx")
       file.remove("tmp.docx")
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
     }
     
     doc <- doc |>
@@ -4286,7 +4286,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
       }
     
-    download.file(paste(lnk, "Intestata.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "Intestata_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
@@ -4296,12 +4296,12 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         footers_replace_img_at_bkm(bookmark = "bookmark_footers", external_img(src = logo, width = 3, height = 2, unit = "cm"))
       file.remove(logo)
     }else{
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
-      }
+      # doc <- doc |>
+      #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1)
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale")
+      # }
     }
 
     doc <- doc |>
@@ -6905,12 +6905,12 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       file.remove("tmp.docx")
       file.remove(logo)
     }else{
-      doc <- doc.dic.pres |>
-        headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
-      if(sede=="TOsi"){
-        doc <- doc |>
-          headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
-      }
+      # doc <- doc.dic.pres |>
+      #   headers_replace_all_text("CAMPO.Sede.Secondaria", sede1, only_at_cursor = TRUE)
+      # if(sede=="TOsi"){
+      #   doc <- doc |>
+      #     headers_replace_all_text("Secondaria", "Istituzionale", only_at_cursor = TRUE)
+      # }
     }
     
     if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
