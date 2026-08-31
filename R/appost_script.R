@@ -127,7 +127,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     RSS <- paste("dott.", RSS.nome)
     RSS.email <- 'giovanninicola.bubici@cnr.it'
     RAMM <- 'Dott. Nicola Centorame'
-    RAMM.email <- 'nicola.centorame@ipsp.cnr.it'
+    RAMM.email <- 'nicola.centorame@cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Bari"
     firma.RSS <- "Il responsabile della sede secondaria di Bari dell'IPSP"
     firma.RSS.en <- "The responsible of the Bari Unit of the IPSP"
@@ -150,7 +150,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     RSS <- paste("dott.", RSS.nome)
     RSS.email <- 'stefano.ghignone@cnr.it'
     RAMM <- "Dott.ssa Lucia Allione"
-    RAMM.email <- 'lucia.allione@ipsp.cnr.it'
+    RAMM.email <- 'lucia.allione@cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Torino"
     firma.RSS <- "Il responsabile della sede secondaria di Torino dell'IPSP"
     firma.RSS.en <- "The responsible of the Torino Unit of the IPSP"
@@ -174,7 +174,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     RSS <- paste("dott.ssa", RSS.nome)
     RSS.email <- 'michelina.ruocco@cnr.it'
     RAMM <- 'Dott. Ettore Magaldi'
-    RAMM.email <- 'ettore.magaldi@ipsp.cnr.it'
+    RAMM.email <- 'ettore.magaldi@cnr.it'
     al.RSS <- "Alla responsabile della sede secondaria di Portici"
     firma.RSS <- "La responsabile della sede secondaria di Portici dell'IPSP"
     firma.RSS.en <- "The responsible of the Portici Unit of the IPSP"
@@ -195,9 +195,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     sede2 <- 'Sede Secondaria di Sesto Fiorentino'
     RSS.nome <- "Nicola Luchi"
     RSS <- paste("dott.", RSS.nome)
-    RSS.email <- "nicola.luchi@ipsp.cnr.it"
+    RSS.email <- "nicola.luchi@cnr.it"
     RAMM <- "Sig.ra Francesca Pesciolini"
-    RAMM.email <- 'francesca.pesciolini@ipsp.cnr.it'
+    RAMM.email <- 'francesca.pesciolini@cnr.it'
     al.RSS <- "Al responsabile della sede secondaria di Sesto Fiorentino"
     firma.RSS <- "Il responsabile della sede secondaria di Sesto Fiorentino dell'IPSP"
     firma.RSS.en <- "The responsible of the Sesto Fiorentino Unit of the IPSP"
@@ -214,26 +214,26 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     CUU <- "KWH4FD"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='PD'){
-    sede1 <- 'Legnaro'
-    sede2 <- 'Sede Secondaria di Legnaro'
+    sede1 <- 'Padova'
+    sede2 <- 'Sede Secondaria di Padova'
     RSS.nome <- "Laura Scarabel"
     RSS <- paste("dott.ssa", RSS.nome)
-    RSS.email <- "laura.scarabel@ipsp.cnr.it"
+    RSS.email <- "laura.scarabel@cnr.it"
     RAMM <- "Dott.ssa Lucia Allione"
-    RAMM.email <- 'lucia.allione@ipsp.cnr.it'
-    al.RSS <- "Al responsabile della sede secondaria di Legnaro"
-    firma.RSS <- "Il responsabile della sede secondaria di Legnaro dell'IPSP"
-    firma.RSS.en <- "The responsible of the Legnaro Unit of the IPSP"
-    fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, viale dell’Università, 16, 35020 Legnaro (PD), Italia."
-    nomina.RSS <- "533896 del 22/12/2025 di nomina della dott.ssa Laura Scarabel quale Responsabile della Sede Secondaria di Legnaro dell’IPSP per il periodo dall'1/1/2026 al 31/12/2026"
-    nomina.RSS2 <- "533896 del 22/12/2025 relativo al conferimento dell’incarico della dott.ssa Laura Scarabel a Responsabile delegato alla gestione della sede secondaria di Legnaro dell’IPSP con decorrenza dall'1/1/2026 al 31/12/2026;"
-    nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Legnaro dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
+    RAMM.email <- 'lucia.allione@cnr.it'
+    al.RSS <- "Al responsabile della sede secondaria di Padova"
+    firma.RSS <- "Il responsabile della sede secondaria di Padova dell'IPSP"
+    firma.RSS.en <- "The responsible of the Padova Unit of the IPSP"
+    fatturazione <- "Istituto per la Protezione Sostenibile delle Piante, corso Stati Uniti, 4, 35127 Padova, Italia."
+    nomina.RSS <- "533896 del 22/12/2025 di nomina della dott.ssa Laura Scarabel quale Responsabile della Sede Secondaria di Padova dell’IPSP per il periodo dall'1/1/2026 al 31/12/2026"
+    nomina.RSS2 <- "533896 del 22/12/2025 relativo al conferimento dell’incarico della dott.ssa Laura Scarabel a Responsabile delegato alla gestione della sede secondaria di Padova dell’IPSP con decorrenza dall'1/1/2026 al 31/12/2026;"
+    nomina.RAMM <- "146196 del 2/5/2024 di nomina della dott.ssa Lucia Allione quale Responsabile Amministrativo della Sede Secondaria di Padova dell’IPSP per il periodo dal 1/5/2024 al 31/12/2024;"
     resp.segr <- "La responsabile amministrativa"
     sottoscritto.rss <- "La sottoscritta "
     nato.rss <- " nata a Bruxelles il 20/3/1963, codice fiscale SCRLRA63C60Z103Z,"
-    RSS.dich <- "responsabile della sede secondaria di Legnaro dell'IPSP"
-    RSS.patto <- "dal responsabile della sede secondaria di Legnaro"
-    RSS.patto.en <- "responsible of the Legnaro Unit"
+    RSS.dich <- "responsabile della sede secondaria di Padova dell'IPSP"
+    RSS.patto <- "dal responsabile della sede secondaria di Padova"
+    RSS.patto.en <- "responsible of the Padova Unit"
     CUU <- "8INQPI"
     cdr <- paste("CdR 121.00_.000 IPSP", sede2)
   }else if(sede=='TOsi'){
@@ -243,7 +243,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     RSS <- paste("dott.", RSS.nome)
     RSS.email <- 'francesco.diserio@cnr.it'
     RAMM <- 'Dott. Josè Saporita'
-    RAMM.email <- 'jose.saporita@ipsp.cnr.it'
+    RAMM.email <- 'jose.saporita@cnr.it'
     al.RSS <- "Al direttore dell'IPSP"
     firma.RSS <- "Il direttore dell'IPSP"
     firma.RSS.en <- "The director of the IPSP"
