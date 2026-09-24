@@ -14,7 +14,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
       "))
   # ordine <- "31_RDA 54"
-  # ordine <- "035"
+  # ordine <- 52
   ordine <- readline()
 
   if(file.exists("Ordini.csv")=="TRUE"){
@@ -4190,6 +4190,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       body_add_fpar(fpar(ftext("OGGETTO: ", fpt.b), ftext(bene), ftext(" di “"), ftext(Prodotto), ftext("”.")), style = "Normal") |>
       body_add_fpar(fpar(ftext("CIG ", fpt.b), ftext(CIG)), style = "Normal") |>
       body_add_fpar(fpar(ftext("CUP ", fpt.b), ftext(CUP)), style = "Normal") |>
+      body_add_fpar(fpar(ftext("FORNITORE: ", fpt.b), ftext(Fornitore)), style = "Normal") |>
       body_add_par("") |>
       body_add_fpar(fpar(ftext("Importo: ", fpt.b), ftext(Importo.senza.IVA), ftext(" oltre IVA")), style = "Normal") |>
       body_add_fpar(fpar(ftext("RUP: ", fpt.b), ftext(RUP)), style = "Normal") |>
