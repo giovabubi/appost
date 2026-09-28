@@ -3930,19 +3930,19 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     colnames(prt.en) <- c("Amount", "Description", "Unit cost", "Total")
     Prot..DaC.en <- sub("del", "of", Prot..DaC)
 
-    download.file(paste(lnk, "LdO.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
+    download.file(paste(lnk, "LdO_2026.docx", sep=""), destfile = "tmp.docx", method = "curl", extra = "--ssl-no-revoke", quiet = TRUE)
     doc <- read_docx("tmp.docx")
     file.remove("tmp.docx")
     
-    doc <- doc |>
-      headers_replace_text_at_bkm("bookmark_headers_sede", sede1) |>
-      headers_replace_text_at_bkm("bookmark_headers_sede_en", sede1)
+    # doc <- doc |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede", sede1) |>
+    #   headers_replace_text_at_bkm("bookmark_headers_sede_en", sede1)
     
-    if(sede=="TOsi"){
-      doc <- doc |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale") |>
-        headers_replace_text_at_bkm("bookmark_headers_istituzionale_en", "Istituzionale")
-    }
+    # if(sede=="TOsi"){
+    #   doc <- doc |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale", "Istituzionale") |>
+    #     headers_replace_text_at_bkm("bookmark_headers_istituzionale_en", "Istituzionale")
+    # }
 
     doc <- doc |>
       cursor_begin() |>
@@ -3971,7 +3971,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       body_replace_text_at_bkm("bookmark_consegna", Richiedente..Luogo.di.consegna) |>
       body_replace_text_at_bkm("bookmark_cuu", CUU) |>
       body_replace_text_at_bkm("bookmark_fatturazione", fatturazione) |>
-      body_replace_text_at_bkm("bookmark_note", paste0("ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda in alto nella pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ", progetto ", Progetto, ".")) |>
+      body_replace_text_at_bkm("bookmark_note", paste0("ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda sulla sinistra della pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ", progetto ", Progetto, ".")) |>
       cursor_bookmark("bookmark_firma") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
