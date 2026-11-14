@@ -14,9 +14,10 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
       "))
   # ordine <- "31_RDA 54"
-  # ordine <- 52
+  # ordine <- 107
   ordine <- readline()
 
+  # Modalità locale ----
   if(file.exists("Ordini.csv")=="TRUE"){
     ordini <- read.csv("Ordini.csv", na.strings = "")
     pat <- getwd()
@@ -37,6 +38,180 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     ordini <- read.csv(patfile, na.strings = "")
   }
 
+  # # Modalità remoto ----
+  # modalita <- ordine
+  # 
+  # if(modalita!=0){
+  #   if(file.exists("Ordini.csv")=="TRUE"){
+  #     ordini <- read.csv("Ordini.csv", na.strings = "")
+  #     pat <- getwd()
+  #   }else if(file.exists("Ordini_2025.csv")=="TRUE"){
+  #     ordini <- read.csv("Ordini_2025.csv", na.strings = "")
+  #     pat <- getwd()
+  #   }else if(file.exists("Ordini_2026.csv")=="TRUE"){
+  #     ordini <- read.csv("Ordini_2026.csv", na.strings = "")
+  #     pat <- getwd()
+  #   }else{
+  #     patfile <- utils::choose.files(default = "*.csv", caption = "Selezionare il file 'Ordini' scaricato da Teams")
+  #     if(!require(stringr)) install.packages("stringr")
+  #     n <- stringr::str_locate_all(patfile, "\\\\")
+  #     m <- max(n[[1]])
+  #     n <- paste0("(.{", m, "}).*")
+  #     pat <- sub(n, "\\1", patfile)
+  #     setwd(pat)
+  #     ordini <- read.csv(patfile, na.strings = "")
+  #   }
+  # }else{
+  #   if(!require(Microsoft365R)) install.packages("Microsoft365R")
+  #   library(Microsoft365R)
+  #   cat("
+  #       Indica la sede su cui vuoi operare:
+  #         1: TO sede istituzionale
+  #         2: TO sede secondaria
+  #         3: BA
+  #         4: FI
+  #         5: NA
+  #         6: PD
+  #       ")
+  #   fluor.sede <- readline()
+  #   cat("
+  #       Indica l'anno dell'ordine (2024, 2025, 2026):
+  #       ")
+  #   fluor.anno <- readline()
+  #   cat("
+  #       Indica il N° ordine:
+  #       ")
+  #   ordine <- readline()
+  #   
+  #   site <- get_sharepoint_site("ORDINI CNR-IPSP-Bari-grp")
+  #   ordini.tmp <- site$get_list("Ordini_2026")
+  #   ordini.tmp <- ordini.tmp$list_items()
+  #   ordini.tmp <- ordini.tmp[0,]
+  #   
+  #   if(fluor.sede==1){
+  #     site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-TOSI")
+  #   }else if(fluor.sede==2){
+  #     site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-TO")
+  #   }else if(fluor.sede==3){
+  #     site <- get_sharepoint_site("ORDINI CNR-IPSP-Bari-grp")
+  #   }else if(fluor.sede==4){
+  #     site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-FI")
+  #   }else if(fluor.sede==5){
+  #     site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-NA")
+  #   }else if(fluor.sede==6){
+  #     site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-PD")
+  #   }
+  #   
+  #   fluor.scheda <- paste0("Ordini_", fluor.anno)
+  #   if(fluor.anno==2024 | (fluor.anno==2025 & fluor.sede!=3)){
+  #     fluor.scheda <- sub("Ordini")
+  #   }
+  #   ordini <- site$get_list(fluor.scheda)
+  #   
+  #   if(!require(dplyr)) install.packages("dplyr")
+  #   library(dplyr)
+  #   ordini <- ordini$list_items()
+  #   ordini <- dplyr::bind_rows(ordini.tmp, ordini)
+  #   rm(ordini.tmp)
+  #   fornitori <- site$get_list("Fornitori")
+  #   fornitori <- fornitori$list_items()
+  #   membri <- site$get_list("Membri")
+  #   membri <- membri$list_items()
+  #   cpv <- site$get_list("CPV")
+  #   cpv <- cpv$list_items()
+  #   
+  #   ordini <- ordini %>% 
+  #     dplyr::select(-contains("LookupId"), -starts_with("_"))
+  #   
+  #   colnames(ordini) <- sub("Prot_x002e_", "Prot..", colnames(ordini))
+  #   colnames(ordini) <- sub("_x002e_", ".", colnames(ordini))
+  #   ordini$Cartella <- ordini$Cartella$Url
+  #   ordini$Paginaweb <- ordini$Paginaweb$Url
+  #   ordini <- ordini %>%
+  #     dplyr::rename(any_of(c(
+  #         "Ordine.N." = "OrdineN_x00b0_",
+  #         "Descrizione.beni.servizi.lavori" = "Title",
+  #         "Stato" = "Category",
+  #         "Importo.senza.IVA" = "ImportosenzaIVA",
+  #         "Aliquota.IVA" = "AliquotaIVA",
+  #         "Oneri.sicurezza" = "Onerisicurezza",
+  #         "Scelta.fornitore" = "Sceltafornitore",
+  #         "Tipo.acquisizione" = "Tipoacquisizione",
+  #         "Rotazione.fornitore" = "Rotazionefornitore",
+  #         "Motivo.fuori.MePA" = "MotivofuoriMePA",
+  #         "Voce.di.spesa" = "Vocedispesa",
+  #         "N..RDO.MePA" = "N_x00b0_TD_x002f_RdOMePA",
+  #         "Preventivo.fornitore" = "Preventivofornitore",
+  #         "Prot..provv..anticipata" = "Prot..provv.impegno",
+  #         "Pagina.web" = "Paginaweb",
+  #         "Prot..nomina.RUP" = "NominaRUP",
+  #         "Prot..provv..impegno" = "Prot..provv.impegno",
+  #         "Prot..conflitto.interesse" = "Prot..conflittointeresse",
+  #         "Prot..avviso.pubblico" = "Prot..avvisopubblico",
+  #         "Prot..preventivi.avviso" = "Prot..preventiviavviso",
+  #         "Prot..atto.istruttorio" = "Prot..attoistruttorio",
+  #         "Prot..lettera.ordine" = "Prot..letteraordine",
+  #         "Anticipata.ordine" = "Anticipataordine",
+  #         "Prot..prestazione.resa" = "Prot..prestazioneresa",
+  #         "Scrittura.normale.fattura" = "Scritturanormalefattura",
+  #         "Prot..impegno.di.spesa" = "Prot..impegnodispesa",
+  #         "Prot..doppio.finanziamento" = "Prot..doppiofinanziamento",
+  #         "Anticipata.fattura" = "Anticipatafattura"
+  #       )
+  #     ))
+  #   
+  #   
+  #   fornitori <- dplyr::rename(fornitori,
+  #                              Fornitore = Title,
+  #                              Fornitore..P.IVA = field_1,
+  #                              Fornitore..Sede = field_2,
+  #                              Fornitore..Telefono = field_3,
+  #                              Fornitore..E.mail = field_4,
+  #                              Fornitore..PEC = field_5,
+  #                              Fornitore..IBAN = field_6,
+  #                              Fornitore..Codice.terzo.SIGLA = field_8,
+  #                              Fornitore..Nazione = Nazione,
+  #                              Fornitore..Rappresentante.legale = Rappresentantelegale,
+  #                              Fornitore..Ruolo.rappresentante = Ruolo_x0020Xrappresentante,
+  #                              Fornitore..DURC.scadenza = DURCscadenza,
+  #                              Fornitore..Ruolo.rappresentante = Ruolo_x0020_rappresentante
+  #   )
+  #   membri <- dplyr::rename(membri,
+  #                           Richiedente = Title,
+  #                           Richiedente..Data.di.nascita = field_2,
+  #                           Richiedente..Luogo.di.nascita = field_3,
+  #                           Richiedente..Codice.fiscale = field_4,
+  #                           Richiedente..Luogo.di.consegna = field_5,
+  #                           Richiedente..E.mail = field_6,
+  #                           Richiedente..Sesso = Sesso
+  #   )
+  #   membri$giorno <- as.numeric(sub("(....)-(..)-(..).*", "\\3", membri$Richiedente..Data.di.nascita)) + 1
+  #   membri$Richiedente..Data.di.nascita <- sub("(....)-(..)-(..).*", "\\2/\\1", membri$Richiedente..Data.di.nascita)
+  #   membri$Richiedente..Data.di.nascita <- paste0(membri$giorno, "/", membri$Richiedente..Data.di.nascita)
+  #   membri$Richiedente..Data.di.nascita <- sub("NA/NA", NA, membri$Richiedente..Data.di.nascita)
+  #   cpv <- dplyr::rename(cpv,
+  #                        CPV = field_1,
+  #                        CPV..CPV = field_2
+  #   ) %>%
+  #     dplyr::select(id, CPV, CPV..CPV)
+  #   
+  #   ordini <- merge(ordini, fornitori, by.x = "FornitoreLookupId", by.y = "id", all.x = TRUE)
+  #   ordini <- merge(ordini, cpv, by.x = "CPVLookupId", by.y = "id", all.x = TRUE)
+  #   ordini <- merge(ordini, membri, by.x = "RichiedenteLookupId", by.y = "id", all.x = TRUE)
+  #   colnames(membri) <- sub("Richiedente", "Responsabile.progetto", colnames(membri))
+  #   ordini <- merge(ordini, membri, by.x = "ResponsabileprogettoLookupId", by.y = "id", all.x = TRUE)
+  #   colnames(membri) <- sub("Responsabile.progetto", "RUP", colnames(membri))
+  #   ordini <- merge(ordini, membri, by.x = "RUPLookupId", by.y = "id", all.x = TRUE)
+  #   colnames(membri) <- sub("RUP", "Supporto.RUP", colnames(membri))
+  #   ordini <- merge(ordini, membri, by.x = "SupportoRUPLookupId", by.y = "id", all.x = TRUE)
+  #   
+  #   n <- grep("etag|Link|Created|Lookup|Content|Modified|Compliance|Version|Attach|Edit|Count|field|id", colnames(ordini))
+  #   ordini <- ordini[,-n]
+  #   
+  #   pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+  # } # fine modalità remoto
+  # 
+  # Dopo modalità locale/remoto ----
   if(!require(dplyr)) install.packages("dplyr")
   ordini <- dplyr::rename(ordini,
                           Prodotto=Descrizione.beni.servizi.lavori,
