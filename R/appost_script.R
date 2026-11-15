@@ -1539,7 +1539,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       cursor_reach("CAMPO.SEDE") |>
       body_replace_all_text("CAMPO.SEDE", sede1, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.IMPORTO.SENZA.IVA") |>
-      body_replace_all_text("CAMPO.IMPORTO.SENZA.IVA", Importo.senza.IVA, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.IMPORTO.SENZA.IVA", as.character(Importo.senza.IVA), only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.VOCE") |>
       body_replace_all_text("CAMPO.VOCE", Voce.di.spesa, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PROGETTO") |>
