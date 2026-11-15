@@ -649,7 +649,10 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     Progetto.cup <- Progetto
   }
 
-  if (!"CUI" %in% names(sc)) {sc$CUI <- NA; suppressMessages(suppressWarnings(attach(sc)))}
+  if (!"CUI" %in% names(sc)){
+    sc$CUI <- trattini
+    suppressMessages(suppressWarnings(attach(sc)))
+    }
   if(CUI!=trattini){
     CUI1 <- paste0(", CUI ", CUI)
     CUI2 <- CUI
