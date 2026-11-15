@@ -215,6 +215,13 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     if(!require(readxl)) install.packages("readxl")
     library(readxl)
     pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    n <- grep("Imponibile", colnames(pr)) + 1
+    Imponibile.ldo <- colnames(pr)[n]
+    IVA.ldo <- as.numeric(pr[1,n])
+    Importo.ldo <- as.numeric(pr[2,n])
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
   } # fine modalità remoto
 
   # Dopo modalità locale/remoto ----
@@ -284,9 +291,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   sc$IVA <- sc$Importo.senza.IVA.num * sc$Aliquota.IVA.num
   sc$IVA.num <- sc$IVA
   sc$Importo.con.IVA <- sc$Importo.senza.IVA.num + sc$IVA
-  # sc$Importo.senza.IVA <- paste("€", format(sc$Importo.senza.IVA.num, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-  # sc$IVA <- paste("€", format(sc$IVA, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-  # sc$Importo.con.IVA <- paste("€", format(sc$Importo.con.IVA, format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+  
   sc <- sc %>%
     dplyr::mutate(
       dplyr::across(
@@ -294,6 +299,12 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         ~ paste0("€ ", format(.x, nsmall = 2, big.mark = ".", decimal.mark = ","))
       )
     )
+  sc$Importo.senza.IVA.num <- Imponibile.ldo
+  sc$IVA.num <- IVA.ldo
+  sc$Importo.con.IVA.num <- Importo.ldo
+  sc$Importo.senza.IVA <- Imponibile.ldo.txt 
+  sc$IVA <- IVA.ldo.txt
+  sc$Importo.con.IVA <- Importo.ldo.txt  
   sc$Importo.senza.IVA2 <- paste0(sub("€ ", "", sc$Importo.senza.IVA), " €")
   sc$IVA2 <- paste0(sub("€ ", "", sc$IVA), " €")
   sc$Importo.con.IVA2 <- paste0(sub("€ ", "", sc$Importo.con.IVA), " €")
@@ -4111,40 +4122,23 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
 
-    if(colnames(pr)[10]=="Imponibile"){
-      Imponibile.ldo <- colnames(pr)[11]
-      IVA.ldo <- pr[1,11]
-      Importo.ldo <- pr[2,11]
-      Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      
-      pr <- pr[,1:5]
-      colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
-      pr <- subset(pr, !is.na(pr$Quantità))
-      pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
-      pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      prt <- pr[,-5]
-      colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
-    }else{
-      Imponibile.ldo <- colnames(pr)[10]
-      IVA.ldo <- pr[1,10]
-      Importo.ldo <- pr[2,10]
-      Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      
-      pr <- pr[,c(1:5,8)]
-      colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Aliquota IVA", "Inv./Cons.")
-      pr <- subset(pr, !is.na(pr$Quantità))
-      pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
-      pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      prt <- pr[,-6]
-      colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
-    }
+    n <- grep("Imponibile", colnames(pr)) + 1
+    Imponibile.ldo <- colnames(pr)[n]
+    IVA.ldo <- as.numeric(pr[1,n])
+    Importo.ldo <- as.numeric(pr[2,n])
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
     
+    pr <- pr[,1:5]
+    colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
+    pr <- subset(pr, !is.na(pr$Quantità))
+    pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
+    pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    prt <- pr[,-5]
+    colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
+  
     ## Inglese
     prt.en <- prt
     colnames(prt.en) <- c("Amount", "Description", "Unit cost", "Total")
@@ -6872,39 +6866,22 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
     
-    if(colnames(pr)[6]=="Imponibile"){
-      Imponibile.ldo <- colnames(pr)[7]
-      IVA.ldo <- pr[1,7]
-      Importo.ldo <- pr[2,7]
-      Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      
-      pr <- pr[,1:5]
-      colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
-      pr <- subset(pr, !is.na(pr$Quantità))
-      pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
-      pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      prt <- pr[,-5]
-      colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
-    }else{
-      Imponibile.ldo <- colnames(pr)[10]
-      IVA.ldo <- pr[1,10]
-      Importo.ldo <- pr[2,10]
-      Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      
-      pr <- pr[,c(1:5,8)]
-      colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Aliquota IVA", "Inv./Cons.")
-      pr <- subset(pr, !is.na(pr$Quantità))
-      pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
-      pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
-      prt <- pr[,-6]
-      colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo", "Aliquota IVA")
-    }
+    n <- grep("Imponibile", colnames(pr)) + 1
+    Imponibile.ldo <- colnames(pr)[n]
+    IVA.ldo <- as.numeric(pr[1,n])
+    Importo.ldo <- as.numeric(pr[2,n])
+    Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    
+    pr <- pr[,1:5]
+    colnames(pr) <- c("Quantità", "Descrizione", "Costo unitario senza IVA", "Importo senza IVA", "Inv./Cons.")
+    pr <- subset(pr, !is.na(pr$Quantità))
+    pr$`Inv./Cons.`[which(is.na(pr$`Inv./Cons.`))] <- ""
+    pr$`Costo unitario senza IVA` <- paste("€", format(as.numeric(pr$`Costo unitario senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    pr$`Importo senza IVA` <- paste("€", format(as.numeric(pr$`Importo senza IVA`), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
+    prt <- pr[,-5]
+    colnames(prt) <- c("Quantità", "Descrizione", "Costo unitario", "Importo")
     
     ## Inglese
     prt.en <- prt
