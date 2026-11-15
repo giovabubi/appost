@@ -639,13 +639,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
   if(CUP!=trattini){
     CUP1 <- paste0(" (CUP ", CUP, ")")
-    Progetto1 <- paste0(Progetto, " (CUP ", CUP, ")")
     CUP2 <- CUP
     Progetto.cup <- paste0(Progetto, " (CUP ", CUP, ")")
     CUP.ldo.note <- paste0(", CUP ", CUP)
   }else{
     CUP1 <- ""
-    Progetto1 <- Progetto
     CUP2 <- ""
     Progetto.cup <- Progetto
     CUP.ldo.note <- ""
@@ -1931,7 +1929,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                            ftext(" di “"),
                            ftext(Prodotto),
                            ftext("” nell'ambito del progetto “"),
-                           ftext(Progetto1),
+                           ftext(Progetto.cup),
                            ftext("”.")), style = "Titolo avviso") |>
         body_add_fpar(fpar(ftext("")), style = "Normal") |>
         
@@ -2600,7 +2598,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
       
       doc <- doc |>
-        body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
+        body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto.cup)) |>
         body_replace_text_at_bkm("bookmark_fornitore", paste0("L'operatore economico ", Fornitore, " (di seguito Operatore Economico) con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA), ", rappresentato da ", Fornitore..Rappresentante.legale, " in qualità di ", tolower(Fornitore..Ruolo.rappresentante), ",")) |>
         body_replace_text_at_bkm("bookmark_firma", firma.RSS)
       
@@ -3370,7 +3368,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
           }
           
           doc <- doc |>
-            body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto1)) |>
+            body_replace_text_at_bkm("bookmark_fornitura", paste0(della.fornitura, " di “", Prodotto, "” (", Pagina.web, "), nell'ambito del progetto ", Progetto.cup)) |>
             body_replace_text_at_bkm("bookmark_fornitore", paste0(Fornitore, ", con sede legale in ", Fornitore..Sede, ", C.F./P.IVA ", as.character(Fornitore..P.IVA))) |>
             body_replace_text_at_bkm("bookmark_firma", firma.RSS)
           
