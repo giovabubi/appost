@@ -1263,7 +1263,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     decreto.pnrr <- paste0(" il Decreto Direttoriale MUR n. ", decreto.concessione, " (di seguito, “Decreto di Concessione del Finanziamento”) col quale è stata ammessa a finanziamento la domanda di agevolazione del progetto ", finanziamento, " “", PNRR, ": ", titolo, "”, codice identificativo ", codice.progetto, ", CUP ", CUP2, ";")
     intervento <- paste0(finanziamento, ": “", titolo, "” (", PNRR, "). Codice progetto: ", codice.progetto)
   }
-  Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
+  # Progetto.cup <- paste0(Progetto, " (CUP ", CUP2, ")")
   if(PNRR=="No"){
     Progetto.int <- paste("progetto", Progetto.cup)
     Progetto.int.no.cup <- sub(" .CUP.*", "", Progetto.cup)
