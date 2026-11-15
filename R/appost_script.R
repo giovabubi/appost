@@ -83,8 +83,6 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         ")
     ordine <- readline()
 
-    site <- get_sharepoint_site("ORDINI CNR-IPSP-Bari-grp")
- 
     if(fluor.sede==1){
       site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-TOSI")
     }else if(fluor.sede==2){
@@ -121,7 +119,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     ordini$Paginaweb <- ordini$Paginaweb$Url
     ordini <- ordini %>%
       dplyr::select(-starts_with(c("_", "@"))) %>%
-      dplyr::rename(, any_of(c(
+      dplyr::rename(any_of(c(
           "Ordine.N." = "OrdineN_x00b0_",
           "Descrizione.beni.servizi.lavori" = "Title",
           "Stato" = "Category",
@@ -150,7 +148,12 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
           "Prot..impegno.di.spesa" = "Prot..impegnodispesa",
           "Prot..doppio.finanziamento" = "Prot..doppiofinanziamento",
           "Anticipata.fattura" = "Anticipatafattura"
-        )))
+        ))) %>%
+      dplyr::select(-dplyr::any_of(c(
+        "LinkTitle", "ContentType", "Modified", "Created", 
+        "Attachments", "Edit", "LinkTitleNoMenu", 
+        "ItemChildCount", "FolderChildCount"
+      )))
     fornitori <- fornitori %>%
       dplyr::select(-contains("LookupId"), -starts_with(c("_", "@"))) %>%
       dplyr::rename(any_of(c(
@@ -166,6 +169,11 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         "Fornitore..Rappresentante.legale" = "Rappresentantelegale",
         "Fornitore..Ruolo.rappresentante" = "Ruolo_x0020_rappresentante",
         "Fornitore..DURC.scadenza" = "DURCscadenza"
+      ))) %>%
+      dplyr::select(-dplyr::any_of(c(
+        "LinkTitle", "ContentType", "Modified", "Created", 
+        "Attachments", "Edit", "LinkTitleNoMenu", 
+        "ItemChildCount", "FolderChildCount"
       )))
     membri <- membri %>%
       dplyr::select(-contains("LookupId"), -starts_with(c("_", "@"))) %>%
@@ -177,7 +185,12 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
                             "Richiedente..Luogo.di.consegna" = "field_5",
                             "Richiedente..E.mail" = "field_6",
                             "Richiedente..Sesso" = "Sesso"
-    )))
+    ))) %>%
+      dplyr::select(-dplyr::any_of(c(
+        "LinkTitle", "ContentType", "Modified", "Created", 
+        "Attachments", "Edit", "LinkTitleNoMenu", 
+        "ItemChildCount", "FolderChildCount", "field_1"
+      )))
     membri$Richiedente..Data.di.nascita <- format(as.POSIXct(membri$Richiedente..Data.di.nascita, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC"), "%d/%m/%Y")
     cpv <- dplyr::rename(cpv,
                          CPV = field_1,
