@@ -638,10 +638,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     CUP2 <- ""
   }
 
-  if (!"CUI" %in% names(sc)) {
-    sc <- sc %>% dplyr::mutate(CUI = "")
-  }
-  
+  if (!"CUI" %in% names(sc)) {sc$CUI <- ""}
   if(CUI!=trattini){
     CUI1 <- paste0(", CUI ", CUI)
     CUI2 <- CUI
