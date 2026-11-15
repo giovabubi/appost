@@ -127,6 +127,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
           "Aliquota.IVA" = "AliquotaIVA",
           "Oneri.sicurezza" = "Onerisicurezza",
           "Scelta.fornitore" = "Sceltafornitore",
+          "Tipo.ordine" = "Piattaforma",
           "Tipo.acquisizione" = "Tipoacquisizione",
           "Rotazione.fornitore" = "Rotazionefornitore",
           "Motivo.fuori.MePA" = "MotivofuoriMePA",
@@ -303,7 +304,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   ## Calcoli ----
   trattini <- "__________"
   sc[is.na(sc)] <- trattini
-  attach(sc)
+  suppressMessages(suppressWarnings(attach(sc)))
 
   fpt.b <- fp_text(bold = TRUE, font.family = 'Source Sans Pro')
   fpt.i <- fp_text(italic = TRUE, font.family = 'Source Sans Pro')
@@ -637,6 +638,10 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     CUP2 <- ""
   }
 
+  if (!"CUI" %in% names(sc)) {
+    sc <- sc %>% dplyr::mutate(CUI = "")
+  }
+  
   if(CUI!=trattini){
     CUI1 <- paste0(", CUI ", CUI)
     CUI2 <- CUI
