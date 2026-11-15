@@ -241,6 +241,17 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         ),
         .names = "{.col}.num"
       )
+    ) %>%
+    dplyr::mutate(
+      Importo.senza.IVA = paste0(
+        format(
+          readr::parse_number(as.character(Importo.senza.IVA)), 
+          nsmall = 2, 
+          big.mark = ".", 
+          decimal.mark = ","
+        ), 
+        " €"
+      )
     )
   
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
