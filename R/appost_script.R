@@ -62,7 +62,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       ordini <- read.csv(patfile, na.strings = "")
     }
   }else{
-    if(!require(Microsoft365R)) install.packages("Microsoft365R")
+    if(!require("Microsoft365R", quietly = TRUE)) install.packages("Microsoft365R", quiet = TRUE, verbose = FALSE)
     library(Microsoft365R)
     cat("
         Indica la sede su cui vuoi operare:
@@ -102,7 +102,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       fluor.scheda <- sub("Ordini")
     }
     
-    if(!require(dplyr)) install.packages("dplyr")
+    if(!require("dplyr", quietly = TRUE)) install.packages("dplyr", quiet = TRUE, verbose = FALSE)
     library(dplyr)
     ordini <- site$get_list(fluor.scheda)
     ordini <- ordini$list_items()
@@ -146,7 +146,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
           "Prot..lettera.ordine" = "Prot..letteraordine",
           "Anticipata.ordine" = "Anticipataordine",
           "Prot..prestazione.resa" = "Prot..prestazioneresa",
-          "Scrittura.normale.fattura" = "Scritturanormalefattura",
+          "Scrittura.normale.fattura" = "Anticipatafattura",
           "Prot..impegno.di.spesa" = "Prot..impegnodispesa",
           "Prot..doppio.finanziamento" = "Prot..doppiofinanziamento",
           "Anticipata.fattura" = "Anticipatafattura"
@@ -243,7 +243,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       )
     ) %>%
     dplyr::mutate(
-      Importo.senza.IVA = paste0("€ ",
+      Importo.senza.IVA = paste0("€ f",
         format(
           readr::parse_number(as.character(Importo.senza.IVA)), 
           nsmall = 2, 
