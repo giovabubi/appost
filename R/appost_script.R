@@ -4193,7 +4193,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       body_replace_text_at_bkm("bookmark_consegna", Richiedente..Luogo.di.consegna) |>
       body_replace_text_at_bkm("bookmark_cuu", CUU) |>
       body_replace_text_at_bkm("bookmark_fatturazione", fatturazione) |>
-      body_replace_text_at_bkm("bookmark_note", paste0("ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda sulla sinistra della pagina della lettera d'ordine), CIG ", CIG, ", CUP ", CUP, ", progetto ", Progetto, ".")) |>
+      body_replace_text_at_bkm("bookmark_note", paste0("ordine n° ", sede, " ", ordine, y, ", prot. n. _____ (si veda sulla sinistra della pagina della lettera d'ordine), CIG ", CIG, CUP.ldo.note, ", progetto ", Progetto, ".")) |>
       cursor_bookmark("bookmark_firma") |>
       body_add_fpar(fpar(ftext(firma.RSS)), style = "Firma 2", pos = "on") |>
       body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
