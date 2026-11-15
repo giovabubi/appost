@@ -123,6 +123,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
           "Ordine.N." = "OrdineN_x00b0_",
           "Descrizione.beni.servizi.lavori" = "Title",
           "Stato" = "Category",
+          "Data" = "Created",
           "Importo.senza.IVA" = "ImportosenzaIVA",
           "Aliquota.IVA" = "AliquotaIVA",
           "Oneri.sicurezza" = "Onerisicurezza",
