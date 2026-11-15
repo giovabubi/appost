@@ -290,8 +290,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   sc$Importo.con.IVA2 <- paste0(sub("€ ", "", sc$Importo.con.IVA), " €")
 
   ## Installa e carica pacchetti ---
-  if(!require(officer)) install.packages("officer")
-  if(!require(openxlsx)) install.packages("openxlsx")
+  if(!require(officer)) install.packages("officer", , quiet = TRUE)
+  if(!require(openxlsx)) install.packages("openxlsx", quiet = TRUE)
   #if(!require(Microsoft365R)) install.packages("Microsoft365R")
   #if(!require(googledrive)) install.packages("googledrive")
 
@@ -638,7 +638,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     CUP2 <- ""
   }
 
-  if (!"CUI" %in% names(sc)) {sc$CUI <- ""}
+  if (!"CUI" %in% names(sc)) {sc$CUI <- ""; suppressMessages(suppressWarnings(attach(sc)))}
   if(CUI!=trattini){
     CUI1 <- paste0(", CUI ", CUI)
     CUI2 <- CUI
