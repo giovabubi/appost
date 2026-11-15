@@ -243,7 +243,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       )
     ) %>%
     dplyr::mutate(
-      Importo.senza.IVA = paste0("€ f",
+      Importo.senza.IVA = paste0("€ ",
         format(
           readr::parse_number(as.character(Importo.senza.IVA)), 
           nsmall = 2, 
@@ -641,13 +641,15 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     CUP1 <- paste0(" (CUP ", CUP, ")")
     Progetto1 <- paste0(Progetto, " (CUP ", CUP, ")")
     CUP2 <- CUP
+    Progetto.cup <- paste0(Progetto, " (CUP ", CUP, ")")
   }else{
     CUP1 <- ""
     Progetto1 <- Progetto
     CUP2 <- ""
+    Progetto.cup <- Progetto
   }
 
-  if (!"CUI" %in% names(sc)) {sc$CUI <- ""; suppressMessages(suppressWarnings(attach(sc)))}
+  if (!"CUI" %in% names(sc)) {sc$CUI <- NA; suppressMessages(suppressWarnings(attach(sc)))}
   if(CUI!=trattini){
     CUI1 <- paste0(", CUI ", CUI)
     CUI2 <- CUI
@@ -1535,7 +1537,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       cursor_reach("CAMPO.PRODOTTO") |>
       body_replace_all_text("CAMPO.PRODOTTO", Prodotto, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.PROGETTO") |>
-      body_replace_all_text("CAMPO.PROGETTO", Progetto1, only_at_cursor = TRUE) |>
+      body_replace_all_text("CAMPO.PROGETTO", Progetto.cup, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.SOTTOSCRITTO") |>
       body_replace_all_text("CAMPO.SOTTOSCRITTO", sottoscritto.ric, only_at_cursor = TRUE) |>
       cursor_reach("CAMPO.RICHIEDENTE") |>
