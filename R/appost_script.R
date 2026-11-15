@@ -310,7 +310,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   #library(Microsoft365R)
   #library(googledrive)
 
-  ## Calcoli ----
+  # Calcoli ----
   trattini <- "__________"
   sc[is.na(sc)] <- trattini
   suppressMessages(suppressWarnings(attach(sc)))
@@ -642,11 +642,13 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     Progetto1 <- paste0(Progetto, " (CUP ", CUP, ")")
     CUP2 <- CUP
     Progetto.cup <- paste0(Progetto, " (CUP ", CUP, ")")
+    CUP.ldo.note <- paste0(", CUP ", CUP)
   }else{
     CUP1 <- ""
     Progetto1 <- Progetto
     CUP2 <- ""
     Progetto.cup <- Progetto
+    CUP.ldo.note <- ""
   }
 
   if (!"CUI" %in% names(sc)){
@@ -1480,7 +1482,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     #   readline()
     # }
 
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -2156,7 +2160,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
     
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -4091,7 +4097,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
   # Lettera d'ordine ----
   ldo <- function(){
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -4105,10 +4113,10 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
 
-    if(colnames(pr)[6]=="Imponibile"){
-      Imponibile.ldo <- colnames(pr)[7]
-      IVA.ldo <- pr[1,7]
-      Importo.ldo <- pr[2,7]
+    if(colnames(pr)[10]=="Imponibile"){
+      Imponibile.ldo <- colnames(pr)[11]
+      IVA.ldo <- pr[1,11]
+      Importo.ldo <- pr[2,11]
       Imponibile.ldo.txt <- paste("€", format(as.numeric(Imponibile.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
       IVA.ldo.txt <- paste("€", format(as.numeric(IVA.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
       Importo.ldo.txt <- paste("€", format(as.numeric(Importo.ldo), format='f', digits=2, nsmall=2, big.mark = ".", decimal.mark = ","))
@@ -4227,7 +4235,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         body_replace_text_at_bkm("bookmark_en_consegna", Richiedente..Luogo.di.consegna) |>
         body_replace_text_at_bkm("bookmark_cuu_en", CUU) |>
         body_replace_text_at_bkm("bookmark_en_fatturazione", fatturazione) |>
-        body_replace_text_at_bkm("bookmark_en_note", paste0("purchase order no. ", sede, " ", ordine, y, ", prot. n. _____ (see on the left border of this page), CIG ", CIG, ", CUP ", CUP, ", project ", Progetto, ".")) |>
+        body_replace_text_at_bkm("bookmark_en_note", paste0("purchase order no. ", sede, " ", ordine, y, ", prot. n. _____ (see on the left border of this page), CIG ", CIG, CUP.ldo.note, ", project ", Progetto, ".")) |>
         cursor_bookmark("bookmark_en_firma") |>
         body_add_fpar(fpar(ftext("The Responsible")), style = "Firma 2", pos = "on") |>
         body_add_fpar(fpar(ftext("("), ftext(RSS), ftext(")")), style = "Firma 2")
@@ -4266,7 +4274,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
     # Dich. Prestazione resa ----
   dic_pres <- function(){
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -4477,7 +4487,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
   # Provv. Liquidazione ----
   provv_liq <- function(){
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -4705,7 +4717,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
     
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -5171,7 +5185,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       }
     }
 
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -6842,7 +6858,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
   # Lettera d'ordine PNRR ----
   ldo.pnrr <- function(){
-    if(modalita!=0){
+    if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
@@ -7141,7 +7159,9 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       # }
     }
     
-    if(modalita!=0){
+        if(modalita==0){
+      pr <- site$get_drive()$load_dataframe(paste0(fluor.scheda, "/", ordine, "/Elenco prodotti.xlsx"))
+    }else{
       if(file.exists("Elenco prodotti.xlsx")=="FALSE"){
         cat("
 
