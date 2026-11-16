@@ -226,9 +226,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
 
   # Dopo modalità locale/remoto ----
   if(!require(dplyr)) install.packages("dplyr")
-  # if(!require(tidyverse)) install.packages("tidyverse")
-  # library(tidyverse)
-  # library(readr)
+  if(!require(tidyverse)) install.packages("tidyverse")
+  library(tidyverse)
   
   ordini <- dplyr::rename(ordini, any_of(c(
     "Prodotto" = "Descrizione.beni.servizi.lavori",
