@@ -298,12 +298,12 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
         ~ paste0("€ ", format(.x, nsmall = 2, big.mark = ".", decimal.mark = ","))
       )
     )
-  sc$Importo.senza.IVA.num <- Imponibile.ldo
-  sc$IVA.num <- IVA.ldo
-  sc$Importo.con.IVA.num <- Importo.ldo
-  sc$Importo.senza.IVA <- Imponibile.ldo.txt 
-  sc$IVA <- IVA.ldo.txt
-  sc$Importo.con.IVA <- Importo.ldo.txt  
+  # sc$Importo.senza.IVA.num <- Imponibile.ldo
+  # sc$IVA.num <- IVA.ldo
+  # sc$Importo.con.IVA.num <- Importo.ldo
+  # sc$Importo.senza.IVA <- Imponibile.ldo.txt 
+  # sc$IVA <- IVA.ldo.txt
+  # sc$Importo.con.IVA <- Importo.ldo.txt  
   sc$Importo.senza.IVA2 <- paste0(sub("€ ", "", sc$Importo.senza.IVA), " €")
   sc$IVA2 <- paste0(sub("€ ", "", sc$IVA), " €")
   sc$Importo.con.IVA2 <- paste0(sub("€ ", "", sc$Importo.con.IVA), " €")
