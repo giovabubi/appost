@@ -268,6 +268,18 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
   
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
   
+  sc <- sc %>%
+    dplyr::mutate(
+      dplyr::across(
+        c(
+          dplyr::starts_with("Prot"), 
+          dplyr::starts_with("Anticipata"), 
+          dplyr::any_of(c("Pagina.web", "Scrittura.normale"))
+        ),
+        ~ dplyr::if_else(is.na(.x), NA_character_, stringr::str_to_lower(as.character(.x)))
+      )
+    )
+  
   anno24 <- grep("_2024", sc$Ordine.N.)
   anno25 <- grep("_2025", sc$Ordine.N.)
   ordine.orig <- ordine
