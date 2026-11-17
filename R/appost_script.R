@@ -235,8 +235,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     "sede" = "Sede")))
   ordini$Fornitore..P.IVA <- as.character(ordini$Fornitore..P.IVA)
   ordini$CPV <- as.character(ordini$CPV..CPV)
-  ordini$Manodopera <- ifelse(is.na(ordini$Manodopera), "0,00 €", ordini$Manodopera)
-  ordini$Oneri.sicurezza <- ifelse(is.na(ordini$Oneri.sicurezza), "0,00 €", ordini$Oneri.sicurezza)
+  # ordini$Manodopera <- ifelse(is.na(ordini$Manodopera), "0,00 €", ordini$Manodopera)
+  # ordini$Oneri.sicurezza <- ifelse(is.na(ordini$Oneri.sicurezza), "0,00 €", ordini$Oneri.sicurezza)
   ordini <- ordini %>%
     dplyr::mutate(
       dplyr::across(
@@ -249,13 +249,22 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       )
     ) %>%
     dplyr::mutate(
-      Importo.senza.IVA = paste0("€ ",
-        format(
-          readr::parse_number(as.character(Importo.senza.IVA)), 
-          nsmall = 2, 
-          big.mark = ".", 
-          decimal.mark = ","
-        )))
+      Aliquota.IVA.num = dplyr::case_when(
+        stringr::str_detect(stringr::str_to_lower(as.character(Aliquota.IVA)), "esente") ~ 0,
+        TRUE ~ suppressWarnings(readr::parse_number(as.character(Aliquota.IVA))/ 100)
+      ), 
+      IVA.num = round(Importo.senza.IVA.num * Aliquota.IVA.num, 2),
+      Importo.con.IVA.num = Importo.senza.IVA.num + IVA.num
+    ) %>%
+    dplyr::mutate(
+      Importo.senza.IVA = paste0("€ ", format(Importo.senza.IVA.num, nsmall = 2, big.mark = ".", decimal.mark = ",")),
+      Manodopera        = paste0("€ ", format(Manodopera.num, nsmall = 2, big.mark = ".", decimal.mark = ",")),
+      Oneri.sicurezza   = paste0("€ ", format(Oneri.sicurezza.num, nsmall = 2, big.mark = ".", decimal.mark = ",")),
+      IVA = paste0("€ ", format(IVA.num, nsmall = 2, big.mark = ".", decimal.mark = ",")),
+      Importo.con.IVA = paste0("€ ", format(Importo.con.IVA.num, nsmall = 2, big.mark = ".", decimal.mark = ",")),
+      Importo.senza.IVA2 = paste0(format(Importo.senza.IVA.num, nsmall = 2, big.mark = ".", decimal.mark = ","), " €"),
+      IVA2 = paste0(format(IVA.num, nsmall = 2, big.mark = ".", decimal.mark = ","), " €"),
+      Importo.con.IVA2 = paste0(format(Importo.con.IVA.num, nsmall = 2, big.mark = ".", decimal.mark = ","), " €"))
   
   sc <- subset(ordini, ordini$Ordine.N.==ordine)
   
@@ -280,24 +289,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     y <- "/2026"
     y2 <- 2026
   }
-  
-  sc <- sc %>%
-    dplyr::mutate(
-      Aliquota.IVA.num = tidyr::replace_na(
-        readr::parse_number(as.character(Aliquota.IVA)) / 100, 
-        0))
-  
-  sc$IVA <- sc$Importo.senza.IVA.num * sc$Aliquota.IVA.num
-  sc$IVA.num <- sc$IVA
-  sc$Importo.con.IVA <- sc$Importo.senza.IVA.num + sc$IVA
-  
-  sc <- sc %>%
-    dplyr::mutate(
-      dplyr::across(
-        c(Importo.senza.IVA.num, IVA, Importo.con.IVA),
-        ~ paste0("€ ", format(.x, nsmall = 2, big.mark = ".", decimal.mark = ","))
-      )
-    )
+
   if(modalita==0){
     sc$Importo.senza.IVA.num <- Imponibile.ldo
     sc$IVA.num <- IVA.ldo
@@ -306,9 +298,6 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     sc$IVA <- IVA.ldo.txt
     sc$Importo.con.IVA <- Importo.ldo.txt
   }
-  sc$Importo.senza.IVA2 <- paste0(sub("€ ", "", sc$Importo.senza.IVA), " €")
-  sc$IVA2 <- paste0(sub("€ ", "", sc$IVA), " €")
-  sc$Importo.con.IVA2 <- paste0(sub("€ ", "", sc$Importo.con.IVA), " €")
 
   ## Installa e carica pacchetti ---
   if(!require(officer)) install.packages("officer", , quiet = TRUE)
