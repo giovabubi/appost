@@ -89,7 +89,7 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-TO")
     }else if(fluor.sede==3){
       # site <- get_sharepoint_site("ORDINI CNR-IPSP-Bari-grp")
-      site <- get_sharepoint_site("https://cnrsc.sharepoint.com/sites/CNR-IPSPBari588-grp")
+      site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/CNR-IPSPBari588-grp")
     }else if(fluor.sede==4){
       site <- get_sharepoint_site(site_url = "https://cnrsc.sharepoint.com/sites/FluOr-grp2-FI")
     }else if(fluor.sede==5){
