@@ -4637,7 +4637,8 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
       body_add_fpar(fpar(ftext("VISTO", fpt.b), ftext(" il Documento Unico di Regolarità Contributiva (DURC) che accerta la regolarità della posizione dell’Operatore Economico nei confronti degli Enti individuati dalla normativa vigente alla data odierna;")), style = "Normal")
     if(Importo.senza.IVA.num>=5000){
       doc <- doc |>
-        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la verifica della posizione dell’Operatore Economico presso l’Agenzia Riscossione Entrate mediante liberatoria di non inadempienza per l’importo della fattura, ai sensi dell’art. 48-bis del DPR n. 602/73, effettuata in data "),
+        body_add_fpar(fpar(ftext("VISTA", fpt.b), ftext(" la verifica della posizione dell’Operatore Economico presso l’Agenzia Riscossione Entrate mediante liberatoria di non inadempienza (prot. n. "),
+        ftext(Prot..equitalia), ftext(") per l’importo della fattura, ai sensi dell’art. 48-bis del DPR n. 602/73, effettuata in data "),
         ftext(format(Sys.Date(), "%d %B %Y")),
         ftext(";")), style = "Normal")
     }
