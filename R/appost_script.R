@@ -4678,6 +4678,14 @@ Digitare il numero d'ordine e premere INVIO per caricare il file 'Ordini.csv' sc
     cat("
 
     Documento generato: '11 Provv. liquidazione'")
+    
+    if(Importo.senza.IVA.num>=5000){
+      cat("
+    !!! ATTENZIONE !!!
+    C'è una novità: bisogna protocollare l'esito della varifica Equitalia (per importi >5,000 €) e inserire il n. prot. in FluOr.
+    In tal modo questo n. prot. sarà inserito automaticamente nel provvedimento di liquidazione che, altrimenti avrà un campo vuoto.
+    ")
+    }
 
     ## Dati mancanti ---
     manca <- dplyr::select(sc, Prodotto, Progetto, Fornitore, Fornitore..Codice.terzo.SIGLA, CIG, CUP, Anticipata, Voce.di.spesa, Fornitore..IBAN, Prot..prestazione.resa)
